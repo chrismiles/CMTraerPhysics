@@ -58,6 +58,9 @@
 		832A9C2014AD321800C1CB8E /* CMTPDWebTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 832A9C1E14AD321800C1CB8E /* CMTPDWebTestViewController.xib */; };
 		832A9C2314AD336200C1CB8E /* WebTestFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 832A9C2114AD336200C1CB8E /* WebTestFragmentShader.glsl */; };
 		832A9C2414AD336200C1CB8E /* WebTestVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 832A9C2214AD336200C1CB8E /* WebTestVertexShader.glsl */; };
+		834326E114DFC2FC006F930F /* CMTPDInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 834326DF14DFC2FC006F930F /* CMTPDInfoViewController.m */; };
+		834326E214DFC2FC006F930F /* CMTPDInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834326E014DFC2FC006F930F /* CMTPDInfoViewController.xib */; };
+		834326EB14DFC570006F930F /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = 834326EA14DFC570006F930F /* info.html */; };
 		835E713014CA4A5200409E43 /* wonderwall_atlas.plist in Resources */ = {isa = PBXBuildFile; fileRef = 835E712C14CA4A5200409E43 /* wonderwall_atlas.plist */; };
 		835E713114CA4A5200409E43 /* wonderwall_atlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 835E712D14CA4A5200409E43 /* wonderwall_atlas.png */; };
 		835E713214CA4A5200409E43 /* wonderwall_atlas@2x.plist in Resources */ = {isa = PBXBuildFile; fileRef = 835E712E14CA4A5200409E43 /* wonderwall_atlas@2x.plist */; };
@@ -159,6 +162,10 @@
 		832A9C1E14AD321800C1CB8E /* CMTPDWebTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDWebTestViewController.xib; sourceTree = "<group>"; };
 		832A9C2114AD336200C1CB8E /* WebTestFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebTestFragmentShader.glsl; sourceTree = "<group>"; };
 		832A9C2214AD336200C1CB8E /* WebTestVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebTestVertexShader.glsl; sourceTree = "<group>"; };
+		834326DE14DFC2FC006F930F /* CMTPDInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMTPDInfoViewController.h; path = Classes/CMTPDInfoViewController.h; sourceTree = "<group>"; };
+		834326DF14DFC2FC006F930F /* CMTPDInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMTPDInfoViewController.m; path = Classes/CMTPDInfoViewController.m; sourceTree = "<group>"; };
+		834326E014DFC2FC006F930F /* CMTPDInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CMTPDInfoViewController.xib; path = Classes/CMTPDInfoViewController.xib; sourceTree = "<group>"; };
+		834326EA14DFC570006F930F /* info.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = info.html; sourceTree = "<group>"; };
 		835E712C14CA4A5200409E43 /* wonderwall_atlas.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = wonderwall_atlas.plist; sourceTree = "<group>"; };
 		835E712D14CA4A5200409E43 /* wonderwall_atlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wonderwall_atlas.png; sourceTree = "<group>"; };
 		835E712E14CA4A5200409E43 /* wonderwall_atlas@2x.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "wonderwall_atlas@2x.plist"; sourceTree = "<group>"; };
@@ -370,6 +377,9 @@
 			children = (
 				831E95E0146FF02B003789DF /* CMTPDAppDelegate.h */,
 				831E95E1146FF02B003789DF /* CMTPDAppDelegate.m */,
+				834326DE14DFC2FC006F930F /* CMTPDInfoViewController.h */,
+				834326DF14DFC2FC006F930F /* CMTPDInfoViewController.m */,
+				834326E014DFC2FC006F930F /* CMTPDInfoViewController.xib */,
 				831E962614712566003789DF /* CMTPDMenuViewController.h */,
 				831E962714712566003789DF /* CMTPDMenuViewController.m */,
 				831E962814712566003789DF /* CMTPDMenuViewController.xib */,
@@ -414,6 +424,7 @@
 		831E9697147135E7003789DF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				834326E914DFC570006F930F /* html */,
 				835E712B14CA4A5200409E43 /* Textures */,
 				831E9698147135E7003789DF /* Images */,
 			);
@@ -438,6 +449,14 @@
 				832A9C2214AD336200C1CB8E /* WebTestVertexShader.glsl */,
 			);
 			path = "Web Test";
+			sourceTree = "<group>";
+		};
+		834326E914DFC570006F930F /* html */ = {
+			isa = PBXGroup;
+			children = (
+				834326EA14DFC570006F930F /* info.html */,
+			);
+			path = html;
 			sourceTree = "<group>";
 		};
 		835E712B14CA4A5200409E43 /* Textures */ = {
@@ -616,6 +635,8 @@
 				835E713114CA4A5200409E43 /* wonderwall_atlas.png in Resources */,
 				835E713214CA4A5200409E43 /* wonderwall_atlas@2x.plist in Resources */,
 				835E713314CA4A5200409E43 /* wonderwall_atlas@2x.png in Resources */,
+				834326E214DFC2FC006F930F /* CMTPDInfoViewController.xib in Resources */,
+				834326EB14DFC570006F930F /* info.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,6 +705,7 @@
 				832A9C1F14AD321800C1CB8E /* CMTPDWebTestViewController.m in Sources */,
 				83ECC5C214BC4CA2002126E1 /* CMTPDWonderwallLikeViewController.m in Sources */,
 				83ECC5CA14BC4E87002126E1 /* CMGLESKUtil.m in Sources */,
+				834326E114DFC2FC006F930F /* CMTPDInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

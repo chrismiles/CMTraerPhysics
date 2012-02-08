@@ -11,6 +11,7 @@
 #import "CMTPDAttractionTestViewController.h"
 #import "CMTPDClothTestViewController.h"
 #import "CMTPDFreeFloatingTestViewController.h"
+#import "CMTPDInfoViewController.h"
 #import "CMTPDSpringTestViewController.h"
 #import "CMTPDWebTestViewController.h"
 #import "CMTPDWonderwallLikeViewController.h"
@@ -18,22 +19,16 @@
 
 @implementation CMTPDMenuViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+
+#pragma mark - UIControl actions
+
+- (void)infoAction:(id)sender
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    CMTPDInfoViewController *viewController = [[[CMTPDInfoViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:viewController] autorelease];
+    [self presentModalViewController:navController animated:YES];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
 
 #pragma mark - View lifecycle
 
@@ -42,6 +37,23 @@
     [super viewDidLoad];
 
     self.title = @"CMTraerPhysics";
+    
+    [self.navigationController setToolbarHidden:NO animated:NO];
+    
+    UIBarButtonItem *flexibleItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
+    
+    UIButtonType infoButtonType;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+	infoButtonType = UIButtonTypeInfoDark;
+    }
+    else {
+	infoButtonType = UIButtonTypeInfoLight;
+    }
+    UIButton *infoButton = [UIButton buttonWithType:infoButtonType];
+    [infoButton addTarget:self action:@selector(infoAction:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *infoBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:infoButton] autorelease];
+    
+    self.toolbarItems = [NSArray arrayWithObjects:flexibleItem, infoBarButtonItem, nil];
 }
 
 - (void)viewDidUnload
