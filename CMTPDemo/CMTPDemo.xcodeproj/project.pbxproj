@@ -183,8 +183,8 @@
 		83DFD64F148E32FD003771E9 /* CMTPDClothTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDClothTestViewController.h; sourceTree = "<group>"; };
 		83DFD650148E32FD003771E9 /* CMTPDClothTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDClothTestViewController.m; sourceTree = "<group>"; };
 		83DFD651148E32FD003771E9 /* CMTPDClothTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDClothTestViewController.xib; sourceTree = "<group>"; };
-		83DFD654148F7AC4003771E9 /* ClothTestFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ClothTestFragmentShader.glsl; sourceTree = "<group>"; };
-		83DFD655148F7AC4003771E9 /* ClothTestVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ClothTestVertexShader.glsl; sourceTree = "<group>"; };
+		83DFD654148F7AC4003771E9 /* ClothTestFragmentShader.glsl */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = ClothTestFragmentShader.glsl; sourceTree = "<group>"; };
+		83DFD655148F7AC4003771E9 /* ClothTestVertexShader.glsl */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = ClothTestVertexShader.glsl; sourceTree = "<group>"; };
 		83DFD67114941A5E003771E9 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		83DFD67414960D5A003771E9 /* CMTPDFreeFloatingTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDFreeFloatingTestViewController.h; sourceTree = "<group>"; };
 		83DFD67514960D5A003771E9 /* CMTPDFreeFloatingTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDFreeFloatingTestViewController.m; sourceTree = "<group>"; };
