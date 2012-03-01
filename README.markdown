@@ -29,3 +29,35 @@ released under an MIT license.
 ![Spring Test](https://lh5.googleusercontent.com/-hhc2L3qrzX4/TzIx83KP0uI/AAAAAAAAAOc/M96VeUNk7ug/s640/CMTraerPhysics-Spring.png "Spring Test")
 ![Free Floating Test](https://lh6.googleusercontent.com/-PbyAxK4YD_4/TzIx84dsMrI/AAAAAAAAAOg/KVXLXhS37Jg/s640/CMTraerPhysics-Free-Floating.png "Free Floating Test")
 ![Attraction Test](https://lh4.googleusercontent.com/-JQdEas4DxDw/TzIx2QcYaFI/AAAAAAAAAOE/fTYL_TkVxAo/s640/CMTraerPhysics-Attraction-Test.png "Attraction Test")
+
+
+Videos
+------
+
+See videos of CMTraerPhysics demos on YouTube http://www.youtube.com/playlist?list=PLADC6B15A0E8772C9
+
+<iframe width="240" height="320" src="http://www.youtube-nocookie.com/embed/videoseries?list=PLADC6B15A0E8772C9&amp;hl=en_US" frameborder="0" allowfullscreen></iframe>
+
+
+License
+-------
+
+CMTraerPhysics is released open source under a MIT license.
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
