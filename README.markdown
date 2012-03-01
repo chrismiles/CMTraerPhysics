@@ -36,8 +36,6 @@ Videos
 
 See videos of CMTraerPhysics demos on YouTube http://www.youtube.com/playlist?list=PLADC6B15A0E8772C9
 
-<iframe width="240" height="320" src="http://www.youtube-nocookie.com/embed/videoseries?list=PLADC6B15A0E8772C9&amp;hl=en_US" frameborder="0" allowfullscreen></iframe>
-
 
 License
 -------
