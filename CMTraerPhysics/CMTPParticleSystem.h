@@ -69,7 +69,7 @@ typedef enum {
 @property (nonatomic, retain, readonly) NSMutableArray *particles;
 
 - (void)setIntegrator:(CMTPParticleSystemIntegrator)anIntegrator;
-- (void)tick:(NSUInteger)t;
+- (void)tick:(CMTPFloat)t;
 - (CMTPParticle *)makeParticleWithMass:(CMTPFloat)mass position:(CMTPVector3D)vector;
 - (CMTPSpring *)makeSpringBetweenParticleA:(CMTPParticle *)particleA particleB:(CMTPParticle *)particleB springConstant:(CMTPFloat)springConstant damping:(CMTPFloat)damping restLength:(CMTPFloat)restLength;
 - (CMTPAttraction *)makeAttractionBetweenParticleA:(CMTPParticle *)particleA particleB:(CMTPParticle *)particleB strength:(CMTPFloat)strength minDistance:(CMTPFloat)minDistance;

@@ -57,7 +57,7 @@
     }	
 }
 
-- (void)tick:(NSUInteger)t
+- (void)tick:(CMTPFloat)t
 {
     [integrator step:t];
     

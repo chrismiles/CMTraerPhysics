@@ -102,3 +102,8 @@ static inline CMTPVector3D CMTPVector3DAdd(CMTPVector3D vector1, CMTPVector3D ve
     ret.z = vector1.z + vector2.z;
     return ret;
 }
+
+static inline NSString *NSStringFromCMTPVector3D(CMTPVector3D vector)
+{
+    return [NSString stringWithFormat:@"{%f, %f, %f}", vector.x, vector.y, vector.z];
+}
