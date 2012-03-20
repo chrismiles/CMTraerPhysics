@@ -113,7 +113,7 @@
     NSUInteger c_length = [custom count];
     
     // Effects of gravity
-    if ( gravity.x != 0 || gravity.y != 0 || gravity.x != 0) {
+    if ( gravity.x != 0.0f || gravity.y != 0.0f || gravity.x != 0.0f) {
 	for (i=0; i<p_length; i++) {
 	    CMTPParticle *p = [particles objectAtIndex:i];
 	    p.force = CMTPVector3DAdd(p.force, gravity);
