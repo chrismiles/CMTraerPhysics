@@ -67,6 +67,11 @@
 		835E713314CA4A5200409E43 /* wonderwall_atlas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 835E712F14CA4A5200409E43 /* wonderwall_atlas@2x.png */; };
 		8395502514864FEA00241646 /* CMTPDAttractionTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8395502314864FEA00241646 /* CMTPDAttractionTestViewController.m */; };
 		8395502614864FEA00241646 /* CMTPDAttractionTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8395502414864FEA00241646 /* CMTPDAttractionTestViewController.xib */; };
+		83CCDBDA15341B99003EA4D6 /* CMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CCDBD315341B99003EA4D6 /* CMScrollView.m */; };
+		83CCDBDB15341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CCDBD515341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.m */; };
+		83CCDBDC15341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83CCDBD615341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.xib */; };
+		83CCDBDD15341B99003EA4D6 /* CMTPDScrollViewCloneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CCDBD815341B99003EA4D6 /* CMTPDScrollViewCloneViewController.m */; };
+		83CCDBDE15341B99003EA4D6 /* CMTPDScrollViewCloneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83CCDBD915341B99003EA4D6 /* CMTPDScrollViewCloneViewController.xib */; };
 		83DFD63E148ADD10003771E9 /* CMTPDAttractionTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DFD63D148ADD10003771E9 /* CMTPDAttractionTestView.m */; };
 		83DFD642148ADDE6003771E9 /* CMTPDAttractionTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DFD641148ADDE6003771E9 /* CMTPDAttractionTestLayer.m */; };
 		83DFD645148AF9C3003771E9 /* CMTPDATSubLayers.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DFD644148AF9C3003771E9 /* CMTPDATSubLayers.m */; };
@@ -174,6 +179,14 @@
 		8395502214864FEA00241646 /* CMTPDAttractionTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDAttractionTestViewController.h; sourceTree = "<group>"; };
 		8395502314864FEA00241646 /* CMTPDAttractionTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDAttractionTestViewController.m; sourceTree = "<group>"; };
 		8395502414864FEA00241646 /* CMTPDAttractionTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDAttractionTestViewController.xib; sourceTree = "<group>"; };
+		83CCDBD215341B99003EA4D6 /* CMScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMScrollView.h; sourceTree = "<group>"; };
+		83CCDBD315341B99003EA4D6 /* CMScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMScrollView.m; sourceTree = "<group>"; };
+		83CCDBD415341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDScrollViewCloneConfigureViewController.h; sourceTree = "<group>"; };
+		83CCDBD515341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDScrollViewCloneConfigureViewController.m; sourceTree = "<group>"; };
+		83CCDBD615341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDScrollViewCloneConfigureViewController.xib; sourceTree = "<group>"; };
+		83CCDBD715341B99003EA4D6 /* CMTPDScrollViewCloneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDScrollViewCloneViewController.h; sourceTree = "<group>"; };
+		83CCDBD815341B99003EA4D6 /* CMTPDScrollViewCloneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDScrollViewCloneViewController.m; sourceTree = "<group>"; };
+		83CCDBD915341B99003EA4D6 /* CMTPDScrollViewCloneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDScrollViewCloneViewController.xib; sourceTree = "<group>"; };
 		83DFD63C148ADD10003771E9 /* CMTPDAttractionTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDAttractionTestView.h; sourceTree = "<group>"; };
 		83DFD63D148ADD10003771E9 /* CMTPDAttractionTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDAttractionTestView.m; sourceTree = "<group>"; };
 		83DFD640148ADDE6003771E9 /* CMTPDAttractionTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDAttractionTestLayer.h; sourceTree = "<group>"; };
@@ -352,6 +365,7 @@
 				8395502014864F7E00241646 /* Attraction Test */,
 				83DFD64E148E3275003771E9 /* Cloth Test */,
 				83DFD6731495FEFA003771E9 /* Free Floating Test */,
+				83CCDBD115341B99003EA4D6 /* Scroll View Clone */,
 				83DFD682149A11C1003771E9 /* Spring Test */,
 				832A9C1B14AD31D400C1CB8E /* Web Test */,
 				83ECC5BD14BC4BF3002126E1 /* Wonderwall Like */,
@@ -484,6 +498,21 @@
 				83DFD644148AF9C3003771E9 /* CMTPDATSubLayers.m */,
 			);
 			path = "Attraction Test";
+			sourceTree = "<group>";
+		};
+		83CCDBD115341B99003EA4D6 /* Scroll View Clone */ = {
+			isa = PBXGroup;
+			children = (
+				83CCDBD215341B99003EA4D6 /* CMScrollView.h */,
+				83CCDBD315341B99003EA4D6 /* CMScrollView.m */,
+				83CCDBD415341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.h */,
+				83CCDBD515341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.m */,
+				83CCDBD615341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.xib */,
+				83CCDBD715341B99003EA4D6 /* CMTPDScrollViewCloneViewController.h */,
+				83CCDBD815341B99003EA4D6 /* CMTPDScrollViewCloneViewController.m */,
+				83CCDBD915341B99003EA4D6 /* CMTPDScrollViewCloneViewController.xib */,
+			);
+			path = "Scroll View Clone";
 			sourceTree = "<group>";
 		};
 		83DFD64E148E3275003771E9 /* Cloth Test */ = {
@@ -637,6 +666,8 @@
 				835E713314CA4A5200409E43 /* wonderwall_atlas@2x.png in Resources */,
 				834326E214DFC2FC006F930F /* CMTPDInfoViewController.xib in Resources */,
 				834326EB14DFC570006F930F /* info.html in Resources */,
+				83CCDBDC15341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.xib in Resources */,
+				83CCDBDE15341B99003EA4D6 /* CMTPDScrollViewCloneViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -706,6 +737,9 @@
 				83ECC5C214BC4CA2002126E1 /* CMTPDWonderwallLikeViewController.m in Sources */,
 				83ECC5CA14BC4E87002126E1 /* CMGLESKUtil.m in Sources */,
 				834326E114DFC2FC006F930F /* CMTPDInfoViewController.m in Sources */,
+				83CCDBDA15341B99003EA4D6 /* CMScrollView.m in Sources */,
+				83CCDBDB15341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.m in Sources */,
+				83CCDBDD15341B99003EA4D6 /* CMTPDScrollViewCloneViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

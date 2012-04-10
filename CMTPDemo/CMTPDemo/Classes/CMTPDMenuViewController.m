@@ -30,6 +30,7 @@
 #import "CMTPDClothTestViewController.h"
 #import "CMTPDFreeFloatingTestViewController.h"
 #import "CMTPDInfoViewController.h"
+#import "CMTPDScrollViewCloneViewController.h"
 #import "CMTPDSpringTestViewController.h"
 #import "CMTPDWebTestViewController.h"
 #import "CMTPDWonderwallLikeViewController.h"
@@ -123,7 +124,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 7;
+    return 8;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -149,12 +150,15 @@
         title = @"Free Floating Test";
     }
     else if (4 == indexPath.row) {
-        title = @"Spring Test";
+        title = @"Scroll View Clone";
     }
     else if (5 == indexPath.row) {
-        title = @"Web Test";
+        title = @"Spring Test";
     }
     else if (6 == indexPath.row) {
+        title = @"Web Test";
+    }
+    else if (7 == indexPath.row) {
         title = @"Wonderwall Like";
     }
     cell.textLabel.text = title;
@@ -184,14 +188,18 @@
 	[self.navigationController pushViewController:viewController animated:YES];
     }
     else if (4 == indexPath.row) {
-	CMTPDSpringTestViewController *viewController = [[[CMTPDSpringTestViewController alloc] init] autorelease];
+	CMTPDScrollViewCloneViewController *viewController = [[[CMTPDScrollViewCloneViewController alloc] init] autorelease];
 	[self.navigationController pushViewController:viewController animated:YES];
     }
     else if (5 == indexPath.row) {
-	CMTPDWebTestViewController *viewController = [[[CMTPDWebTestViewController alloc] init] autorelease];
+	CMTPDSpringTestViewController *viewController = [[[CMTPDSpringTestViewController alloc] init] autorelease];
 	[self.navigationController pushViewController:viewController animated:YES];
     }
     else if (6 == indexPath.row) {
+	CMTPDWebTestViewController *viewController = [[[CMTPDWebTestViewController alloc] init] autorelease];
+	[self.navigationController pushViewController:viewController animated:YES];
+    }
+    else if (7 == indexPath.row) {
 	CMTPDWonderwallLikeViewController *viewController = [[[CMTPDWonderwallLikeViewController alloc] init] autorelease];
 	[self.navigationController pushViewController:viewController animated:YES];
     }
