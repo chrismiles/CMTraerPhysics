@@ -95,7 +95,7 @@
 	
 	CMTPFloat a2bDistance = sqrtf(a2bX*a2bX + a2bY*a2bY + a2bZ*a2bZ);
 	
-	if (a2bDistance == 0) {
+	if (a2bDistance == 0.0f) {
 	    
 	    a2bX = 0;
 	    a2bY = 0;
