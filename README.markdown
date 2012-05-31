@@ -36,6 +36,8 @@ Videos
 
 See videos of CMTraerPhysics demos on YouTube http://www.youtube.com/playlist?list=PLADC6B15A0E8772C9
 
+See a presentation about CMTraerPhysics that Chris Miles gave at Melbourne Cocoaheads (March 2012) https://vimeo.com/42195248
+
 
 License
 -------
