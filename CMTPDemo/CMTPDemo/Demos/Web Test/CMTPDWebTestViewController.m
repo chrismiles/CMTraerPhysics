@@ -126,7 +126,7 @@ static BOOL ccpFastIntersect(CGPoint A, CGPoint B,
 static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
 				     CGPoint C, CGPoint D)
 {
-    float S, T;
+    float S=0.0f, T=0.0f;
     
     ccpFastIntersect(A, B, C, D, &S, &T);
     // Point of intersection

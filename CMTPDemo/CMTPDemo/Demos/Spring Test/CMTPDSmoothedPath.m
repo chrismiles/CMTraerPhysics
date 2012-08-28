@@ -33,7 +33,7 @@
 
 static void getPointsFromBezier(void *info, const CGPathElement *element) 
 {
-    NSMutableArray *bezierPoints = (__bridge NSMutableArray *)info;    
+    NSMutableArray *bezierPoints = (NSMutableArray *)info;
     
     // Retrieve the path element type and its points
     CGPathElementType type = element->type;
@@ -54,7 +54,7 @@ static void getPointsFromBezier(void *info, const CGPathElement *element)
 static NSArray *pointsFromBezierPath(UIBezierPath *bpath)
 {
     NSMutableArray *points = [NSMutableArray array];
-    CGPathApply(bpath.CGPath, (__bridge void *)points, getPointsFromBezier);
+    CGPathApply(bpath.CGPath, (void *)points, getPointsFromBezier);
     return points;
 }
 

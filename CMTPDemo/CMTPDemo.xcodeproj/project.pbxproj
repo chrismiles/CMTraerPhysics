@@ -616,7 +616,7 @@
 		831E95C4146FF02B003789DF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0440;
 				ORGANIZATIONNAME = "Chris Miles";
 			};
 			buildConfigurationList = 831E95C7146FF02B003789DF /* Build configuration list for PBXProject "CMTPDemo" */;

@@ -42,7 +42,7 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
     unsigned int index = 0;
     
     *count = 2*(2+num_sections);
-    vertices = malloc(sizeof(GL_FLOAT) * *count);
+    vertices = malloc(sizeof(GLfloat) * *count);
     
     vertices[index++] = 0.0f;
     vertices[index++] = 0.0f;
