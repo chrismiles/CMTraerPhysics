@@ -33,7 +33,15 @@
 
 static void getPointsFromBezier(void *info, const CGPathElement *element) 
 {
-    NSMutableArray *bezierPoints = (NSMutableArray *)info;
+    // Silence warning about use of __bridge outside of ARC, but required
+    // for auto ARC conversion
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-bridge-casts-disallowed-in-nonarc"
+
+    NSMutableArray *bezierPoints = (__bridge NSMutableArray *)info;
+    
+#pragma clang diagnostic pop
+    
     
     // Retrieve the path element type and its points
     CGPathElementType type = element->type;
@@ -54,7 +62,16 @@ static void getPointsFromBezier(void *info, const CGPathElement *element)
 static NSArray *pointsFromBezierPath(UIBezierPath *bpath)
 {
     NSMutableArray *points = [NSMutableArray array];
-    CGPathApply(bpath.CGPath, (void *)points, getPointsFromBezier);
+    
+    // Silence warning about use of __bridge outside of ARC, but required
+    // for auto ARC conversion
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-bridge-casts-disallowed-in-nonarc"
+    
+    CGPathApply(bpath.CGPath, (__bridge void *)points, getPointsFromBezier);
+    
+#pragma clang diagnostic pop
+    
     return points;
 }
 
