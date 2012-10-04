@@ -101,44 +101,44 @@ static inline void Matrix3DMultiply(Matrix3D m1, Matrix3D m2, Matrix3D result)
                           // function computes A*B as (B^T * A^T)^T.
                           
                           // Load the whole matrix into memory.
-                          "fldmias  %2, {s8-s23}    \n\t"
+                          "VLDMIA.32  %2, {s8-s23}    \n\t"
                           // Load first column to scalar bank.
-                          "fldmias  %1!, {s0-s3}    \n\t"
+                          "VLDMIA.32  %1!, {s0-s3}    \n\t"
                           // First column times matrix.
                           "fmuls s24, s8, s0        \n\t"
                           "fmacs s24, s12, s1       \n\t"
                           
                           // Load second column to scalar bank.
-                          "fldmias %1!,  {s4-s7}    \n\t"
+                          "VLDMIA.32 %1!,  {s4-s7}    \n\t"
                           
                           "fmacs s24, s16, s2       \n\t"
                           "fmacs s24, s20, s3       \n\t"
                           // Save first column.
-                          "fstmias  %0!, {s24-s27}  \n\t" 
+                          "VSTMIA.32  %0!, {s24-s27}  \n\t"
                           
                           // Second column times matrix.
                           "fmuls s28, s8, s4        \n\t"
                           "fmacs s28, s12, s5       \n\t"
                           
                           // Load third column to scalar bank.
-                          "fldmias  %1!, {s0-s3}    \n\t"
+                          "VLDMIA.32  %1!, {s0-s3}    \n\t"
                           
                           "fmacs s28, s16, s6       \n\t"
                           "fmacs s28, s20, s7       \n\t"
                           // Save second column.
-                          "fstmias  %0!, {s28-s31}  \n\t" 
+                          "VSTMIA.32  %0!, {s28-s31}  \n\t"
                           
                           // Third column times matrix.
                           "fmuls s24, s8, s0        \n\t"
                           "fmacs s24, s12, s1       \n\t"
                           
                           // Load fourth column to scalar bank.
-                          "fldmias %1,  {s4-s7}    \n\t"
+                          "VLDMIA.32 %1,  {s4-s7}    \n\t"
                           
                           "fmacs s24, s16, s2       \n\t"
                           "fmacs s24, s20, s3       \n\t"
                           // Save third column.
-                          "fstmias  %0!, {s24-s27}  \n\t" 
+                          "VSTMIA.32  %0!, {s24-s27}  \n\t"
                           
                           // Fourth column times matrix.
                           "fmuls s28, s8, s4        \n\t"
@@ -146,7 +146,7 @@ static inline void Matrix3DMultiply(Matrix3D m1, Matrix3D m2, Matrix3D result)
                           "fmacs s28, s16, s6       \n\t"
                           "fmacs s28, s20, s7       \n\t"
                           // Save fourth column.
-                          "fstmias  %0!, {s28-s31}  \n\t" 
+                          "VSTMIA.32  %0!, {s28-s31}  \n\t" 
                           
                           VFP_VECTOR_LENGTH_ZERO
                           : "=r" (result), "=r" (m2)
