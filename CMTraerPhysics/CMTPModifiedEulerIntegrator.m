@@ -42,7 +42,7 @@
     [s clearForces];
     [s applyForces];
     
-    CMTPFloat halftt = (t*t)*.5;
+    CMTPFloat halftt = (t*t) * 0.5f;
     CMTPFloat one_over_t = 1/t;
     
     for (NSUInteger i = 0; i<p_length; i++) {

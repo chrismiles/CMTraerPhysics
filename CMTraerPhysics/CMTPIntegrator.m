@@ -36,7 +36,8 @@
 
 - (void)step:(CMTPFloat)t
 {
-    
+#pragma unused(t)
+  
 }
 
 @end

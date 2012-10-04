@@ -211,15 +211,17 @@
 - (BOOL)removeCustomForceByReference:(CMTPForce *)f
 {
     NSUInteger i;
-    int n = -1;
+    NSUInteger n = 0;
+    BOOL found = NO;
     NSUInteger c_length = [custom count];
     for (i=0; i<c_length; i++) {
 	if ([custom objectAtIndex:i] == f) {
 	    n = i;
+            found = YES;
 	    break;
 	}
     }
-    if (n != -1) {
+    if (found) {
 	[custom removeObjectAtIndex:n];
 	return YES;
     } else {
@@ -235,15 +237,17 @@
 - (BOOL)removeSpringByReference:(CMTPSpring *)s
 {
     NSUInteger i;
-    int n = -1;
+    NSUInteger n = 0;
+    BOOL found = NO;
     NSUInteger s_length = [springs count];
     for (i=0; i<s_length; i++) {
 	if ([springs objectAtIndex:i] == s) {
 	    n = i;
+            found = YES;
 	    break;
 	}
     }
-    if (n != -1) {
+    if (found) {
 	[springs removeObjectAtIndex:n];
 	return YES;
     } else {
@@ -259,15 +263,17 @@
 - (BOOL)removeAttractionByReference:(CMTPAttraction *)a
 {
     NSUInteger i;
-    int n = -1;
+    NSUInteger n = 0;
+    BOOL found = NO;
     NSUInteger a_length = [attractions count];
     for (i=0; i<a_length; i++) {
 	if ([attractions objectAtIndex:i] == a) {
 	    n = i;
+            found = YES;
 	    break;
 	}
     }
-    if (n != -1) {
+    if (found) {
 	[attractions removeObjectAtIndex:n];
 	return YES;
     } else {
@@ -283,15 +289,17 @@
 - (BOOL)removeParticleByReference:(CMTPParticle *)p
 {
     NSUInteger i;
-    int n = -1;
+    NSUInteger n = 0;
+    BOOL found = NO;
     NSUInteger p_length = [particles count];
     for (i=0; i<p_length; i++) {
 	if ([particles objectAtIndex:i] == p) {
 	    n = i;
+            found = YES;
 	    break;
 	}
     }
-    if (n != -1) {
+    if (found) {
 	[particles removeObjectAtIndex:n];
 	return YES;
     } else {
