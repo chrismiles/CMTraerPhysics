@@ -36,8 +36,8 @@
 - (BOOL)loadProgramFromStringsVertexShader:(NSString *)vertexShader fragmentShader:(NSString *)fragmentShader attributeNames:(NSArray *)attributeNames uniformNames:(NSArray *)uniformNames error:(NSError **)error;
 - (BOOL)loadProgramFromFilesVertexShader:(NSString *)vertexShaderPath fragmentShader:(NSString *)fragmentShaderPath attributeNames:(NSArray *)attributeNames uniformNames:(NSArray *)uniformNames error:(NSError **)error;
 
-- (GLuint)indexOfAttribute:(NSString *)attributeName;
-- (GLuint)indexOfUniform:(NSString *)uniformName;
+- (int)indexOfAttribute:(NSString *)attributeName;
+- (int)indexOfUniform:(NSString *)uniformName;
 
 @end
 

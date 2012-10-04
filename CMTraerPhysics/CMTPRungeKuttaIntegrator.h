@@ -38,7 +38,7 @@
 }
 @property (nonatomic, assign) CMTPVector3D vector3D;
 + (CMVector3Dobj *)vector3Dobj;
-@end;
+@end
 
 
 @interface CMTPRungeKuttaIntegrator : CMTPIntegrator {

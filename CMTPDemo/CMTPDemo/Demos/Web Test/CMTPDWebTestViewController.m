@@ -167,8 +167,8 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     float attractionMinDistanceFactor;
     float attractionStrengthFactor;
     BOOL canModifyStructure;
-    NSInteger steps;
-    NSInteger numTurns;
+    NSUInteger steps;
+    NSUInteger numTurns;
     CGPoint q0, q1, q2, q3;
     CGPoint prevLocation, userLocation;
 }
@@ -254,7 +254,7 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     
     GLfloat projectionMatrix[16];
     orthoMatrix(projectionMatrix, 0.0f, frameWidth, frameHeight, 0.0f, -1.0f, 1.0f); // inverted Y
-    GLuint uniformMVP = [self.shaderProgram indexOfUniform:@"mvp"];
+    int uniformMVP = [self.shaderProgram indexOfUniform:@"mvp"];
     glUniformMatrix4fv(uniformMVP, 1, GL_FALSE, projectionMatrix);
     ASSERT_GL_OK();
     
@@ -267,7 +267,7 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     ASSERT_GL_OK();
     
     // draw spiral
-    for (int i = 2; i < [particles count]; i++) {
+    for (NSUInteger i = 2; i < [particles count]; i++) {
 	CMTPParticle *p0 = [particles objectAtIndex:i-1];
 	CMTPParticle *p1 = [particles objectAtIndex:i];
 	
@@ -278,11 +278,11 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     }
     
     // draw armature
-    for (int i = 1; i <= steps; i++) {
+    for (NSUInteger i = 1; i <= steps; i++) {
 	CMTPParticle *p0 = [particles objectAtIndex:i];
 	CMTPVector3D pos0 = p0.position;
-	for (int j = 0; j <= numTurns; j++) {
-	    int index = i + (j * steps);
+	for (NSUInteger j = 0; j <= numTurns; j++) {
+	    NSUInteger index = i + (j * steps);
 	    if (index < [particles count]) {
 		CMTPParticle *p1 = [particles objectAtIndex:index];
 		webVertices[vIndex++] = pos0.x * contentScale;
@@ -296,8 +296,8 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     }
     
     // draw joints to frame
-    for (int i = 0; i <= steps; i++) {
-	int p0_index = i + (numTurns-1) * steps;
+    for (NSUInteger i = 0; i <= steps; i++) {
+	NSUInteger p0_index = i + (NSUInteger)((numTurns-1) * steps);
 	if (p0_index < [particles count]) {
 	    CMTPParticle *p0 = [particles objectAtIndex:p0_index];
 	    CMTPParticle *p1 = [joints objectAtIndex:i];
@@ -312,7 +312,7 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     if (prevLocation.x >= 0.0f) {
 	float user_d = CGPointDistance(userLocation, prevLocation);
 	
-	for (int i = 0; i < [attractions count]; i++) {
+	for (NSUInteger i = 0; i < [attractions count]; i++) {
 	    CMTPAttraction *a = [attractions objectAtIndex:i];
 	    [a setMinDistance:user_d * attractionMinDistanceFactor];
 	    [a setStrength:(attractionStrengthFactor * (user_d*user_d))];
@@ -346,8 +346,8 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     
     float ox = CGRectGetMidX(frame);
     float oy = CGRectGetMidY(frame);
-    float a = 6;
-    float b = 1.1;
+    float a = 6.0f;
+    float b = 1.1f;
     
     anchors = [[NSMutableArray alloc] init];
     anchors_copy = calloc(numTurns * steps, sizeof(CMTPVector3D));
@@ -391,11 +391,11 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     
     NSUInteger anchorIndex = 0;
     
-    for (int i = 1; i <= numTurns; i++) {
-	for (int j = 0; j < steps; j++) {
-	    float rand = 1 + randomClamp() * .008; //add some small irregularities
+    for (NSUInteger i = 1; i <= numTurns; i++) {
+	for (NSUInteger j = 0; j < steps; j++) {
+	    float rand = 1 + randomClamp() * .008f; //add some small irregularities
 	    
-	    float theta = (j * ((M_PI * 2) / steps)) + (i * M_PI * 2) + M_PI/2; // add 90 deg so the orientation of web is correct (starts at top)
+	    float theta = (j * (((float)M_PI * 2) / steps)) + (i * (float)M_PI * 2) + (float)M_PI/2; // add 90 deg so the orientation of web is correct (starts at top)
 	    float r = a + (b * theta) * rand;
 	    // use theta*-1 as spiders create their final web outwards, turning clockwise 
 	    CGPoint pos = CGPointFromPolar(r, -theta);
@@ -405,8 +405,8 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
 	    [pfixed makeFixed];
 	    
 	    // Attraction strength & minDistance will be overriden based on user input
-	    CMTPAttraction *a = [s makeAttractionBetweenParticleA:attractor particleB:pfree strength:1.0f minDistance:1.0f];
-	    [attractions addObject:a];
+	    CMTPAttraction *attr = [s makeAttractionBetweenParticleA:attractor particleB:pfree strength:1.0f minDistance:1.0f];
+	    [attractions addObject:attr];
 	    [particles addObject:pfree];
 	    [anchors addObject:pfixed];
 	    
@@ -417,7 +417,7 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
 	    
 	    anchors_copy[anchorIndex++] = CMTPVector3DMake(pfixed.position.x, pfixed.position.y, pfixed.position.z);
 	    
-	    [s makeSpringBetweenParticleA:pfree particleB:pfixed springConstant:0.42f damping:0.0f restLength:randomClamp()*1.01];
+	    [s makeSpringBetweenParticleA:pfree particleB:pfixed springConstant:0.42f damping:0.0f restLength:randomClamp()*1.01f];
 	}
     }
     
@@ -426,15 +426,15 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     
     // NOTE: the mix of vector math + "custom" calc is horrible, to rewrite using Vector3D methods only
     
-    for (int i = 0; i < steps-2; i++) {
-	int seed_index = i + (numTurns-1) * steps;
+    for (NSUInteger i = 0; i < steps-2; i++) {
+	NSUInteger seed_index = i + (NSUInteger)((numTurns-1) * steps);
 	
 	if (seed_index < [particles count]) {
 	    
 	    CMTPParticle *p0 = [particles objectAtIndex:seed_index];
 	    CMTPVector3D seed_pos = p0.position;
 	    
-	    CMTPParticle *p1 = [particles objectAtIndex:i + (numTurns-2) * steps];
+	    CMTPParticle *p1 = [particles objectAtIndex:i + (NSUInteger)((numTurns-2) * steps)];
 	    CMTPVector3D n_pt_pos = p1.position;
 	    
 	    float mod_scale = randomClamp() * -4.0f;
@@ -453,7 +453,7 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
 	    float dy = next_seed_pos.y - seed_pos.y;
 	    float d = sqrtf(dx*dx + dy*dy);
 	    
-	    for (int j=0; j<[particles count]; j++) {
+	    for (NSUInteger j=0; j<[particles count]; j++) {
 		CMTPParticle *pj = [particles objectAtIndex:j];
 		float _dx = next_seed_pos.x - pj.position.x;
 		float _dy = next_seed_pos.y - pj.position.y;
@@ -483,7 +483,7 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     // generate spring-dampers keeping the structure together
     
     // main spiral
-    for (int i = 2; i < [particles count]; i++) {
+    for (NSUInteger i = 2; i < [particles count]; i++) {
 	CMTPParticle *p0 = [particles objectAtIndex:i];
 	CMTPParticle *p1 = [particles objectAtIndex:i-1];
 	float dx = p0.position.x - p1.position.x;
@@ -495,11 +495,11 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     // joints to frame: create necessary fixed particles and connect
     // we'll need to figure out were the armature should intersect the frame
 
-    for (int i = 0; i <= steps; i++) {
-	int p0_index = i + (numTurns-1) * steps;
+    for (NSUInteger i = 0; i <= steps; i++) {
+	NSUInteger p0_index = i + (numTurns-1) * steps;
 	
 	if (p0_index < [particles count]) {
-	    int p1_index = i + (numTurns-2) * steps;
+	    NSUInteger p1_index = i + (numTurns-2) * steps;
 	    
 	    CMTPParticle *particle0 = [particles objectAtIndex:p0_index];
 	    CMTPParticle *particle1 = [particles objectAtIndex:p1_index];
@@ -556,7 +556,7 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     
     ASSERT_GL_OK();
     
-    vertexAttrib = [self.shaderProgram indexOfAttribute:@"position"];
+    vertexAttrib = (GLuint)[self.shaderProgram indexOfAttribute:@"position"];
     
     animating = NO;
 }
@@ -752,7 +752,7 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        int numWebVertices = 1908;
+        NSUInteger numWebVertices = 1908;
 	
         webVertices = calloc(2*numWebVertices, sizeof(GLfloat));
 	

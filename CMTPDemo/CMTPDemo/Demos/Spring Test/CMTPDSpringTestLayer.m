@@ -43,7 +43,7 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
 
 
 @interface CMTPDSpringTestLayer () {
-    double spring_length;
+    float spring_length;
     NSUInteger subdivisions;
 
     CADisplayLink *displayLink;
@@ -96,11 +96,11 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
 {
     if (motionManager.isDeviceMotionActive) {
         CMAcceleration gravity = motionManager.deviceMotion.gravity;
-        CMTPVector3D gravityVector = CMTPVector3DMake(gravity.x*gravityScale, -gravity.y*gravityScale, 0.0f);
+        CMTPVector3D gravityVector = CMTPVector3DMake((float)(gravity.x)*gravityScale, (float)(-gravity.y)*gravityScale, 0.0f);
         s.gravity = gravityVector;
     }
 
-    [s tick:1.8];
+    [s tick:1.8f];
     [self setNeedsDisplay];      // draw layer
     
     /* FPS */
@@ -124,10 +124,10 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
     [anchor makeFixed];
     [particles addObject:anchor];
     
-    double sub_len = spring_length / subdivisions;
+    float sub_len = spring_length / subdivisions;
     float sy = 100.0f;
     for (NSUInteger i=1; i<=subdivisions; i++) {
-	CMTPParticle *p = [s makeParticleWithMass:0.6f position:CMTPVector3DMake(300, sy + i*sub_len, 0)];
+	CMTPParticle *p = [s makeParticleWithMass:0.6f position:CMTPVector3DMake(300.0f, sy + i*sub_len, 0)];
 	[particles addObject:p];
     }
     
@@ -224,7 +224,7 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
     
     p = [particles objectAtIndex:0];
     CGPathMoveToPoint(path, NULL, p.position.x, p.position.y);
-    for (int i=1; i<[particles count]; i++) {
+    for (NSUInteger i=1; i<[particles count]; i++) {
 	p = [particles objectAtIndex:i];
 	CGPathAddLineToPoint(path, NULL, p.position.x, p.position.y);
     }

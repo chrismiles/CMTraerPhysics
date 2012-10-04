@@ -65,9 +65,9 @@ static inline float fastAbs(float x) { return (x < 0) ? -x : x; }
 static inline GLfloat fastSinf(GLfloat x)
 {
     // fast sin function; maximum error is 0.001
-    const float P = 0.225;
+    const float P = 0.225f;
     
-    x = x * M_1_PI;
+    x = x * (float)M_1_PI;
     int k = (int) round(x);
     x = x - k;
     
@@ -231,7 +231,7 @@ static inline void Matrix3DSetXRotationUsingRadians(Matrix3D matrix, GLfloat deg
 
 static inline void Matrix3DSetXRotationUsingDegrees(Matrix3D matrix, GLfloat degrees)
 {
-    Matrix3DSetXRotationUsingRadians(matrix, degrees * M_PI / 180.0);
+    Matrix3DSetXRotationUsingRadians(matrix, degrees * (float)M_PI / 180.0f);
 }
 
 static inline void Matrix3DSetYRotationUsingRadians(Matrix3D matrix, GLfloat degrees)
@@ -247,7 +247,7 @@ static inline void Matrix3DSetYRotationUsingRadians(Matrix3D matrix, GLfloat deg
 
 static inline void Matrix3DSetYRotationUsingDegrees(Matrix3D matrix, GLfloat degrees)
 {
-    Matrix3DSetYRotationUsingRadians(matrix, degrees * M_PI / 180.0);
+    Matrix3DSetYRotationUsingRadians(matrix, degrees * (float)M_PI / 180.0f);
 }
 
 static inline void Matrix3DSetZRotationUsingRadians(Matrix3D matrix, GLfloat degrees)
@@ -263,7 +263,7 @@ static inline void Matrix3DSetZRotationUsingRadians(Matrix3D matrix, GLfloat deg
 
 static inline void Matrix3DSetZRotationUsingDegrees(Matrix3D matrix, GLfloat degrees)
 {
-    Matrix3DSetZRotationUsingRadians(matrix, degrees * M_PI / 180.0);
+    Matrix3DSetZRotationUsingRadians(matrix, degrees * (float)M_PI / 180.0f);
 }
 
 static inline void Matrix3DSetRotationByRadians(Matrix3D matrix, GLfloat angle, GLfloat x, GLfloat y, GLfloat z)
@@ -301,7 +301,7 @@ static inline void Matrix3DSetRotationByRadians(Matrix3D matrix, GLfloat angle, 
 
 static inline void Matrix3DSetRotationByDegrees(Matrix3D matrix, GLfloat angle, GLfloat x, GLfloat y, GLfloat z)
 {
-    Matrix3DSetRotationByRadians(matrix, angle * M_PI / 180.0, x, y, z);
+    Matrix3DSetRotationByRadians(matrix, angle * (float)M_PI / 180.0f, x, y, z);
 }
 
 static inline void Matrix3DSetShear(Matrix3D matrix, GLfloat xShear, GLfloat yShear)

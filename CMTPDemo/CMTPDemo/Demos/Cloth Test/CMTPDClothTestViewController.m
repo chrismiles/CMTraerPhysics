@@ -47,9 +47,9 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
     vertices[index++] = 0.0f;
     vertices[index++] = 0.0f;
     
-    for (int i=0; i<num_sections+1; i++) {
-	vertices[index++] = radius * cosf(i * 2 * M_PI / num_sections);
-	vertices[index++] = radius * sinf(i * 2 * M_PI / num_sections);
+    for (NSUInteger i=0; i<num_sections+1; i++) {
+	vertices[index++] = radius * cosf(i * 2 * (float)M_PI / num_sections);
+	vertices[index++] = radius * sinf(i * 2 * (float)M_PI / num_sections);
     }
     
     ZAssert(index <= *count, @"vertices array was too small");
@@ -200,14 +200,16 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
     
     /* *** Cloth Test **** */
     
-    CMTPParticle *p1 = [particles objectAtIndex:0];
-    CMTPParticle *p2 = [particles objectAtIndex:gridSize-1];
-    p1.position = CMTPVector3DMake(handle1.x, handle1.y, 0.0f);
-    p2.position = CMTPVector3DMake(handle2.x, handle2.y, 0.0f);
+    {
+	CMTPParticle *p1 = [particles objectAtIndex:0];
+	CMTPParticle *p2 = [particles objectAtIndex:gridSize-1];
+	p1.position = CMTPVector3DMake(handle1.x, handle1.y, 0.0f);
+	p2.position = CMTPVector3DMake(handle2.x, handle2.y, 0.0f);
+    }
 
     if (motionManager.isDeviceMotionActive) {
         CMAcceleration gravity = motionManager.deviceMotion.gravity;
-        CMTPVector3D gravityVector = CMTPVector3DMake(gravity.x*gravityScale, -gravity.y*gravityScale, 0.0f);
+        CMTPVector3D gravityVector = CMTPVector3DMake((float)(gravity.x)*gravityScale, (float)(-gravity.y)*gravityScale, 0.0f);
         s.gravity = gravityVector;
     }
     
@@ -230,7 +232,7 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
     glUseProgram(self.shaderProgram.program);
     ASSERT_GL_OK();
     
-    GLuint uniformMVP = [self.shaderProgram indexOfUniform:@"mvp"];
+    int uniformMVP = [self.shaderProgram indexOfUniform:@"mvp"];
 
     
     if (showImage || showGrid) {
@@ -246,12 +248,12 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
 	Matrix3DSetTranslation(translationMatrix, handle1.x*contentScale, handle1.y*contentScale, 0.0f);
 	Matrix3DMultiply(projectionMatrix, translationMatrix, mvpMatrix);
 	glUniformMatrix4fv(uniformMVP, 1, GL_FALSE, mvpMatrix);
-	glDrawArrays(GL_TRIANGLE_FAN, 0, handleCount);
+	glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei)handleCount);
 	
 	Matrix3DSetTranslation(translationMatrix, handle2.x*contentScale, handle2.y*contentScale, 0.0f);
 	Matrix3DMultiply(projectionMatrix, translationMatrix, mvpMatrix);
 	glUniformMatrix4fv(uniformMVP, 1, GL_FALSE, mvpMatrix);
-	glDrawArrays(GL_TRIANGLE_FAN, 0, handleCount);
+	glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei)handleCount);
 	
 	glDisableVertexAttribArray(vertexAttrib);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -384,28 +386,28 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
     s = [[CMTPParticleSystem alloc] initWithGravityVector:gravityVector drag:0.06f];
     [s setIntegrator:CMTPParticleSystemIntegratorRungeKutta];
     
-    NSUInteger sp = CGRectGetWidth(frame) / gridSize / 3;
-    NSUInteger sx = CGRectGetWidth(frame)/2.0f - sp*gridSize/2.0f;
-    NSUInteger sy = CGRectGetHeight(frame) * 0.15f;
+    NSUInteger sp = (NSUInteger)(CGRectGetWidth(frame) / gridSize / 3);
+    NSUInteger sx = (NSUInteger)(CGRectGetWidth(frame)/2.0f - sp*gridSize/2.0f);
+    NSUInteger sy = (NSUInteger)(CGRectGetHeight(frame) * 0.15f);
 
     // create grid of particles
-    for (int i=0; i<gridSize; i++) {
-        for (int j=0; j<gridSize; j++) {
-            CMTPParticle *p = [s makeParticleWithMass:0.8 position:CMTPVector3DMake(sx+j*sp, sy+i*sp, 0)];
+    for (NSUInteger i=0; i<gridSize; i++) {
+        for (NSUInteger j=0; j<gridSize; j++) {
+            CMTPParticle *p = [s makeParticleWithMass:0.8f position:CMTPVector3DMake(sx+j*sp, sy+i*sp, 0.0f)];
             [particles addObject:p];
         }
     }
     
     // create springs
-    for (int i=0; i<gridSize; i++) { //horizontal
-        for (int j=0; j<gridSize-1; j++) {
+    for (NSUInteger i=0; i<gridSize; i++) { //horizontal
+        for (NSUInteger j=0; j<gridSize-1; j++) {
             CMTPParticle *particleA = [particles objectAtIndex:(i*gridSize+j)];
             CMTPParticle *particleB = [particles objectAtIndex:(i*gridSize+j+1)];
             [s makeSpringBetweenParticleA:particleA particleB:particleB springConstant:1.0f damping:0.6f restLength:sp];
         }
     }
-    for (int i=0; i<gridSize-1; i++) { //vertical
-        for (int j=0; j<gridSize; j++) {
+    for (NSUInteger i=0; i<gridSize-1; i++) { //vertical
+        for (NSUInteger j=0; j<gridSize; j++) {
             CMTPParticle *particleA = [particles objectAtIndex:(i*gridSize+j)];
             CMTPParticle *particleB = [particles objectAtIndex:((i+1)*gridSize+j)];
             [s makeSpringBetweenParticleA:particleA particleB:particleB springConstant:1.0f damping:0.6f restLength:sp];
@@ -451,8 +453,8 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
     
     ASSERT_GL_OK();
     
-    vertexAttrib = [self.shaderProgram indexOfAttribute:@"position"];
-    textureCoordAttrib = [self.shaderProgram indexOfAttribute:@"textureCoord"];
+    vertexAttrib = (GLuint)[self.shaderProgram indexOfAttribute:@"position"];
+    textureCoordAttrib = (GLuint)[self.shaderProgram indexOfAttribute:@"textureCoord"];
     
     animating = NO;
 
@@ -492,7 +494,7 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
     
     glGenBuffers(1, &handle_vbo);
     glBindBuffer(GL_ARRAY_BUFFER, handle_vbo);
-    glBufferData(GL_ARRAY_BUFFER, handleCount*sizeof(GL_FLOAT), handleVertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr)(handleCount*sizeof(GL_FLOAT)), handleVertices, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind
     ASSERT_GL_OK();
     

@@ -57,7 +57,7 @@ float randomClamp(void);
     }
     
     // Add distance labels
-    NSInteger numDistanceLabels = CGRectGetHeight(self.contentView.bounds) / kDistanceLabelOffset - 1;
+    NSInteger numDistanceLabels = (NSInteger)(CGRectGetHeight(self.contentView.bounds) / kDistanceLabelOffset) - 1;
     CGFloat y = kDistanceLabelOffset;
     for (NSInteger i=0; i<numDistanceLabels; i++) {
 	NSString *text = [[NSString alloc] initWithFormat:@"%0.0f points", y];
@@ -67,9 +67,9 @@ float randomClamp(void);
 	
 	[distanceLabel sizeToFit];
 	
-	CGRect frame = distanceLabel.frame;
-	frame.origin.x = randomClamp() * (CGRectGetWidth(self.contentView.bounds) - CGRectGetWidth(frame));
-	distanceLabel.frame = frame;
+	CGRect dFrame = distanceLabel.frame;
+	dFrame.origin.x = randomClamp() * (CGRectGetWidth(self.contentView.bounds) - CGRectGetWidth(dFrame));
+	distanceLabel.frame = dFrame;
 	
 	[self.contentView addSubview:distanceLabel];
 	

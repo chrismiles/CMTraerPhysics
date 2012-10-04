@@ -87,7 +87,7 @@ UIBezierPath *smoothedPath(UIBezierPath *bpath, int granularity)
     smoothedPath.lineWidth = bpath.lineWidth;
     
     [smoothedPath moveToPoint:POINT(0)];
-    for (int index = 1; index < points.count-2; index++)
+    for (NSUInteger index = 1; index < points.count-2; index++)
     {
         CGPoint p0 = POINT(index - 1);
         CGPoint p1 = POINT(index);
@@ -102,8 +102,8 @@ UIBezierPath *smoothedPath(UIBezierPath *bpath, int granularity)
             float ttt = tt * t;
             
             CGPoint pi; // intermediate point
-            pi.x = 0.5 * (2*p1.x+(p2.x-p0.x)*t + (2*p0.x-5*p1.x+4*p2.x-p3.x)*tt + (3*p1.x-p0.x-3*p2.x+p3.x)*ttt);
-            pi.y = 0.5 * (2*p1.y+(p2.y-p0.y)*t + (2*p0.y-5*p1.y+4*p2.y-p3.y)*tt + (3*p1.y-p0.y-3*p2.y+p3.y)*ttt);
+            pi.x = 0.5f * (2.0f*p1.x+(p2.x-p0.x)*t + (2.0f*p0.x-5.0f*p1.x+4.0f*p2.x-p3.x)*tt + (3.0f*p1.x-p0.x-3.0f*p2.x+p3.x)*ttt);
+            pi.y = 0.5f * (2.0f*p1.y+(p2.y-p0.y)*t + (2.0f*p0.y-5.0f*p1.y+4.0f*p2.y-p3.y)*tt + (3.0f*p1.y-p0.y-3.0f*p2.y+p3.y)*ttt);
             [smoothedPath addLineToPoint:pi];
         }
         

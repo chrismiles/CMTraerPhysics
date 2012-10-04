@@ -176,7 +176,7 @@
 
     GLfloat projectionMatrix[16];
     orthoMatrix(projectionMatrix, 0.0f, frameWidth, 0.0f, frameHeight, -1.0f, 1.0f);
-    GLuint uniformMVP = [self.shaderProgram indexOfUniform:@"mvp"];
+    int uniformMVP = [self.shaderProgram indexOfUniform:@"mvp"];
     glUniformMatrix4fv(uniformMVP, 1, GL_FALSE, projectionMatrix);
     ASSERT_GL_OK();
     
@@ -247,7 +247,7 @@
         ASSERT_GL_OK();
 
 	NSUInteger pfixed_count = [particles_fixed count];
-	for (int i = 0; i<pfixed_count; i++) {
+	for (NSUInteger i = 0; i<pfixed_count; i++) {
 	    CMTPParticle *pFixed = [particles_fixed objectAtIndex:i];
 	    CMTPParticle *pFree = [particles_free objectAtIndex:i];
 	    
@@ -344,12 +344,12 @@
     particles_fixed = [[NSMutableArray alloc] init];
     particles_free = [[NSMutableArray alloc] init];
     CMTPVector3D gravityVector = CMTPVector3DMake(0.0, 0.0, 0.0);
-    s = [[CMTPParticleSystem alloc] initWithGravityVector:gravityVector drag:.2];
+    s = [[CMTPParticleSystem alloc] initWithGravityVector:gravityVector drag:0.2f];
     [s setIntegrator:CMTPParticleSystemIntegratorModifiedEuler];
     
-    NSUInteger sx = CGRectGetMinX(frame);
-    NSUInteger sy = CGRectGetMinY(frame);
-    NSUInteger sp = CGRectGetWidth(frame) / GRID_SIZE;
+    NSUInteger sx = (NSUInteger)CGRectGetMinX(frame);
+    NSUInteger sy = (NSUInteger)CGRectGetMinY(frame);
+    NSUInteger sp = (NSUInteger)CGRectGetWidth(frame) / GRID_SIZE;
     
     attractor = [[s makeParticleWithMass:1 position:CMTPVector3DMake(CGRectGetMidX(frame), CGRectGetMidY(frame), 0.0)] retain];
     [attractor makeFixed];
@@ -371,14 +371,14 @@
     for (NSUInteger i=0; i<GRID_SIZE; i++) {
         for (NSUInteger j=0; j<GRID_SIZE; j++) {
             
-            CMTPParticle *a = [s makeParticleWithMass:0.8 position:CMTPVector3DMake(sx+j*sp, sy+i*sp, 0)];
+            CMTPParticle *a = [s makeParticleWithMass:0.8f position:CMTPVector3DMake(sx+j*sp, sy+i*sp, 0.0f)];
             [a makeFixed];
-            CMTPParticle *b = [s makeParticleWithMass:0.8 position:CMTPVector3DMake(sx+j*sp, sy+i*sp, 0)];
+            CMTPParticle *b = [s makeParticleWithMass:0.8f position:CMTPVector3DMake(sx+j*sp, sy+i*sp, 0.0f)];
             
             [particles_fixed addObject:a];
             [particles_free addObject:b];
             
-            [s makeSpringBetweenParticleA:a particleB:b springConstant:0.1 damping:0.01 restLength:0.0];
+            [s makeSpringBetweenParticleA:a particleB:b springConstant:0.1f damping:0.01f restLength:0.0f];
             [s makeAttractionBetweenParticleA:attractor particleB:b strength:attractionStrength minDistance:attractionMinDistance];
         }
     }
@@ -409,9 +409,9 @@
     
     ASSERT_GL_OK();
     
-    colorAttrib = [self.shaderProgram indexOfAttribute:@"color"];
-    vertexAttrib = [self.shaderProgram indexOfAttribute:@"position"];
-    textureCoordAttrib = [self.shaderProgram indexOfAttribute:@"textureCoord"];
+    colorAttrib = (GLuint)[self.shaderProgram indexOfAttribute:@"color"];
+    vertexAttrib = (GLuint)[self.shaderProgram indexOfAttribute:@"position"];
+    textureCoordAttrib = (GLuint)[self.shaderProgram indexOfAttribute:@"textureCoord"];
 
     animating = NO;
     

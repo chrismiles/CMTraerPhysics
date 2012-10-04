@@ -54,30 +54,30 @@ NSInteger const CMGLESKProgramUniformNotFound = 6;
 
 #pragma mark - Public methods
 
-- (GLuint)indexOfUniform:(NSString *)uniformName
+- (int)indexOfUniform:(NSString *)uniformName
 {
-    GLuint index;
+    int index;
     NSNumber *location = [self.uniformLocations valueForKey:uniformName];
     ZAssert(location != nil, @"Location not found for uniform \"%@\"", uniformName);
     if (nil == location) {
         index = -1;
     }
     else {
-        index = [location unsignedIntValue];
+        index = [location intValue];
     }
     return index;
 }
 
-- (GLuint)indexOfAttribute:(NSString *)attributeName
+- (int)indexOfAttribute:(NSString *)attributeName
 {
-    GLuint index;
+    int index;
     NSNumber *location = [self.attributeLocations valueForKey:attributeName];
     ZAssert(location != nil, @"Location not found for attribute \"%@\"", attributeName);
     if (nil == location) {
         index = -1;
     }
     else {
-        index = [location unsignedIntValue];
+        index = [location intValue];
     }
     return index;
 }
@@ -219,7 +219,7 @@ NSInteger const CMGLESKProgramUniformNotFound = 6;
     glValidateProgram(program);
     glGetProgramiv(program, GL_INFO_LOG_LENGTH, &logLength);
     if (logLength > 0) {
-        GLchar *log = (GLchar *)malloc(logLength);
+        GLchar *log = (GLchar *)malloc((unsigned long)logLength);
         glGetProgramInfoLog(program, logLength, &logLength, log);
         NSLog(@"Program validate log:\n%s", log);
         free(log);
@@ -265,7 +265,7 @@ NSInteger const CMGLESKProgramUniformNotFound = 6;
     GLint logLength;
     glGetShaderiv(shaderName, GL_INFO_LOG_LENGTH, &logLength);
     if (logLength > 0) {
-        GLchar *log = (GLchar *)malloc(logLength);
+        GLchar *log = (GLchar *)malloc((unsigned long)logLength);
         glGetShaderInfoLog(shaderName, logLength, &logLength, log);
         NSLog(@"Shader compile log:\n%s", log);
         free(log);
@@ -294,7 +294,7 @@ NSInteger const CMGLESKProgramUniformNotFound = 6;
     GLint logLength;
     glGetProgramiv(program, GL_INFO_LOG_LENGTH, &logLength);
     if (logLength > 0) {
-        GLchar *log = (GLchar *)malloc(logLength);
+        GLchar *log = (GLchar *)malloc((unsigned long)logLength);
         glGetProgramInfoLog(program, logLength, &logLength, log);
         NSLog(@"Program link log:\n%s", log);
         free(log);

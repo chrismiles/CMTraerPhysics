@@ -58,8 +58,8 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
     float frameHeight, frameWidth;
     NSInteger animationFrameInterval;
     
-    GLuint textureCoordAttrib;
-    GLuint vertexAttrib;
+    int textureCoordAttrib;
+    int vertexAttrib;
     
     GLfloat *texCoords;
     GLfloat *vertices;
@@ -126,12 +126,12 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
     NSUInteger numIntersect;
     NSUInteger count = [particlesFree count];
     
-    for (int i = 0; i<count-1; i++) {
+    for (NSUInteger i = 0; i<count-1; i++) {
 	NSArray *particlesFreeRow = [particlesFree objectAtIndex:i];
 	NSArray *particlesFreeRow1 = [particlesFree objectAtIndex:i+1];
 	NSUInteger pfree_row_count = [particlesFreeRow count];
 	
-	for (int j = 0; j<pfree_row_count-1; j++) {
+	for (NSUInteger j = 0; j<pfree_row_count-1; j++) {
 	    CMTPParticle *pFreeij = [particlesFreeRow objectAtIndex:j];		// top / left
 	    CMTPParticle *pFreeij1 = [particlesFreeRow objectAtIndex:j+1];	// top / right
 	    CMTPParticle *pFreei1j = [particlesFreeRow1 objectAtIndex:j];	// bottom / left
@@ -229,10 +229,10 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
     attractionStrength *= contentScale;
     attractionMinDistance *= contentScale;
     
-    cell_width = CGRectGetWidth(frame) * 0.8 / num_cols;
-    cell_height = CGRectGetHeight(frame) * 0.8 / num_rows;
-    sx = CGRectGetWidth(frame) * 0.1;
-    sy = CGRectGetHeight(frame) * 0.1;
+    cell_width = CGRectGetWidth(frame) * 0.8f / num_cols;
+    cell_height = CGRectGetHeight(frame) * 0.8f / num_rows;
+    sx = CGRectGetWidth(frame) * 0.1f;
+    sy = CGRectGetHeight(frame) * 0.1f;
     
     DLog(@"grid cell width, height: %f, %f", cell_width, cell_height);
 
@@ -353,7 +353,7 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
     
     /* *** Wonderwall Like **** */
     
-    [s tick:2.9];
+    [s tick:2.9f];
     
     if (!touching || ![self isMouseOnGrid]) {
 	attractor.position = CMTPVector3DMake(-50000, -50000, 0);
@@ -381,7 +381,7 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
     glUseProgram(self.shaderProgram.program);
     ASSERT_GL_OK();
     
-    GLuint uniformMVP = [self.shaderProgram indexOfUniform:@"mvp"];
+    int uniformMVP = [self.shaderProgram indexOfUniform:@"mvp"];
     glUniformMatrix4fv(uniformMVP, 1, GL_FALSE, projectionMatrix);
     ASSERT_GL_OK();
     
@@ -493,16 +493,16 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
         glUniform1i([self.shaderProgram indexOfUniform:@"enableTexture"], GL_TRUE);
 	
         int stride = 0;
-        glEnableVertexAttribArray(vertexAttrib); // vertex coords
-	glEnableVertexAttribArray(textureCoordAttrib); // texture coords
+        glEnableVertexAttribArray((GLuint)vertexAttrib); // vertex coords
+	glEnableVertexAttribArray((GLuint)textureCoordAttrib); // texture coords
         ASSERT_GL_OK();
 	
-        glVertexAttribPointer(vertexAttrib, 2, GL_FLOAT, GL_FALSE, stride, vertices);
-	glVertexAttribPointer(textureCoordAttrib, 2, GL_FLOAT, GL_FALSE, stride, texCoords);
+        glVertexAttribPointer((GLuint)vertexAttrib, 2, GL_FLOAT, GL_FALSE, stride, vertices);
+	glVertexAttribPointer((GLuint)textureCoordAttrib, 2, GL_FLOAT, GL_FALSE, stride, texCoords);
         glDrawArrays(GL_TRIANGLES, 0, vIndex/2);
         
-        glDisableVertexAttribArray(vertexAttrib);
-	glDisableVertexAttribArray(textureCoordAttrib); // texture coords
+        glDisableVertexAttribArray((GLuint)vertexAttrib);
+	glDisableVertexAttribArray((GLuint)textureCoordAttrib); // texture coords
     }
     
     if (highlightEnabled && touching && highlightCell.shouldDraw) {
@@ -513,7 +513,7 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
 	ASSERT_GL_OK();
         
         int stride = 0;
-        glEnableVertexAttribArray(vertexAttrib); // vertex coords
+        glEnableVertexAttribArray((GLuint)vertexAttrib); // vertex coords
         ASSERT_GL_OK();
 	
 	vertices[vIndex++] = highlightCell.p1.x * contentScale;
@@ -546,10 +546,10 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
 	vertices[vIndex++] = highlightCell.p2.x * contentScale;
 	vertices[vIndex++] = highlightCell.p2.y * contentScale;
 	
-        glVertexAttribPointer(vertexAttrib, 2, GL_FLOAT, GL_FALSE, stride, vertices);
+        glVertexAttribPointer((GLuint)vertexAttrib, 2, GL_FLOAT, GL_FALSE, stride, vertices);
         glDrawArrays(GL_LINES, 0, vIndex/2);
         
-        glDisableVertexAttribArray(vertexAttrib);
+        glDisableVertexAttribArray((GLuint)vertexAttrib);
     }
     
     [glView.context presentRenderbuffer:GL_RENDERBUFFER];
