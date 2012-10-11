@@ -34,6 +34,7 @@
 #import "CMTPParticle.h"
 #import "CMTPSpring.h"
 #import "CMTPAttraction.h"
+#import "CMTPCustomForce.h"
 
 /* Enable DEBUG_PHYSICS_OBJECTS to log count of physics objects */
 //#define DEBUG_PHYSICS_OBJECTS
