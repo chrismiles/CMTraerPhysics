@@ -39,10 +39,24 @@ See videos of CMTraerPhysics demos on YouTube http://www.youtube.com/playlist?li
 See a presentation about CMTraerPhysics that Chris Miles gave at Melbourne Cocoaheads (March 2012) https://vimeo.com/42195248
 
 
+Support
+-------
+
+CMTraerPhysics is provided open source with no warranty and no guarantee
+of support. However, best effort is made to address [issues][1] raised on Github.
+
+If you would like assistance with integrating CMTraerPhysics or modifying
+it for your needs, contact the author Chris Miles <miles.chris@gmail.com> for consulting
+opportunities.
+
+[1]: https://github.com/chrismiles/CMTraerPhysics/issues "CMTraerPhysics issues on Github"
+
+
 License
 -------
 
-CMTraerPhysics is released open source under a MIT license.
+CMTraerPhysics is Copyright (c) 2011-2012 Chris Miles and released open source
+under a MIT license:
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
