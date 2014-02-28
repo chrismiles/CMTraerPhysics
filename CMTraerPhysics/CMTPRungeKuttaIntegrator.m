@@ -128,16 +128,16 @@
 	    originalPosition = [(CMVector3Dobj *)[originalPositions objectAtIndex:i] vector3D];
 	    k1Velocity = [(CMVector3Dobj *)[k1Velocities objectAtIndex:i] vector3D];
 	    
-	    p.position = CMTPVector3DMake(originalPosition.x + k1Velocity.x * 0.5 * t,
-                                          originalPosition.y + k1Velocity.y * 0.5 * t,
-                                          originalPosition.z + k1Velocity.z * 0.5 * t);
+	    p.position = CMTPVector3DMake(originalPosition.x + k1Velocity.x * 0.5f * t,
+                                          originalPosition.y + k1Velocity.y * 0.5f * t,
+                                          originalPosition.z + k1Velocity.z * 0.5f * t);
 	    
 	    originalVelocity = [(CMVector3Dobj *)[originalVelocities objectAtIndex:i] vector3D];
 	    k1Force = [(CMVector3Dobj *)[k1Forces objectAtIndex:i] vector3D];
 	    
-	    p.velocity = CMTPVector3DMake(originalVelocity.x + k1Force.x * 0.5 * t / p.mass,
-                                          originalVelocity.y + k1Force.y * 0.5 * t / p.mass,
-                                          originalVelocity.z + k1Force.z * 0.5 * t / p.mass);
+	    p.velocity = CMTPVector3DMake(originalVelocity.x + k1Force.x * 0.5f * t / p.mass,
+                                          originalVelocity.y + k1Force.y * 0.5f * t / p.mass,
+                                          originalVelocity.z + k1Force.z * 0.5f * t / p.mass);
 	    
 	    
 	}
@@ -174,16 +174,16 @@
 	    originalPosition = [(CMVector3Dobj *)[originalPositions objectAtIndex:i] vector3D];
 	    k2Velocity = [(CMVector3Dobj *)[k2Velocities objectAtIndex:i] vector3D];
 	    
-	    p.position = CMTPVector3DMake(originalPosition.x + k2Velocity.x * 0.5 * t,
-                                          originalPosition.y + k2Velocity.y * 0.5 * t,
-                                          originalPosition.z + k2Velocity.z * 0.5 * t);
+	    p.position = CMTPVector3DMake(originalPosition.x + k2Velocity.x * 0.5f * t,
+                                          originalPosition.y + k2Velocity.y * 0.5f * t,
+                                          originalPosition.z + k2Velocity.z * 0.5f * t);
 	    
 	    originalVelocity = [(CMVector3Dobj *)[originalVelocities objectAtIndex:i] vector3D];
 	    k2Force = [(CMVector3Dobj *)[k2Forces objectAtIndex:i] vector3D];
 	    
-	    p.velocity = CMTPVector3DMake(originalVelocity.x + k2Force.x * 0.5 * t / p.mass,
-                                          originalVelocity.y + k2Force.y * 0.5 * t / p.mass,
-                                          originalVelocity.z + k2Force.z * 0.5 * t / p.mass);
+	    p.velocity = CMTPVector3DMake(originalVelocity.x + k2Force.x * 0.5f * t / p.mass,
+                                          originalVelocity.y + k2Force.y * 0.5f * t / p.mass,
+                                          originalVelocity.z + k2Force.z * 0.5f * t / p.mass);
 	    
 	}
 	
@@ -219,16 +219,16 @@
 	    originalPosition = [(CMVector3Dobj *)[originalPositions objectAtIndex:i] vector3D];
 	    k3Velocity = [(CMVector3Dobj *)[k3Velocities objectAtIndex:i] vector3D];
 	    
-	    p.position = CMTPVector3DMake(originalPosition.x + k3Velocity.x * 0.5 * t,
-                                          originalPosition.y + k3Velocity.y * 0.5 * t,
-                                          originalPosition.z + k3Velocity.z * 0.5 * t);
+	    p.position = CMTPVector3DMake(originalPosition.x + k3Velocity.x * 0.5f * t,
+                                          originalPosition.y + k3Velocity.y * 0.5f * t,
+                                          originalPosition.z + k3Velocity.z * 0.5f * t);
 	    
 	    originalVelocity = [(CMVector3Dobj *)[originalVelocities objectAtIndex:i] vector3D];
 	    k3Force = [(CMVector3Dobj *)[k3Forces objectAtIndex:i] vector3D];
 	    
-	    p.velocity = CMTPVector3DMake(originalVelocity.x + k3Force.x * 0.5 * t / p.mass,
-                                          originalVelocity.y + k3Force.y * 0.5 * t / p.mass,
-                                          originalVelocity.z + k3Force.z * 0.5 * t / p.mass);
+	    p.velocity = CMTPVector3DMake(originalVelocity.x + k3Force.x * 0.5f * t / p.mass,
+                                          originalVelocity.y + k3Force.y * 0.5f * t / p.mass,
+                                          originalVelocity.z + k3Force.z * 0.5f * t / p.mass);
 	    
 	}
 	
