@@ -32,6 +32,7 @@
 #import "CMTPModifiedEulerIntegrator.h"
 #import "CMTPParticleSystem.h"
 #import "CMTPRungeKuttaIntegrator.h"
+#import "CMGLESKUtil.h"
 
 #ifdef DEBUG_PHYSICS_OBJECTS
 #import <QuartzCore/QuartzCore.h>   // for CACurrentMediaTime()

@@ -8,6 +8,7 @@
 
 #import "CMScrollView.h"
 #import "CMTraerPhysics.h"
+#import "CMGLESKUtil.h"
 #import <objc/runtime.h>
 #import <QuartzCore/QuartzCore.h>
 

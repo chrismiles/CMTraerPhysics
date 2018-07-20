@@ -25,6 +25,7 @@
 //
 
 #import "CMGLESKProgram.h"
+#import "CMGLESKUtil.h"
 
 NSString* const CMGLESKProgramErrorDomain=@"CMGLESKProgramErrorDomain";
 NSInteger const CMGLESKProgramCompileError=1;

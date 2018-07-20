@@ -24,6 +24,8 @@
 //  THE SOFTWARE.
 //
 
+#import <UIKit/UIKit.h>
+
 typedef CGFloat CMTPFloat;
 
 typedef struct {

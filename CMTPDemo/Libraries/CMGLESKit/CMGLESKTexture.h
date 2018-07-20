@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <OpenGLES/ES2/gl.h>
 
 typedef struct {

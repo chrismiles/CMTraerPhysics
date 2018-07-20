@@ -30,6 +30,8 @@
 #ifndef CMGLESKMatrix3D_h
 #define CMGLESKMatrix3D_h
 
+#import <UIKit/UIKit.h>
+
 typedef GLfloat Matrix3D[16];
 
 // OpenGL ES hardware accelerates Vector * Matrix but not Matrix * Matrix

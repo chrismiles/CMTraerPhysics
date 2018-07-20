@@ -85,10 +85,8 @@
 		831E95D5146FF02B003789DF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		831E95D9146FF02B003789DF /* CMTPDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CMTPDemo-Info.plist"; sourceTree = "<group>"; };
 		831E95DD146FF02B003789DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		831E95DF146FF02B003789DF /* CMTPDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CMTPDemo-Prefix.pch"; sourceTree = "<group>"; };
 		831E95E0146FF02B003789DF /* CMTPDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMTPDAppDelegate.h; sourceTree = "<group>"; };
 		831E95E1146FF02B003789DF /* CMTPDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CMTPDAppDelegate.m; sourceTree = "<group>"; };
-		831E95E9146FF02C003789DF /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		831E9601146FF093003789DF /* CMTPAttraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPAttraction.h; sourceTree = "<group>"; };
 		831E9602146FF093003789DF /* CMTPAttraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPAttraction.m; sourceTree = "<group>"; };
 		831E9603146FF093003789DF /* CMTPCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPCommon.h; sourceTree = "<group>"; };
@@ -232,13 +230,12 @@
 		831E95D0146FF02B003789DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				83DFD67114941A5E003771E9 /* CoreMotion.framework */,
-				831E96A414714324003789DF /* QuartzCore.framework */,
-				831E96A21471430F003789DF /* OpenGLES.framework */,
-				831E95D1146FF02B003789DF /* UIKit.framework */,
-				831E95D3146FF02B003789DF /* Foundation.framework */,
 				831E95D5146FF02B003789DF /* CoreGraphics.framework */,
-				831E95E9146FF02C003789DF /* SenTestingKit.framework */,
+				83DFD67114941A5E003771E9 /* CoreMotion.framework */,
+				831E95D3146FF02B003789DF /* Foundation.framework */,
+				831E96A21471430F003789DF /* OpenGLES.framework */,
+				831E96A414714324003789DF /* QuartzCore.framework */,
+				831E95D1146FF02B003789DF /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -266,19 +263,10 @@
 				831E9697147135E7003789DF /* Resources */,
 				83CCDBD115341B99003EA4D6 /* ScrollViewClone */,
 				83DFD682149A11C1003771E9 /* SpringTest */,
-				831E95D8146FF02B003789DF /* Supporting Files */,
 				832A9C1B14AD31D400C1CB8E /* WebTest */,
 				83ECC5BD14BC4BF3002126E1 /* WonderwallLike */,
 			);
 			path = CMTPDemo;
-			sourceTree = "<group>";
-		};
-		831E95D8146FF02B003789DF /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				831E95DF146FF02B003789DF /* CMTPDemo-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		831E9600146FF093003789DF /* CMTraerPhysics */ = {
@@ -709,8 +697,6 @@
 		831E95FB146FF02C003789DF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CMTPDemo/CMTPDemo-Prefix.pch";
 				INFOPLIST_FILE = "CMTPDemo/CMTPDemo-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "info.chrismiles.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -721,8 +707,6 @@
 		831E95FC146FF02C003789DF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CMTPDemo/CMTPDemo-Prefix.pch";
 				INFOPLIST_FILE = "CMTPDemo/CMTPDemo-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "info.chrismiles.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
