@@ -30,7 +30,11 @@
 #define ASSERT_GL_OK() do {\
 	GLenum glError = glGetError();\
 	if (glError != GL_NO_ERROR) {\
-	    [[NSAssertionHandler currentHandler] handleFailureInFunction:[NSString stringWithCString:__PRETTY_FUNCTION__ encoding:NSUTF8StringEncoding] file:[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lineNumber:__LINE__ description:[NSString stringWithFormat:@"glError: %d", glError]];\
+	    [[NSAssertionHandler currentHandler]\
+         handleFailureInFunction:[NSString stringWithCString:__PRETTY_FUNCTION__ encoding:NSUTF8StringEncoding]\
+         file:[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding]\
+         lineNumber:__LINE__\
+         description:[NSString stringWithFormat:@"glError: %@", @(glError)]];\
 	}} while (0)
 #else
 	#define ASSERT_GL_OK() do { } while (0)

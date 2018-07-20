@@ -65,9 +65,6 @@
 - (void)dealloc
 {
     [self deleteFramebuffer];    
-    [context release];
-    
-    [super dealloc];
 }
 
 - (EAGLContext *)context
@@ -81,8 +78,7 @@
     {
         [self deleteFramebuffer];
         
-        [context release];
-        context = [newContext retain];
+        context = newContext;
         
         [EAGLContext setCurrentContext:nil];
     }

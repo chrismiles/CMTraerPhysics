@@ -44,24 +44,13 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [_onFinishedHandler release];
-    
-    [_dragSlider release];
-    [_springEqualSwitch release];
-    [_springFixedSlider release];
-    [_springTouchSlider release];
-    [super dealloc];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.title = @"Configure Scroll View";
     
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)] autorelease];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)];
     
     self.dragSlider.value = _scrollDrag;
     self.springFixedSlider.value = _springFixedConstant;
@@ -69,6 +58,7 @@
     self.springEqualSwitch.on = _springEqual;
 }
 
+#if false
 - (void)viewDidUnload
 {
     [self setDragSlider:nil];
@@ -79,11 +69,7 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
+#endif
 
 - (void)doneAction:(id)sender
 {

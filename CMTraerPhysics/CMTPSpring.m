@@ -63,26 +63,22 @@
 
 - (void)setParticleA:(CMTPParticle *)p
 {
-    [p retain];
-    [particleA release];
     particleA = p;
 }
 
 - (void)setParticleB:(CMTPParticle *)p
 {
-    [p retain];
-    [particleB release];
     particleB = p;
 }
 
 - (CMTPParticle *)getOneEnd
 {
-    return [[particleA retain] autorelease];
+    return particleA;
 }
 
 - (CMTPParticle *)getTheOtherEnd
 {
-    return [[particleB retain] autorelease];
+    return particleB;
 }
 
 - (void)apply
@@ -130,23 +126,15 @@
 - (id)initWithParticleA:(CMTPParticle *)aParticleA particleB:(CMTPParticle *)aParticleB springConstant:(CMTPFloat)aSpringConstant damping:(CMTPFloat)aDamping restLength:(CMTPFloat)aRestLength
 {
     if ((self = [super init])) {
-	particleA = [aParticleA retain];
-	particleB = [aParticleB retain];
-	springConstant = aSpringConstant;
-	damping = aDamping;
-	restLength = aRestLength;
-	
-	on = YES;
+        particleA = aParticleA;
+        particleB = aParticleB;
+        springConstant = aSpringConstant;
+        damping = aDamping;
+        restLength = aRestLength;
+        
+        on = YES;
     }
     return self;
-}
-
-- (void)dealloc
-{
-    [particleA release];
-    [particleB release];
-    
-    [super dealloc];
 }
 
 @end

@@ -31,18 +31,12 @@
 
 @synthesize window = _window;
 
-- (void)dealloc
-{
-    [_window release];
-    [super dealloc];
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    CMTPDMenuViewController *menuViewController = [[[CMTPDMenuViewController alloc] initWithNibName:nil bundle:nil] autorelease];
-    UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:menuViewController] autorelease];
+    CMTPDMenuViewController *menuViewController = [[CMTPDMenuViewController alloc] initWithNibName:nil bundle:nil];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
     
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window setRootViewController:navController];
     [self.window makeKeyAndVisible];

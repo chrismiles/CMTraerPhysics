@@ -28,9 +28,9 @@
 
 @interface CMTPDSpringTestViewController : UIViewController
 
-@property (retain, nonatomic) IBOutlet UIView *accelerometerToggleView;
-@property (retain, nonatomic) IBOutlet UIView *smoothToggleView;
-@property (retain, nonatomic) IBOutlet UILabel *fpsLabel;
+@property (strong, nonatomic) IBOutlet UIView *accelerometerToggleView;
+@property (strong, nonatomic) IBOutlet UIView *smoothToggleView;
+@property (strong, nonatomic) IBOutlet UILabel *fpsLabel;
 
 - (IBAction)accelerometerToggleAction:(id)sender;
 - (IBAction)smoothToggleAction:(id)sender;

@@ -39,14 +39,6 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -56,9 +48,9 @@
     self.title = @"Attraction Test";
     
     NSMutableArray *toolbarItems = [NSMutableArray array];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
     
     self.toolbarItems = toolbarItems;
     [self.navigationController setToolbarHidden:NO animated:YES];
@@ -66,6 +58,7 @@
     self.attractionTestView.fpsLabel = self.fpsLabel;
 }
 
+#if false
 - (void)viewDidUnload
 {
     [self setFpsLabel:nil];
@@ -74,6 +67,7 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
+#endif
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -87,19 +81,6 @@
     [super viewWillDisappear:animated];
     
     [self.attractionTestView stopAnimation];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)dealloc
-{
-    [fpsLabel release];
-    [attractionTestView release];
-    [super dealloc];
 }
 
 @end

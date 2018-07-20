@@ -34,20 +34,14 @@
 #import "CMTPForce.h"
 #import "CMTPParticle.h"
 
-@interface CMTPAttraction : CMTPForce {
-    CMTPParticle *particleA;
-    CMTPParticle *particleB;
-    
-    CMTPFloat strength; //k
-    
-    CMTPFloat minDistance;
-    CMTPFloat minDistanceSquared;
-    
-    BOOL on;
-}
+@interface CMTPAttraction : CMTPForce
 
+@property (nonatomic, strong) CMTPParticle *particleA;
+@property (nonatomic, strong) CMTPParticle *particleB;
+@property (nonatomic, assign) CMTPFloat strength; //k
 @property (nonatomic, assign) CMTPFloat minDistance;
-@property (nonatomic, assign) CMTPFloat strength;
+@property (nonatomic, assign) CMTPFloat minDistanceSquared;
+@property (nonatomic, assign) BOOL on;
 
 - (void)setMinDistance:(CMTPFloat)aMinDistance;
 - (void)setParticleA:(CMTPParticle *)p;

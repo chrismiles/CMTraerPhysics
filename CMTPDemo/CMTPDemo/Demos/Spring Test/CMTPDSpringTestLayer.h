@@ -30,7 +30,7 @@
 
 @interface CMTPDSpringTestLayer : CALayer
 
-@property (nonatomic, retain) UILabel *fpsLabel;
+@property (nonatomic, strong) UILabel *fpsLabel;
 @property (nonatomic, assign) BOOL gravityByDeviceMotionEnabled;
 @property (nonatomic, assign, readonly) BOOL isDeviceMotionAvailable;
 @property (nonatomic, assign) BOOL smoothed;

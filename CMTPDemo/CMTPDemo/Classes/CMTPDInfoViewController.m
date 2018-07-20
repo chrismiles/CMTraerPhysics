@@ -47,7 +47,7 @@
 
 - (void)doneAction:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -58,7 +58,7 @@
     [super viewDidLoad];
     
     self.title = @"CMTPDemo Info";
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)] autorelease];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)];
     
     NSString *htmlFilePath = [[NSBundle mainBundle] pathForResource:@"info" ofType:@"html"];
     NSURL *url = [NSURL fileURLWithPath:htmlFilePath];
@@ -66,6 +66,7 @@
     [self.infoWebView loadRequest:fileRequest];
 }
 
+#if false
 - (void)viewDidUnload
 {
     [self setInfoWebView:nil];
@@ -73,17 +74,6 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)dealloc
-{
-    [infoWebView release];
-    [super dealloc];
-}
+#endif
 
 @end

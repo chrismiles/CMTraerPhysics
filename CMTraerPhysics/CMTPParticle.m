@@ -79,7 +79,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p position=(%f, %f, %f)>", [self class], self, position.x, position.y, position.z];
+    return [NSString stringWithFormat:@"<%@: %p position=(%f, %f, %f)>", [self class], (void *)self, position.x, position.y, position.z];
 }
 
 - (id)initWithMass:(CMTPFloat)aMass position:(CMTPVector3D)aPosition
@@ -97,13 +97,6 @@
 	fixed = NO;
     }
     return self;
-}
-
-- (void)dealloc
-{
-    [context release];
-    
-    [super dealloc];
 }
 
 @end

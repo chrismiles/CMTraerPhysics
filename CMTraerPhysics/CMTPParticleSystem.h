@@ -67,7 +67,7 @@ typedef enum {
 @property (nonatomic, assign) CMTPFloat drag;
 @property (nonatomic, assign) CMTPVector3D gravity;
 
-@property (nonatomic, retain, readonly) NSMutableArray *particles;
+@property (nonatomic, strong, readonly) NSMutableArray *particles;
 
 - (void)setIntegrator:(CMTPParticleSystemIntegrator)anIntegrator;
 - (void)tick:(CMTPFloat)t;

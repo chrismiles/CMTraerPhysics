@@ -43,7 +43,7 @@
 	return nil;
     }
     
-    CMGLESKTexture *texture = [[[CMGLESKTexture alloc] initWithImage:image invertYAxis:invertYAxis] autorelease];
+    CMGLESKTexture *texture = [[CMGLESKTexture alloc] initWithImage:image invertYAxis:invertYAxis];
     return texture;
 }
 
@@ -133,8 +133,6 @@
 - (void)dealloc
 {
     glDeleteTextures(1, &glTextureName);
-    
-    [super dealloc];
 }
 
 @end

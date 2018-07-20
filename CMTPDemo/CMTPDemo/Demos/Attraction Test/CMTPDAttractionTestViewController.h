@@ -29,7 +29,7 @@
 
 @interface CMTPDAttractionTestViewController : UIViewController
 
-@property (retain, nonatomic) IBOutlet CMTPDAttractionTestView *attractionTestView;
-@property (retain, nonatomic) IBOutlet UILabel *fpsLabel;
+@property (strong, nonatomic) IBOutlet CMTPDAttractionTestView *attractionTestView;
+@property (strong, nonatomic) IBOutlet UILabel *fpsLabel;
 
 @end

@@ -35,71 +35,55 @@
 
 @implementation CMTPAttraction
 
-@synthesize minDistance, strength;
-
 - (void)setMinDistance:(CMTPFloat)aMinDistance
 {
-    minDistance = aMinDistance;
-    minDistanceSquared = aMinDistance*aMinDistance;
+    _minDistance = aMinDistance;
+    _minDistanceSquared = aMinDistance*aMinDistance;
 }
 
 - (void)turnOn
 {
-    on = YES;
+    _on = YES;
 }
 
 - (void)turnOff
 {
-    on = NO;
+    _on = NO;
 }
 
 - (BOOL)isOn
 {
-    return on;
+    return _on;
 }
 
 - (BOOL)isOff
 {
-    return !on;
-}
-
-- (void)setParticleA:(CMTPParticle *)p
-{
-    [p retain];
-    [particleA release];
-    particleA = p;
-}
-
-- (void)setParticleB:(CMTPParticle *)p
-{
-    [p retain];
-    [particleB release];
-    particleB = p;
+    return !_on;
 }
 
 - (CMTPParticle *)getOneEnd
 {
-    return [[particleA retain] autorelease];
+    return _particleA;
 }
 
 - (CMTPParticle *)getTheOtherEnd
 {
-    return [[particleB retain] autorelease];
+    return _particleB;
 }
 
 - (void)apply
 {
-    if ( on && ( [particleA isFree] || [particleB isFree] ) ) {
+    if ( _on && ( [_particleA isFree] || [_particleB isFree] ) ) {
 	
-	CMTPFloat a2bX = particleA.position.x - particleB.position.x;
-	CMTPFloat a2bY = particleA.position.y - particleB.position.y;
-	CMTPFloat a2bZ = particleA.position.z - particleB.position.z;
+	CMTPFloat a2bX = _particleA.position.x - _particleB.position.x;
+	CMTPFloat a2bY = _particleA.position.y - _particleB.position.y;
+	CMTPFloat a2bZ = _particleA.position.z - _particleB.position.z;
 	
 	CMTPFloat a2bDistanceSquared = a2bX*a2bX + a2bY*a2bY + a2bZ*a2bZ;
 	
-	if ( a2bDistanceSquared < minDistanceSquared ) a2bDistanceSquared = minDistanceSquared;
+	if ( a2bDistanceSquared < _minDistanceSquared ) a2bDistanceSquared = _minDistanceSquared;
 	
-	CMTPFloat force = strength * particleA.mass * particleB.mass / a2bDistanceSquared;
+	CMTPFloat force = _strength * _particleA.mass * _particleB.mass / a2bDistanceSquared;
 	
 	CMTPFloat length = sqrtf( a2bDistanceSquared );
 	
@@ -111,32 +95,24 @@
 	a2bY *= force;
 	a2bZ *= force;
 	
-	if ([particleA isFree]) particleA.force = CMTPVector3DAdd(particleA.force, CMTPVector3DMake(-a2bX, -a2bY, -a2bZ));
-	if ([particleB isFree]) particleB.force = CMTPVector3DAdd(particleB.force, CMTPVector3DMake(a2bX, a2bY, a2bZ));
+	if ([_particleA isFree]) _particleA.force = CMTPVector3DAdd(_particleA.force, CMTPVector3DMake(-a2bX, -a2bY, -a2bZ));
+	if ([_particleB isFree]) _particleB.force = CMTPVector3DAdd(_particleB.force, CMTPVector3DMake(a2bX, a2bY, a2bZ));
     }
 }
 
 - (id)initWithParticleA:(CMTPParticle *)aParticleA particleB:(CMTPParticle *)aParticleB strength:(CMTPFloat)aStrength minDistance:(CMTPFloat)aMinDistance
 {
     if ((self = [super init])) {
-	particleA = [aParticleA retain];
-	particleB = [aParticleB retain];
-	strength = aStrength;
-	
-	on = YES;
-	
-	minDistance = aMinDistance;
-	minDistanceSquared = aMinDistance*aMinDistance;
+        _particleA = aParticleA;
+        _particleB = aParticleB;
+        _strength = aStrength;
+        
+        _on = YES;
+        
+        _minDistance = aMinDistance;
+        _minDistanceSquared = aMinDistance*aMinDistance;
     }
     return self;
-}
-
-- (void)dealloc
-{
-    [particleA release];
-    [particleB release];
-    
-    [super dealloc];
 }
 
 @end

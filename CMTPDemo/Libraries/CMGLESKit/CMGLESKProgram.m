@@ -318,11 +318,6 @@ NSInteger const CMGLESKProgramUniformNotFound = 6;
         glDeleteProgram(program);
         program = 0;
     }
-
-    [attributeLocations release];
-    [uniformLocations release];
-    
-    [super dealloc];
 }
 
 @end

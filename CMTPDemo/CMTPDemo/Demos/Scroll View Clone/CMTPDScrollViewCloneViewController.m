@@ -33,13 +33,6 @@ float randomClamp(void);
     return self;
 }
 
-- (void)dealloc
-{
-    [scrollView release];
-    [contentView release];
-    [super dealloc];
-}
-
 - (void)configureContentViewWithHeight:(CGFloat)height
 {
     CGRect frame = self.contentView.frame;
@@ -73,9 +66,6 @@ float randomClamp(void);
 	
 	[self.contentView addSubview:distanceLabel];
 	
-	[text release];
-	[distanceLabel release];
-	
 	y += kDistanceLabelOffset;
     }
 }
@@ -86,12 +76,13 @@ float randomClamp(void);
     
     self.title = @"Scroll View Clone";
     
-    UIBarButtonItem *configureItem = [[[UIBarButtonItem alloc] initWithTitle:@"Configure" style:UIBarButtonItemStyleBordered target:self action:@selector(configureAction:)] autorelease];
+    UIBarButtonItem *configureItem = [[UIBarButtonItem alloc] initWithTitle:@"Configure" style:UIBarButtonItemStylePlain target:self action:@selector(configureAction:)];
     self.toolbarItems = [NSArray arrayWithObjects:configureItem, nil];
     
     [self configureContentViewWithHeight:5150.0f];
 }
 
+#if false
 - (void)viewDidUnload
 {
     [self setScrollView:nil];
@@ -100,25 +91,28 @@ float randomClamp(void);
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
+#endif
 
 - (void)configureAction:(id)sender
 {
-    CMTPDScrollViewCloneConfigureViewController *viewController = [[[CMTPDScrollViewCloneConfigureViewController alloc] initWithNibName:nil bundle:nil scrolldrag:self.scrollView.scrollDrag springFixedConstant:self.scrollView.fixedSpringConstant springTouchConstant:self.scrollView.touchSpringConstant] autorelease];
-    [viewController setOnFinishedHandler:^{
-	self.scrollView.scrollDrag = viewController.dragSlider.value;
-	self.scrollView.fixedSpringConstant = viewController.springFixedSlider.value;
-	self.scrollView.touchSpringConstant = viewController.springTouchSlider.value;
-	
-	[self dismissModalViewControllerAnimated:YES];
+    __weak CMTPDScrollViewCloneViewController *weakSelf = self;
+    CMTPDScrollViewCloneConfigureViewController *viewController = [[CMTPDScrollViewCloneConfigureViewController alloc] initWithNibName:nil bundle:nil scrolldrag:self.scrollView.scrollDrag springFixedConstant:self.scrollView.fixedSpringConstant springTouchConstant:self.scrollView.touchSpringConstant];
+    __weak CMTPDScrollViewCloneConfigureViewController *weakViewController = viewController;
+    [weakViewController setOnFinishedHandler:^{
+        CMTPDScrollViewCloneViewController *strongSelf = weakSelf;
+        CMTPDScrollViewCloneConfigureViewController *strongViewController = weakViewController;
+        if (strongSelf != nil) {
+            if (strongViewController != nil) {
+                strongSelf.scrollView.scrollDrag = strongViewController.dragSlider.value;
+                strongSelf.scrollView.fixedSpringConstant = strongViewController.springFixedSlider.value;
+                strongSelf.scrollView.touchSpringConstant = strongViewController.springTouchSlider.value;
+            }
+            [strongSelf dismissViewControllerAnimated:YES completion:nil];
+        }
     }];
     
-    UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:viewController] autorelease];
-    [self presentModalViewController:navController animated:YES];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:weakViewController];
+    [self presentViewController:navController animated:YES completion:nil];
     
 }
 

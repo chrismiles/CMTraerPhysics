@@ -36,7 +36,7 @@
 @synthesize vector3D;
 + (CMVector3Dobj *)vector3Dobj
 {
-    return [[[CMVector3Dobj alloc] init] autorelease];
+    return [[CMVector3Dobj alloc] init];
 }
 @end
 
@@ -317,19 +317,6 @@
 - (void)dealloc
 {
     s = nil;
-    
-    [originalPositions release];
-    [originalVelocities release];
-    [k1Forces release];
-    [k1Velocities release];
-    [k2Forces release];
-    [k2Velocities release];
-    [k3Forces release];
-    [k3Velocities release];
-    [k4Forces release];
-    [k4Velocities release];
-    
-    [super dealloc];
 }
 
 @end

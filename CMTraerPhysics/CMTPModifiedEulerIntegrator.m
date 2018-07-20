@@ -72,11 +72,4 @@
     return self;
 }
 
-- (void)dealloc
-{
-    s = nil;
-    
-    [super dealloc];
-}
-
 @end

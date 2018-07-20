@@ -78,13 +78,13 @@ static char CMScrollViewOriginKey;
     _touchSpringConstant = 0.4f;
     
     _particleSystem = [[CMTPParticleSystem alloc] initWithGravityVector:CMTPVector3DMake(0.0f, 0.0f, 0.0f) drag:0.1f];
-    _contentParticle = [[_particleSystem makeParticleWithMass:1.0f position:CMTPVector3DMake(0.0f, 0.0f, 0.0f)] retain];
-    _fixedParticle = [[_particleSystem makeParticleWithMass:1.0f position:CMTPVector3DMake(0.0f, 0.0f, 0.0f)] retain];
-    _touchParticle = [[_particleSystem makeParticleWithMass:1.0f position:CMTPVector3DMake(0.0f, 0.0f, 0.0f)] retain];
+    _contentParticle = [_particleSystem makeParticleWithMass:1.0f position:CMTPVector3DMake(0.0f, 0.0f, 0.0f)];
+    _fixedParticle = [_particleSystem makeParticleWithMass:1.0f position:CMTPVector3DMake(0.0f, 0.0f, 0.0f)];
+    _touchParticle = [_particleSystem makeParticleWithMass:1.0f position:CMTPVector3DMake(0.0f, 0.0f, 0.0f)];
     [_fixedParticle makeFixed];
     [_touchParticle makeFixed];
     
-    UIPanGestureRecognizer *panGestureRecognizer = [[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizerAction:)] autorelease];
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizerAction:)];
     [self addGestureRecognizer:panGestureRecognizer];
     
     [self startAnimation];
@@ -93,18 +93,8 @@ static char CMScrollViewOriginKey;
 - (void)dealloc
 {
     [_displayLink invalidate];
-    [_displayLink release]; _displayLink = nil;
-
-    [_fixedParticle release];
-    [_particleSystem release];
-    [_contentParticle release];
-    [_spring1 release];
-    [_spring2 release];
-    [_touchParticle release];
-    
-    [super dealloc];
+    _displayLink = nil;
 }
-
 
 #pragma mark - Custom accessors
 
@@ -207,30 +197,30 @@ static char CMScrollViewOriginKey;
 - (void)addSpring1
 {
     if (nil == _spring1) {
-	_spring1 = [[_particleSystem makeSpringBetweenParticleA:_fixedParticle particleB:_contentParticle springConstant:_fixedSpringConstant damping:kSpringDamping restLength:0.0f] retain];
+	_spring1 = [_particleSystem makeSpringBetweenParticleA:_fixedParticle particleB:_contentParticle springConstant:_fixedSpringConstant damping:kSpringDamping restLength:0.0f];
     }
 }
 
 - (void)addSpring2
 {
     if (nil == _spring2) {
-	_spring2 = [[_particleSystem makeSpringBetweenParticleA:_contentParticle particleB:_touchParticle springConstant:_touchSpringConstant damping:kSpringDamping restLength:0.0f] retain];
+	_spring2 = [_particleSystem makeSpringBetweenParticleA:_contentParticle particleB:_touchParticle springConstant:_touchSpringConstant damping:kSpringDamping restLength:0.0f];
     }
 }
 
 - (void)removeSpring1
 {
     if (_spring1) {
-	[_particleSystem removeSpringByReference:_spring1];
-	[_spring1 release]; _spring1 = nil;
+        [_particleSystem removeSpringByReference:_spring1];
+        _spring1 = nil;
     }
 }
 
 - (void)removeSpring2
 {
     if (_spring2) {
-	[_particleSystem removeSpringByReference:_spring2];
-	[_spring2 release]; _spring2 = nil;
+        [_particleSystem removeSpringByReference:_spring2];
+        _spring2 = nil;
     }
 }
 
@@ -275,7 +265,7 @@ static char CMScrollViewOriginKey;
     
     if (NO == _isTouching && _touchVelocity.y != 0.0f) {
 	// Apply momentum after touch up, if magnitude is large enough
-	if (fabsf(_touchVelocity.y) > 50.0f) {
+        if (fabs(_touchVelocity.y) > 50.0f) {
 	    _contentParticle.velocity = CMTPVector3DMake(0.0f, _touchVelocity.y*0.05f, 0.0f);
 	}
 	_touchVelocity = CGPointZero;
@@ -289,7 +279,7 @@ static char CMScrollViewOriginKey;
 {
     if (nil == _displayLink) {
 	/* Init Timer */
-	_displayLink = [[CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame:)] retain];
+	_displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame:)];
 	[_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     }
 }
@@ -298,7 +288,6 @@ static char CMScrollViewOriginKey;
 {
     if (_displayLink) {
 	[_displayLink invalidate];
-	[_displayLink release];
 	_displayLink = nil;
     }
 }

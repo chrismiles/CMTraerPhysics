@@ -381,7 +381,7 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
 	attractionStrengthFactor = 50.0f;
     }
     
-    attractor = [[s makeParticleWithMass:1.0f position:CMTPVector3DMake(ox, oy, 0.0f)] retain];
+    attractor = [s makeParticleWithMass:1.0f position:CMTPVector3DMake(ox, oy, 0.0f)];
     [attractor makeFixed];
 
 
@@ -543,13 +543,12 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     
     EAGLView *glView = (EAGLView *)self.view;
     [glView setContext:context];
-    [context release];
     [glView setFramebuffer];
     
     NSError *error = nil;
     NSArray *attributeNames = [NSArray arrayWithObjects:@"position", nil];
     NSArray *uniformNames = [NSArray arrayWithObjects:@"color", @"mvp", nil];
-    self.shaderProgram = [[[CMGLESKProgram alloc] init] autorelease];
+    self.shaderProgram = [[CMGLESKProgram alloc] init];
     if (![self.shaderProgram loadProgramFromFilesVertexShader:@"WebTestVertexShader.glsl" fragmentShader:@"WebTestFragmentShader.glsl" attributeNames:attributeNames uniformNames:uniformNames error:&error]) {
         ALog(@"Shader program load failed: %@", error);
     }
@@ -685,11 +684,11 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     self.title = @"Web Test";
     
     NSMutableArray *toolbarItems = [NSMutableArray array];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.fullFrameRateToggleView] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.modifyStructureToggleView] autorelease]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fullFrameRateToggleView]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.modifyStructureToggleView]];
     
     self.toolbarItems = toolbarItems;
     [self.navigationController setToolbarHidden:NO animated:YES];
@@ -699,6 +698,7 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     [self setupOpenGL];
 }
 
+#if false
 - (void)viewDidUnload
 {
     [self setFpsLabel:nil];
@@ -710,6 +710,7 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
+#endif
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -730,21 +731,6 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     
     [super viewWillDisappear:animated];
 }
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 
 #pragma mark - Object lifecycle
 
@@ -768,21 +754,6 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     
     free(webVertices);
     free(anchors_copy);
-    
-    [anchors release];
-    [attractor release];
-    [attractions release];
-    [displayLink release];
-    [fpsLabel release];
-    [fullFrameRateLabel release];
-    [fullFrameRateToggleView release];
-    [joints release];
-    [modifyStructureToggleView release];
-    [particles release];
-    [s release];
-    [shaderProgram release];
-    
-    [super dealloc];
 }
 
 @end

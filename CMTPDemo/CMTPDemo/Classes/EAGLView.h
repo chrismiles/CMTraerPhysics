@@ -38,7 +38,7 @@
 
 @property (nonatomic, assign) IBOutlet id<EAGLViewDelegate> delegate;
 
-@property (nonatomic, retain) EAGLContext *context;
+@property (nonatomic, strong) EAGLContext *context;
 
 @property (nonatomic, readonly) GLuint defaultFramebuffer;
 @property (nonatomic, readonly) GLint framebufferWidth;

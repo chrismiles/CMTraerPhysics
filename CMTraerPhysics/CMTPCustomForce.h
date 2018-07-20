@@ -33,7 +33,7 @@
     BOOL on;
 }
 
-@property (nonatomic, retain) CMTPParticle *particle;
+@property (nonatomic, strong) CMTPParticle *particle;
 @property (nonatomic, assign) CMTPVector3D forceVector;
 
 - (id)initWithParticle:(CMTPParticle *)aParticle forceVector:(CMTPVector3D)aForceVector;

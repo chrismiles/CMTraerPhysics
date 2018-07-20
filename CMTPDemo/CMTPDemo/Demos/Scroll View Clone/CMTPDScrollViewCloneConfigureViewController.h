@@ -12,10 +12,10 @@
 
 @property (nonatomic, copy) void (^onFinishedHandler)(void);
 
-@property (retain, nonatomic) IBOutlet UISlider *dragSlider;
-@property (retain, nonatomic) IBOutlet UISwitch *springEqualSwitch;
-@property (retain, nonatomic) IBOutlet UISlider *springFixedSlider;
-@property (retain, nonatomic) IBOutlet UISlider *springTouchSlider;
+@property (strong, nonatomic) IBOutlet UISlider *dragSlider;
+@property (strong, nonatomic) IBOutlet UISwitch *springEqualSwitch;
+@property (strong, nonatomic) IBOutlet UISlider *springFixedSlider;
+@property (strong, nonatomic) IBOutlet UISlider *springTouchSlider;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil scrolldrag:(float)scrollDrag springFixedConstant:(float)springFixedConstant springTouchConstant:(float)springTouchConstant;
 

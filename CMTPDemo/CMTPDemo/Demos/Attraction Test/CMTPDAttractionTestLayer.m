@@ -63,7 +63,7 @@
 {
     if (nil == displayLink) {
 	/* Init Timer */
-	displayLink = [[CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame:)] retain];
+	displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame:)];
 	[displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     }
 }
@@ -72,7 +72,6 @@
 {
     if (displayLink) {
 	[displayLink invalidate];
-	[displayLink release];
 	displayLink = nil;
     }
 }
@@ -152,16 +151,16 @@
         CMTPVector3D gravity = CMTPVector3DMake(0.0f, 0.0f, 0.0f);
         s = [[CMTPParticleSystem alloc] initWithGravityVector:gravity drag:0.3f];
         
-        anchor = [[s makeParticleWithMass:1.0f position:CMTPVector3DMake(anchorPosition.x, anchorPosition.y, 0.0f)] retain];
+        anchor = [s makeParticleWithMass:1.0f position:CMTPVector3DMake(anchorPosition.x, anchorPosition.y, 0.0f)];
         [anchor makeFixed];
         
-        particle = [[s makeParticleWithMass:1.0f position:CMTPVector3DMake(anchorPosition.x, anchorPosition.y, 0.0f)] retain];
+        particle = [s makeParticleWithMass:1.0f position:CMTPVector3DMake(anchorPosition.x, anchorPosition.y, 0.0f)];
         
-        attractor = [[s makeParticleWithMass:1.0f position:CMTPVector3DMake(anchorPosition.x, anchorPosition.y, 0.0f)] retain];
+        attractor = [s makeParticleWithMass:1.0f position:CMTPVector3DMake(anchorPosition.x, anchorPosition.y, 0.0f)];
         [attractor makeFixed];
         
-        spring = [[s makeSpringBetweenParticleA:anchor particleB:particle springConstant:0.1f damping:0.01f restLength:0.0f] retain];
-        attraction = [[s makeAttractionBetweenParticleA:attractor particleB:particle strength:9000.0f minDistance:30.0f] retain];
+        spring = [s makeSpringBetweenParticleA:anchor particleB:particle springConstant:0.1f damping:0.01f restLength:0.0f];
+        attraction = [s makeAttractionBetweenParticleA:attractor particleB:particle strength:9000.0f minDistance:30.0f];
         [attraction turnOff];
         
         /* Sub Layers */
@@ -187,21 +186,6 @@
 - (void)dealloc
 {
     [displayLink invalidate];
-    [displayLink release];
-    
-    [_fpsLabel release];
-    
-    [anchor release];
-    [anchorLayer release];
-    [attraction release];
-    [attractor release];
-    [particle release];
-    [particleLayer release];
-    [s release];
-    [spring release];
-    [touchIndicatorLayer release];
-    
-    [super dealloc];
 }
 
 @end

@@ -44,11 +44,11 @@
 
 #pragma mark - Error domain and codes
 
-NSString * const CMGLESKProgramErrorDomain;
+extern NSString * const CMGLESKProgramErrorDomain;
 
-NSInteger const CMGLESKProgramCompileError;
-NSInteger const CMGLESKProgramLinkError;
-NSInteger const CMGLESKProgramInvalidError;
-NSInteger const CMGLESKProgramFileNotFound;
-NSInteger const CMGLESKProgramAttributeNotFound;
-NSInteger const CMGLESKProgramUniformNotFound;
+extern NSInteger const CMGLESKProgramCompileError;
+extern NSInteger const CMGLESKProgramLinkError;
+extern NSInteger const CMGLESKProgramInvalidError;
+extern NSInteger const CMGLESKProgramFileNotFound;
+extern NSInteger const CMGLESKProgramAttributeNotFound;
+extern NSInteger const CMGLESKProgramUniformNotFound;

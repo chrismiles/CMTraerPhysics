@@ -82,7 +82,7 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
 {
     if (nil == displayLink) {
 	/* Init Timer */
-	displayLink = [[CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame:)] retain];
+	displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame:)];
 	[displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     }
 }
@@ -91,7 +91,6 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
 {
     if (displayLink) {
 	[displayLink invalidate];
-	[displayLink release];
 	displayLink = nil;
     }
 }
@@ -153,7 +152,7 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
 	particleSize = 10.0f;
     }
     
-    attractor = [[s makeParticleWithMass:0.8f position:CMTPVector3DMake(0, 0, 0)] retain];
+    attractor = [s makeParticleWithMass:0.8f position:CMTPVector3DMake(0, 0, 0)];
     
     for (unsigned int i = 0; i<numParticles; i++) {
 	float randx = randomClamp() * (CGRectGetWidth(self.bounds)-1);
@@ -167,8 +166,6 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
 	CMTPParticle *particle = [s makeParticleWithMass:0.8f position:CMTPVector3DMake(randx, randy, 0)];
 	particle.context = subLayer;
 	[particles addObject:particle];
-	
-	[subLayer release];
 	
 	CMTPAttraction *attraction = [s makeAttractionBetweenParticleA:particle particleB:attractor strength:attractorStrength minDistance:attractorMinDistance];
 	[attractions addObject:attraction];
@@ -244,15 +241,7 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
 - (void)dealloc
 {
     [displayLink invalidate];
-    [displayLink release]; displayLink = nil;
-    
-    [_fpsLabel release];
-    [attractions release];
-    [attractor release];
-    [particles release];
-    [s release];
-    
-    [super dealloc];
+    displayLink = nil;
 }
 
 @end

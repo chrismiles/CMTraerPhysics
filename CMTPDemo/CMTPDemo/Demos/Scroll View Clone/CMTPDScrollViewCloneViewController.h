@@ -11,7 +11,7 @@
 
 @interface CMTPDScrollViewCloneViewController : UIViewController
 
-@property (retain, nonatomic) IBOutlet UIView *contentView;
-@property (retain, nonatomic) IBOutlet CMScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutlet CMScrollView *scrollView;
 
 @end

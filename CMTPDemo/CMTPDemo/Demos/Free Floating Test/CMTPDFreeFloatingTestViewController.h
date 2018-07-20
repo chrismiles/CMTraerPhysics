@@ -29,7 +29,7 @@
 
 @interface CMTPDFreeFloatingTestViewController : UIViewController
 
-@property (retain, nonatomic) IBOutlet UILabel *fpsLabel;
-@property (retain, nonatomic) IBOutlet UILabel *numParticlesLabel;
+@property (strong, nonatomic) IBOutlet UILabel *fpsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *numParticlesLabel;
 
 @end

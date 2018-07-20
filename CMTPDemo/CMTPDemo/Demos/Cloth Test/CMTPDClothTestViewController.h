@@ -34,11 +34,11 @@
 
 @interface CMTPDClothTestViewController : UIViewController <EAGLViewDelegate>
 
-@property (retain, nonatomic) IBOutlet UIView *accelerometerToggleView;
-@property (retain, nonatomic) IBOutlet UILabel *fpsLabel;
-@property (retain, nonatomic) IBOutlet UILabel *fullFrameRateLabel;
-@property (retain, nonatomic) IBOutlet UIView *gridToggleView;
-@property (retain, nonatomic) IBOutlet UIView *imageToggleView;
+@property (strong, nonatomic) IBOutlet UIView *accelerometerToggleView;
+@property (strong, nonatomic) IBOutlet UILabel *fpsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *fullFrameRateLabel;
+@property (strong, nonatomic) IBOutlet UIView *gridToggleView;
+@property (strong, nonatomic) IBOutlet UIView *imageToggleView;
 
 - (IBAction)accelerometerToggleAction:(id)sender;
 - (IBAction)gridToggleAction:(id)sender;

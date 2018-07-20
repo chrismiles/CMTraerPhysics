@@ -39,14 +39,6 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -56,11 +48,11 @@
     self.title = @"Free Floating Test";
     
     NSMutableArray *toolbarItems = [NSMutableArray array];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.numParticlesLabel] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.numParticlesLabel]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
     
     self.toolbarItems = toolbarItems;
     [self.navigationController setToolbarHidden:NO animated:YES];
@@ -68,6 +60,7 @@
     [(CMTPDFreeFloatingTestView *)self.view setFpsLabel:self.fpsLabel];
 }
 
+#if false
 - (void)viewDidUnload
 {
     [self setFpsLabel:nil];
@@ -77,12 +70,13 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
+#endif
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    self.numParticlesLabel.text = [NSString stringWithFormat:@"%d particles", [(CMTPDFreeFloatingTestView *)self.view particleCount]];
+    self.numParticlesLabel.text = [NSString stringWithFormat:@"%lu particles", (unsigned long)[(CMTPDFreeFloatingTestView *)self.view particleCount]];
     
     [(CMTPDFreeFloatingTestView *)self.view startAnimation];
 }
@@ -92,20 +86,6 @@
     [super viewWillDisappear:animated];
     
     [(CMTPDFreeFloatingTestView *)self.view stopAnimation];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)dealloc
-{
-    [fpsLabel release];
-    
-    [numParticlesLabel release];
-    [super dealloc];
 }
 
 @end

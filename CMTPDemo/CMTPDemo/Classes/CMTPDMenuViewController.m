@@ -43,9 +43,9 @@
 
 - (void)infoAction:(id)sender
 {
-    CMTPDInfoViewController *viewController = [[[CMTPDInfoViewController alloc] initWithNibName:nil bundle:nil] autorelease];
-    UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:viewController] autorelease];
-    [self presentModalViewController:navController animated:YES];
+    CMTPDInfoViewController *viewController = [[CMTPDInfoViewController alloc] initWithNibName:nil bundle:nil];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 
@@ -59,7 +59,7 @@
     
     [self.navigationController setToolbarHidden:NO animated:NO];
     
-    UIBarButtonItem *flexibleItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
+    UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     UIButtonType infoButtonType;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -70,17 +70,19 @@
     }
     UIButton *infoButton = [UIButton buttonWithType:infoButtonType];
     [infoButton addTarget:self action:@selector(infoAction:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *infoBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:infoButton] autorelease];
+    UIBarButtonItem *infoBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
     
     self.toolbarItems = [NSArray arrayWithObjects:flexibleItem, infoBarButtonItem, nil];
 }
 
+#if false
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
+#endif
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -107,12 +109,6 @@
     [super viewDidDisappear:animated];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -133,7 +129,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     NSString *title = nil;
@@ -172,35 +168,35 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (0 == indexPath.row) {
-	CMTPDAttractionGridViewController *viewController = [[[CMTPDAttractionGridViewController alloc] init] autorelease];
+	CMTPDAttractionGridViewController *viewController = [[CMTPDAttractionGridViewController alloc] init];
 	[self.navigationController pushViewController:viewController animated:YES];
     }
     else if (1 == indexPath.row) {
-	CMTPDAttractionTestViewController *viewController = [[[CMTPDAttractionTestViewController alloc] init] autorelease];
+	CMTPDAttractionTestViewController *viewController = [[CMTPDAttractionTestViewController alloc] init];
 	[self.navigationController pushViewController:viewController animated:YES];
     }
     else if (2 == indexPath.row) {
-	CMTPDClothTestViewController *viewController = [[[CMTPDClothTestViewController alloc] init] autorelease];
+	CMTPDClothTestViewController *viewController = [[CMTPDClothTestViewController alloc] init];
 	[self.navigationController pushViewController:viewController animated:YES];
     }
     else if (3 == indexPath.row) {
-	CMTPDFreeFloatingTestViewController *viewController = [[[CMTPDFreeFloatingTestViewController alloc] init] autorelease];
+	CMTPDFreeFloatingTestViewController *viewController = [[CMTPDFreeFloatingTestViewController alloc] init];
 	[self.navigationController pushViewController:viewController animated:YES];
     }
     else if (4 == indexPath.row) {
-	CMTPDScrollViewCloneViewController *viewController = [[[CMTPDScrollViewCloneViewController alloc] init] autorelease];
+	CMTPDScrollViewCloneViewController *viewController = [[CMTPDScrollViewCloneViewController alloc] init];
 	[self.navigationController pushViewController:viewController animated:YES];
     }
     else if (5 == indexPath.row) {
-	CMTPDSpringTestViewController *viewController = [[[CMTPDSpringTestViewController alloc] init] autorelease];
+	CMTPDSpringTestViewController *viewController = [[CMTPDSpringTestViewController alloc] init];
 	[self.navigationController pushViewController:viewController animated:YES];
     }
     else if (6 == indexPath.row) {
-	CMTPDWebTestViewController *viewController = [[[CMTPDWebTestViewController alloc] init] autorelease];
+	CMTPDWebTestViewController *viewController = [[CMTPDWebTestViewController alloc] init];
 	[self.navigationController pushViewController:viewController animated:YES];
     }
     else if (7 == indexPath.row) {
-	CMTPDWonderwallLikeViewController *viewController = [[[CMTPDWonderwallLikeViewController alloc] init] autorelease];
+	CMTPDWonderwallLikeViewController *viewController = [[CMTPDWonderwallLikeViewController alloc] init];
 	[self.navigationController pushViewController:viewController animated:YES];
     }
 }

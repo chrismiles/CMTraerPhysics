@@ -52,7 +52,7 @@
 @property (nonatomic, assign) CMTPFloat age;
 @property (nonatomic, assign, readonly) CMTPFloat mass;
 
-@property (nonatomic, retain) id context;
+@property (nonatomic, strong) id context;
 
 - (CMTPFloat)distanceToParticle:(CMTPParticle *)p;
 - (void)makeFixed;

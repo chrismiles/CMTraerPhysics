@@ -440,13 +440,12 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
     
     EAGLView *glView = (EAGLView *)self.view;
     [glView setContext:context];
-    [context release];
     [glView setFramebuffer];
     
     NSError *error = nil;
     NSArray *attributeNames = [NSArray arrayWithObjects:@"position", @"textureCoord", nil];
     NSArray *uniformNames = [NSArray arrayWithObjects:@"color", @"colorOnly", @"mvp", @"sampler", nil];
-    self.shaderProgram = [[[CMGLESKProgram alloc] init] autorelease];
+    self.shaderProgram = [[CMGLESKProgram alloc] init];
     if (![self.shaderProgram loadProgramFromFilesVertexShader:@"ClothTestVertexShader.glsl" fragmentShader:@"ClothTestFragmentShader.glsl" attributeNames:attributeNames uniformNames:uniformNames error:&error]) {
         ALog(@"Shader program load failed: %@", error);
     }
@@ -500,15 +499,6 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
     
     free(handleVertices);
 }
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 
 #pragma mark - Animation management
 
@@ -648,15 +638,15 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
     self.title = @"Cloth Test";
     
     NSMutableArray *toolbarItems = [NSMutableArray array];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.gridToggleView] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel] autorelease]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.gridToggleView]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel]];
     if (motionManager.isDeviceMotionAvailable) {
-        [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
-        [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.accelerometerToggleView] autorelease]];
+        [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+        [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.accelerometerToggleView]];
     }
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.imageToggleView] autorelease]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.imageToggleView]];
     
     self.toolbarItems = toolbarItems;
     [self.navigationController setToolbarHidden:NO animated:YES];
@@ -666,6 +656,7 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
     [self setupOpenGL];
 }
 
+#if false
 - (void)viewDidUnload
 {
     [self setFpsLabel:nil];
@@ -677,6 +668,7 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
+#endif
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -697,13 +689,6 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
 
     [super viewWillDisappear:animated];
 }
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
 
 #pragma mark - Object lifecycle
 
@@ -733,26 +718,9 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [motionManager release];
-    
     free(gridVertices);
     free(texCoords);
     free(texVertices);
-    
-    [accelerometerToggleView release];
-    [attractor release];
-    [displayLink release];
-    [fpsLabel release];
-    [fullFrameRateLabel release];
-    [gridTexture release];
-    [gridToggleView release];
-    [imageToggleView release];
-    [particles release];
-    [s release];
-    [shaderProgram release];
-    
-    [super dealloc];
 }
 
 @end

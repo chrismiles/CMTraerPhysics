@@ -249,7 +249,7 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
     CMTPVector3D gravityVector = CMTPVector3DMake(0.0f, 0.0f, 0.0f);
     s = [[CMTPParticleSystem alloc] initWithGravityVector:gravityVector drag:0.1f];
 
-    attractor = [[s makeParticleWithMass:1.0f position:CMTPVector3DMake(0.0f, 0.0f, 0.0f)] retain];
+    attractor = [s makeParticleWithMass:1.0f position:CMTPVector3DMake(0.0f, 0.0f, 0.0f)];
     [attractor makeFixed];
     
     for (NSUInteger i=0; i<=num_rows; i++) {
@@ -266,9 +266,6 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
 	}
 	[particlesFixed addObject:row_particles_fixed];
 	[particlesFree addObject:row_particles_free];
-	
-	[row_particles_fixed release];
-	[row_particles_free release];
     }
 }
 
@@ -305,13 +302,12 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
     
     EAGLView *glView = (EAGLView *)self.view;
     [glView setContext:context];
-    [context release];
     [glView setFramebuffer];
     
     NSError *error = nil;
     NSArray *attributeNames = [NSArray arrayWithObjects:@"position", @"textureCoord", nil];
     NSArray *uniformNames = [NSArray arrayWithObjects:@"color", @"enableTexture", @"mvp", @"sampler", nil];
-    self.shaderProgram = [[[CMGLESKProgram alloc] init] autorelease];
+    self.shaderProgram = [[CMGLESKProgram alloc] init];
     if (![self.shaderProgram loadProgramFromFilesVertexShader:@"WonderwallLikeVertexShader.glsl" fragmentShader:@"WonderwallLikeFragmentShader.glsl" attributeNames:attributeNames uniformNames:uniformNames error:&error]) {
         ALog(@"Shader program load failed: %@", error);
     }
@@ -487,8 +483,8 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
 	}
 
 	//DLog(@"vIndex=%d tIndex=%d", vIndex, tIndex);
-	ZAssert(vIndex <= vertexArraySize, @"vIndex=%d", vIndex);
-	ZAssert(tIndex <= vertexArraySize, @"tIndex=%d", tIndex);
+	ZAssert(vIndex <= vertexArraySize, @"vIndex=%lu", (unsigned long)vIndex);
+	ZAssert(tIndex <= vertexArraySize, @"tIndex=%lu", (unsigned long)tIndex);
 	
         glUniform1i([self.shaderProgram indexOfUniform:@"enableTexture"], GL_TRUE);
 	
@@ -664,11 +660,11 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
     self.title = @"Wonderwall Like";
     
     NSMutableArray *toolbarItems = [NSMutableArray array];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.fullFrameRateToggleView] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.highlightToggleView] autorelease]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fullFrameRateToggleView]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.highlightToggleView]];
     
     self.toolbarItems = toolbarItems;
     [self.navigationController setToolbarHidden:NO animated:YES];
@@ -680,6 +676,7 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
     [self setupOpenGL];
 }
 
+#if false
 - (void)viewDidUnload
 {
     [self setFpsLabel:nil];
@@ -691,6 +688,7 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
+#endif
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -712,20 +710,6 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
     [super viewWillDisappear:animated];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-
 #pragma mark -
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -746,21 +730,6 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
     
     free(texCoords);
     free(vertices);
-    
-    [attractor release];
-    [displayLink release];
-    [fpsLabel release];
-    [fullFrameRateLabel release];
-    [fullFrameRateToggleView release];
-    [gridTexture release];
-    [highlightToggleView release];
-    [particlesFixed release];
-    [particlesFree release];
-    [s release];
-    [shaderProgram release];
-    [textureAtlasFrames release];
-    
-    [super dealloc];
 }
 
 @end

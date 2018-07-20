@@ -351,7 +351,7 @@
     NSUInteger sy = (NSUInteger)CGRectGetMinY(frame);
     NSUInteger sp = (NSUInteger)CGRectGetWidth(frame) / GRID_SIZE;
     
-    attractor = [[s makeParticleWithMass:1 position:CMTPVector3DMake(CGRectGetMidX(frame), CGRectGetMidY(frame), 0.0)] retain];
+    attractor = [s makeParticleWithMass:1 position:CMTPVector3DMake(CGRectGetMidX(frame), CGRectGetMidY(frame), 0.0)];
     [attractor makeFixed];
     
     float attractionStrength;
@@ -386,7 +386,7 @@
 
 - (void)setupOpenGL
 {
-    EAGLContext *context = [[[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2] autorelease];
+    EAGLContext *context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     
     if (!context) {
         ALog(@"Failed to create ES context");
@@ -402,7 +402,7 @@
     NSError *error = nil;
     NSArray *attributeNames = [NSArray arrayWithObjects:@"position", @"color", @"textureCoord", nil];
     NSArray *uniformNames = [NSArray arrayWithObjects:@"mvp", @"sampler", @"colorOnly", nil];
-    self.shaderProgram = [[[CMGLESKProgram alloc] init] autorelease];
+    self.shaderProgram = [[CMGLESKProgram alloc] init];
     if (![self.shaderProgram loadProgramFromFilesVertexShader:@"AttractionGridVertexShader.glsl" fragmentShader:@"AttractionGridFragmentShader.glsl" attributeNames:attributeNames uniformNames:uniformNames error:&error]) {
         ALog(@"Shader program load failed: %@", error);
     }
@@ -447,15 +447,6 @@
 
     ASSERT_GL_OK();
 }
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 
 #pragma mark - Animation management
 
@@ -570,11 +561,11 @@
     self.title = @"Attraction Grid";
     
     NSMutableArray *toolbarItems = [NSMutableArray array];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.gridToggleView] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.imageToggleView] autorelease]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.gridToggleView]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.imageToggleView]];
     
     self.toolbarItems = toolbarItems;
     [self.navigationController setToolbarHidden:NO animated:YES];
@@ -583,6 +574,7 @@
     [self setupOpenGL];
 }
 
+#if false
 - (void)viewDidUnload
 {
     [self setFpsLabel:nil];
@@ -595,6 +587,7 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
+#endif
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -623,13 +616,6 @@
     [super viewWillDisappear:animated];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-
 #pragma mark - Object lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -654,21 +640,6 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
 
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [attractor release];
-    [displayLink release];
-    [fpsLabel release];
-    [fullFrameRateLabel release];
-    [glView release];
-    [gridTexture release];
-    [gridToggleView release];
-    [imageToggleView release];
-    [particles_fixed release];
-    [particles_free release];
-    [s release];
-    [shaderProgram release];
-    
-    [super dealloc];
 }
 
 @end

@@ -78,7 +78,7 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
 {
     if (nil == displayLink) {
 	/* Init Timer */
-	displayLink = [[CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame:)] retain];
+	displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame:)];
 	[displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     }
 }
@@ -87,7 +87,6 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
 {
     if (displayLink) {
 	[displayLink invalidate];
-	[displayLink release];
 	displayLink = nil;
     }
 }
@@ -120,7 +119,7 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
 
 - (void)generateParticles
 {
-    anchor = [[s makeParticleWithMass:0.8f position:CMTPVector3DMake(CGRectGetMidX(self.bounds), CGRectGetHeight(self.bounds)*0.2f, 0)] retain];
+    anchor = [s makeParticleWithMass:0.8f position:CMTPVector3DMake(CGRectGetMidX(self.bounds), CGRectGetHeight(self.bounds)*0.2f, 0)];
     [anchor makeFixed];
     [particles addObject:anchor];
     
@@ -275,15 +274,6 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
 - (void)dealloc
 {
     [displayLink invalidate];
-    [displayLink release];
-    
-    [_fpsLabel release];
-    [anchor release];
-    [motionManager release];
-    [particles release];
-    [s release];
-    
-    [super dealloc];
 }
 
 @end

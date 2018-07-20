@@ -30,7 +30,7 @@
 
 @interface CMTPDFreeFloatingTestLayer : CALayer
 
-@property (nonatomic, retain) UILabel *fpsLabel;
+@property (nonatomic, strong) UILabel *fpsLabel;
 
 - (void)startAnimation;
 - (void)stopAnimation;

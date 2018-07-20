@@ -59,12 +59,12 @@
     self.title = @"Spring Test";
     
     NSMutableArray *toolbarItems = [NSMutableArray array];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.smoothToggleView] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel] autorelease]];
-    [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.smoothToggleView]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel]];
+    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
     if ([(CMTPDSpringTestView *)self.view isDeviceMotionAvailable]) {
-	[toolbarItems addObject:[[[UIBarButtonItem alloc] initWithCustomView:self.accelerometerToggleView] autorelease]];
+	[toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.accelerometerToggleView]];
     }
     
     self.toolbarItems = toolbarItems;
@@ -74,6 +74,7 @@
     [(CMTPDSpringTestView *)self.view setFpsLabel:self.fpsLabel];
 }
 
+#if false
 - (void)viewDidUnload
 {
     [self setAccelerometerToggleView:nil];
@@ -84,6 +85,7 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
+#endif
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -99,21 +101,6 @@
     [(CMTPDSpringTestView *)self.view stopAnimation];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-
 #pragma mark - Object lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -123,15 +110,6 @@
 	
     }
     return self;
-}
-
-- (void)dealloc
-{
-    [accelerometerToggleView release];
-    [fpsLabel release];
-    [smoothToggleView release];
-    
-    [super dealloc];
 }
 
 @end

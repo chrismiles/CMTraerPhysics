@@ -69,11 +69,4 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [particle release];
-    
-    [super dealloc];
-}
-
 @end

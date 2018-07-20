@@ -46,12 +46,10 @@
 {
     switch (anIntegrator) {
 	case CMTPParticleSystemIntegratorRungeKutta:
-	    [integrator release];
 	    integrator = [[CMTPRungeKuttaIntegrator alloc] initWithParticleSystem:self];
 	    break;
 	    
 	case CMTPParticleSystemIntegratorModifiedEuler:
-	    [integrator release];
 	    integrator = [[CMTPModifiedEulerIntegrator alloc] initWithParticleSystem:self];
 	    break;
     }	
@@ -76,29 +74,25 @@
 {
     CMTPParticle *p = [[CMTPParticle alloc] initWithMass:mass position:position];
     [particles addObject:p];
-    return [p autorelease];
+    return p;
 }
 
 - (CMTPSpring *)makeSpringBetweenParticleA:(CMTPParticle *)particleA particleB:(CMTPParticle *)particleB springConstant:(CMTPFloat)springConstant damping:(CMTPFloat)damping restLength:(CMTPFloat)restLength
 {
     CMTPSpring *s = [[CMTPSpring alloc] initWithParticleA:particleA particleB:particleB springConstant:springConstant damping:damping restLength:restLength];
     [springs addObject:s];
-    return [s autorelease];
+    return s;
 }
 
 - (CMTPAttraction *)makeAttractionBetweenParticleA:(CMTPParticle *)particleA particleB:(CMTPParticle *)particleB strength:(CMTPFloat)strength minDistance:(CMTPFloat)minDistance
 {
     CMTPAttraction *m = [[CMTPAttraction alloc] initWithParticleA:particleA particleB:particleB strength:strength minDistance:minDistance];
     [attractions addObject:m];
-    return [m autorelease];
+    return m;
 }
 
 - (void)clear
 {
-    [particles release];
-    [springs release];
-    [attractions release];
-    
     particles = [[NSMutableArray alloc] init];
     springs = [[NSMutableArray alloc] init];
     attractions = [[NSMutableArray alloc] init];	
@@ -323,17 +317,6 @@
 	drag = dragValue;
     }
     return self;
-}
-
-- (void)dealloc
-{
-    [integrator release];
-    [particles release];
-    [springs release];
-    [attractions release];
-    [custom release];
-    
-    [super dealloc];
 }
 
 @end
