@@ -14,39 +14,20 @@
 		831E95DC146FF02B003789DF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 831E95DA146FF02B003789DF /* InfoPlist.strings */; };
 		831E95DE146FF02B003789DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E95DD146FF02B003789DF /* main.m */; };
 		831E95E2146FF02B003789DF /* CMTPDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E95E1146FF02B003789DF /* CMTPDAppDelegate.m */; };
-		831E95EA146FF02C003789DF /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831E95E9146FF02C003789DF /* SenTestingKit.framework */; };
-		831E95EB146FF02C003789DF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831E95D1146FF02B003789DF /* UIKit.framework */; };
-		831E95EC146FF02C003789DF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831E95D3146FF02B003789DF /* Foundation.framework */; };
-		831E95F4146FF02C003789DF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 831E95F2146FF02C003789DF /* InfoPlist.strings */; };
-		831E95F7146FF02C003789DF /* CMTPDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E95F6146FF02C003789DF /* CMTPDemoTests.m */; };
 		831E9614146FF093003789DF /* CMTPAttraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9602146FF093003789DF /* CMTPAttraction.m */; };
-		831E9615146FF093003789DF /* CMTPAttraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9602146FF093003789DF /* CMTPAttraction.m */; };
 		831E9616146FF093003789DF /* CMTPCustomForce.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9605146FF093003789DF /* CMTPCustomForce.m */; };
-		831E9617146FF093003789DF /* CMTPCustomForce.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9605146FF093003789DF /* CMTPCustomForce.m */; };
 		831E9618146FF093003789DF /* CMTPForce.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9607146FF093003789DF /* CMTPForce.m */; };
-		831E9619146FF093003789DF /* CMTPForce.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9607146FF093003789DF /* CMTPForce.m */; };
 		831E961A146FF093003789DF /* CMTPIntegrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9609146FF093003789DF /* CMTPIntegrator.m */; };
-		831E961B146FF093003789DF /* CMTPIntegrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9609146FF093003789DF /* CMTPIntegrator.m */; };
 		831E961C146FF093003789DF /* CMTPModifiedEulerIntegrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E960B146FF093003789DF /* CMTPModifiedEulerIntegrator.m */; };
-		831E961D146FF093003789DF /* CMTPModifiedEulerIntegrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E960B146FF093003789DF /* CMTPModifiedEulerIntegrator.m */; };
 		831E961E146FF093003789DF /* CMTPParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E960D146FF093003789DF /* CMTPParticle.m */; };
-		831E961F146FF093003789DF /* CMTPParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E960D146FF093003789DF /* CMTPParticle.m */; };
 		831E9620146FF093003789DF /* CMTPParticleSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E960F146FF093003789DF /* CMTPParticleSystem.m */; };
-		831E9621146FF093003789DF /* CMTPParticleSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E960F146FF093003789DF /* CMTPParticleSystem.m */; };
 		831E9622146FF093003789DF /* CMTPRungeKuttaIntegrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9611146FF093003789DF /* CMTPRungeKuttaIntegrator.m */; };
-		831E9623146FF093003789DF /* CMTPRungeKuttaIntegrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9611146FF093003789DF /* CMTPRungeKuttaIntegrator.m */; };
 		831E9624146FF093003789DF /* CMTPSpring.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9613146FF093003789DF /* CMTPSpring.m */; };
-		831E9625146FF093003789DF /* CMTPSpring.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9613146FF093003789DF /* CMTPSpring.m */; };
 		831E962914712566003789DF /* CMTPDMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E962714712566003789DF /* CMTPDMenuViewController.m */; };
-		831E962A14712566003789DF /* CMTPDMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E962714712566003789DF /* CMTPDMenuViewController.m */; };
 		831E962B14712566003789DF /* CMTPDMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831E962814712566003789DF /* CMTPDMenuViewController.xib */; };
-		831E962C14712566003789DF /* CMTPDMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831E962814712566003789DF /* CMTPDMenuViewController.xib */; };
 		831E963214712752003789DF /* CMTPDAttractionGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E963014712752003789DF /* CMTPDAttractionGridViewController.m */; };
-		831E963314712752003789DF /* CMTPDAttractionGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E963014712752003789DF /* CMTPDAttractionGridViewController.m */; };
 		831E963414712752003789DF /* CMTPDAttractionGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831E963114712752003789DF /* CMTPDAttractionGridViewController.xib */; };
-		831E963514712752003789DF /* CMTPDAttractionGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831E963114712752003789DF /* CMTPDAttractionGridViewController.xib */; };
 		831E963D14712B77003789DF /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E963C14712B77003789DF /* EAGLView.m */; };
-		831E963E14712B77003789DF /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E963C14712B77003789DF /* EAGLView.m */; };
 		831E9696147134D3003789DF /* CMGLESKTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9695147134D3003789DF /* CMGLESKTexture.m */; };
 		831E969A147135E7003789DF /* sandy_beach.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 831E9699147135E7003789DF /* sandy_beach.jpg */; };
 		831E969D1471371C003789DF /* CMGLESKProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E969C1471371C003789DF /* CMGLESKProgram.m */; };
@@ -97,16 +78,6 @@
 		83ECC5CA14BC4E87002126E1 /* CMGLESKUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC5C914BC4E87002126E1 /* CMGLESKUtil.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		831E95ED146FF02C003789DF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 831E95C4146FF02B003789DF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 831E95CC146FF02B003789DF;
-			remoteInfo = CMTPDemo;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		831261A6161D749A0037F109 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		831E95CD146FF02B003789DF /* CMTPDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CMTPDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,12 +90,7 @@
 		831E95DF146FF02B003789DF /* CMTPDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CMTPDemo-Prefix.pch"; sourceTree = "<group>"; };
 		831E95E0146FF02B003789DF /* CMTPDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CMTPDAppDelegate.h; path = Classes/CMTPDAppDelegate.h; sourceTree = "<group>"; };
 		831E95E1146FF02B003789DF /* CMTPDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CMTPDAppDelegate.m; path = Classes/CMTPDAppDelegate.m; sourceTree = "<group>"; };
-		831E95E8146FF02C003789DF /* CMTPDemoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CMTPDemoTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		831E95E9146FF02C003789DF /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		831E95F1146FF02C003789DF /* CMTPDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CMTPDemoTests-Info.plist"; sourceTree = "<group>"; };
-		831E95F3146FF02C003789DF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		831E95F5146FF02C003789DF /* CMTPDemoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMTPDemoTests.h; sourceTree = "<group>"; };
-		831E95F6146FF02C003789DF /* CMTPDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CMTPDemoTests.m; sourceTree = "<group>"; };
 		831E9601146FF093003789DF /* CMTPAttraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPAttraction.h; sourceTree = "<group>"; };
 		831E9602146FF093003789DF /* CMTPAttraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPAttraction.m; sourceTree = "<group>"; };
 		831E9603146FF093003789DF /* CMTPCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPCommon.h; sourceTree = "<group>"; };
@@ -242,16 +208,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		831E95E4146FF02C003789DF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				831E95EA146FF02C003789DF /* SenTestingKit.framework in Frameworks */,
-				831E95EB146FF02C003789DF /* UIKit.framework in Frameworks */,
-				831E95EC146FF02C003789DF /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -262,7 +218,6 @@
 				831E9691147134D3003789DF /* Libraries */,
 				831E9600146FF093003789DF /* CMTraerPhysics */,
 				831E95D7146FF02B003789DF /* CMTPDemo */,
-				831E95EF146FF02C003789DF /* CMTPDemoTests */,
 				831E95D0146FF02B003789DF /* Frameworks */,
 				831E95CE146FF02B003789DF /* Products */,
 			);
@@ -272,7 +227,6 @@
 			isa = PBXGroup;
 			children = (
 				831E95CD146FF02B003789DF /* CMTPDemo.app */,
-				831E95E8146FF02C003789DF /* CMTPDemoTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -309,25 +263,6 @@
 				831E95DA146FF02B003789DF /* InfoPlist.strings */,
 				831E95DD146FF02B003789DF /* main.m */,
 				831E95DF146FF02B003789DF /* CMTPDemo-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		831E95EF146FF02C003789DF /* CMTPDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				831E95F5146FF02C003789DF /* CMTPDemoTests.h */,
-				831E95F6146FF02C003789DF /* CMTPDemoTests.m */,
-				831E95F0146FF02C003789DF /* Supporting Files */,
-			);
-			path = CMTPDemoTests;
-			sourceTree = "<group>";
-		};
-		831E95F0146FF02C003789DF /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				831E95F1146FF02C003789DF /* CMTPDemoTests-Info.plist */,
-				831E95F2146FF02C003789DF /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -594,25 +529,6 @@
 			productReference = 831E95CD146FF02B003789DF /* CMTPDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		831E95E7146FF02C003789DF /* CMTPDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 831E95FD146FF02C003789DF /* Build configuration list for PBXNativeTarget "CMTPDemoTests" */;
-			buildPhases = (
-				831E95E3146FF02C003789DF /* Sources */,
-				831E95E4146FF02C003789DF /* Frameworks */,
-				831E95E5146FF02C003789DF /* Resources */,
-				831E95E6146FF02C003789DF /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				831E95EE146FF02C003789DF /* PBXTargetDependency */,
-			);
-			name = CMTPDemoTests;
-			productName = CMTPDemoTests;
-			productReference = 831E95E8146FF02C003789DF /* CMTPDemoTests.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -635,7 +551,6 @@
 			projectRoot = "";
 			targets = (
 				831E95CC146FF02B003789DF /* CMTPDemo */,
-				831E95E7146FF02C003789DF /* CMTPDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -675,33 +590,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		831E95E5146FF02C003789DF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				831E95F4146FF02C003789DF /* InfoPlist.strings in Resources */,
-				831E962C14712566003789DF /* CMTPDMenuViewController.xib in Resources */,
-				831E963514712752003789DF /* CMTPDAttractionGridViewController.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		831E95E6146FF02C003789DF /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		831E95C9146FF02B003789DF /* Sources */ = {
@@ -747,49 +636,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		831E95E3146FF02C003789DF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				831E95F7146FF02C003789DF /* CMTPDemoTests.m in Sources */,
-				831E9615146FF093003789DF /* CMTPAttraction.m in Sources */,
-				831E9617146FF093003789DF /* CMTPCustomForce.m in Sources */,
-				831E9619146FF093003789DF /* CMTPForce.m in Sources */,
-				831E961B146FF093003789DF /* CMTPIntegrator.m in Sources */,
-				831E961D146FF093003789DF /* CMTPModifiedEulerIntegrator.m in Sources */,
-				831E961F146FF093003789DF /* CMTPParticle.m in Sources */,
-				831E9621146FF093003789DF /* CMTPParticleSystem.m in Sources */,
-				831E9623146FF093003789DF /* CMTPRungeKuttaIntegrator.m in Sources */,
-				831E9625146FF093003789DF /* CMTPSpring.m in Sources */,
-				831E962A14712566003789DF /* CMTPDMenuViewController.m in Sources */,
-				831E963314712752003789DF /* CMTPDAttractionGridViewController.m in Sources */,
-				831E963E14712B77003789DF /* EAGLView.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		831E95EE146FF02C003789DF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 831E95CC146FF02B003789DF /* CMTPDemo */;
-			targetProxy = 831E95ED146FF02C003789DF /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		831E95DA146FF02B003789DF /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				831E95DB146FF02B003789DF /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		831E95F2146FF02C003789DF /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				831E95F3146FF02C003789DF /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -942,42 +795,6 @@
 			};
 			name = Release;
 		};
-		831E95FE146FF02C003789DF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CMTPDemo.app/CMTPDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CMTPDemo/CMTPDemo-Prefix.pch";
-				INFOPLIST_FILE = "CMTPDemoTests/CMTPDemoTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "info.chrismiles.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		831E95FF146FF02C003789DF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CMTPDemo.app/CMTPDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CMTPDemo/CMTPDemo-Prefix.pch";
-				INFOPLIST_FILE = "CMTPDemoTests/CMTPDemoTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "info.chrismiles.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -995,15 +812,6 @@
 			buildConfigurations = (
 				831E95FB146FF02C003789DF /* Debug */,
 				831E95FC146FF02C003789DF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		831E95FD146FF02C003789DF /* Build configuration list for PBXNativeTarget "CMTPDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				831E95FE146FF02C003789DF /* Debug */,
-				831E95FF146FF02C003789DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
