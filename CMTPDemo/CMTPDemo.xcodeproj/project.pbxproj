@@ -299,20 +299,20 @@
 		831E962D147126A3003789DF /* Demos */ = {
 			isa = PBXGroup;
 			children = (
-				831E962E147126AB003789DF /* Attraction Grid Demo */,
-				8395502014864F7E00241646 /* Attraction Test */,
-				83DFD64E148E3275003771E9 /* Cloth Test */,
-				83DFD6731495FEFA003771E9 /* Free Floating Test */,
-				83CCDBD115341B99003EA4D6 /* Scroll View Clone */,
-				83DFD682149A11C1003771E9 /* Spring Test */,
-				832A9C1B14AD31D400C1CB8E /* Web Test */,
-				83ECC5BD14BC4BF3002126E1 /* Wonderwall Like */,
+				831E962E147126AB003789DF /* AttractionGridDemo */,
+				8395502014864F7E00241646 /* AttractionTest */,
+				83DFD64E148E3275003771E9 /* ClothTest */,
+				83DFD6731495FEFA003771E9 /* FreeFloatingTest */,
+				83CCDBD115341B99003EA4D6 /* ScrollViewClone */,
+				83DFD682149A11C1003771E9 /* SpringTest */,
+				832A9C1B14AD31D400C1CB8E /* WebTest */,
+				83ECC5BD14BC4BF3002126E1 /* WonderwallLike */,
 			);
 			name = Demos;
 			path = ../Demos;
 			sourceTree = "<group>";
 		};
-		831E962E147126AB003789DF /* Attraction Grid Demo */ = {
+		831E962E147126AB003789DF /* AttractionGridDemo */ = {
 			isa = PBXGroup;
 			children = (
 				831E96A614720435003789DF /* AttractionGridVertexShader.glsl */,
@@ -321,7 +321,7 @@
 				831E963014712752003789DF /* CMTPDAttractionGridViewController.m */,
 				831E963114712752003789DF /* CMTPDAttractionGridViewController.xib */,
 			);
-			path = "Attraction Grid Demo";
+			path = AttractionGridDemo;
 			sourceTree = "<group>";
 		};
 		831E963A14712B57003789DF /* Shared */ = {
@@ -391,7 +391,7 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
-		832A9C1B14AD31D400C1CB8E /* Web Test */ = {
+		832A9C1B14AD31D400C1CB8E /* WebTest */ = {
 			isa = PBXGroup;
 			children = (
 				832A9C1C14AD321800C1CB8E /* CMTPDWebTestViewController.h */,
@@ -400,7 +400,7 @@
 				832A9C2114AD336200C1CB8E /* WebTestFragmentShader.glsl */,
 				832A9C2214AD336200C1CB8E /* WebTestVertexShader.glsl */,
 			);
-			path = "Web Test";
+			path = WebTest;
 			sourceTree = "<group>";
 		};
 		834326E914DFC570006F930F /* html */ = {
@@ -422,7 +422,7 @@
 			path = Textures;
 			sourceTree = "<group>";
 		};
-		8395502014864F7E00241646 /* Attraction Test */ = {
+		8395502014864F7E00241646 /* AttractionTest */ = {
 			isa = PBXGroup;
 			children = (
 				83DFD640148ADDE6003771E9 /* CMTPDAttractionTestLayer.h */,
@@ -435,10 +435,10 @@
 				83DFD643148AF9C3003771E9 /* CMTPDATSubLayers.h */,
 				83DFD644148AF9C3003771E9 /* CMTPDATSubLayers.m */,
 			);
-			path = "Attraction Test";
+			path = AttractionTest;
 			sourceTree = "<group>";
 		};
-		83CCDBD115341B99003EA4D6 /* Scroll View Clone */ = {
+		83CCDBD115341B99003EA4D6 /* ScrollViewClone */ = {
 			isa = PBXGroup;
 			children = (
 				83CCDBD215341B99003EA4D6 /* CMScrollView.h */,
@@ -450,10 +450,10 @@
 				83CCDBD815341B99003EA4D6 /* CMTPDScrollViewCloneViewController.m */,
 				83CCDBD915341B99003EA4D6 /* CMTPDScrollViewCloneViewController.xib */,
 			);
-			path = "Scroll View Clone";
+			path = ScrollViewClone;
 			sourceTree = "<group>";
 		};
-		83DFD64E148E3275003771E9 /* Cloth Test */ = {
+		83DFD64E148E3275003771E9 /* ClothTest */ = {
 			isa = PBXGroup;
 			children = (
 				83DFD654148F7AC4003771E9 /* ClothTestFragmentShader.glsl */,
@@ -462,10 +462,10 @@
 				83DFD650148E32FD003771E9 /* CMTPDClothTestViewController.m */,
 				83DFD651148E32FD003771E9 /* CMTPDClothTestViewController.xib */,
 			);
-			path = "Cloth Test";
+			path = ClothTest;
 			sourceTree = "<group>";
 		};
-		83DFD6731495FEFA003771E9 /* Free Floating Test */ = {
+		83DFD6731495FEFA003771E9 /* FreeFloatingTest */ = {
 			isa = PBXGroup;
 			children = (
 				83DFD67C14960D9C003771E9 /* CMTPDFreeFloatingTestLayer.h */,
@@ -478,10 +478,10 @@
 				83DFD67514960D5A003771E9 /* CMTPDFreeFloatingTestViewController.m */,
 				83DFD67614960D5A003771E9 /* CMTPDFreeFloatingTestViewController.xib */,
 			);
-			path = "Free Floating Test";
+			path = FreeFloatingTest;
 			sourceTree = "<group>";
 		};
-		83DFD682149A11C1003771E9 /* Spring Test */ = {
+		83DFD682149A11C1003771E9 /* SpringTest */ = {
 			isa = PBXGroup;
 			children = (
 				832A9C1714A729EB00C1CB8E /* CMTPDSmoothedPath.h */,
@@ -494,10 +494,10 @@
 				83DFD684149A12CE003771E9 /* CMTPDSpringTestViewController.m */,
 				83DFD685149A12CE003771E9 /* CMTPDSpringTestViewController.xib */,
 			);
-			path = "Spring Test";
+			path = SpringTest;
 			sourceTree = "<group>";
 		};
-		83ECC5BD14BC4BF3002126E1 /* Wonderwall Like */ = {
+		83ECC5BD14BC4BF3002126E1 /* WonderwallLike */ = {
 			isa = PBXGroup;
 			children = (
 				83ECC5BF14BC4CA2002126E1 /* CMTPDWonderwallLikeViewController.h */,
@@ -506,7 +506,7 @@
 				83ECC5C414BC4D10002126E1 /* WonderwallLikeFragmentShader.glsl */,
 				83ECC5C514BC4D10002126E1 /* WonderwallLikeVertexShader.glsl */,
 			);
-			path = "Wonderwall Like";
+			path = WonderwallLike;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
