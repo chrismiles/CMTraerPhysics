@@ -11,7 +11,6 @@
 		831E95D2146FF02B003789DF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831E95D1146FF02B003789DF /* UIKit.framework */; };
 		831E95D4146FF02B003789DF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831E95D3146FF02B003789DF /* Foundation.framework */; };
 		831E95D6146FF02B003789DF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831E95D5146FF02B003789DF /* CoreGraphics.framework */; };
-		831E95DC146FF02B003789DF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 831E95DA146FF02B003789DF /* InfoPlist.strings */; };
 		831E95DE146FF02B003789DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E95DD146FF02B003789DF /* main.m */; };
 		831E95E2146FF02B003789DF /* CMTPDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E95E1146FF02B003789DF /* CMTPDAppDelegate.m */; };
 		831E9614146FF093003789DF /* CMTPAttraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9602146FF093003789DF /* CMTPAttraction.m */; };
@@ -85,11 +84,10 @@
 		831E95D3146FF02B003789DF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		831E95D5146FF02B003789DF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		831E95D9146FF02B003789DF /* CMTPDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CMTPDemo-Info.plist"; sourceTree = "<group>"; };
-		831E95DB146FF02B003789DF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		831E95DD146FF02B003789DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		831E95DF146FF02B003789DF /* CMTPDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CMTPDemo-Prefix.pch"; sourceTree = "<group>"; };
-		831E95E0146FF02B003789DF /* CMTPDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CMTPDAppDelegate.h; path = Classes/CMTPDAppDelegate.h; sourceTree = "<group>"; };
-		831E95E1146FF02B003789DF /* CMTPDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CMTPDAppDelegate.m; path = Classes/CMTPDAppDelegate.m; sourceTree = "<group>"; };
+		831E95E0146FF02B003789DF /* CMTPDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMTPDAppDelegate.h; sourceTree = "<group>"; };
+		831E95E1146FF02B003789DF /* CMTPDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CMTPDAppDelegate.m; sourceTree = "<group>"; };
 		831E95E9146FF02C003789DF /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		831E9601146FF093003789DF /* CMTPAttraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPAttraction.h; sourceTree = "<group>"; };
 		831E9602146FF093003789DF /* CMTPAttraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPAttraction.m; sourceTree = "<group>"; };
@@ -110,14 +108,14 @@
 		831E9611146FF093003789DF /* CMTPRungeKuttaIntegrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPRungeKuttaIntegrator.m; sourceTree = "<group>"; };
 		831E9612146FF093003789DF /* CMTPSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPSpring.h; sourceTree = "<group>"; };
 		831E9613146FF093003789DF /* CMTPSpring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPSpring.m; sourceTree = "<group>"; };
-		831E962614712566003789DF /* CMTPDMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMTPDMenuViewController.h; path = Classes/CMTPDMenuViewController.h; sourceTree = "<group>"; };
-		831E962714712566003789DF /* CMTPDMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMTPDMenuViewController.m; path = Classes/CMTPDMenuViewController.m; sourceTree = "<group>"; };
-		831E962814712566003789DF /* CMTPDMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CMTPDMenuViewController.xib; path = Classes/CMTPDMenuViewController.xib; sourceTree = "<group>"; };
+		831E962614712566003789DF /* CMTPDMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDMenuViewController.h; sourceTree = "<group>"; };
+		831E962714712566003789DF /* CMTPDMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDMenuViewController.m; sourceTree = "<group>"; };
+		831E962814712566003789DF /* CMTPDMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDMenuViewController.xib; sourceTree = "<group>"; };
 		831E962F14712752003789DF /* CMTPDAttractionGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDAttractionGridViewController.h; sourceTree = "<group>"; };
 		831E963014712752003789DF /* CMTPDAttractionGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDAttractionGridViewController.m; sourceTree = "<group>"; };
 		831E963114712752003789DF /* CMTPDAttractionGridViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDAttractionGridViewController.xib; sourceTree = "<group>"; };
-		831E963B14712B77003789DF /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EAGLView.h; path = Classes/EAGLView.h; sourceTree = "<group>"; };
-		831E963C14712B77003789DF /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EAGLView.m; path = Classes/EAGLView.m; sourceTree = "<group>"; };
+		831E963B14712B77003789DF /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
+		831E963C14712B77003789DF /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
 		831E9694147134D3003789DF /* CMGLESKTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMGLESKTexture.h; sourceTree = "<group>"; };
 		831E9695147134D3003789DF /* CMGLESKTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMGLESKTexture.m; sourceTree = "<group>"; };
 		831E9699147135E7003789DF /* sandy_beach.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sandy_beach.jpg; sourceTree = "<group>"; };
@@ -135,9 +133,9 @@
 		832A9C1E14AD321800C1CB8E /* CMTPDWebTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDWebTestViewController.xib; sourceTree = "<group>"; };
 		832A9C2114AD336200C1CB8E /* WebTestFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebTestFragmentShader.glsl; sourceTree = "<group>"; };
 		832A9C2214AD336200C1CB8E /* WebTestVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebTestVertexShader.glsl; sourceTree = "<group>"; };
-		834326DE14DFC2FC006F930F /* CMTPDInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMTPDInfoViewController.h; path = Classes/CMTPDInfoViewController.h; sourceTree = "<group>"; };
-		834326DF14DFC2FC006F930F /* CMTPDInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMTPDInfoViewController.m; path = Classes/CMTPDInfoViewController.m; sourceTree = "<group>"; };
-		834326E014DFC2FC006F930F /* CMTPDInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CMTPDInfoViewController.xib; path = Classes/CMTPDInfoViewController.xib; sourceTree = "<group>"; };
+		834326DE14DFC2FC006F930F /* CMTPDInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDInfoViewController.h; sourceTree = "<group>"; };
+		834326DF14DFC2FC006F930F /* CMTPDInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDInfoViewController.m; sourceTree = "<group>"; };
+		834326E014DFC2FC006F930F /* CMTPDInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDInfoViewController.xib; sourceTree = "<group>"; };
 		834326EA14DFC570006F930F /* info.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = info.html; sourceTree = "<group>"; };
 		835E712C14CA4A5200409E43 /* wonderwall_atlas.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = wonderwall_atlas.plist; sourceTree = "<group>"; };
 		835E712D14CA4A5200409E43 /* wonderwall_atlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wonderwall_atlas.png; sourceTree = "<group>"; };
@@ -248,10 +246,29 @@
 		831E95D7146FF02B003789DF /* CMTPDemo */ = {
 			isa = PBXGroup;
 			children = (
-				831E963F14712B7F003789DF /* Classes */,
-				831E9697147135E7003789DF /* Resources */,
-				831E95D8146FF02B003789DF /* Supporting Files */,
+				831E962E147126AB003789DF /* AttractionGridDemo */,
+				8395502014864F7E00241646 /* AttractionTest */,
+				83DFD64E148E3275003771E9 /* ClothTest */,
+				831E95E0146FF02B003789DF /* CMTPDAppDelegate.h */,
+				831E95E1146FF02B003789DF /* CMTPDAppDelegate.m */,
+				831E95D9146FF02B003789DF /* CMTPDemo-Info.plist */,
+				834326DE14DFC2FC006F930F /* CMTPDInfoViewController.h */,
+				834326DF14DFC2FC006F930F /* CMTPDInfoViewController.m */,
+				834326E014DFC2FC006F930F /* CMTPDInfoViewController.xib */,
+				831E962614712566003789DF /* CMTPDMenuViewController.h */,
+				831E962714712566003789DF /* CMTPDMenuViewController.m */,
+				831E962814712566003789DF /* CMTPDMenuViewController.xib */,
+				831E963B14712B77003789DF /* EAGLView.h */,
+				831E963C14712B77003789DF /* EAGLView.m */,
+				83DFD6731495FEFA003771E9 /* FreeFloatingTest */,
 				83F857D314D5F5ED00EB98F4 /* LICENSE.txt */,
+				831E95DD146FF02B003789DF /* main.m */,
+				831E9697147135E7003789DF /* Resources */,
+				83CCDBD115341B99003EA4D6 /* ScrollViewClone */,
+				83DFD682149A11C1003771E9 /* SpringTest */,
+				831E95D8146FF02B003789DF /* Supporting Files */,
+				832A9C1B14AD31D400C1CB8E /* WebTest */,
+				83ECC5BD14BC4BF3002126E1 /* WonderwallLike */,
 			);
 			path = CMTPDemo;
 			sourceTree = "<group>";
@@ -259,9 +276,6 @@
 		831E95D8146FF02B003789DF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				831E95D9146FF02B003789DF /* CMTPDemo-Info.plist */,
-				831E95DA146FF02B003789DF /* InfoPlist.strings */,
-				831E95DD146FF02B003789DF /* main.m */,
 				831E95DF146FF02B003789DF /* CMTPDemo-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -296,59 +310,16 @@
 			path = ../CMTraerPhysics;
 			sourceTree = "<group>";
 		};
-		831E962D147126A3003789DF /* Demos */ = {
-			isa = PBXGroup;
-			children = (
-				831E962E147126AB003789DF /* AttractionGridDemo */,
-				8395502014864F7E00241646 /* AttractionTest */,
-				83DFD64E148E3275003771E9 /* ClothTest */,
-				83DFD6731495FEFA003771E9 /* FreeFloatingTest */,
-				83CCDBD115341B99003EA4D6 /* ScrollViewClone */,
-				83DFD682149A11C1003771E9 /* SpringTest */,
-				832A9C1B14AD31D400C1CB8E /* WebTest */,
-				83ECC5BD14BC4BF3002126E1 /* WonderwallLike */,
-			);
-			name = Demos;
-			path = ../Demos;
-			sourceTree = "<group>";
-		};
 		831E962E147126AB003789DF /* AttractionGridDemo */ = {
 			isa = PBXGroup;
 			children = (
-				831E96A614720435003789DF /* AttractionGridVertexShader.glsl */,
 				831E96A814720472003789DF /* AttractionGridFragmentShader.glsl */,
+				831E96A614720435003789DF /* AttractionGridVertexShader.glsl */,
 				831E962F14712752003789DF /* CMTPDAttractionGridViewController.h */,
 				831E963014712752003789DF /* CMTPDAttractionGridViewController.m */,
 				831E963114712752003789DF /* CMTPDAttractionGridViewController.xib */,
 			);
 			path = AttractionGridDemo;
-			sourceTree = "<group>";
-		};
-		831E963A14712B57003789DF /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				831E95E0146FF02B003789DF /* CMTPDAppDelegate.h */,
-				831E95E1146FF02B003789DF /* CMTPDAppDelegate.m */,
-				834326DE14DFC2FC006F930F /* CMTPDInfoViewController.h */,
-				834326DF14DFC2FC006F930F /* CMTPDInfoViewController.m */,
-				834326E014DFC2FC006F930F /* CMTPDInfoViewController.xib */,
-				831E962614712566003789DF /* CMTPDMenuViewController.h */,
-				831E962714712566003789DF /* CMTPDMenuViewController.m */,
-				831E962814712566003789DF /* CMTPDMenuViewController.xib */,
-				831E963B14712B77003789DF /* EAGLView.h */,
-				831E963C14712B77003789DF /* EAGLView.m */,
-			);
-			name = Shared;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		831E963F14712B7F003789DF /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				831E962D147126A3003789DF /* Demos */,
-				831E963A14712B57003789DF /* Shared */,
-			);
-			path = Classes;
 			sourceTree = "<group>";
 		};
 		831E9691147134D3003789DF /* Libraries */ = {
@@ -376,19 +347,14 @@
 		831E9697147135E7003789DF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				834326E914DFC570006F930F /* html */,
-				835E712B14CA4A5200409E43 /* Textures */,
-				831E9698147135E7003789DF /* Images */,
+				834326EA14DFC570006F930F /* info.html */,
+				831E9699147135E7003789DF /* sandy_beach.jpg */,
+				835E712C14CA4A5200409E43 /* wonderwall_atlas.plist */,
+				835E712D14CA4A5200409E43 /* wonderwall_atlas.png */,
+				835E712E14CA4A5200409E43 /* wonderwall_atlas@2x.plist */,
+				835E712F14CA4A5200409E43 /* wonderwall_atlas@2x.png */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		831E9698147135E7003789DF /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				831E9699147135E7003789DF /* sandy_beach.jpg */,
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		832A9C1B14AD31D400C1CB8E /* WebTest */ = {
@@ -403,28 +369,11 @@
 			path = WebTest;
 			sourceTree = "<group>";
 		};
-		834326E914DFC570006F930F /* html */ = {
-			isa = PBXGroup;
-			children = (
-				834326EA14DFC570006F930F /* info.html */,
-			);
-			path = html;
-			sourceTree = "<group>";
-		};
-		835E712B14CA4A5200409E43 /* Textures */ = {
-			isa = PBXGroup;
-			children = (
-				835E712C14CA4A5200409E43 /* wonderwall_atlas.plist */,
-				835E712D14CA4A5200409E43 /* wonderwall_atlas.png */,
-				835E712E14CA4A5200409E43 /* wonderwall_atlas@2x.plist */,
-				835E712F14CA4A5200409E43 /* wonderwall_atlas@2x.png */,
-			);
-			path = Textures;
-			sourceTree = "<group>";
-		};
 		8395502014864F7E00241646 /* AttractionTest */ = {
 			isa = PBXGroup;
 			children = (
+				83DFD643148AF9C3003771E9 /* CMTPDATSubLayers.h */,
+				83DFD644148AF9C3003771E9 /* CMTPDATSubLayers.m */,
 				83DFD640148ADDE6003771E9 /* CMTPDAttractionTestLayer.h */,
 				83DFD641148ADDE6003771E9 /* CMTPDAttractionTestLayer.m */,
 				83DFD63C148ADD10003771E9 /* CMTPDAttractionTestView.h */,
@@ -432,8 +381,6 @@
 				8395502214864FEA00241646 /* CMTPDAttractionTestViewController.h */,
 				8395502314864FEA00241646 /* CMTPDAttractionTestViewController.m */,
 				8395502414864FEA00241646 /* CMTPDAttractionTestViewController.xib */,
-				83DFD643148AF9C3003771E9 /* CMTPDATSubLayers.h */,
-				83DFD644148AF9C3003771E9 /* CMTPDATSubLayers.m */,
 			);
 			path = AttractionTest;
 			sourceTree = "<group>";
@@ -560,7 +507,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				831E95DC146FF02B003789DF /* InfoPlist.strings in Resources */,
 				831E962B14712566003789DF /* CMTPDMenuViewController.xib in Resources */,
 				831E963414712752003789DF /* CMTPDAttractionGridViewController.xib in Resources */,
 				831E969A147135E7003789DF /* sandy_beach.jpg in Resources */,
@@ -637,17 +583,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		831E95DA146FF02B003789DF /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				831E95DB146FF02B003789DF /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		831E95F8146FF02C003789DF /* Debug */ = {
