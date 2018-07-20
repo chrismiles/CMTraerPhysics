@@ -13,10 +13,10 @@
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//  
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,40 +27,35 @@
 //
 
 #import "CMTPDFreeFloatingTestLayer.h"
-#import "CMTraerPhysics.h"
 #import "CMTPDFreeFloatingTestSubLayer.h"
-
+#import "CMTraerPhysics.h"
 
 /* Return a random CMTPFloat between 0.0 and 1.0 */
-static CMTPFloat randomClamp()
-{
-    return (CMTPFloat)(arc4random() % ((unsigned)RAND_MAX + 1)) / (CMTPFloat)((unsigned)RAND_MAX + 1);
+static CMTPFloat randomClamp(){
+    return (CMTPFloat)(arc4random()%((unsigned)RAND_MAX+1))/(CMTPFloat)((unsigned)RAND_MAX+1);
 }
 
-static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
-{
-    CGFloat dx = prevPosition.x - userPosition.x;
-    CGFloat dy = prevPosition.y - userPosition.y;
-    return sqrt(dx*dx + dy*dy);
+static CGFloat CGPointDistance(CGPoint userPosition,CGPoint prevPosition){
+    CGFloat dx=prevPosition.x-userPosition.x;
+    CGFloat dy=prevPosition.y-userPosition.y;
+    return sqrt(dx*dx+dy*dy);
 }
-
 
 @interface CMTPDFreeFloatingTestLayer () {
-    
     NSUInteger numParticles;
-    
-    CADisplayLink *displayLink;
+
+    CADisplayLink* displayLink;
     CGSize lastSize;
     CGPoint prevPosition;
     CGPoint userPosition;
 
     /* Physics */
-    CMTPParticle *attractor;
-    NSMutableArray *attractions;
+    CMTPParticle* attractor;
+    NSMutableArray* attractions;
     CMTPFloat attractorStrengthFactor;
-    NSMutableArray *particles;
-    CMTPParticleSystem *s;
-    
+    NSMutableArray* particles;
+    CMTPParticleSystem* s;
+
     // FPS
     double fps_prev_time;
     NSUInteger fps_count;
@@ -68,180 +63,156 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
 
 @end
 
-
 @implementation CMTPDFreeFloatingTestLayer
 
 @synthesize fpsLabel=_fpsLabel;
 
-- (NSUInteger)particleCount
-{
+-(NSUInteger)particleCount {
     return numParticles;
 }
 
-- (void)startAnimation
-{
-    if (nil == displayLink) {
-	/* Init Timer */
-	displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame:)];
-	[displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+-(void)startAnimation {
+    if (nil==displayLink) {
+        /* Init Timer */
+        displayLink=[CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame:)];
+        [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     }
 }
 
-- (void)stopAnimation
-{
+-(void)stopAnimation {
     if (displayLink) {
-	[displayLink invalidate];
-	displayLink = nil;
+        [displayLink invalidate];
+        displayLink=nil;
     }
 }
 
-- (void)setUserPosition:(CGPoint)position
-{
-    userPosition = position;
+-(void)setUserPosition:(CGPoint)position {
+    userPosition=position;
 }
 
-- (void)clearPrevPosition
-{
-    prevPosition = userPosition;
+-(void)clearPrevPosition {
+    prevPosition=userPosition;
 }
 
-- (void)drawFrame:(CADisplayLink *)sender
-{
+-(void)drawFrame:(CADisplayLink*)sender {
     [s tick:1];
     [self setNeedsLayout];      // position sub layers
-    
     /* FPS */
     if (_fpsLabel) {
-	double curr_time = CACurrentMediaTime(); 
-	if (curr_time - fps_prev_time >= 0.2) {
-	    double delta = (curr_time - fps_prev_time) / fps_count;
-	    _fpsLabel.text = [NSString stringWithFormat:@"%0.0f fps", 1.0/delta];
-	    fps_prev_time = curr_time;
-	    fps_count = 1;
-	}
-	else {
-	    fps_count++;
-	}
+        double curr_time=CACurrentMediaTime();
+        if (curr_time-fps_prev_time>=0.2) {
+            double delta=(curr_time-fps_prev_time)/fps_count;
+            _fpsLabel.text=[NSString stringWithFormat:@"%0.0f fps",1.0/delta];
+            fps_prev_time=curr_time;
+            fps_count=1;
+        } else {
+            fps_count++;
+        }
     }
 }
 
-- (void)generateParticles
-{
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone && [UIScreen mainScreen].scale == 1) {
-	// Significantly less particles on earlier iPhones (i.e. 3GS) to keep acceptable performance
-	numParticles = 100;
+-(void)generateParticles {
+    if (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPhone&&[UIScreen mainScreen].scale==1) {
+        // Significantly less particles on earlier iPhones (i.e. 3GS) to keep acceptable performance
+        numParticles=100;
+    } else {
+        numParticles=500;
     }
-    else {
-	numParticles = 500;
-    }
-    
     CGFloat particleSize;
     CMTPFloat attractorStrength;
     CMTPFloat attractorMinDistance;
-    
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-	attractorStrength = 100.0f;
-	attractorMinDistance = 30.0f;
-	attractorStrengthFactor = 60.0f;
-	particleSize = 14.0f;
+    if (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPad) {
+        attractorStrength=100.0f;
+        attractorMinDistance=30.0f;
+        attractorStrengthFactor=60.0f;
+        particleSize=14.0f;
+    } else {
+        attractorStrength=50.0f;
+        attractorMinDistance=15.0f;
+        attractorStrengthFactor=30.0f;
+        particleSize=10.0f;
     }
-    else {
-	attractorStrength = 50.0f;
-	attractorMinDistance = 15.0f;
-	attractorStrengthFactor = 30.0f;
-	particleSize = 10.0f;
-    }
-    
-    attractor = [s makeParticleWithMass:0.8f position:CMTPVector3DMake(0, 0, 0)];
-    
-    for (unsigned int i = 0; i<numParticles; i++) {
-	CMTPFloat randx = randomClamp() * (CGRectGetWidth(self.bounds)-1);
-	CMTPFloat randy = randomClamp() * (CGRectGetHeight(self.bounds)-1);
-	
-	CMTPDFreeFloatingTestSubLayer *subLayer = [[CMTPDFreeFloatingTestSubLayer alloc] init];
-	subLayer.frame = CGRectMake(0.0f, 0.0f, particleSize, particleSize);
-	subLayer.position = CGPointMake(randx, randy);
-	[self addSublayer:subLayer];
-	
-	CMTPParticle *particle = [s makeParticleWithMass:0.8f position:CMTPVector3DMake(randx, randy, 0)];
-	particle.context = subLayer;
-	[particles addObject:particle];
-	
-	CMTPAttraction *attraction = [s makeAttractionBetweenParticleA:particle particleB:attractor strength:attractorStrength minDistance:attractorMinDistance];
-	[attractions addObject:attraction];
+    attractor=[s makeParticleWithMass:0.8f position:CMTPVector3DMake(0,0,0)];
+    for (unsigned int i=0;i<numParticles;i++) {
+        CMTPFloat randx=randomClamp()*(CGRectGetWidth(self.bounds)-1);
+        CMTPFloat randy=randomClamp()*(CGRectGetHeight(self.bounds)-1);
+
+        CMTPDFreeFloatingTestSubLayer* subLayer=[[CMTPDFreeFloatingTestSubLayer alloc] init];
+        subLayer.frame=CGRectMake(0.0f,0.0f,particleSize,particleSize);
+        subLayer.position=CGPointMake(randx,randy);
+        [self addSublayer:subLayer];
+
+        CMTPParticle* particle=[s makeParticleWithMass:0.8f position:CMTPVector3DMake(randx,randy,0)];
+        particle.context=subLayer;
+        [particles addObject:particle];
+
+        CMTPAttraction* attraction=[s makeAttractionBetweenParticleA:particle particleB:attractor strength:attractorStrength minDistance:attractorMinDistance];
+        [attractions addObject:attraction];
     }
 }
 
-
 #pragma mark - CALayer methods
 
-- (void)layoutSublayers
-{
-    if (!CGSizeEqualToSize(self.bounds.size, lastSize) && !attractor) {
-	[self generateParticles];
+-(void)layoutSublayers {
+    if (!CGSizeEqualToSize(self.bounds.size,lastSize)&&!attractor) {
+        [self generateParticles];
 
-        lastSize = self.bounds.size;
+        lastSize=self.bounds.size;
     }
-    
     /* Disable implicit animations */
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-    
-    attractor.position = CMTPVector3DMake(userPosition.x, userPosition.y, 0.0f);
-    
-    CMTPFloat width = CGRectGetWidth(self.bounds);
-    CMTPFloat height = CGRectGetHeight(self.bounds);
-    
-    for (unsigned int i=0; i < numParticles; i++) {
-	CMTPParticle *particle = [particles objectAtIndex:i];
-	CMTPFloat x = fmod(width + particle.position.x, width);
-	CMTPFloat y = fmod(height + particle.position.y, height);
-	particle.position = CMTPVector3DMake(x, y, 0);
-	
-	CMTPDFreeFloatingTestSubLayer *sublayer = particle.context;
-	sublayer.position = CGPointMake(x, y);
-	
-	if (prevPosition.x >= 0.0f) {
-	    CMTPFloat distance = CGPointDistance(userPosition, prevPosition);
-	    CMTPAttraction *attraction = [attractions objectAtIndex:i];
-	    [attraction setMinDistance:distance*1.2f];
-	    [attraction setStrength:-(10 + (attractorStrengthFactor * (distance*distance)))];
-	}
+
+    attractor.position=CMTPVector3DMake(userPosition.x,userPosition.y,0.0f);
+
+    CMTPFloat width=CGRectGetWidth(self.bounds);
+    CMTPFloat height=CGRectGetHeight(self.bounds);
+    for (unsigned int i=0;i<numParticles;i++) {
+        CMTPParticle* particle=[particles objectAtIndex:i];
+        CMTPFloat x=fmod(width+particle.position.x,width);
+        CMTPFloat y=fmod(height+particle.position.y,height);
+        particle.position=CMTPVector3DMake(x,y,0);
+
+        CMTPDFreeFloatingTestSubLayer* sublayer=particle.context;
+        sublayer.position=CGPointMake(x,y);
+        if (prevPosition.x>=0.0f) {
+            CMTPFloat distance=CGPointDistance(userPosition,prevPosition);
+            CMTPAttraction* attraction=[attractions objectAtIndex:i];
+            [attraction setMinDistance:distance*1.2f];
+            [attraction setStrength:-(10+(attractorStrengthFactor*(distance*distance)))];
+        }
     }
-    
-    prevPosition = userPosition;
+    prevPosition=userPosition;
 
     [CATransaction commit];
 }
 
-
 #pragma mark - Object lifecycle
 
-- (id)init
-{
-    self = [super init];
+-(id)init {
+    self=[super init];
     if (self) {
-	self.contentsScale = [UIScreen mainScreen].scale;
+        self.contentsScale=[UIScreen mainScreen].scale;
 
-	lastSize = self.bounds.size;
-	userPosition = CGPointZero;
-	prevPosition = CGPointMake(-1.0f, -1.0f);
+        lastSize=self.bounds.size;
+        userPosition=CGPointZero;
+        prevPosition=CGPointMake(-1.0f,-1.0f);
 
         /* Init Physics */
-        CMTPVector3D gravity = CMTPVector3DMake(0.0f, 0.0f, 0.0f);
-        s = [[CMTPParticleSystem alloc] initWithGravityVector:gravity drag:0.02f];
-	[s setIntegrator:CMTPParticleSystemIntegratorModifiedEuler];	// faster simulation (but less stable)
+        CMTPVector3D gravity=CMTPVector3DMake(0.0f,0.0f,0.0f);
+        s=[[CMTPParticleSystem alloc] initWithGravityVector:gravity drag:0.02f];
+        [s setIntegrator:CMTPParticleSystemIntegratorModifiedEuler]; // faster simulation (but less stable)
 
-        attractions = [[NSMutableArray alloc] init];
-	particles = [[NSMutableArray alloc] init];
+        attractions=[[NSMutableArray alloc] init];
+        particles=[[NSMutableArray alloc] init];
     }
     return self;
 }
 
-- (void)dealloc
-{
+-(void)dealloc {
     [displayLink invalidate];
-    displayLink = nil;
+    displayLink=nil;
 }
 
 @end
+

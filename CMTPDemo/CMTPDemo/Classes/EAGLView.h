@@ -11,10 +11,10 @@
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//  
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,34 +24,34 @@
 //  THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
+#import <UIKit/UIKit.h>
 
 @protocol EAGLViewDelegate;
 
 @interface EAGLView : UIView {
-@private
-    EAGLContext *context;
-    GLuint defaultFramebuffer, colorRenderbuffer, depthRenderbuffer;
+    @private
+    EAGLContext* context;
+    GLuint defaultFramebuffer,colorRenderbuffer,depthRenderbuffer;
 }
 
-@property (nonatomic, assign) IBOutlet id<EAGLViewDelegate> delegate;
+@property (nonatomic,assign) IBOutlet id<EAGLViewDelegate> delegate;
 
-@property (nonatomic, strong) EAGLContext *context;
+@property (nonatomic,strong) EAGLContext* context;
 
-@property (nonatomic, readonly) GLuint defaultFramebuffer;
-@property (nonatomic, readonly) GLint framebufferWidth;
-@property (nonatomic, readonly) GLint framebufferHeight;
+@property (nonatomic,readonly) GLuint defaultFramebuffer;
+@property (nonatomic,readonly) GLint framebufferWidth;
+@property (nonatomic,readonly) GLint framebufferHeight;
 
-- (void)setFramebuffer;
+-(void)setFramebuffer;
 
 @end
-
 
 @protocol EAGLViewDelegate <NSObject>
 
 @optional
-- (void)eaglView:(EAGLView *)eaglView framebufferCreatedWithSize:(CGSize)framebufferSize;
+-(void)eaglView:(EAGLView*)eaglView framebufferCreatedWithSize:(CGSize)framebufferSize;
 
 @end
+

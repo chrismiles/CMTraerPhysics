@@ -13,10 +13,10 @@
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//  
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,165 +27,152 @@
 //
 
 #import "CMTPDAttractionTestLayer.h"
-#import "CMTraerPhysics.h"
 #import "CMTPDATSubLayers.h"
+#import "CMTraerPhysics.h"
 
 @interface CMTPDAttractionTestLayer () {
-    
-    CADisplayLink *displayLink;
+    CADisplayLink* displayLink;
     CGSize lastSize;
-    
+
     /* Sub Layers */
-    CMTPDATAnchorLayer *anchorLayer;
-    CMTPDATParticleLayer *particleLayer;
-    CMTPDATTouchIndicatorLayer *touchIndicatorLayer;
-    
+    CMTPDATAnchorLayer* anchorLayer;
+    CMTPDATParticleLayer* particleLayer;
+    CMTPDATTouchIndicatorLayer* touchIndicatorLayer;
+
     /* Physics */
-    CMTPAttraction *attraction;
-    CMTPParticle *anchor;
-    CMTPParticle *attractor;
-    CMTPParticle *particle;
-    CMTPSpring *spring;
-    CMTPParticleSystem *s;
-    
+    CMTPAttraction* attraction;
+    CMTPParticle* anchor;
+    CMTPParticle* attractor;
+    CMTPParticle* particle;
+    CMTPSpring* spring;
+    CMTPParticleSystem* s;
+
     // FPS
     double fps_prev_time;
     NSUInteger fps_count;
 }
 @end
 
-
 @implementation CMTPDAttractionTestLayer
 
 @synthesize fpsLabel=_fpsLabel;
 
-- (void)startAnimation
-{
-    if (nil == displayLink) {
-	/* Init Timer */
-	displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame:)];
-	[displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+-(void)startAnimation {
+    if (nil==displayLink) {
+        /* Init Timer */
+        displayLink=[CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame:)];
+        [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     }
 }
 
-- (void)stopAnimation
-{
+-(void)stopAnimation {
     if (displayLink) {
-	[displayLink invalidate];
-	displayLink = nil;
+        [displayLink invalidate];
+        displayLink=nil;
     }
 }
 
-- (void)setUserPosition:(CGPoint)position
-{
-    attractor.position = CMTPVector3DMake(position.x, position.y, 0.0f);
+-(void)setUserPosition:(CGPoint)position {
+    attractor.position=CMTPVector3DMake(position.x,position.y,0.0f);
     [attraction turnOn];
-    touchIndicatorLayer.opacity = 1.0f;
+    touchIndicatorLayer.opacity=1.0f;
 }
 
-- (void)clearUserPosition
-{
+-(void)clearUserPosition {
     [attraction turnOff];
-    touchIndicatorLayer.opacity = 0.0f;
+    touchIndicatorLayer.opacity=0.0f;
 }
 
-- (void)drawFrame:(CADisplayLink *)sender
-{
+-(void)drawFrame:(CADisplayLink*)sender {
     [s tick:1];
     [self setNeedsDisplay];     // draw "spring" line
     [self setNeedsLayout];      // position sub layers
-    
     /* FPS */
     if (_fpsLabel) {
-	double curr_time = CACurrentMediaTime(); 
-	if (curr_time - fps_prev_time >= 0.2) {
-	    double delta = (curr_time - fps_prev_time) / fps_count;
-	    _fpsLabel.text = [NSString stringWithFormat:@"%0.0f fps", 1.0/delta];
-	    fps_prev_time = curr_time;
-	    fps_count = 1;
-	}
-	else {
-	    fps_count++;
-	}
+        double curr_time=CACurrentMediaTime();
+        if (curr_time-fps_prev_time>=0.2) {
+            double delta=(curr_time-fps_prev_time)/fps_count;
+            _fpsLabel.text=[NSString stringWithFormat:@"%0.0f fps",1.0/delta];
+            fps_prev_time=curr_time;
+            fps_count=1;
+        } else {
+            fps_count++;
+        }
     }
 }
 
-- (void)drawInContext:(CGContextRef)ctx
-{
-    CGContextSetStrokeColorWithColor(ctx, [UIColor redColor].CGColor);
-    CGContextMoveToPoint(ctx, anchor.position.x, anchor.position.y);
-    CGContextAddLineToPoint(ctx, particle.position.x, particle.position.y);
-    CGContextDrawPath(ctx, kCGPathStroke);
+-(void)drawInContext:(CGContextRef)ctx {
+    CGContextSetStrokeColorWithColor(ctx,[UIColor redColor].CGColor);
+    CGContextMoveToPoint(ctx,anchor.position.x,anchor.position.y);
+    CGContextAddLineToPoint(ctx,particle.position.x,particle.position.y);
+    CGContextDrawPath(ctx,kCGPathStroke);
 }
 
-- (void)layoutSublayers
-{
-    if (!CGSizeEqualToSize(self.bounds.size, lastSize)) {
-        CGPoint anchorPosition = CGPointMake(round(CGRectGetMidX(self.bounds)), round(CGRectGetMidY(self.bounds)));
-        anchorLayer.position = anchorPosition;
-        particleLayer.position = anchorPosition;
-        
-        anchor.position = CMTPVector3DMake(anchorPosition.x, anchorPosition.y, 0.0f);
-        particle.position = anchor.position;
-        attractor.position = anchor.position;
-        
-        lastSize = self.bounds.size;
+-(void)layoutSublayers {
+    if (!CGSizeEqualToSize(self.bounds.size,lastSize)) {
+        CGPoint anchorPosition=CGPointMake(round(CGRectGetMidX(self.bounds)),round(CGRectGetMidY(self.bounds)));
+        anchorLayer.position=anchorPosition;
+        particleLayer.position=anchorPosition;
+
+        anchor.position=CMTPVector3DMake(anchorPosition.x,anchorPosition.y,0.0f);
+        particle.position=anchor.position;
+        attractor.position=anchor.position;
+
+        lastSize=self.bounds.size;
     }
-    
     /* Disable implicit animations */
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-    particleLayer.position = CGPointMake(particle.position.x, particle.position.y);
-    touchIndicatorLayer.position = CGPointMake(attractor.position.x, attractor.position.y);
+    particleLayer.position=CGPointMake(particle.position.x,particle.position.y);
+    touchIndicatorLayer.position=CGPointMake(attractor.position.x,attractor.position.y);
     [CATransaction commit];
 }
 
-- (id)init
-{
-    self = [super init];
+-(id)init {
+    self=[super init];
     if (self) {
-        lastSize = self.bounds.size;
-        CGPoint anchorPosition = CGPointMake(round(CGRectGetMidX(self.bounds)), round(CGRectGetMidY(self.bounds)));
-        
+        lastSize=self.bounds.size;
+        CGPoint anchorPosition=CGPointMake(round(CGRectGetMidX(self.bounds)),round(CGRectGetMidY(self.bounds)));
+
         /* Init Physics */
-        CMTPVector3D gravity = CMTPVector3DMake(0.0f, 0.0f, 0.0f);
-        s = [[CMTPParticleSystem alloc] initWithGravityVector:gravity drag:0.3f];
-        
-        anchor = [s makeParticleWithMass:1.0f position:CMTPVector3DMake(anchorPosition.x, anchorPosition.y, 0.0f)];
+        CMTPVector3D gravity=CMTPVector3DMake(0.0f,0.0f,0.0f);
+        s=[[CMTPParticleSystem alloc] initWithGravityVector:gravity drag:0.3f];
+
+        anchor=[s makeParticleWithMass:1.0f position:CMTPVector3DMake(anchorPosition.x,anchorPosition.y,0.0f)];
         [anchor makeFixed];
-        
-        particle = [s makeParticleWithMass:1.0f position:CMTPVector3DMake(anchorPosition.x, anchorPosition.y, 0.0f)];
-        
-        attractor = [s makeParticleWithMass:1.0f position:CMTPVector3DMake(anchorPosition.x, anchorPosition.y, 0.0f)];
+
+        particle=[s makeParticleWithMass:1.0f position:CMTPVector3DMake(anchorPosition.x,anchorPosition.y,0.0f)];
+
+        attractor=[s makeParticleWithMass:1.0f position:CMTPVector3DMake(anchorPosition.x,anchorPosition.y,0.0f)];
         [attractor makeFixed];
-        
-        spring = [s makeSpringBetweenParticleA:anchor particleB:particle springConstant:0.1f damping:0.01f restLength:0.0f];
-        attraction = [s makeAttractionBetweenParticleA:attractor particleB:particle strength:9000.0f minDistance:30.0f];
+
+        spring=[s makeSpringBetweenParticleA:anchor particleB:particle springConstant:0.1f damping:0.01f restLength:0.0f];
+        attraction=[s makeAttractionBetweenParticleA:attractor particleB:particle strength:9000.0f minDistance:30.0f];
         [attraction turnOff];
-        
+
         /* Sub Layers */
-        anchorLayer = [[CMTPDATAnchorLayer alloc] init];
-        anchorLayer.frame = CGRectMake(0.0f, 0.0f, 15.0f, 15.0f);
-        anchorLayer.position = anchorPosition;
+        anchorLayer=[[CMTPDATAnchorLayer alloc] init];
+        anchorLayer.frame=CGRectMake(0.0f,0.0f,15.0f,15.0f);
+        anchorLayer.position=anchorPosition;
         [self addSublayer:anchorLayer];
-        
-        particleLayer = [[CMTPDATParticleLayer alloc] init];
-        particleLayer.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
-        particleLayer.position = anchorPosition;
+
+        particleLayer=[[CMTPDATParticleLayer alloc] init];
+        particleLayer.frame=CGRectMake(0.0f,0.0f,25.0f,25.0f);
+        particleLayer.position=anchorPosition;
         [self addSublayer:particleLayer];
-        
-        touchIndicatorLayer = [[CMTPDATTouchIndicatorLayer alloc] init];
-        touchIndicatorLayer.frame = CGRectMake(0.0f, 0.0f, 80.0f, 80.0f);
-        touchIndicatorLayer.position = anchorPosition;
-        touchIndicatorLayer.opacity = 0.0f;
+
+        touchIndicatorLayer=[[CMTPDATTouchIndicatorLayer alloc] init];
+        touchIndicatorLayer.frame=CGRectMake(0.0f,0.0f,80.0f,80.0f);
+        touchIndicatorLayer.position=anchorPosition;
+        touchIndicatorLayer.opacity=0.0f;
         [self addSublayer:touchIndicatorLayer];
     }
     return self;
 }
 
-- (void)dealloc
-{
+-(void)dealloc {
     [displayLink invalidate];
 }
 
 @end
+

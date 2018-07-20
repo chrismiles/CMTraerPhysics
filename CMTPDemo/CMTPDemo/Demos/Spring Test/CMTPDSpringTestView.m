@@ -11,10 +11,10 @@
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//  
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,8 +24,8 @@
 //  THE SOFTWARE.
 //
 
-#import "CMTPDSpringTestView.h"
 #import "CMTPDSpringTestLayer.h"
+#import "CMTPDSpringTestView.h"
 
 @implementation CMTPDSpringTestView
 
@@ -34,96 +34,81 @@
 @dynamic isDeviceMotionAvailable;
 @dynamic smoothed;
 
-+ (Class)layerClass
-{
++(Class)layerClass {
     return [CMTPDSpringTestLayer class];
 }
 
-- (id)initWithCoder:(NSCoder *)coder {
-    self = [super initWithCoder:coder];
+-(id)initWithCoder:(NSCoder*)coder {
+    self=[super initWithCoder:coder];
     if (self) {
-	[self.layer setContentsScale:[UIScreen mainScreen].scale];
+        [self.layer setContentsScale:[UIScreen mainScreen].scale];
     }
     return self;
 }
 
-- (void)startAnimation
-{
-    [(CMTPDSpringTestLayer *)self.layer startAnimation];
+-(void)startAnimation {
+    [(CMTPDSpringTestLayer*)self.layer startAnimation];
 }
 
-- (void)stopAnimation
-{
-    [(CMTPDSpringTestLayer *)self.layer stopAnimation];
+-(void)stopAnimation {
+    [(CMTPDSpringTestLayer*)self.layer stopAnimation];
 }
 
-- (void)setFpsLabel:(UILabel *)fpsLabel
-{
-    [(CMTPDSpringTestLayer *)self.layer setFpsLabel:fpsLabel];
+-(void)setFpsLabel:(UILabel*)fpsLabel {
+    [(CMTPDSpringTestLayer*)self.layer setFpsLabel:fpsLabel];
 }
 
-- (UILabel *)fpsLabel
-{
-    return [(CMTPDSpringTestLayer *)self.layer fpsLabel];
+-(UILabel*)fpsLabel {
+    return [(CMTPDSpringTestLayer*)self.layer fpsLabel];
 }
-
 
 #pragma mark - Custom property accessors
 
-- (BOOL)smoothed
-{
-    return [(CMTPDSpringTestLayer *)self.layer smoothed];
+-(BOOL)smoothed {
+    return [(CMTPDSpringTestLayer*)self.layer smoothed];
 }
 
-- (void)setSmoothed:(BOOL)smoothed
-{
-    [(CMTPDSpringTestLayer *)self.layer setSmoothed:smoothed];
+-(void)setSmoothed:(BOOL)smoothed {
+    [(CMTPDSpringTestLayer*)self.layer setSmoothed:smoothed];
 }
 
-- (BOOL)isDeviceMotionAvailable
-{
-    return [(CMTPDSpringTestLayer *)self.layer isDeviceMotionAvailable];
+-(BOOL)isDeviceMotionAvailable {
+    return [(CMTPDSpringTestLayer*)self.layer isDeviceMotionAvailable];
 }
 
-- (void)setGravityByDeviceMotionEnabled:(BOOL)gravityByDeviceMotionEnabled
-{
-    [(CMTPDSpringTestLayer *)self.layer setGravityByDeviceMotionEnabled:gravityByDeviceMotionEnabled];
+-(void)setGravityByDeviceMotionEnabled:(BOOL)gravityByDeviceMotionEnabled {
+    [(CMTPDSpringTestLayer*)self.layer setGravityByDeviceMotionEnabled:gravityByDeviceMotionEnabled];
 }
 
-- (BOOL)gravityByDeviceMotionEnabled
-{
-    return [(CMTPDSpringTestLayer *)self.layer gravityByDeviceMotionEnabled];
+-(BOOL)gravityByDeviceMotionEnabled {
+    return [(CMTPDSpringTestLayer*)self.layer gravityByDeviceMotionEnabled];
 }
-
 
 #pragma mark - Handle touches
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    UITouch *touch = [touches anyObject];
-    CGPoint position = [touch locationInView:self];
-    [(CMTPDSpringTestLayer *)self.layer touchBeganAtLocation:position];
+-(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
+    UITouch* touch=[touches anyObject];
+    CGPoint position=[touch locationInView:self];
+    [(CMTPDSpringTestLayer*)self.layer touchBeganAtLocation:position];
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    UITouch *touch = [touches anyObject];
-    CGPoint position = [touch locationInView:self];
-    [(CMTPDSpringTestLayer *)self.layer touchMovedAtLocation:position];
+-(void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
+    UITouch* touch=[touches anyObject];
+    CGPoint position=[touch locationInView:self];
+    [(CMTPDSpringTestLayer*)self.layer touchMovedAtLocation:position];
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    UITouch *touch = [touches anyObject];
-    CGPoint position = [touch locationInView:self];
-    [(CMTPDSpringTestLayer *)self.layer touchEndedAtLocation:position];
+-(void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
+    UITouch* touch=[touches anyObject];
+    CGPoint position=[touch locationInView:self];
+    [(CMTPDSpringTestLayer*)self.layer touchEndedAtLocation:position];
 }
 
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    UITouch *touch = [touches anyObject];
-    CGPoint position = [touch locationInView:self];
-    [(CMTPDSpringTestLayer *)self.layer touchCancelledAtLocation:position];
+-(void)touchesCancelled:(NSSet*)touches withEvent:(UIEvent*)event {
+    UITouch* touch=[touches anyObject];
+    CGPoint position=[touch locationInView:self];
+    [(CMTPDSpringTestLayer*)self.layer touchCancelledAtLocation:position];
 }
 
 @end
+

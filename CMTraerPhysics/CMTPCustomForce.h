@@ -11,10 +11,10 @@
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//  
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -28,14 +28,15 @@
 #import "CMTPParticle.h"
 
 @interface CMTPCustomForce : CMTPForce {
-    CMTPParticle *particle;
+    CMTPParticle* particle;
     CMTPVector3D forceVector;
     BOOL on;
 }
 
-@property (nonatomic, strong) CMTPParticle *particle;
-@property (nonatomic, assign) CMTPVector3D forceVector;
+@property (nonatomic,strong) CMTPParticle* particle;
+@property (nonatomic,assign) CMTPVector3D forceVector;
 
-- (id)initWithParticle:(CMTPParticle *)aParticle forceVector:(CMTPVector3D)aForceVector;
+-(id)initWithParticle:(CMTPParticle*)aParticle forceVector:(CMTPVector3D)aForceVector;
 
 @end
+

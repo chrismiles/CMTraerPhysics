@@ -16,10 +16,10 @@
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//  
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,25 +29,25 @@
 //  THE SOFTWARE.
 //
 
-
-#import <Foundation/Foundation.h>
 #import "CMTPForce.h"
 #import "CMTPParticle.h"
+#import <Foundation/Foundation.h>
 
 @interface CMTPAttraction : CMTPForce
 
-@property (nonatomic, strong) CMTPParticle *particleA;
-@property (nonatomic, strong) CMTPParticle *particleB;
-@property (nonatomic, assign) CMTPFloat strength; //k
-@property (nonatomic, assign) CMTPFloat minDistance;
-@property (nonatomic, assign) CMTPFloat minDistanceSquared;
-@property (nonatomic, assign) BOOL on;
+@property (nonatomic,strong) CMTPParticle* particleA;
+@property (nonatomic,strong) CMTPParticle* particleB;
+@property (nonatomic,assign) CMTPFloat strength;  //k
+@property (nonatomic,assign) CMTPFloat minDistance;
+@property (nonatomic,assign) CMTPFloat minDistanceSquared;
+@property (nonatomic,assign) BOOL on;
 
-- (void)setMinDistance:(CMTPFloat)aMinDistance;
-- (void)setParticleA:(CMTPParticle *)p;
-- (void)setParticleB:(CMTPParticle *)p;
-- (CMTPParticle *)getOneEnd;
-- (CMTPParticle *)getTheOtherEnd;
-- (id)initWithParticleA:(CMTPParticle *)aParticleA particleB:(CMTPParticle *)aParticleB strength:(CMTPFloat)aStrength minDistance:(CMTPFloat)aMinDistance;
+-(void)setMinDistance:(CMTPFloat)aMinDistance;
+-(void)setParticleA:(CMTPParticle*)p;
+-(void)setParticleB:(CMTPParticle*)p;
+-(CMTPParticle*)getOneEnd;
+-(CMTPParticle*)getTheOtherEnd;
+-(id)initWithParticleA:(CMTPParticle*)aParticleA particleB:(CMTPParticle*)aParticleB strength:(CMTPFloat)aStrength minDistance:(CMTPFloat)aMinDistance;
 
 @end
+

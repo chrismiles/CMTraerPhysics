@@ -11,10 +11,10 @@
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//  
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,46 +29,38 @@
 @implementation CMTPDInfoViewController
 @synthesize infoWebView;
 
-
 #pragma mark - UIWebViewDelegate methods
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    if (UIWebViewNavigationTypeOther == navigationType) {
-	return YES;
+-(BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType {
+    if (UIWebViewNavigationTypeOther==navigationType) {
+        return YES;
     }
-    
     [[UIApplication sharedApplication] openURL:request.URL];
     return NO;
 }
 
-
 #pragma mark - UIControl actions
 
-- (void)doneAction:(id)sender
-{
+-(void)doneAction:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
-{
+-(void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.title = @"CMTPDemo Info";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)];
-    
-    NSString *htmlFilePath = [[NSBundle mainBundle] pathForResource:@"info" ofType:@"html"];
-    NSURL *url = [NSURL fileURLWithPath:htmlFilePath];
-    NSURLRequest *fileRequest = [NSURLRequest requestWithURL:url];
+
+    self.title=@"CMTPDemo Info";
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)];
+
+    NSString* htmlFilePath=[[NSBundle mainBundle] pathForResource:@"info" ofType:@"html"];
+    NSURL* url=[NSURL fileURLWithPath:htmlFilePath];
+    NSURLRequest* fileRequest=[NSURLRequest requestWithURL:url];
     [self.infoWebView loadRequest:fileRequest];
 }
 
 #if false
-- (void)viewDidUnload
-{
+-(void)viewDidUnload {
     [self setInfoWebView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -77,3 +69,4 @@
 #endif
 
 @end
+

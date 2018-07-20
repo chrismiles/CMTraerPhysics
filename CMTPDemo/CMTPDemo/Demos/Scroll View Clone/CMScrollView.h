@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Chris Miles. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "CMTPCommon.h"
+#import <UIKit/UIKit.h>
 
 @interface CMScrollView : UIView
 
@@ -22,3 +22,4 @@
 @property (nonatomic) CMTPFloat scrollDrag;
 
 @end
+

@@ -11,10 +11,10 @@
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//  
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,19 +27,20 @@
 #import <Foundation/Foundation.h>
 
 #ifdef DEBUG
-#define ALog(...)\
-    [[NSAssertionHandler currentHandler]\
-     handleFailureInFunction:[NSString stringWithCString:__PRETTY_FUNCTION__ encoding:NSUTF8StringEncoding]\
-     file:[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding]\
-     lineNumber:__LINE__\
-     description:__VA_ARGS__]
-#define ASSERT_GL_OK() do {\
-    GLenum glError = glGetError();\
-    if (glError != GL_NO_ERROR) {\
-        ALog(@"glError: %d", glError);\
-    }} while (0)
+#define ALog(...) \
+    [[NSAssertionHandler currentHandler] \
+     handleFailureInFunction:[NSString stringWithCString:__PRETTY_FUNCTION__ encoding:NSUTF8StringEncoding] \
+                        file:[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] \
+                  lineNumber:__LINE__ \
+                 description:__VA_ARGS__]
+#define ASSERT_GL_OK() do { \
+        GLenum glError=glGetError(); \
+        if (glError!=GL_NO_ERROR) { \
+            ALog(@"glError: %d",glError); \
+        }} while (0)
 #else
-    #define ASSERT_GL_OK() do { } while (0)
+    #define ASSERT_GL_OK() do {} while (0)
 #endif
 
-void orthoMatrix(GLfloat *matrix, float left, float right, float bottom, float top, float zNear, float zFar);
+void orthoMatrix(GLfloat* matrix,float left,float right,float bottom,float top,float zNear,float zFar);
+

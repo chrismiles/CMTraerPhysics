@@ -16,10 +16,10 @@
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//  
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,34 +29,33 @@
 //  THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
 #import "CMTPIntegrator.h"
 #import "CMTPParticleSystem.h"
+#import <Foundation/Foundation.h>
 
 @interface CMVector3Dobj : NSObject {
     CMTPVector3D vector3D;
 }
-@property (nonatomic, assign) CMTPVector3D vector3D;
-+ (CMVector3Dobj *)vector3Dobj;
+@property (nonatomic,assign) CMTPVector3D vector3D;
++(CMVector3Dobj*)vector3Dobj;
 @end
-
 
 @interface CMTPRungeKuttaIntegrator : CMTPIntegrator {
-    CMTPParticleSystem *s;
-    
-    NSMutableArray *originalPositions;
-    NSMutableArray *originalVelocities;
-    NSMutableArray *k1Forces;
-    NSMutableArray *k1Velocities;
-    NSMutableArray *k2Forces;
-    NSMutableArray *k2Velocities;
-    NSMutableArray *k3Forces;
-    NSMutableArray *k3Velocities;
-    NSMutableArray *k4Forces;
-    NSMutableArray *k4Velocities;
-    
+    CMTPParticleSystem* s;
+
+    NSMutableArray* originalPositions;
+    NSMutableArray* originalVelocities;
+    NSMutableArray* k1Forces;
+    NSMutableArray* k1Velocities;
+    NSMutableArray* k2Forces;
+    NSMutableArray* k2Velocities;
+    NSMutableArray* k3Forces;
+    NSMutableArray* k3Velocities;
+    NSMutableArray* k4Forces;
+    NSMutableArray* k4Velocities;
 }
 
-- (id)initWithParticleSystem:(CMTPParticleSystem *)aParticleSystem;
+-(id)initWithParticleSystem:(CMTPParticleSystem*)aParticleSystem;
 
 @end
+

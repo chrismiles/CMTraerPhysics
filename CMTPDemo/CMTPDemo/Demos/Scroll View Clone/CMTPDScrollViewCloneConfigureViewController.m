@@ -19,48 +19,43 @@
 
 @implementation CMTPDScrollViewCloneConfigureViewController
 
-@synthesize dragSlider = _dragSlider;
-@synthesize springEqualSwitch = _springEqualSwitch;
-@synthesize springFixedSlider = _springFixedSlider;
-@synthesize springTouchSlider = _springTouchSlider;
+@synthesize dragSlider=_dragSlider;
+@synthesize springEqualSwitch=_springEqualSwitch;
+@synthesize springFixedSlider=_springFixedSlider;
+@synthesize springTouchSlider=_springTouchSlider;
 
-@synthesize onFinishedHandler = _onFinishedHandler;
+@synthesize onFinishedHandler=_onFinishedHandler;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil scrolldrag:(CMTPFloat)scrollDrag springFixedConstant:(CMTPFloat)springFixedConstant springTouchConstant:(CMTPFloat)springTouchConstant
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+-(id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil scrolldrag:(CMTPFloat)scrollDrag springFixedConstant:(CMTPFloat)springFixedConstant springTouchConstant:(CMTPFloat)springTouchConstant {
+    self=[super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-	_scrollDrag = scrollDrag;
-	_springFixedConstant = springFixedConstant;
-	_springTouchConstant = springTouchConstant;
-	
-	if (_springFixedConstant == _springTouchConstant) {
-	    _springEqual = YES;
-	}
-	else {
-	    _springEqual = NO;
-	}
+        _scrollDrag=scrollDrag;
+        _springFixedConstant=springFixedConstant;
+        _springTouchConstant=springTouchConstant;
+        if (_springFixedConstant==_springTouchConstant) {
+            _springEqual=YES;
+        } else {
+            _springEqual=NO;
+        }
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
+-(void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.title = @"Configure Scroll View";
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)];
-    
-    self.dragSlider.value = (float)_scrollDrag;
-    self.springFixedSlider.value = (float)_springFixedConstant;
-    self.springTouchSlider.value = (float)_springTouchConstant;
-    self.springEqualSwitch.on = _springEqual;
+
+    self.title=@"Configure Scroll View";
+
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)];
+
+    self.dragSlider.value=(float)_scrollDrag;
+    self.springFixedSlider.value=(float)_springFixedConstant;
+    self.springTouchSlider.value=(float)_springTouchConstant;
+    self.springEqualSwitch.on=_springEqual;
 }
 
 #if false
-- (void)viewDidUnload
-{
+-(void)viewDidUnload {
     [self setDragSlider:nil];
     [self setSpringEqualSwitch:nil];
     [self setSpringFixedSlider:nil];
@@ -71,30 +66,27 @@
 }
 #endif
 
-- (void)doneAction:(id)sender
-{
+-(void)doneAction:(id)sender {
     if (self.onFinishedHandler) {
-	self.onFinishedHandler();
+        self.onFinishedHandler();
     }
 }
 
-- (IBAction)springEqualValueChanged:(id)sender
-{
-    _springEqual = self.springEqualSwitch.on;
+-(IBAction)springEqualValueChanged:(id)sender {
+    _springEqual=self.springEqualSwitch.on;
 }
 
-- (IBAction)springFixedValueChanged:(id)sender
-{
-    if (_springEqual && self.springTouchSlider.value != self.springFixedSlider.value) {
-	self.springTouchSlider.value = self.springFixedSlider.value;
+-(IBAction)springFixedValueChanged:(id)sender {
+    if (_springEqual&&self.springTouchSlider.value!=self.springFixedSlider.value) {
+        self.springTouchSlider.value=self.springFixedSlider.value;
     }
 }
 
-- (IBAction)springTouchValueChanged:(id)sender
-{
-    if (_springEqual && self.springTouchSlider.value != self.springFixedSlider.value) {
-	self.springFixedSlider.value = self.springTouchSlider.value;
+-(IBAction)springTouchValueChanged:(id)sender {
+    if (_springEqual&&self.springTouchSlider.value!=self.springFixedSlider.value) {
+        self.springFixedSlider.value=self.springTouchSlider.value;
     }
 }
 
 @end
+

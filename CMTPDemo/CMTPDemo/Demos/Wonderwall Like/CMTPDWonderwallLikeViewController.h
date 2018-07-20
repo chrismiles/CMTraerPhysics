@@ -13,10 +13,10 @@
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//  
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -26,20 +26,21 @@
 //  THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+#import "EAGLView.h"
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
-#import "EAGLView.h"
+#import <UIKit/UIKit.h>
 
 @interface CMTPDWonderwallLikeViewController : UIViewController <EAGLViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UILabel *fpsLabel;
-@property (strong, nonatomic) IBOutlet UILabel *fullFrameRateLabel;
-@property (strong, nonatomic) IBOutlet UIView *fullFrameRateToggleView;
-@property (strong, nonatomic) IBOutlet UIView *highlightToggleView;
+@property (strong,nonatomic) IBOutlet UILabel* fpsLabel;
+@property (strong,nonatomic) IBOutlet UILabel* fullFrameRateLabel;
+@property (strong,nonatomic) IBOutlet UIView* fullFrameRateToggleView;
+@property (strong,nonatomic) IBOutlet UIView* highlightToggleView;
 
-- (IBAction)fullFrameRateAction:(id)sender;
-- (IBAction)highlightToggleAction:(id)sender;
+-(IBAction)fullFrameRateAction:(id)sender;
+-(IBAction)highlightToggleAction:(id)sender;
 
 @end
+

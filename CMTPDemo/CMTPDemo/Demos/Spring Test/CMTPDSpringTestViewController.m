@@ -11,10 +11,10 @@
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//  
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,9 +24,8 @@
 //  THE SOFTWARE.
 //
 
-#import "CMTPDSpringTestViewController.h"
 #import "CMTPDSpringTestView.h"
-
+#import "CMTPDSpringTestViewController.h"
 
 @implementation CMTPDSpringTestViewController
 
@@ -34,82 +33,72 @@
 @synthesize fpsLabel;
 @synthesize smoothToggleView;
 
-
 #pragma mark - UIControl actions
 
-- (IBAction)accelerometerToggleAction:(id)sender
-{
-    UISwitch *aSwitch = (UISwitch *)sender;
-    [(CMTPDSpringTestView *)self.view setGravityByDeviceMotionEnabled:aSwitch.on];
+-(IBAction)accelerometerToggleAction:(id)sender {
+    UISwitch* aSwitch=(UISwitch*)sender;
+    [(CMTPDSpringTestView*)self.view setGravityByDeviceMotionEnabled:aSwitch.on];
 }
 
-- (IBAction)smoothToggleAction:(id)sender
-{
-    UISwitch *aSwitch = (UISwitch *)sender;
-    [(CMTPDSpringTestView *)self.view setSmoothed:aSwitch.on];
+-(IBAction)smoothToggleAction:(id)sender {
+    UISwitch* aSwitch=(UISwitch*)sender;
+    [(CMTPDSpringTestView*)self.view setSmoothed:aSwitch.on];
 }
-
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
-{
+-(void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.title = @"Spring Test";
-    
-    NSMutableArray *toolbarItems = [NSMutableArray array];
+
+    self.title=@"Spring Test";
+
+    NSMutableArray* toolbarItems=[NSMutableArray array];
     [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.smoothToggleView]];
     [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
     [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel]];
     [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-    if ([(CMTPDSpringTestView *)self.view isDeviceMotionAvailable]) {
-	[toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.accelerometerToggleView]];
+    if ([(CMTPDSpringTestView*)self.view isDeviceMotionAvailable]) {
+        [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.accelerometerToggleView]];
     }
-    
-    self.toolbarItems = toolbarItems;
+    self.toolbarItems=toolbarItems;
     [self.navigationController setToolbarHidden:NO animated:YES];
-    
+
     //    self.freeFloatingTestView.fpsLabel = self.fpsLabel;
-    [(CMTPDSpringTestView *)self.view setFpsLabel:self.fpsLabel];
+    [(CMTPDSpringTestView*)self.view setFpsLabel:self.fpsLabel];
 }
 
 #if false
-- (void)viewDidUnload
-{
+-(void)viewDidUnload {
     [self setAccelerometerToggleView:nil];
     [self setFpsLabel:nil];
     [self setSmoothToggleView:nil];
-    
+
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 #endif
 
-- (void)viewDidAppear:(BOOL)animated
-{
+-(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    [(CMTPDSpringTestView *)self.view startAnimation];
+
+    [(CMTPDSpringTestView*)self.view startAnimation];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+-(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
-    [(CMTPDSpringTestView *)self.view stopAnimation];
+
+    [(CMTPDSpringTestView*)self.view stopAnimation];
 }
 
 #pragma mark - Object lifecycle
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+-(id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil {
+    self=[super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-	
     }
     return self;
 }
 
 @end
+

@@ -11,10 +11,10 @@
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//  
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,9 +30,8 @@
 @synthesize fpsLabel;
 @synthesize numParticlesLabel;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+-(id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil {
+    self=[super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
@@ -41,30 +40,28 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
-{
+-(void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.title = @"Free Floating Test";
-    
-    NSMutableArray *toolbarItems = [NSMutableArray array];
+
+    self.title=@"Free Floating Test";
+
+    NSMutableArray* toolbarItems=[NSMutableArray array];
     [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
     [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel]];
     [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
     [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.numParticlesLabel]];
     [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-    
-    self.toolbarItems = toolbarItems;
+
+    self.toolbarItems=toolbarItems;
     [self.navigationController setToolbarHidden:NO animated:YES];
-    
-    [(CMTPDFreeFloatingTestView *)self.view setFpsLabel:self.fpsLabel];
+
+    [(CMTPDFreeFloatingTestView*)self.view setFpsLabel:self.fpsLabel];
 }
 
 #if false
-- (void)viewDidUnload
-{
+-(void)viewDidUnload {
     [self setFpsLabel:nil];
-    
+
     [self setNumParticlesLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -72,20 +69,19 @@
 }
 #endif
 
-- (void)viewDidAppear:(BOOL)animated
-{
+-(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    self.numParticlesLabel.text = [NSString stringWithFormat:@"%lu particles", (unsigned long)[(CMTPDFreeFloatingTestView *)self.view particleCount]];
-    
-    [(CMTPDFreeFloatingTestView *)self.view startAnimation];
+
+    self.numParticlesLabel.text=[NSString stringWithFormat:@"%lu particles",(unsigned long)[(CMTPDFreeFloatingTestView*)self.view particleCount]];
+
+    [(CMTPDFreeFloatingTestView*)self.view startAnimation];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+-(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
-    [(CMTPDFreeFloatingTestView *)self.view stopAnimation];
+
+    [(CMTPDFreeFloatingTestView*)self.view stopAnimation];
 }
 
 @end
+

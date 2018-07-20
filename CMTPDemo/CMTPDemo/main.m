@@ -10,9 +10,9 @@
 
 #import "CMTPDAppDelegate.h"
 
-int main(int argc, char *argv[])
-{
-	@autoreleasepool {
-	    return UIApplicationMain(argc, argv, nil, NSStringFromClass([CMTPDAppDelegate class]));
-	}
+int main(int argc,char* argv[]){
+    @autoreleasepool {
+        return UIApplicationMain(argc,argv,nil,NSStringFromClass([CMTPDAppDelegate class]));
+    }
 }
+

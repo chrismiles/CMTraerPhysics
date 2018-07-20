@@ -6,12 +6,13 @@
 //  Copyright (c) 2012 Chris Miles. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "CMScrollView.h"
+#import <UIKit/UIKit.h>
 
 @interface CMTPDScrollViewCloneViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UIView *contentView;
-@property (strong, nonatomic) IBOutlet CMScrollView *scrollView;
+@property (strong,nonatomic) IBOutlet UIView* contentView;
+@property (strong,nonatomic) IBOutlet CMScrollView* scrollView;
 
 @end
+

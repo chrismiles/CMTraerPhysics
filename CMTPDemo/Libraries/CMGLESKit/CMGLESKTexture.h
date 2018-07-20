@@ -11,10 +11,10 @@
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//  
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -34,20 +34,20 @@ typedef struct {
     GLfloat y2;
 } CMGLESKTexCoord;
 
-
 @interface CMGLESKTexture : NSObject
 
-@property (nonatomic, assign)	GLuint	glTextureName;
-@property (nonatomic, assign)	CGSize	size;
+@property (nonatomic,assign)   GLuint glTextureName;
+@property (nonatomic,assign)   CGSize size;
 
-+ (id)textureNamed:(NSString *)imageName;
-+ (id)textureNamed:(NSString *)imageName invertYAxis:(BOOL)invertYAxis;
++(id)textureNamed:(NSString*)imageName;
++(id)textureNamed:(NSString*)imageName invertYAxis:(BOOL)invertYAxis;
 
-- (id)initWithImage:(UIImage *)image invertYAxis:(BOOL)invertYAxis;
-- (BOOL)setupTextureFromImage:(UIImage *)image;
-- (BOOL)setupTextureFromImage:(UIImage *)image invertYAxis:(BOOL)invertYAxis;
+-(id)initWithImage:(UIImage*)image invertYAxis:(BOOL)invertYAxis;
+-(BOOL)setupTextureFromImage:(UIImage*)image;
+-(BOOL)setupTextureFromImage:(UIImage*)image invertYAxis:(BOOL)invertYAxis;
 
-- (CMGLESKTexCoord)croppedTextureCoord:(CGRect)subRect;
-- (void)generateMipmap;
+-(CMGLESKTexCoord)croppedTextureCoord:(CGRect)subRect;
+-(void)generateMipmap;
 
 @end
+
