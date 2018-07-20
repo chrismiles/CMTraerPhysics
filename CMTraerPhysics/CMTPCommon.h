@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 //
 
-typedef float CMTPFloat;
+typedef CGFloat CMTPFloat;
 
 
 typedef struct {
@@ -53,7 +53,7 @@ static inline CMTPVector3D CMTPVector3DScaleBy(CMTPVector3D vector, CMTPFloat fa
 
 static inline CMTPFloat CMTPVector3DMagnitude(CMTPVector3D vector)
 {
-    return sqrtf((vector.x * vector.x) + (vector.y * vector.y) + (vector.z * vector.z)); 
+    return sqrt((vector.x * vector.x) + (vector.y * vector.y) + (vector.z * vector.z)); 
 }
 
 static inline void CMTPVector3DNormalize(CMTPVector3D *vector)

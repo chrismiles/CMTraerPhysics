@@ -121,7 +121,7 @@
 - (void)layoutSublayers
 {
     if (!CGSizeEqualToSize(self.bounds.size, lastSize)) {
-        CGPoint anchorPosition = CGPointMake(roundf(CGRectGetMidX(self.bounds)), roundf(CGRectGetMidY(self.bounds)));
+        CGPoint anchorPosition = CGPointMake(round(CGRectGetMidX(self.bounds)), round(CGRectGetMidY(self.bounds)));
         anchorLayer.position = anchorPosition;
         particleLayer.position = anchorPosition;
         
@@ -145,7 +145,7 @@
     self = [super init];
     if (self) {
         lastSize = self.bounds.size;
-        CGPoint anchorPosition = CGPointMake(roundf(CGRectGetMidX(self.bounds)), roundf(CGRectGetMidY(self.bounds)));
+        CGPoint anchorPosition = CGPointMake(round(CGRectGetMidX(self.bounds)), round(CGRectGetMidY(self.bounds)));
         
         /* Init Physics */
         CMTPVector3D gravity = CMTPVector3DMake(0.0f, 0.0f, 0.0f);

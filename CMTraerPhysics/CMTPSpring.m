@@ -89,7 +89,7 @@
 	CMTPFloat a2bY = particleA.position.y - particleB.position.y;
 	CMTPFloat a2bZ = particleA.position.z - particleB.position.z;
 	
-	CMTPFloat a2bDistance = sqrtf(a2bX*a2bX + a2bY*a2bY + a2bZ*a2bZ);
+	CMTPFloat a2bDistance = sqrt(a2bX*a2bX + a2bY*a2bY + a2bZ*a2bZ);
 	
 	if (a2bDistance == 0.0f) {
 	    

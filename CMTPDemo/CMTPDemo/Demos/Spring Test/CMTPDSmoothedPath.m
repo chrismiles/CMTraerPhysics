@@ -27,6 +27,7 @@
 //
 
 #import "CMTPDSmoothedPath.h"
+#import "CMTPCommon.h"
 
 #define POINT(_INDEX_) [(NSValue *)[points objectAtIndex:_INDEX_] CGPointValue]
 #define VALUE(_INDEX_) [NSValue valueWithCGPoint:points[_INDEX_]]
@@ -97,9 +98,9 @@ UIBezierPath *smoothedPath(UIBezierPath *bpath, int granularity)
         // now add n points starting at p1 + dx/dy up until p2 using Catmull-Rom splines
         for (int i = 1; i < granularity; i++)
         {
-            float t = (float) i * (1.0f / (float) granularity);
-            float tt = t * t;
-            float ttt = tt * t;
+            CMTPFloat t = (CMTPFloat) i * (1.0f / (CMTPFloat) granularity);
+            CMTPFloat tt = t * t;
+            CMTPFloat ttt = tt * t;
             
             CGPoint pi; // intermediate point
             pi.x = 0.5f * (2.0f*p1.x+(p2.x-p0.x)*t + (2.0f*p0.x-5.0f*p1.x+4.0f*p2.x-p3.x)*tt + (3.0f*p1.x-p0.x-3.0f*p2.x+p3.x)*ttt);

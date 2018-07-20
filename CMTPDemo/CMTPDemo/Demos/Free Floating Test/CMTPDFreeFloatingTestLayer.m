@@ -31,17 +31,17 @@
 #import "CMTPDFreeFloatingTestSubLayer.h"
 
 
-/* Return a random float between 0.0 and 1.0 */
-static float randomClamp()
+/* Return a random CMTPFloat between 0.0 and 1.0 */
+static CMTPFloat randomClamp()
 {
-    return (float)(arc4random() % ((unsigned)RAND_MAX + 1)) / (float)((unsigned)RAND_MAX + 1);
+    return (CMTPFloat)(arc4random() % ((unsigned)RAND_MAX + 1)) / (CMTPFloat)((unsigned)RAND_MAX + 1);
 }
 
 static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
 {
     CGFloat dx = prevPosition.x - userPosition.x;
     CGFloat dy = prevPosition.y - userPosition.y;
-    return sqrtf(dx*dx + dy*dy);
+    return sqrt(dx*dx + dy*dy);
 }
 
 
@@ -57,7 +57,7 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
     /* Physics */
     CMTPParticle *attractor;
     NSMutableArray *attractions;
-    float attractorStrengthFactor;
+    CMTPFloat attractorStrengthFactor;
     NSMutableArray *particles;
     CMTPParticleSystem *s;
     
@@ -136,8 +136,8 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
     }
     
     CGFloat particleSize;
-    float attractorStrength;
-    float attractorMinDistance;
+    CMTPFloat attractorStrength;
+    CMTPFloat attractorMinDistance;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 	attractorStrength = 100.0f;
@@ -155,8 +155,8 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
     attractor = [s makeParticleWithMass:0.8f position:CMTPVector3DMake(0, 0, 0)];
     
     for (unsigned int i = 0; i<numParticles; i++) {
-	float randx = randomClamp() * (CGRectGetWidth(self.bounds)-1);
-	float randy = randomClamp() * (CGRectGetHeight(self.bounds)-1);
+	CMTPFloat randx = randomClamp() * (CGRectGetWidth(self.bounds)-1);
+	CMTPFloat randy = randomClamp() * (CGRectGetHeight(self.bounds)-1);
 	
 	CMTPDFreeFloatingTestSubLayer *subLayer = [[CMTPDFreeFloatingTestSubLayer alloc] init];
 	subLayer.frame = CGRectMake(0.0f, 0.0f, particleSize, particleSize);
@@ -189,20 +189,20 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
     
     attractor.position = CMTPVector3DMake(userPosition.x, userPosition.y, 0.0f);
     
-    float width = CGRectGetWidth(self.bounds);
-    float height = CGRectGetHeight(self.bounds);
+    CMTPFloat width = CGRectGetWidth(self.bounds);
+    CMTPFloat height = CGRectGetHeight(self.bounds);
     
     for (unsigned int i=0; i < numParticles; i++) {
 	CMTPParticle *particle = [particles objectAtIndex:i];
-	float x = fmodf(width + particle.position.x, width);
-	float y = fmodf(height + particle.position.y, height);
+	CMTPFloat x = fmod(width + particle.position.x, width);
+	CMTPFloat y = fmod(height + particle.position.y, height);
 	particle.position = CMTPVector3DMake(x, y, 0);
 	
 	CMTPDFreeFloatingTestSubLayer *sublayer = particle.context;
 	sublayer.position = CGPointMake(x, y);
 	
 	if (prevPosition.x >= 0.0f) {
-	    float distance = CGPointDistance(userPosition, prevPosition);
+	    CMTPFloat distance = CGPointDistance(userPosition, prevPosition);
 	    CMTPAttraction *attraction = [attractions objectAtIndex:i];
 	    [attraction setMinDistance:distance*1.2f];
 	    [attraction setStrength:-(10 + (attractorStrengthFactor * (distance*distance)))];

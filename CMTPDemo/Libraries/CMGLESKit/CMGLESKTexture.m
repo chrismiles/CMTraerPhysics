@@ -99,10 +99,10 @@
 - (CMGLESKTexCoord)croppedTextureCoord:(CGRect)subRect
 {
     CMGLESKTexCoord texCoord;
-    texCoord.x1 = CGRectGetMinX(subRect) / size.width;
-    texCoord.y1 = CGRectGetMinY(subRect) / size.height;
-    texCoord.x2 = CGRectGetMaxX(subRect) / size.width;
-    texCoord.y2 = CGRectGetMaxY(subRect) / size.height;
+    texCoord.x1 = (GLfloat)(CGRectGetMinX(subRect) / size.width);
+    texCoord.y1 = (GLfloat)(CGRectGetMinY(subRect) / size.height);
+    texCoord.x2 = (GLfloat)(CGRectGetMaxX(subRect) / size.width);
+    texCoord.y2 = (GLfloat)(CGRectGetMaxY(subRect) / size.height);
     return texCoord;
 }
 

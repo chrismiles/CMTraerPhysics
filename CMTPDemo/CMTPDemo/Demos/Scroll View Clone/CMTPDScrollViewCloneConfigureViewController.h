@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CMTPCommon.h"
 
 @interface CMTPDScrollViewCloneConfigureViewController : UIViewController
 
@@ -17,7 +18,7 @@
 @property (strong, nonatomic) IBOutlet UISlider *springFixedSlider;
 @property (strong, nonatomic) IBOutlet UISlider *springTouchSlider;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil scrolldrag:(float)scrollDrag springFixedConstant:(float)springFixedConstant springTouchConstant:(float)springTouchConstant;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil scrolldrag:(CMTPFloat)scrollDrag springFixedConstant:(CMTPFloat)springFixedConstant springTouchConstant:(CMTPFloat)springTouchConstant;
 
 - (IBAction)springEqualValueChanged:(id)sender;
 - (IBAction)springFixedValueChanged:(id)sender;

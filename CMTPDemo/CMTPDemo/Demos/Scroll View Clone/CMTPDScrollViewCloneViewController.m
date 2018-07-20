@@ -13,7 +13,7 @@
 
 #define kDistanceLabelOffset 100.0f
 
-float randomClamp(void);
+CMTPFloat randomClamp(void);
 
 
 @interface CMTPDScrollViewCloneViewController ()
@@ -119,9 +119,9 @@ float randomClamp(void);
 @end
 
 
-/* Return a random float between 0.0 and 1.0 */
-float randomClamp()
+/* Return a random CMTPFloat between 0.0 and 1.0 */
+CMTPFloat randomClamp()
 {
-    return (float)(arc4random() % ((unsigned)RAND_MAX + 1)) / (float)((unsigned)RAND_MAX + 1);
+    return (CMTPFloat)(arc4random() % ((unsigned)RAND_MAX + 1)) / (CMTPFloat)((unsigned)RAND_MAX + 1);
 }
 

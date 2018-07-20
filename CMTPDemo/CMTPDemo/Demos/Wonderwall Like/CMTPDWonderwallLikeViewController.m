@@ -54,8 +54,8 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
     BOOL animating;
     BOOL fullFrameRate;
     
-    float contentScale;
-    float frameHeight, frameWidth;
+    CMTPFloat contentScale;
+    CMTPFloat frameHeight, frameWidth;
     NSInteger animationFrameInterval;
     
     int textureCoordAttrib;
@@ -85,11 +85,11 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
     
     NSUInteger num_cols;
     NSUInteger num_rows;
-    float cell_width;
-    float cell_height;
+    CMTPFloat cell_width;
+    CMTPFloat cell_height;
     
-    float sx;
-    float sy;
+    CMTPFloat sx;
+    CMTPFloat sy;
     
     NSUInteger subdivisions;
 }
@@ -173,7 +173,7 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
 
 - (void)enableFullFrameRate
 {
-    self.fullFrameRateLabel.center = CGPointMake(roundf(CGRectGetMidX(self.view.bounds)), roundf(CGRectGetMidY(self.view.bounds)));
+    self.fullFrameRateLabel.center = CGPointMake(round(CGRectGetMidX(self.view.bounds)), round(CGRectGetMidY(self.view.bounds)));
     [self.view addSubview:self.fullFrameRateLabel];
     fullFrameRate = YES;
 }
@@ -213,8 +213,8 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
     num_cols = 5;
     num_rows = 7;
     
-    float attractionStrength;
-    float attractionMinDistance;
+    CMTPFloat attractionStrength;
+    CMTPFloat attractionMinDistance;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 	// iPad
 	attractionStrength = -56800;
@@ -410,22 +410,22 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
 		CMTPParticle *pFreei1j1 = [particlesFreeRow1 objectAtIndex:j+1];// bottom / right
 		
 		for (NSUInteger m=0; m<subdivisions; m++) {
-		    float y_part = (float)m / (float)subdivisions;
-		    float y_part1 = (float)(m+1) / (float)subdivisions;
+		    CMTPFloat y_part = (CMTPFloat)m / (CMTPFloat)subdivisions;
+		    CMTPFloat y_part1 = (CMTPFloat)(m+1) / (CMTPFloat)subdivisions;
 		    
-		    float x_lhs = pFreeij.position.x + y_part*(pFreei1j.position.x - pFreeij.position.x);
-		    float x_lhs1 = pFreeij.position.x + y_part1*(pFreei1j.position.x - pFreeij.position.x);
-		    float x_rhs = pFreeij1.position.x + y_part*(pFreei1j1.position.x - pFreeij1.position.x);
-		    float x_rhs1 = pFreeij1.position.x + y_part1*(pFreei1j1.position.x - pFreeij1.position.x);
+		    CMTPFloat x_lhs = pFreeij.position.x + y_part*(pFreei1j.position.x - pFreeij.position.x);
+		    CMTPFloat x_lhs1 = pFreeij.position.x + y_part1*(pFreei1j.position.x - pFreeij.position.x);
+		    CMTPFloat x_rhs = pFreeij1.position.x + y_part*(pFreei1j1.position.x - pFreeij1.position.x);
+		    CMTPFloat x_rhs1 = pFreeij1.position.x + y_part1*(pFreei1j1.position.x - pFreeij1.position.x);
 		    
 		    for (NSUInteger n=0; n<subdivisions; n++) {
-			float x_part = (float)n / (float)subdivisions;
-			float x_part1 = (float)(n+1) / (float)subdivisions;
+			CMTPFloat x_part = (CMTPFloat)n / (CMTPFloat)subdivisions;
+			CMTPFloat x_part1 = (CMTPFloat)(n+1) / (CMTPFloat)subdivisions;
 			
-			float y_top = pFreeij.position.y + x_part*(pFreeij1.position.y - pFreeij.position.y);
-			float y_top1 = pFreeij.position.y + x_part1*(pFreeij1.position.y - pFreeij.position.y);
-			float y_bot = pFreei1j.position.y + x_part*(pFreei1j1.position.y - pFreei1j.position.y);
-			float y_bot1 = pFreei1j.position.y + x_part1*(pFreei1j1.position.y - pFreei1j.position.y);
+			CMTPFloat y_top = pFreeij.position.y + x_part*(pFreeij1.position.y - pFreeij.position.y);
+			CMTPFloat y_top1 = pFreeij.position.y + x_part1*(pFreeij1.position.y - pFreeij.position.y);
+			CMTPFloat y_bot = pFreei1j.position.y + x_part*(pFreei1j1.position.y - pFreei1j.position.y);
+			CMTPFloat y_bot1 = pFreei1j.position.y + x_part1*(pFreei1j1.position.y - pFreei1j.position.y);
 			
 			CGPoint p_tl = CGPointMake((x_lhs + x_part*(x_rhs - x_lhs)) * contentScale,
 						   (y_top + y_part*(y_bot - y_top)) * contentScale);
@@ -442,41 +442,41 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
 			CGPoint t_tr = CGPointMake(texCoord.x1 + x_part1*(texCoord.x2 - texCoord.x1), texCoord.y1 + y_part*(texCoord.y2 - texCoord.y1));
 			
 			// Top left
-			vertices[vIndex++] = p_tl.x;
-			vertices[vIndex++] = p_tl.y;
-			texCoords[tIndex++] = t_tl.x;
-			texCoords[tIndex++] = t_tl.y;
+			vertices[vIndex++] = (GLfloat)p_tl.x;
+			vertices[vIndex++] = (GLfloat)p_tl.y;
+			texCoords[tIndex++] = (GLfloat)t_tl.x;
+			texCoords[tIndex++] = (GLfloat)t_tl.y;
 
 			// Bottom left
-			vertices[vIndex++] = p_bl.x;
-			vertices[vIndex++] = p_bl.y;
-			texCoords[tIndex++] = t_bl.x;
-			texCoords[tIndex++] = t_bl.y;
+			vertices[vIndex++] = (GLfloat)p_bl.x;
+			vertices[vIndex++] = (GLfloat)p_bl.y;
+			texCoords[tIndex++] = (GLfloat)t_bl.x;
+			texCoords[tIndex++] = (GLfloat)t_bl.y;
 			
 			// Bottom right
-			vertices[vIndex++] = p_br.x;
-			vertices[vIndex++] = p_br.y;
-			texCoords[tIndex++] = t_br.x;
-			texCoords[tIndex++] = t_br.y;
+			vertices[vIndex++] = (GLfloat)p_br.x;
+			vertices[vIndex++] = (GLfloat)p_br.y;
+			texCoords[tIndex++] = (GLfloat)t_br.x;
+			texCoords[tIndex++] = (GLfloat)t_br.y;
 			
 			
 			// Top left
-			vertices[vIndex++] = p_tl.x;
-			vertices[vIndex++] = p_tl.y;
-			texCoords[tIndex++] = t_tl.x;
-			texCoords[tIndex++] = t_tl.y;
+			vertices[vIndex++] = (GLfloat)p_tl.x;
+			vertices[vIndex++] = (GLfloat)p_tl.y;
+			texCoords[tIndex++] = (GLfloat)t_tl.x;
+			texCoords[tIndex++] = (GLfloat)t_tl.y;
 			
 			// Bottom right
-			vertices[vIndex++] = p_br.x;
-			vertices[vIndex++] = p_br.y;
-			texCoords[tIndex++] = t_br.x;
-			texCoords[tIndex++] = t_br.y;
+			vertices[vIndex++] = (GLfloat)p_br.x;
+			vertices[vIndex++] = (GLfloat)p_br.y;
+			texCoords[tIndex++] = (GLfloat)t_br.x;
+			texCoords[tIndex++] = (GLfloat)t_br.y;
 			
 			// Top right
-			vertices[vIndex++] = p_tr.x;
-			vertices[vIndex++] = p_tr.y;
-			texCoords[tIndex++] = t_tr.x;
-			texCoords[tIndex++] = t_tr.y;
+			vertices[vIndex++] = (GLfloat)p_tr.x;
+			vertices[vIndex++] = (GLfloat)p_tr.y;
+			texCoords[tIndex++] = (GLfloat)t_tr.x;
+			texCoords[tIndex++] = (GLfloat)t_tr.y;
 		    }
 		}
 	    }
@@ -495,7 +495,7 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
 	
         glVertexAttribPointer((GLuint)vertexAttrib, 2, GL_FLOAT, GL_FALSE, stride, vertices);
 	glVertexAttribPointer((GLuint)textureCoordAttrib, 2, GL_FLOAT, GL_FALSE, stride, texCoords);
-        glDrawArrays(GL_TRIANGLES, 0, vIndex/2);
+        glDrawArrays(GL_TRIANGLES, 0, (GLsizei)(vIndex/2));
         
         glDisableVertexAttribArray((GLuint)vertexAttrib);
 	glDisableVertexAttribArray((GLuint)textureCoordAttrib); // texture coords
@@ -512,38 +512,38 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
         glEnableVertexAttribArray((GLuint)vertexAttrib); // vertex coords
         ASSERT_GL_OK();
 	
-	vertices[vIndex++] = highlightCell.p1.x * contentScale;
-	vertices[vIndex++] = highlightCell.p1.y * contentScale;
-	vertices[vIndex++] = highlightCell.p2.x * contentScale;
-	vertices[vIndex++] = highlightCell.p2.y * contentScale;
+	vertices[vIndex++] = (GLfloat)(highlightCell.p1.x * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p1.y * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p2.x * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p2.y * contentScale);
 
-	vertices[vIndex++] = highlightCell.p2.x * contentScale;
-	vertices[vIndex++] = highlightCell.p2.y * contentScale;
-	vertices[vIndex++] = highlightCell.p3.x * contentScale;
-	vertices[vIndex++] = highlightCell.p3.y * contentScale;
+	vertices[vIndex++] = (GLfloat)(highlightCell.p2.x * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p2.y * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p3.x * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p3.y * contentScale);
 
-	vertices[vIndex++] = highlightCell.p3.x * contentScale;
-	vertices[vIndex++] = highlightCell.p3.y * contentScale;
-	vertices[vIndex++] = highlightCell.p0.x * contentScale;
-	vertices[vIndex++] = highlightCell.p0.y * contentScale;
+	vertices[vIndex++] = (GLfloat)(highlightCell.p3.x * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p3.y * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p0.x * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p0.y * contentScale);
 
-	vertices[vIndex++] = highlightCell.p0.x * contentScale;
-	vertices[vIndex++] = highlightCell.p0.y * contentScale;
-	vertices[vIndex++] = highlightCell.p1.x * contentScale;
-	vertices[vIndex++] = highlightCell.p1.y * contentScale;
+	vertices[vIndex++] = (GLfloat)(highlightCell.p0.x * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p0.y * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p1.x * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p1.y * contentScale);
 
-	vertices[vIndex++] = highlightCell.p1.x * contentScale;
-	vertices[vIndex++] = highlightCell.p1.y * contentScale;
-	vertices[vIndex++] = highlightCell.p3.x * contentScale;
-	vertices[vIndex++] = highlightCell.p3.y * contentScale;
+	vertices[vIndex++] = (GLfloat)(highlightCell.p1.x * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p1.y * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p3.x * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p3.y * contentScale);
 
-	vertices[vIndex++] = highlightCell.p0.x * contentScale;
-	vertices[vIndex++] = highlightCell.p0.y * contentScale;
-	vertices[vIndex++] = highlightCell.p2.x * contentScale;
-	vertices[vIndex++] = highlightCell.p2.y * contentScale;
+	vertices[vIndex++] = (GLfloat)(highlightCell.p0.x * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p0.y * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p2.x * contentScale);
+	vertices[vIndex++] = (GLfloat)(highlightCell.p2.y * contentScale);
 	
         glVertexAttribPointer((GLuint)vertexAttrib, 2, GL_FLOAT, GL_FALSE, stride, vertices);
-        glDrawArrays(GL_LINES, 0, vIndex/2);
+        glDrawArrays((GLsizei)GL_LINES, 0, (GLsizei)(vIndex/2));
         
         glDisableVertexAttribArray((GLuint)vertexAttrib);
     }
@@ -607,7 +607,7 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4);
     frameHeight = framebufferSize.height;
     contentScale = eaglView.contentScaleFactor;
     
-    orthoMatrix(projectionMatrix, 0.0f, frameWidth, frameHeight, 0.0f, -1.0f, 1.0f); // inverted Y
+    orthoMatrix(projectionMatrix, 0.0f, (float)frameWidth, (float)frameHeight, 0.0f, -1.0f, 1.0f); // inverted Y
 }
 
 
@@ -743,16 +743,16 @@ doesIntersectOnBothSegments(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4)
     // based on an algorithm by Paul Bourke
     // http://local.wasp.uwa.edu.au/~pbourke/geometry/lineline2d/
     
-    float denom = (p4.y - p3.y)*(p2.x - p1.x) - (p4.x - p3.x)*(p2.y - p1.y);
-    float num_a = (p4.x - p3.x)*(p1.y - p3.y) - (p4.y - p3.y)*(p1.x - p3.x);
-    float num_b = (p2.x - p1.x)*(p1.y - p3.y) - (p2.y - p1.y)*(p1.x - p3.x);
+    CMTPFloat denom = (p4.y - p3.y)*(p2.x - p1.x) - (p4.x - p3.x)*(p2.y - p1.y);
+    CMTPFloat num_a = (p4.x - p3.x)*(p1.y - p3.y) - (p4.y - p3.y)*(p1.x - p3.x);
+    CMTPFloat num_b = (p2.x - p1.x)*(p1.y - p3.y) - (p2.y - p1.y)*(p1.x - p3.x);
     
     if (denom == 0) {
 	return NO; //lines are parallel
     }
     else {
-	float ua = num_a / denom;
-	float ub =  num_b / denom;
+	CMTPFloat ua = num_a / denom;
+	CMTPFloat ub =  num_b / denom;
 	
 	if (ua == denom && ub == denom) {
 	    return NO; //lines are coincident

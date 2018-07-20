@@ -9,10 +9,10 @@
 #import "CMTPDScrollViewCloneConfigureViewController.h"
 
 @interface CMTPDScrollViewCloneConfigureViewController () {
-    float _scrollDrag;
+    CMTPFloat _scrollDrag;
     BOOL _springEqual;
-    float _springFixedConstant;
-    float _springTouchConstant;
+    CMTPFloat _springFixedConstant;
+    CMTPFloat _springTouchConstant;
 }
 
 @end
@@ -26,7 +26,7 @@
 
 @synthesize onFinishedHandler = _onFinishedHandler;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil scrolldrag:(float)scrollDrag springFixedConstant:(float)springFixedConstant springTouchConstant:(float)springTouchConstant
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil scrolldrag:(CMTPFloat)scrollDrag springFixedConstant:(CMTPFloat)springFixedConstant springTouchConstant:(CMTPFloat)springTouchConstant
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -52,9 +52,9 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)];
     
-    self.dragSlider.value = _scrollDrag;
-    self.springFixedSlider.value = _springFixedConstant;
-    self.springTouchSlider.value = _springTouchConstant;
+    self.dragSlider.value = (float)_scrollDrag;
+    self.springFixedSlider.value = (float)_springFixedConstant;
+    self.springTouchSlider.value = (float)_springTouchConstant;
     self.springEqualSwitch.on = _springEqual;
 }
 

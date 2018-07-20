@@ -268,7 +268,7 @@ static inline void Matrix3DSetZRotationUsingDegrees(Matrix3D matrix, GLfloat deg
 
 static inline void Matrix3DSetRotationByRadians(Matrix3D matrix, GLfloat angle, GLfloat x, GLfloat y, GLfloat z)
 {
-    GLfloat mag = sqrtf((x*x) + (y*y) + (z*z));
+    GLfloat mag = (GLfloat)sqrt((x*x) + (y*y) + (z*z));
     if (mag == 0.0)
     {
         x = 1.0;

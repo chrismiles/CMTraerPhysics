@@ -36,7 +36,7 @@
 #import "CMGLESKMatrix3D.h"
 
 
-static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int num_sections)
+static GLfloat *circle_vertices(unsigned int *count, CMTPFloat radius, unsigned int num_sections)
 {
     GLfloat *vertices;
     unsigned int index = 0;
@@ -48,8 +48,8 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
     vertices[index++] = 0.0f;
     
     for (NSUInteger i=0; i<num_sections+1; i++) {
-	vertices[index++] = radius * cosf(i * 2 * (float)M_PI / num_sections);
-	vertices[index++] = radius * sinf(i * 2 * (float)M_PI / num_sections);
+	vertices[index++] = (GLfloat)(radius * cos(i * 2 * M_PI / num_sections));
+	vertices[index++] = (GLfloat)(radius * sin(i * 2 * M_PI / num_sections));
     }
     
     ZAssert(index <= *count, @"vertices array was too small");
@@ -64,8 +64,8 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
     BOOL showGrid;
     BOOL showImage;
     
-    float contentScale;
-    float frameHeight, frameWidth;
+    CMTPFloat contentScale;
+    CMTPFloat frameHeight, frameWidth;
     NSInteger animationFrameInterval;
     
     NSUInteger grabbedHandle;
@@ -80,7 +80,7 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
     
     GLfloat projectionMatrix[16];
 
-    float gravityScale;
+    CMTPFloat gravityScale;
     NSUInteger gridSize;
     NSUInteger numGridVertices;
     GLfloat *texCoords;
@@ -126,7 +126,7 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
 
 - (void)enableFullFrameRate
 {
-    self.fullFrameRateLabel.center = CGPointMake(roundf(CGRectGetMidX(self.view.bounds)), roundf(CGRectGetMidY(self.view.bounds)));
+    self.fullFrameRateLabel.center = CGPointMake(round(CGRectGetMidX(self.view.bounds)), round(CGRectGetMidY(self.view.bounds)));
     [self.view addSubview:self.fullFrameRateLabel];
     fullFrameRate = YES;
 }
@@ -209,7 +209,7 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
 
     if (motionManager.isDeviceMotionActive) {
         CMAcceleration gravity = motionManager.deviceMotion.gravity;
-        CMTPVector3D gravityVector = CMTPVector3DMake((float)(gravity.x)*gravityScale, (float)(-gravity.y)*gravityScale, 0.0f);
+        CMTPVector3D gravityVector = CMTPVector3DMake((CMTPFloat)(gravity.x)*gravityScale, (CMTPFloat)(-gravity.y)*gravityScale, 0.0f);
         s.gravity = gravityVector;
     }
     
@@ -245,12 +245,12 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
 	glEnableVertexAttribArray(vertexAttrib);
 	glVertexAttribPointer(vertexAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);
 	
-	Matrix3DSetTranslation(translationMatrix, handle1.x*contentScale, handle1.y*contentScale, 0.0f);
+	Matrix3DSetTranslation(translationMatrix, (GLfloat)(handle1.x*contentScale), (GLfloat)(handle1.y*contentScale), 0.0f);
 	Matrix3DMultiply(projectionMatrix, translationMatrix, mvpMatrix);
 	glUniformMatrix4fv(uniformMVP, 1, GL_FALSE, mvpMatrix);
 	glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei)handleCount);
 	
-	Matrix3DSetTranslation(translationMatrix, handle2.x*contentScale, handle2.y*contentScale, 0.0f);
+	Matrix3DSetTranslation(translationMatrix, (GLfloat)(handle2.x*contentScale), (GLfloat)(handle2.y*contentScale), 0.0f);
 	Matrix3DMultiply(projectionMatrix, translationMatrix, mvpMatrix);
 	glUniformMatrix4fv(uniformMVP, 1, GL_FALSE, mvpMatrix);
 	glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei)handleCount);
@@ -276,23 +276,23 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
 		CMTPParticle *pTopLeft =  [particles objectAtIndex:(gridSize-1-j)*gridSize+i];
 		CMTPParticle *pTopRight = [particles objectAtIndex:(gridSize-1-j)*gridSize+i+1];
 		
-		texVertices[vIndex++] = pBotLeft.position.x * contentScale;
-		texVertices[vIndex++] = pBotLeft.position.y * contentScale;
+		texVertices[vIndex++] = (GLfloat)(pBotLeft.position.x * contentScale);
+		texVertices[vIndex++] = (GLfloat)(pBotLeft.position.y * contentScale);
 		
-		texVertices[vIndex++] = pBotRight.position.x * contentScale;
-		texVertices[vIndex++] = pBotRight.position.y * contentScale;
+		texVertices[vIndex++] = (GLfloat)(pBotRight.position.x * contentScale);
+		texVertices[vIndex++] = (GLfloat)(pBotRight.position.y * contentScale);
 		
-                texVertices[vIndex++] = pTopLeft.position.x * contentScale;
-                texVertices[vIndex++] = pTopLeft.position.y * contentScale;
+                texVertices[vIndex++] = (GLfloat)(pTopLeft.position.x * contentScale);
+                texVertices[vIndex++] = (GLfloat)(pTopLeft.position.y * contentScale);
                 
-		texVertices[vIndex++] = pBotRight.position.x * contentScale;
-		texVertices[vIndex++] = pBotRight.position.y * contentScale;
+		texVertices[vIndex++] = (GLfloat)(pBotRight.position.x * contentScale);
+		texVertices[vIndex++] = (GLfloat)(pBotRight.position.y * contentScale);
 		
-                texVertices[vIndex++] = pTopLeft.position.x * contentScale;
-                texVertices[vIndex++] = pTopLeft.position.y * contentScale;
+                texVertices[vIndex++] = (GLfloat)(pTopLeft.position.x * contentScale);
+                texVertices[vIndex++] = (GLfloat)(pTopLeft.position.y * contentScale);
                 
-		texVertices[vIndex++] = pTopRight.position.x * contentScale;
-		texVertices[vIndex++] = pTopRight.position.y * contentScale;
+		texVertices[vIndex++] = (GLfloat)(pTopRight.position.x * contentScale);
+		texVertices[vIndex++] = (GLfloat)(pTopRight.position.y * contentScale);
 	    }
 	}
         
@@ -309,7 +309,7 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
 	glBindTexture(GL_TEXTURE_2D, gridTexture.glTextureName);
 	glUniform1i([self.shaderProgram indexOfUniform:@"sampler"], 0);
 	
-        glDrawArrays(GL_TRIANGLES, 0, vIndex/2);
+        glDrawArrays(GL_TRIANGLES, 0, (GLsizei)(vIndex/2));
         
 	glDisableVertexAttribArray(textureCoordAttrib);
 	glDisableVertexAttribArray(vertexAttrib);
@@ -333,10 +333,10 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
 		    CMTPParticle *p1 = [particles objectAtIndex:count];
 		    CMTPParticle *p2 = [particles objectAtIndex:count+1];
 		    
-		    gridVertices[vIndex++] = p1.position.x * contentScale;
-		    gridVertices[vIndex++] = p1.position.y * contentScale;
-		    gridVertices[vIndex++] = p2.position.x * contentScale;
-		    gridVertices[vIndex++] = p2.position.y * contentScale;
+		    gridVertices[vIndex++] = (GLfloat)(p1.position.x * contentScale);
+		    gridVertices[vIndex++] = (GLfloat)(p1.position.y * contentScale);
+		    gridVertices[vIndex++] = (GLfloat)(p2.position.x * contentScale);
+		    gridVertices[vIndex++] = (GLfloat)(p2.position.y * contentScale);
 		}
 		count ++;
 	    }
@@ -349,17 +349,17 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
 		CMTPParticle *p1 = [particles objectAtIndex:count];
 		CMTPParticle *p2 = [particles objectAtIndex:count+gridSize];
 		
-		gridVertices[vIndex++] = p1.position.x * contentScale;
-		gridVertices[vIndex++] = p1.position.y * contentScale;
-		gridVertices[vIndex++] = p2.position.x * contentScale;
-		gridVertices[vIndex++] = p2.position.y * contentScale;
+		gridVertices[vIndex++] = (GLfloat)(p1.position.x * contentScale);
+		gridVertices[vIndex++] = (GLfloat)(p1.position.y * contentScale);
+		gridVertices[vIndex++] = (GLfloat)(p2.position.x * contentScale);
+		gridVertices[vIndex++] = (GLfloat)(p2.position.y * contentScale);
 		
 		count ++;
 	    }
 	}
 
         glVertexAttribPointer(vertexAttrib, 2, GL_FLOAT, GL_FALSE, stride, gridVertices);
-        glDrawArrays(GL_LINES, 0, vIndex/2);
+        glDrawArrays(GL_LINES, 0, (GLsizei)(vIndex/2));
         
         glDisableVertexAttribArray(vertexAttrib);
         
@@ -555,7 +555,7 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
     frameHeight = framebufferSize.height;
     contentScale = eaglView.contentScaleFactor;
     
-    orthoMatrix(projectionMatrix, 0.0f, frameWidth, frameHeight, 0.0f, -1.0f, 1.0f); // inverted Y
+    orthoMatrix(projectionMatrix, 0.0f, (float)frameWidth, (float)frameHeight, 0.0f, -1.0f, 1.0f); // inverted Y
 }
 
 
@@ -597,8 +597,8 @@ static GLfloat *circle_vertices(unsigned int *count, float radius, unsigned int 
     CGPoint location = [touch locationInView:self.view];
     CGPoint diff1 = CGPointMake(location.x-handle1.x, location.y-handle1.y);
     CGPoint diff2 = CGPointMake(location.x-handle2.x, location.y-handle2.y);
-    CGFloat distance1 = sqrtf(diff1.x*diff1.x + diff1.y*diff1.y);
-    CGFloat distance2 = sqrtf(diff2.x*diff2.x + diff2.y*diff2.y);
+    CGFloat distance1 = sqrt(diff1.x*diff1.x + diff1.y*diff1.y);
+    CGFloat distance2 = sqrt(diff2.x*diff2.x + diff2.y*diff2.y);
     if (distance1 < 24.0f) {
         grabbedHandle = 1;
     }

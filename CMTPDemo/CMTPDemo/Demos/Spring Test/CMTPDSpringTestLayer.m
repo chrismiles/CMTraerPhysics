@@ -38,12 +38,12 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
 {
     CGFloat dx = prevPosition.x - userPosition.x;
     CGFloat dy = prevPosition.y - userPosition.y;
-    return sqrtf(dx*dx + dy*dy);
+    return sqrt(dx*dx + dy*dy);
 }
 
 
 @interface CMTPDSpringTestLayer () {
-    float spring_length;
+    CMTPFloat spring_length;
     NSUInteger subdivisions;
 
     CADisplayLink *displayLink;
@@ -51,7 +51,7 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
     BOOL isDragging;
     CGSize lastSize;
     
-    float gravityScale;
+    CMTPFloat gravityScale;
     CMMotionManager *motionManager;
 
     /* Physics */
@@ -95,7 +95,7 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
 {
     if (motionManager.isDeviceMotionActive) {
         CMAcceleration gravity = motionManager.deviceMotion.gravity;
-        CMTPVector3D gravityVector = CMTPVector3DMake((float)(gravity.x)*gravityScale, (float)(-gravity.y)*gravityScale, 0.0f);
+        CMTPVector3D gravityVector = CMTPVector3DMake((CMTPFloat)(gravity.x)*gravityScale, (CMTPFloat)(-gravity.y)*gravityScale, 0.0f);
         s.gravity = gravityVector;
     }
 
@@ -123,8 +123,8 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
     [anchor makeFixed];
     [particles addObject:anchor];
     
-    float sub_len = spring_length / subdivisions;
-    float sy = 100.0f;
+    CMTPFloat sub_len = spring_length / subdivisions;
+    CMTPFloat sy = 100.0f;
     for (NSUInteger i=1; i<=subdivisions; i++) {
 	CMTPParticle *p = [s makeParticleWithMass:0.6f position:CMTPVector3DMake(300.0f, sy + i*sub_len, 0)];
 	[particles addObject:p];

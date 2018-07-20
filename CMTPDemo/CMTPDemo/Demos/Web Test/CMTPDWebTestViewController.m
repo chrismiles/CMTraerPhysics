@@ -44,25 +44,25 @@
 //#endif
 
 
-/* Return a random float between 0.0 and 1.0 */
-static inline float randomClamp()
+/* Return a random CMTPFloat between 0.0 and 1.0 */
+static inline CMTPFloat randomClamp()
 {
-    return (float)(arc4random() % ((unsigned)RAND_MAX + 1)) / (float)((unsigned)RAND_MAX + 1);
+    return (CMTPFloat)(arc4random() % ((unsigned)RAND_MAX + 1)) / (CMTPFloat)((unsigned)RAND_MAX + 1);
 }
 
 static inline CGPoint CGPointFromPolar(CGFloat r, CGFloat theta)
 {
-    return CGPointMake(r * cosf(theta), r * sinf(theta));
+    return CGPointMake(r * cos(theta), r * sin(theta));
 }
 
 static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
 {
     CGFloat dx = prevPosition.x - userPosition.x;
     CGFloat dy = prevPosition.y - userPosition.y;
-    return sqrtf(dx*dx + dy*dy);
+    return sqrt(dx*dx + dy*dy);
 }
 
-//static inline void orthoMatrix(GLfloat *matrix, float left, float right, float bottom, float top, float zNear, float zFar)
+//static inline void orthoMatrix(GLfloat *matrix, CMTPFloat left, float right, float bottom, float top, float zNear, float zFar)
 //{
 //    matrix[ 0] = 2.0f / (right-left);
 //    matrix[ 1] = 0.0f;
@@ -86,19 +86,19 @@ static CGFloat CGPointDistance(CGPoint userPosition, CGPoint prevPosition)
  */
 static BOOL ccpFastIntersect(CGPoint A, CGPoint B,
 			     CGPoint C, CGPoint D,
-			     float *S, float *T)
+			     CMTPFloat *S, CMTPFloat *T)
 {
     // FAIL: Line undefined
     if ( (A.x==B.x && A.y==B.y) || (C.x==D.x && C.y==D.y) ) return NO;
     
-    const float BAx = B.x - A.x;
-    const float BAy = B.y - A.y;
-    const float DCx = D.x - C.x;
-    const float DCy = D.y - C.y;
-    const float ACx = A.x - C.x;
-    const float ACy = A.y - C.y;
+    const CMTPFloat BAx = B.x - A.x;
+    const CMTPFloat BAy = B.y - A.y;
+    const CMTPFloat DCx = D.x - C.x;
+    const CMTPFloat DCy = D.y - C.y;
+    const CMTPFloat ACx = A.x - C.x;
+    const CMTPFloat ACy = A.y - C.y;
     
-    const float denom = DCy*BAx - DCx*BAy;
+    const CMTPFloat denom = DCy*BAx - DCx*BAy;
     
     *S = DCx*ACy - DCy*ACx;
     *T = BAx*ACy - BAy*ACx;
@@ -126,7 +126,7 @@ static BOOL ccpFastIntersect(CGPoint A, CGPoint B,
 static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
 				     CGPoint C, CGPoint D)
 {
-    float S=0.0f, T=0.0f;
+    CMTPFloat S=0.0, T=0.0;
     
     ccpFastIntersect(A, B, C, D, &S, &T);
     // Point of intersection
@@ -143,8 +143,8 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     BOOL animating;
     BOOL fullFrameRate;
     
-    float contentScale;
-    float frameHeight, frameWidth;
+    CMTPFloat contentScale;
+    CMTPFloat frameHeight, frameWidth;
     NSInteger animationFrameInterval;
     
     GLuint vertexAttrib;
@@ -196,7 +196,7 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
 
 - (void)enableFullFrameRate
 {
-    self.fullFrameRateLabel.center = CGPointMake(roundf(CGRectGetMidX(self.view.bounds)), roundf(CGRectGetMidY(self.view.bounds)));
+    self.fullFrameRateLabel.center = CGPointMake(round(CGRectGetMidX(self.view.bounds)), round(CGRectGetMidY(self.view.bounds)));
     [self.view addSubview:self.fullFrameRateLabel];
     fullFrameRate = YES;
 }
@@ -253,7 +253,7 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     ASSERT_GL_OK();
     
     GLfloat projectionMatrix[16];
-    orthoMatrix(projectionMatrix, 0.0f, frameWidth, frameHeight, 0.0f, -1.0f, 1.0f); // inverted Y
+    orthoMatrix(projectionMatrix, 0.0f, (float)frameWidth, (float)frameHeight, 0.0f, -1.0f, 1.0f); // inverted Y
     int uniformMVP = [self.shaderProgram indexOfUniform:@"mvp"];
     glUniformMatrix4fv(uniformMVP, 1, GL_FALSE, projectionMatrix);
     ASSERT_GL_OK();
@@ -271,10 +271,10 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
 	CMTPParticle *p0 = [particles objectAtIndex:i-1];
 	CMTPParticle *p1 = [particles objectAtIndex:i];
 	
-	webVertices[vIndex++] = p0.position.x * contentScale;
-	webVertices[vIndex++] = p0.position.y * contentScale;
-	webVertices[vIndex++] = p1.position.x * contentScale;
-	webVertices[vIndex++] = p1.position.y * contentScale;
+	webVertices[vIndex++] = (GLfloat)(p0.position.x * contentScale);
+	webVertices[vIndex++] = (GLfloat)(p0.position.y * contentScale);
+	webVertices[vIndex++] = (GLfloat)(p1.position.x * contentScale);
+	webVertices[vIndex++] = (GLfloat)(p1.position.y * contentScale);
     }
     
     // draw armature
@@ -285,10 +285,10 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
 	    NSUInteger index = i + (j * steps);
 	    if (index < [particles count]) {
 		CMTPParticle *p1 = [particles objectAtIndex:index];
-		webVertices[vIndex++] = pos0.x * contentScale;
-		webVertices[vIndex++] = pos0.y * contentScale;
-		webVertices[vIndex++] = p1.position.x * contentScale;
-		webVertices[vIndex++] = p1.position.y * contentScale;
+		webVertices[vIndex++] = (GLfloat)(pos0.x * contentScale);
+		webVertices[vIndex++] = (GLfloat)(pos0.y * contentScale);
+		webVertices[vIndex++] = (GLfloat)(p1.position.x * contentScale);
+		webVertices[vIndex++] = (GLfloat)(p1.position.y * contentScale);
 		
 		pos0 = p1.position;
 	    }
@@ -301,16 +301,16 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
 	if (p0_index < [particles count]) {
 	    CMTPParticle *p0 = [particles objectAtIndex:p0_index];
 	    CMTPParticle *p1 = [joints objectAtIndex:i];
-	    webVertices[vIndex++] = p0.position.x * contentScale;
-	    webVertices[vIndex++] = p0.position.y * contentScale;
-	    webVertices[vIndex++] = p1.position.x * contentScale;
-	    webVertices[vIndex++] = p1.position.y * contentScale;
+	    webVertices[vIndex++] = (GLfloat)(p0.position.x * contentScale);
+	    webVertices[vIndex++] = (GLfloat)(p0.position.y * contentScale);
+	    webVertices[vIndex++] = (GLfloat)(p1.position.x * contentScale);
+	    webVertices[vIndex++] = (GLfloat)(p1.position.y * contentScale);
 	}
     }
     
     // set attraction based on touch motion, and modify structure if option enabled
     if (prevLocation.x >= 0.0f) {
-	float user_d = CGPointDistance(userLocation, prevLocation);
+	CMTPFloat user_d = CGPointDistance(userLocation, prevLocation);
 	
 	for (NSUInteger i = 0; i < [attractions count]; i++) {
 	    CMTPAttraction *a = [attractions objectAtIndex:i];
@@ -329,7 +329,7 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     prevLocation = userLocation;
 
     glVertexAttribPointer(vertexAttrib, 2, GL_FLOAT, GL_FALSE, stride, webVertices);
-    glDrawArrays(GL_LINES, 0, vIndex/2);
+    glDrawArrays(GL_LINES, 0, (GLsizei)(vIndex/2));
     
     glDisableVertexAttribArray(vertexAttrib);
     
@@ -344,10 +344,10 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     steps = 20;
     numTurns = 10;
     
-    float ox = CGRectGetMidX(frame);
-    float oy = CGRectGetMidY(frame);
-    float a = 6.0f;
-    float b = 1.1f;
+    CMTPFloat ox = (GLfloat)CGRectGetMidX(frame);
+    CMTPFloat oy = (GLfloat)CGRectGetMidY(frame);
+    CMTPFloat a = 6.0;
+    CMTPFloat b = 1.1;
     
     anchors = [[NSMutableArray alloc] init];
     anchors_copy = calloc(numTurns * steps, sizeof(CMTPVector3D));
@@ -363,7 +363,7 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     q2 = CGPointMake(CGRectGetMaxX(self.view.bounds), CGRectGetMaxY(self.view.bounds));
     q3 = CGPointMake(CGRectGetMinX(self.view.bounds), CGRectGetMaxY(self.view.bounds));
 
-    float screenScale = 1.0f * CGRectGetHeight(self.view.frame) / 320.0f;
+    CMTPFloat screenScale = 1.0f * CGRectGetHeight(self.view.frame) / 320.0f;
     
     CMTPVector3D gravityVector = CMTPVector3DMake(0.0f, 0.0f, 0.0f);
     s = [[CMTPParticleSystem alloc] initWithGravityVector:gravityVector drag:0.42f];
@@ -393,10 +393,10 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     
     for (NSUInteger i = 1; i <= numTurns; i++) {
 	for (NSUInteger j = 0; j < steps; j++) {
-	    float rand = 1 + randomClamp() * .008f; //add some small irregularities
+	    CMTPFloat rand = 1 + randomClamp() * .008f; //add some small irregularities
 	    
-	    float theta = (j * (((float)M_PI * 2) / steps)) + (i * (float)M_PI * 2) + (float)M_PI/2; // add 90 deg so the orientation of web is correct (starts at top)
-	    float r = a + (b * theta) * rand;
+	    CMTPFloat theta = (j * ((M_PI * 2) / steps)) + (i * M_PI * 2) + M_PI/2; // add 90 deg so the orientation of web is correct (starts at top)
+	    CMTPFloat r = a + (b * theta) * rand;
 	    // use theta*-1 as spiders create their final web outwards, turning clockwise 
 	    CGPoint pos = CGPointFromPolar(r, -theta);
 	    
@@ -437,7 +437,7 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
 	    CMTPParticle *p1 = [particles objectAtIndex:i + (NSUInteger)((numTurns-2) * steps)];
 	    CMTPVector3D n_pt_pos = p1.position;
 	    
-	    float mod_scale = randomClamp() * -4.0f;
+	    CMTPFloat mod_scale = randomClamp() * -4.0f;
 	    CMTPVector3D mod_v = CMTPVector3DMake((n_pt_pos.x - seed_pos.x)*mod_scale, (n_pt_pos.y - seed_pos.y)*mod_scale, 0.0f);
 	    
 	    CMTPVector3D next_seed_pos = CMTPVector3DMake(seed_pos.x + mod_v.x, seed_pos.y + mod_v.y, 0.0f);
@@ -449,22 +449,22 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
 	    if (next_seed_pos.x > q1.x - _sp) next_seed_pos.x = q1.x - _sp;
 	    if (next_seed_pos.y > q2.y - _sp) next_seed_pos.y = q2.y - _sp;
 	    
-	    float dx = next_seed_pos.x - seed_pos.x;
-	    float dy = next_seed_pos.y - seed_pos.y;
-	    float d = sqrtf(dx*dx + dy*dy);
+	    CMTPFloat dx = next_seed_pos.x - seed_pos.x;
+	    CMTPFloat dy = next_seed_pos.y - seed_pos.y;
+	    CMTPFloat d = sqrt(dx*dx + dy*dy);
 	    
 	    for (NSUInteger j=0; j<[particles count]; j++) {
 		CMTPParticle *pj = [particles objectAtIndex:j];
-		float _dx = next_seed_pos.x - pj.position.x;
-		float _dy = next_seed_pos.y - pj.position.y;
-		float _d = sqrtf(_dx*_dx + _dy*_dy);
+		CMTPFloat _dx = next_seed_pos.x - pj.position.x;
+		CMTPFloat _dy = next_seed_pos.y - pj.position.y;
+		CMTPFloat _d = sqrt(_dx*_dx + _dy*_dy);
 		if (d != 0) {
-		    float r = (d/_d); // we could use just that...
+		    CMTPFloat r = (d/_d); // we could use just that...
 		    //r = r*r; // ...but here we attenuate a bit the displacement of the influenced particles
 		    //r = r*r*r; // ...or this would give an even more spiky look
 		    
-		    float p_pos_x = pj.position.x + dx*r;
-		    float p_pos_y = pj.position.y + dy*r;
+		    CMTPFloat p_pos_x = pj.position.x + dx*r;
+		    CMTPFloat p_pos_y = pj.position.y + dy*r;
 		    
 		    pj.position = CMTPVector3DMake(p_pos_x, p_pos_y, 0.0f);
 		    CMTPParticle *anchor = [anchors objectAtIndex:j];
@@ -486,9 +486,9 @@ static CGPoint ccpFastIntersectPoint(CGPoint A, CGPoint B,
     for (NSUInteger i = 2; i < [particles count]; i++) {
 	CMTPParticle *p0 = [particles objectAtIndex:i];
 	CMTPParticle *p1 = [particles objectAtIndex:i-1];
-	float dx = p0.position.x - p1.position.x;
-	float dy = p0.position.y - p1.position.y;
-	float d = sqrtf(dx*dx + dy*dy);
+	CMTPFloat dx = p0.position.x - p1.position.x;
+	CMTPFloat dy = p0.position.y - p1.position.y;
+	CMTPFloat d = sqrt(dx*dx + dy*dy);
 	[s makeSpringBetweenParticleA:p1 particleB:p0 springConstant:0.03f damping:0.61f restLength:d];
     }
     

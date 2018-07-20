@@ -85,7 +85,7 @@
 	
 	CMTPFloat force = _strength * _particleA.mass * _particleB.mass / a2bDistanceSquared;
 	
-	CMTPFloat length = sqrtf( a2bDistanceSquared );
+	CMTPFloat length = sqrt( a2bDistanceSquared );
 	
 	a2bX /= length;
 	a2bY /= length;

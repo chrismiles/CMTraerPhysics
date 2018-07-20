@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CMTPCommon.h"
 
 @interface CMScrollView : UIView
 
@@ -16,8 +17,8 @@
 /* Scroll physics settings.
  * Defaults result in similar behaviour to UIScrollView.
  */
-@property (nonatomic) float fixedSpringConstant;
-@property (nonatomic) float touchSpringConstant;
-@property (nonatomic) float scrollDrag;
+@property (nonatomic) CMTPFloat fixedSpringConstant;
+@property (nonatomic) CMTPFloat touchSpringConstant;
+@property (nonatomic) CMTPFloat scrollDrag;
 
 @end

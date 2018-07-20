@@ -27,7 +27,6 @@
 #import "EAGLView.h"
 #import <QuartzCore/QuartzCore.h>
 
-
 @interface EAGLView (PrivateMethods)
 - (void)createFramebuffer;
 - (void)deleteFramebuffer;
@@ -93,7 +92,7 @@
 	// Handle scale
         if ([self respondsToSelector:@selector(setContentScaleFactor:)])
         {
-	    float screenScale = [UIScreen mainScreen].scale;
+	    CGFloat screenScale = [UIScreen mainScreen].scale;
 	    
 	    self.contentScaleFactor = screenScale;
 	}

@@ -98,22 +98,22 @@ static char CMScrollViewOriginKey;
 
 #pragma mark - Custom accessors
 
-- (void)setScrollDrag:(float)scrollDrag
+- (void)setScrollDrag:(CMTPFloat)scrollDrag
 {
     _particleSystem.drag = scrollDrag;
 }
 
-- (float)scrollDrag
+- (CMTPFloat)scrollDrag
 {
     return _particleSystem.drag;
 }
 
-- (float)fixedSpringConstant
+- (CMTPFloat)fixedSpringConstant
 {
     return _fixedSpringConstant;
 }
 
-- (void)setFixedSpringConstant:(float)fixedSpringConstant
+- (void)setFixedSpringConstant:(CMTPFloat)fixedSpringConstant
 {
     _fixedSpringConstant = fixedSpringConstant;
     if (_spring1) {
@@ -121,12 +121,12 @@ static char CMScrollViewOriginKey;
     }
 }
 
-- (float)touchSpringConstant
+- (CMTPFloat)touchSpringConstant
 {
     return _touchSpringConstant;
 }
 
-- (void)setTouchSpringConstant:(float)touchSpringConstant
+- (void)setTouchSpringConstant:(CMTPFloat)touchSpringConstant
 {
     _touchSpringConstant = touchSpringConstant;
     if (_spring2) {
@@ -189,7 +189,7 @@ static char CMScrollViewOriginKey;
 	
 	// Adjust view origin
 	CGRect frame = subview.frame;
-	frame.origin = CGPointMake(floorf(origin.x + _contentOffset.x), floorf(origin.y + _contentOffset.y));
+	frame.origin = CGPointMake(floor(origin.x + _contentOffset.x), floor(origin.y + _contentOffset.y));
 	subview.frame = frame;
     }
 }
@@ -299,12 +299,12 @@ static char CMScrollViewOriginKey;
 
     [self updatePhysics];
     
-    [_particleSystem tick:(float)step];
+    [_particleSystem tick:(CMTPFloat)step];
     
     _contentOffset = CGPointMake(0.0f, _contentParticle.position.y);
     [self updateSubviewPositions];
     
-    float velocityYMagnitude = fabsf(_contentParticle.velocity.y);
+    CMTPFloat velocityYMagnitude = fabs(_contentParticle.velocity.y);
     if (velocityYMagnitude > 0.0f && velocityYMagnitude < kMinScrollVelocity) {
 	_contentParticle.velocity = CMTPVector3DMake(0.0f, 0.0f, 0.0f);
     }

@@ -45,8 +45,8 @@
     BOOL showGrid;
     BOOL showImage;
     
-    float contentScale;
-    float frameHeight, frameWidth;
+    CMTPFloat contentScale;
+    CMTPFloat frameHeight, frameWidth;
     NSInteger animationFrameInterval;
     
     GLfloat mouseX;
@@ -96,7 +96,7 @@
 
 - (void)enableFullFrameRate
 {
-    self.fullFrameRateLabel.center = CGPointMake(roundf(CGRectGetMidX(self.view.bounds)), roundf(CGRectGetMidY(self.view.bounds)));
+    self.fullFrameRateLabel.center = CGPointMake(round(CGRectGetMidX(self.view.bounds)), round(CGRectGetMidY(self.view.bounds)));
     [self.view addSubview:self.fullFrameRateLabel];
     fullFrameRate = YES;
 }
@@ -175,7 +175,7 @@
     ASSERT_GL_OK();
 
     GLfloat projectionMatrix[16];
-    orthoMatrix(projectionMatrix, 0.0f, frameWidth, 0.0f, frameHeight, -1.0f, 1.0f);
+    orthoMatrix(projectionMatrix, 0.0f, (float)frameWidth, 0.0f, (float)frameHeight, -1.0f, 1.0f);
     int uniformMVP = [self.shaderProgram indexOfUniform:@"mvp"];
     glUniformMatrix4fv(uniformMVP, 1, GL_FALSE, projectionMatrix);
     ASSERT_GL_OK();
@@ -193,23 +193,23 @@
 		CMTPParticle *pTopLeft =  [particles_free objectAtIndex:(GRID_SIZE-1-j)*GRID_SIZE+i];
 		CMTPParticle *pTopRight = [particles_free objectAtIndex:(GRID_SIZE-1-j)*GRID_SIZE+i+1];
 		
-		vertices[vIndex++] = pBotLeft.position.x * contentScale;
-		vertices[vIndex++] = pBotLeft.position.y * contentScale;
+		vertices[vIndex++] = (GLfloat)(pBotLeft.position.x * contentScale);
+		vertices[vIndex++] = (GLfloat)(pBotLeft.position.y * contentScale);
 		
-		vertices[vIndex++] = pBotRight.position.x * contentScale;
-		vertices[vIndex++] = pBotRight.position.y * contentScale;
+		vertices[vIndex++] = (GLfloat)(pBotRight.position.x * contentScale);
+		vertices[vIndex++] = (GLfloat)(pBotRight.position.y * contentScale);
 		
-                vertices[vIndex++] = pTopLeft.position.x * contentScale;
-                vertices[vIndex++] = pTopLeft.position.y * contentScale;
+                vertices[vIndex++] = (GLfloat)(pTopLeft.position.x * contentScale);
+                vertices[vIndex++] = (GLfloat)(pTopLeft.position.y * contentScale);
                 
-		vertices[vIndex++] = pBotRight.position.x * contentScale;
-		vertices[vIndex++] = pBotRight.position.y * contentScale;
+		vertices[vIndex++] = (GLfloat)(pBotRight.position.x * contentScale);
+		vertices[vIndex++] = (GLfloat)(pBotRight.position.y * contentScale);
 		
-                vertices[vIndex++] = pTopLeft.position.x * contentScale;
-                vertices[vIndex++] = pTopLeft.position.y * contentScale;
+                vertices[vIndex++] = (GLfloat)(pTopLeft.position.x * contentScale);
+                vertices[vIndex++] = (GLfloat)(pTopLeft.position.y * contentScale);
                 
-		vertices[vIndex++] = pTopRight.position.x * contentScale;
-		vertices[vIndex++] = pTopRight.position.y * contentScale;
+		vertices[vIndex++] = (GLfloat)(pTopRight.position.x * contentScale);
+		vertices[vIndex++] = (GLfloat)(pTopRight.position.y * contentScale);
 	    }
 	}
 
@@ -227,7 +227,7 @@
 	glUniform1i([self.shaderProgram indexOfUniform:@"sampler"], 0);
 	
 	//glDrawArrays(GL_TRIANGLE_STRIP, 0, vIndex/2);
-        glDrawArrays(GL_TRIANGLES, 0, vIndex/2);
+        glDrawArrays(GL_TRIANGLES, 0, (GLsizei)(vIndex/2));
         
 	glDisableVertexAttribArray(textureCoordAttrib);
 	glDisableVertexAttribArray(vertexAttrib);
@@ -251,10 +251,10 @@
 	    CMTPParticle *pFixed = [particles_fixed objectAtIndex:i];
 	    CMTPParticle *pFree = [particles_free objectAtIndex:i];
 	    
-	    vertices[vIndex++] = pFixed.position.x * contentScale;
-	    vertices[vIndex++] = pFixed.position.y * contentScale;
-	    vertices[vIndex++] = pFree.position.x * contentScale;
-	    vertices[vIndex++] = pFree.position.y * contentScale;
+	    vertices[vIndex++] = (GLfloat)(pFixed.position.x * contentScale);
+	    vertices[vIndex++] = (GLfloat)(pFixed.position.y * contentScale);
+	    vertices[vIndex++] = (GLfloat)(pFree.position.x * contentScale);
+	    vertices[vIndex++] = (GLfloat)(pFree.position.y * contentScale);
             
             colors[cIndex++] = 255;
             colors[cIndex++] = 0;
@@ -275,10 +275,10 @@
 		    CMTPParticle *pFree = [particles_free objectAtIndex:count];
 		    CMTPParticle *pFree1 = [particles_free objectAtIndex:count+1];
 		    
-		    vertices[vIndex++] = pFree.position.x * contentScale;
-		    vertices[vIndex++] = pFree.position.y * contentScale;
-		    vertices[vIndex++] = pFree1.position.x * contentScale;
-		    vertices[vIndex++] = pFree1.position.y * contentScale;
+		    vertices[vIndex++] = (GLfloat)(pFree.position.x * contentScale);
+		    vertices[vIndex++] = (GLfloat)(pFree.position.y * contentScale);
+		    vertices[vIndex++] = (GLfloat)(pFree1.position.x * contentScale);
+		    vertices[vIndex++] = (GLfloat)(pFree1.position.y * contentScale);
 		    
                     colors[cIndex++] = 0;
                     colors[cIndex++] = 0;
@@ -301,10 +301,10 @@
 		CMTPParticle *pFree = [particles_free objectAtIndex:count];
 		CMTPParticle *pFree1 = [particles_free objectAtIndex:count+GRID_SIZE];
 		
-		vertices[vIndex++] = pFree.position.x * contentScale;
-		vertices[vIndex++] = pFree.position.y * contentScale;
-		vertices[vIndex++] = pFree1.position.x * contentScale;
-		vertices[vIndex++] = pFree1.position.y * contentScale;
+		vertices[vIndex++] = (GLfloat)(pFree.position.x * contentScale);
+		vertices[vIndex++] = (GLfloat)(pFree.position.y * contentScale);
+		vertices[vIndex++] = (GLfloat)(pFree1.position.x * contentScale);
+		vertices[vIndex++] = (GLfloat)(pFree1.position.y * contentScale);
 		
                 colors[cIndex++] = 0;
                 colors[cIndex++] = 0;
@@ -322,7 +322,7 @@
 	
         glVertexAttribPointer(vertexAttrib, 2, GL_FLOAT, GL_FALSE, stride, vertices);
         glVertexAttribPointer(colorAttrib, 4, GL_UNSIGNED_BYTE, 1, 0, colors);
-        glDrawArrays(GL_LINES, 0, vIndex/2);
+        glDrawArrays(GL_LINES, 0, (GLsizei)(vIndex/2));
         
         glDisableVertexAttribArray(vertexAttrib);
         glDisableVertexAttribArray(colorAttrib);
@@ -354,8 +354,8 @@
     attractor = [s makeParticleWithMass:1 position:CMTPVector3DMake(CGRectGetMidX(frame), CGRectGetMidY(frame), 0.0)];
     [attractor makeFixed];
     
-    float attractionStrength;
-    float attractionMinDistance;
+    CMTPFloat attractionStrength;
+    CMTPFloat attractionMinDistance;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 	// iPad
 	attractionStrength = -40000.0f;
@@ -526,24 +526,24 @@
 {
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInView:self.view];
-    mouseX = location.x;
-    mouseY = self.view.bounds.size.height - location.y;
+    mouseX = (GLfloat)location.x;
+    mouseY = (GLfloat)(self.view.bounds.size.height - location.y);
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInView:self.view];
-    mouseX = location.x;
-    mouseY = self.view.bounds.size.height - location.y;
+    mouseX = (GLfloat)location.x;
+    mouseY = (GLfloat)(self.view.bounds.size.height - location.y);
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInView:self.view];
-    mouseX = location.x;
-    mouseY = self.view.bounds.size.height - location.y;
+    mouseX = (GLfloat)location.x;
+    mouseY = (GLfloat)(self.view.bounds.size.height - location.y);
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
@@ -594,15 +594,15 @@
     [super viewWillAppear:animated];
     
     if (!physicsSetupCompleted) {
-        GLfloat viewWidth = CGRectGetWidth(self.glView.frame);
-        GLfloat viewHeight = CGRectGetHeight(self.glView.frame);
+        GLfloat viewWidth = (GLfloat)CGRectGetWidth(self.glView.frame);
+        GLfloat viewHeight = (GLfloat)CGRectGetHeight(self.glView.frame);
         CGFloat gridWH = fminf(viewWidth, viewHeight) * 0.8f;   // width & height (square)
         CGRect gridFrame = CGRectIntegral(CGRectMake(viewWidth/2-gridWH/2, viewHeight/2-gridWH/2, gridWH, gridWH));
         [self setupPhysicsInFrame:gridFrame];
         physicsSetupCompleted = YES;
         
-        mouseX = attractor.position.x;
-        mouseY = attractor.position.y;
+        mouseX = (GLfloat)attractor.position.x;
+        mouseY = (GLfloat)attractor.position.y;
     }
     
     fps_prev_time = CACurrentMediaTime();
