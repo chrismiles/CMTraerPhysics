@@ -27,18 +27,19 @@
 #import <Foundation/Foundation.h>
 
 #ifdef DEBUG
+#define ALog(...)\
+    [[NSAssertionHandler currentHandler]\
+     handleFailureInFunction:[NSString stringWithCString:__PRETTY_FUNCTION__ encoding:NSUTF8StringEncoding]\
+     file:[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding]\
+     lineNumber:__LINE__\
+     description:__VA_ARGS__]
 #define ASSERT_GL_OK() do {\
-	GLenum glError = glGetError();\
-	if (glError != GL_NO_ERROR) {\
-	    [[NSAssertionHandler currentHandler]\
-         handleFailureInFunction:[NSString stringWithCString:__PRETTY_FUNCTION__ encoding:NSUTF8StringEncoding]\
-         file:[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding]\
-         lineNumber:__LINE__\
-         description:[NSString stringWithFormat:@"glError: %@", @(glError)]];\
-	}} while (0)
+    GLenum glError = glGetError();\
+    if (glError != GL_NO_ERROR) {\
+        ALog(@"glError: %d", glError);\
+    }} while (0)
 #else
-	#define ASSERT_GL_OK() do { } while (0)
+    #define ASSERT_GL_OK() do { } while (0)
 #endif
-
 
 void orthoMatrix(GLfloat *matrix, float left, float right, float bottom, float top, float zNear, float zFar);
