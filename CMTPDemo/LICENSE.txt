@@ -1,11 +1,15 @@
 Image license
 -------------
 
-All images included in this project are copyright (c) 2011-2012 Chris Miles.
+CMTPDemo info.imageset created from Icons8's Help png.
+https://icons8.com/icon/set/help/ios
+Attribution-NoDerivs 3.0 Unported (CC BY-ND 3.0)
+https://creativecommons.org/licenses/by-nd/3.0/
+
+All other images included in this project are copyright (c) 2011-2012 Chris Miles.
 
 The images are only for use within the demo application, as provided, and
 may not be redistributed separately from the demo application.
-
 
 Source code license
 -------------------

@@ -3,587 +3,402 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		831261A7161D749A0037F109 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 831261A6161D749A0037F109 /* Default-568h@2x.png */; };
-		831E95D2146FF02B003789DF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831E95D1146FF02B003789DF /* UIKit.framework */; };
-		831E95D4146FF02B003789DF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831E95D3146FF02B003789DF /* Foundation.framework */; };
-		831E95D6146FF02B003789DF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831E95D5146FF02B003789DF /* CoreGraphics.framework */; };
-		831E95DC146FF02B003789DF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 831E95DA146FF02B003789DF /* InfoPlist.strings */; };
-		831E95DE146FF02B003789DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E95DD146FF02B003789DF /* main.m */; };
-		831E95E2146FF02B003789DF /* CMTPDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E95E1146FF02B003789DF /* CMTPDAppDelegate.m */; };
-		831E95EA146FF02C003789DF /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831E95E9146FF02C003789DF /* SenTestingKit.framework */; };
-		831E95EB146FF02C003789DF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831E95D1146FF02B003789DF /* UIKit.framework */; };
-		831E95EC146FF02C003789DF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831E95D3146FF02B003789DF /* Foundation.framework */; };
-		831E95F4146FF02C003789DF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 831E95F2146FF02C003789DF /* InfoPlist.strings */; };
-		831E95F7146FF02C003789DF /* CMTPDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E95F6146FF02C003789DF /* CMTPDemoTests.m */; };
-		831E9614146FF093003789DF /* CMTPAttraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9602146FF093003789DF /* CMTPAttraction.m */; };
-		831E9615146FF093003789DF /* CMTPAttraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9602146FF093003789DF /* CMTPAttraction.m */; };
-		831E9616146FF093003789DF /* CMTPCustomForce.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9605146FF093003789DF /* CMTPCustomForce.m */; };
-		831E9617146FF093003789DF /* CMTPCustomForce.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9605146FF093003789DF /* CMTPCustomForce.m */; };
-		831E9618146FF093003789DF /* CMTPForce.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9607146FF093003789DF /* CMTPForce.m */; };
-		831E9619146FF093003789DF /* CMTPForce.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9607146FF093003789DF /* CMTPForce.m */; };
-		831E961A146FF093003789DF /* CMTPIntegrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9609146FF093003789DF /* CMTPIntegrator.m */; };
-		831E961B146FF093003789DF /* CMTPIntegrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9609146FF093003789DF /* CMTPIntegrator.m */; };
-		831E961C146FF093003789DF /* CMTPModifiedEulerIntegrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E960B146FF093003789DF /* CMTPModifiedEulerIntegrator.m */; };
-		831E961D146FF093003789DF /* CMTPModifiedEulerIntegrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E960B146FF093003789DF /* CMTPModifiedEulerIntegrator.m */; };
-		831E961E146FF093003789DF /* CMTPParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E960D146FF093003789DF /* CMTPParticle.m */; };
-		831E961F146FF093003789DF /* CMTPParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E960D146FF093003789DF /* CMTPParticle.m */; };
-		831E9620146FF093003789DF /* CMTPParticleSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E960F146FF093003789DF /* CMTPParticleSystem.m */; };
-		831E9621146FF093003789DF /* CMTPParticleSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E960F146FF093003789DF /* CMTPParticleSystem.m */; };
-		831E9622146FF093003789DF /* CMTPRungeKuttaIntegrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9611146FF093003789DF /* CMTPRungeKuttaIntegrator.m */; };
-		831E9623146FF093003789DF /* CMTPRungeKuttaIntegrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9611146FF093003789DF /* CMTPRungeKuttaIntegrator.m */; };
-		831E9624146FF093003789DF /* CMTPSpring.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9613146FF093003789DF /* CMTPSpring.m */; };
-		831E9625146FF093003789DF /* CMTPSpring.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9613146FF093003789DF /* CMTPSpring.m */; };
-		831E962914712566003789DF /* CMTPDMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E962714712566003789DF /* CMTPDMenuViewController.m */; };
-		831E962A14712566003789DF /* CMTPDMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E962714712566003789DF /* CMTPDMenuViewController.m */; };
-		831E962B14712566003789DF /* CMTPDMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831E962814712566003789DF /* CMTPDMenuViewController.xib */; };
-		831E962C14712566003789DF /* CMTPDMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831E962814712566003789DF /* CMTPDMenuViewController.xib */; };
-		831E963214712752003789DF /* CMTPDAttractionGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E963014712752003789DF /* CMTPDAttractionGridViewController.m */; };
-		831E963314712752003789DF /* CMTPDAttractionGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E963014712752003789DF /* CMTPDAttractionGridViewController.m */; };
-		831E963414712752003789DF /* CMTPDAttractionGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831E963114712752003789DF /* CMTPDAttractionGridViewController.xib */; };
-		831E963514712752003789DF /* CMTPDAttractionGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 831E963114712752003789DF /* CMTPDAttractionGridViewController.xib */; };
-		831E963D14712B77003789DF /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E963C14712B77003789DF /* EAGLView.m */; };
-		831E963E14712B77003789DF /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E963C14712B77003789DF /* EAGLView.m */; };
-		831E9696147134D3003789DF /* CMGLESKTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E9695147134D3003789DF /* CMGLESKTexture.m */; };
-		831E969A147135E7003789DF /* sandy_beach.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 831E9699147135E7003789DF /* sandy_beach.jpg */; };
-		831E969D1471371C003789DF /* CMGLESKProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E969C1471371C003789DF /* CMGLESKProgram.m */; };
-		831E96A314714310003789DF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831E96A21471430F003789DF /* OpenGLES.framework */; };
-		831E96A514714325003789DF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831E96A414714324003789DF /* QuartzCore.framework */; };
-		831E96A714720435003789DF /* AttractionGridVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 831E96A614720435003789DF /* AttractionGridVertexShader.glsl */; };
-		831E96A914720472003789DF /* AttractionGridFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 831E96A814720472003789DF /* AttractionGridFragmentShader.glsl */; };
-		832A9C1914A729EB00C1CB8E /* CMTPDSmoothedPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 832A9C1814A729EB00C1CB8E /* CMTPDSmoothedPath.m */; };
-		832A9C1F14AD321800C1CB8E /* CMTPDWebTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 832A9C1D14AD321800C1CB8E /* CMTPDWebTestViewController.m */; };
-		832A9C2014AD321800C1CB8E /* CMTPDWebTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 832A9C1E14AD321800C1CB8E /* CMTPDWebTestViewController.xib */; };
-		832A9C2314AD336200C1CB8E /* WebTestFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 832A9C2114AD336200C1CB8E /* WebTestFragmentShader.glsl */; };
-		832A9C2414AD336200C1CB8E /* WebTestVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 832A9C2214AD336200C1CB8E /* WebTestVertexShader.glsl */; };
-		834326E114DFC2FC006F930F /* CMTPDInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 834326DF14DFC2FC006F930F /* CMTPDInfoViewController.m */; };
-		834326E214DFC2FC006F930F /* CMTPDInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834326E014DFC2FC006F930F /* CMTPDInfoViewController.xib */; };
-		834326EB14DFC570006F930F /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = 834326EA14DFC570006F930F /* info.html */; };
-		835E713014CA4A5200409E43 /* wonderwall_atlas.plist in Resources */ = {isa = PBXBuildFile; fileRef = 835E712C14CA4A5200409E43 /* wonderwall_atlas.plist */; };
-		835E713114CA4A5200409E43 /* wonderwall_atlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 835E712D14CA4A5200409E43 /* wonderwall_atlas.png */; };
-		835E713214CA4A5200409E43 /* wonderwall_atlas@2x.plist in Resources */ = {isa = PBXBuildFile; fileRef = 835E712E14CA4A5200409E43 /* wonderwall_atlas@2x.plist */; };
-		835E713314CA4A5200409E43 /* wonderwall_atlas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 835E712F14CA4A5200409E43 /* wonderwall_atlas@2x.png */; };
-		8395502514864FEA00241646 /* CMTPDAttractionTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8395502314864FEA00241646 /* CMTPDAttractionTestViewController.m */; };
-		8395502614864FEA00241646 /* CMTPDAttractionTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8395502414864FEA00241646 /* CMTPDAttractionTestViewController.xib */; };
-		83CCDBDA15341B99003EA4D6 /* CMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CCDBD315341B99003EA4D6 /* CMScrollView.m */; };
-		83CCDBDB15341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CCDBD515341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.m */; };
-		83CCDBDC15341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83CCDBD615341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.xib */; };
-		83CCDBDD15341B99003EA4D6 /* CMTPDScrollViewCloneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CCDBD815341B99003EA4D6 /* CMTPDScrollViewCloneViewController.m */; };
-		83CCDBDE15341B99003EA4D6 /* CMTPDScrollViewCloneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83CCDBD915341B99003EA4D6 /* CMTPDScrollViewCloneViewController.xib */; };
-		83DFD63E148ADD10003771E9 /* CMTPDAttractionTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DFD63D148ADD10003771E9 /* CMTPDAttractionTestView.m */; };
-		83DFD642148ADDE6003771E9 /* CMTPDAttractionTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DFD641148ADDE6003771E9 /* CMTPDAttractionTestLayer.m */; };
-		83DFD645148AF9C3003771E9 /* CMTPDATSubLayers.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DFD644148AF9C3003771E9 /* CMTPDATSubLayers.m */; };
-		83DFD652148E32FD003771E9 /* CMTPDClothTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DFD650148E32FD003771E9 /* CMTPDClothTestViewController.m */; };
-		83DFD653148E32FD003771E9 /* CMTPDClothTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DFD651148E32FD003771E9 /* CMTPDClothTestViewController.xib */; };
-		83DFD656148F7AC4003771E9 /* ClothTestFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 83DFD654148F7AC4003771E9 /* ClothTestFragmentShader.glsl */; };
-		83DFD657148F7AC4003771E9 /* ClothTestVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 83DFD655148F7AC4003771E9 /* ClothTestVertexShader.glsl */; };
-		83DFD67214941A5E003771E9 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DFD67114941A5E003771E9 /* CoreMotion.framework */; };
-		83DFD67714960D5A003771E9 /* CMTPDFreeFloatingTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DFD67514960D5A003771E9 /* CMTPDFreeFloatingTestViewController.m */; };
-		83DFD67814960D5A003771E9 /* CMTPDFreeFloatingTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DFD67614960D5A003771E9 /* CMTPDFreeFloatingTestViewController.xib */; };
-		83DFD67B14960D81003771E9 /* CMTPDFreeFloatingTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DFD67A14960D81003771E9 /* CMTPDFreeFloatingTestView.m */; };
-		83DFD67E14960D9D003771E9 /* CMTPDFreeFloatingTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DFD67D14960D9C003771E9 /* CMTPDFreeFloatingTestLayer.m */; };
-		83DFD681149613C3003771E9 /* CMTPDFreeFloatingTestSubLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DFD680149613C3003771E9 /* CMTPDFreeFloatingTestSubLayer.m */; };
-		83DFD686149A12CE003771E9 /* CMTPDSpringTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DFD684149A12CE003771E9 /* CMTPDSpringTestViewController.m */; };
-		83DFD687149A12CE003771E9 /* CMTPDSpringTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83DFD685149A12CE003771E9 /* CMTPDSpringTestViewController.xib */; };
-		83DFD68A149A139D003771E9 /* CMTPDSpringTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DFD689149A139C003771E9 /* CMTPDSpringTestView.m */; };
-		83DFD68D149A1669003771E9 /* CMTPDSpringTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DFD68C149A1669003771E9 /* CMTPDSpringTestLayer.m */; };
-		83ECC5C214BC4CA2002126E1 /* CMTPDWonderwallLikeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC5C014BC4CA2002126E1 /* CMTPDWonderwallLikeViewController.m */; };
-		83ECC5C314BC4CA2002126E1 /* CMTPDWonderwallLikeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83ECC5C114BC4CA2002126E1 /* CMTPDWonderwallLikeViewController.xib */; };
-		83ECC5C614BC4D10002126E1 /* WonderwallLikeFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 83ECC5C414BC4D10002126E1 /* WonderwallLikeFragmentShader.glsl */; };
-		83ECC5C714BC4D10002126E1 /* WonderwallLikeVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 83ECC5C514BC4D10002126E1 /* WonderwallLikeVertexShader.glsl */; };
-		83ECC5CA14BC4E87002126E1 /* CMGLESKUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC5C914BC4E87002126E1 /* CMGLESKUtil.m */; };
+		E1739D11210261AC00558840 /* CMTPDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1739D10210261AC00558840 /* CMTPDAppDelegate.m */; };
+		E1739D14210261AC00558840 /* CMTPMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1739D13210261AC00558840 /* CMTPMasterViewController.m */; };
+		E1739D1A210261AC00558840 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1739D18210261AC00558840 /* Main.storyboard */; };
+		E1739D1C210261AD00558840 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1739D1B210261AD00558840 /* Assets.xcassets */; };
+		E1739D1F210261AD00558840 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1739D1D210261AD00558840 /* LaunchScreen.storyboard */; };
+		E1739D22210261AD00558840 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1739D21210261AD00558840 /* main.m */; };
+		E1A07E9B210296E6007010AE /* CMTPDInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E4D210296E4007010AE /* CMTPDInfoViewController.m */; };
+		E1A07E9D210296E6007010AE /* WonderwallLikeVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = E1A07E51210296E4007010AE /* WonderwallLikeVertexShader.glsl */; };
+		E1A07E9E210296E6007010AE /* WonderwallLikeFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = E1A07E52210296E4007010AE /* WonderwallLikeFragmentShader.glsl */; };
+		E1A07E9F210296E6007010AE /* CMTPDWonderwallLikeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E53210296E4007010AE /* CMTPDWonderwallLikeViewController.m */; };
+		E1A07EA1210296E6007010AE /* WebTestFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = E1A07E56210296E4007010AE /* WebTestFragmentShader.glsl */; };
+		E1A07EA2210296E6007010AE /* WebTestVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = E1A07E57210296E4007010AE /* WebTestVertexShader.glsl */; };
+		E1A07EA4210296E6007010AE /* CMTPDWebTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E59210296E4007010AE /* CMTPDWebTestViewController.m */; };
+		E1A07EA7210296E6007010AE /* CMTPDSmoothedPath.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E5F210296E5007010AE /* CMTPDSmoothedPath.m */; };
+		E1A07EA8210296E6007010AE /* CMTPDSpringTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E63210296E5007010AE /* CMTPDSpringTestView.m */; };
+		E1A07EA9210296E6007010AE /* CMTPDSpringTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E65210296E5007010AE /* CMTPDSpringTestLayer.m */; };
+		E1A07EAA210296E6007010AE /* CMTPDSpringTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E66210296E5007010AE /* CMTPDSpringTestViewController.m */; };
+		E1A07EAB210296E6007010AE /* CMTPDFreeFloatingTestSubLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E69210296E5007010AE /* CMTPDFreeFloatingTestSubLayer.m */; };
+		E1A07EAC210296E6007010AE /* CMTPDFreeFloatingTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E6A210296E5007010AE /* CMTPDFreeFloatingTestLayer.m */; };
+		E1A07EAE210296E6007010AE /* CMTPDFreeFloatingTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E6C210296E5007010AE /* CMTPDFreeFloatingTestView.m */; };
+		E1A07EAF210296E6007010AE /* CMTPDFreeFloatingTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E6D210296E5007010AE /* CMTPDFreeFloatingTestViewController.m */; };
+		E1A07EB0210296E6007010AE /* wonderwall_atlas.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1A07E73210296E5007010AE /* wonderwall_atlas.plist */; };
+		E1A07EB1210296E6007010AE /* wonderwall_atlas@2x.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1A07E74210296E5007010AE /* wonderwall_atlas@2x.plist */; };
+		E1A07EB2210296E6007010AE /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = E1A07E75210296E5007010AE /* info.html */; };
+		E1A07EB3210296E6007010AE /* sandy_beach.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E1A07E76210296E5007010AE /* sandy_beach.jpg */; };
+		E1A07EB4210296E6007010AE /* wonderwall_atlas.png in Resources */ = {isa = PBXBuildFile; fileRef = E1A07E77210296E5007010AE /* wonderwall_atlas.png */; };
+		E1A07EB5210296E6007010AE /* wonderwall_atlas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1A07E78210296E5007010AE /* wonderwall_atlas@2x.png */; };
+		E1A07EB6210296E6007010AE /* CMTPDAttractionTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E7A210296E5007010AE /* CMTPDAttractionTestLayer.m */; };
+		E1A07EB7210296E6007010AE /* CMTPDAttractionTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E7B210296E5007010AE /* CMTPDAttractionTestView.m */; };
+		E1A07EB9210296E6007010AE /* CMTPDATSubLayers.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E7D210296E5007010AE /* CMTPDATSubLayers.m */; };
+		E1A07EBA210296E6007010AE /* CMTPDAttractionTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E7E210296E5007010AE /* CMTPDAttractionTestViewController.m */; };
+		E1A07EBB210296E6007010AE /* CMTPDScrollViewCloneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E84210296E5007010AE /* CMTPDScrollViewCloneViewController.m */; };
+		E1A07EBC210296E6007010AE /* CMTPDScrollViewCloneConfigureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E86210296E5007010AE /* CMTPDScrollViewCloneConfigureViewController.m */; };
+		E1A07EBE210296E6007010AE /* CMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E89210296E5007010AE /* CMScrollView.m */; };
+		E1A07EC1210296E6007010AE /* CMTPDAttractionGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E8F210296E5007010AE /* CMTPDAttractionGridViewController.m */; };
+		E1A07EC2210296E6007010AE /* AttractionGridVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = E1A07E90210296E5007010AE /* AttractionGridVertexShader.glsl */; };
+		E1A07EC3210296E6007010AE /* AttractionGridFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = E1A07E91210296E5007010AE /* AttractionGridFragmentShader.glsl */; };
+		E1A07EC4210296E6007010AE /* CMTPDClothTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E93210296E5007010AE /* CMTPDClothTestViewController.m */; };
+		E1A07EC5210296E6007010AE /* ClothTestVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = E1A07E94210296E5007010AE /* ClothTestVertexShader.glsl */; };
+		E1A07EC6210296E6007010AE /* ClothTestFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = E1A07E95210296E5007010AE /* ClothTestFragmentShader.glsl */; };
+		E1A07EC8210296E6007010AE /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07E98210296E5007010AE /* EAGLView.m */; };
+		E1A07ED4210296F9007010AE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1A07ECA210296F9007010AE /* LICENSE.txt */; };
+		E1A07ED5210296F9007010AE /* CMGLESKProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07ECE210296F9007010AE /* CMGLESKProgram.m */; };
+		E1A07ED6210296F9007010AE /* CMGLESKTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07ECF210296F9007010AE /* CMGLESKTexture.m */; };
+		E1A07ED7210296F9007010AE /* CMGLESKUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07ED0210296F9007010AE /* CMGLESKUtil.m */; };
+		E1A07EEF21029710007010AE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E1A07ED821029710007010AE /* README.md */; };
+		E1A07EF021029710007010AE /* CMTPModifiedEulerIntegrator.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EDB21029710007010AE /* CMTPModifiedEulerIntegrator.m */; };
+		E1A07EF121029710007010AE /* CMTPSpring.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EDF21029710007010AE /* CMTPSpring.m */; };
+		E1A07EF221029710007010AE /* CMTPAttraction.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EE021029710007010AE /* CMTPAttraction.m */; };
+		E1A07EF321029710007010AE /* CMTPParticleSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EE221029710007010AE /* CMTPParticleSystem.m */; };
+		E1A07EF421029710007010AE /* CMTPForce.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EE321029710007010AE /* CMTPForce.m */; };
+		E1A07EF521029710007010AE /* CMTPRungeKuttaIntegrator.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EE621029710007010AE /* CMTPRungeKuttaIntegrator.m */; };
+		E1A07EF621029710007010AE /* CMTPParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EE721029710007010AE /* CMTPParticle.m */; };
+		E1A07EF721029710007010AE /* CMTPIntegrator.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EE921029710007010AE /* CMTPIntegrator.m */; };
+		E1A07EF921029710007010AE /* CMTPCustomForce.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A07EED21029710007010AE /* CMTPCustomForce.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		831E95ED146FF02C003789DF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 831E95C4146FF02B003789DF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 831E95CC146FF02B003789DF;
-			remoteInfo = CMTPDemo;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		831261A6161D749A0037F109 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		831E95CD146FF02B003789DF /* CMTPDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CMTPDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		831E95D1146FF02B003789DF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		831E95D3146FF02B003789DF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		831E95D5146FF02B003789DF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		831E95D9146FF02B003789DF /* CMTPDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CMTPDemo-Info.plist"; sourceTree = "<group>"; };
-		831E95DB146FF02B003789DF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		831E95DD146FF02B003789DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		831E95DF146FF02B003789DF /* CMTPDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CMTPDemo-Prefix.pch"; sourceTree = "<group>"; };
-		831E95E0146FF02B003789DF /* CMTPDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CMTPDAppDelegate.h; path = Classes/CMTPDAppDelegate.h; sourceTree = "<group>"; };
-		831E95E1146FF02B003789DF /* CMTPDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CMTPDAppDelegate.m; path = Classes/CMTPDAppDelegate.m; sourceTree = "<group>"; };
-		831E95E8146FF02C003789DF /* CMTPDemoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CMTPDemoTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		831E95E9146FF02C003789DF /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		831E95F1146FF02C003789DF /* CMTPDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CMTPDemoTests-Info.plist"; sourceTree = "<group>"; };
-		831E95F3146FF02C003789DF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		831E95F5146FF02C003789DF /* CMTPDemoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMTPDemoTests.h; sourceTree = "<group>"; };
-		831E95F6146FF02C003789DF /* CMTPDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CMTPDemoTests.m; sourceTree = "<group>"; };
-		831E9601146FF093003789DF /* CMTPAttraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPAttraction.h; sourceTree = "<group>"; };
-		831E9602146FF093003789DF /* CMTPAttraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPAttraction.m; sourceTree = "<group>"; };
-		831E9603146FF093003789DF /* CMTPCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPCommon.h; sourceTree = "<group>"; };
-		831E9604146FF093003789DF /* CMTPCustomForce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPCustomForce.h; sourceTree = "<group>"; };
-		831E9605146FF093003789DF /* CMTPCustomForce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPCustomForce.m; sourceTree = "<group>"; };
-		831E9606146FF093003789DF /* CMTPForce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPForce.h; sourceTree = "<group>"; };
-		831E9607146FF093003789DF /* CMTPForce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPForce.m; sourceTree = "<group>"; };
-		831E9608146FF093003789DF /* CMTPIntegrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPIntegrator.h; sourceTree = "<group>"; };
-		831E9609146FF093003789DF /* CMTPIntegrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPIntegrator.m; sourceTree = "<group>"; };
-		831E960A146FF093003789DF /* CMTPModifiedEulerIntegrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPModifiedEulerIntegrator.h; sourceTree = "<group>"; };
-		831E960B146FF093003789DF /* CMTPModifiedEulerIntegrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPModifiedEulerIntegrator.m; sourceTree = "<group>"; };
-		831E960C146FF093003789DF /* CMTPParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPParticle.h; sourceTree = "<group>"; };
-		831E960D146FF093003789DF /* CMTPParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPParticle.m; sourceTree = "<group>"; };
-		831E960E146FF093003789DF /* CMTPParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPParticleSystem.h; sourceTree = "<group>"; };
-		831E960F146FF093003789DF /* CMTPParticleSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPParticleSystem.m; sourceTree = "<group>"; };
-		831E9610146FF093003789DF /* CMTPRungeKuttaIntegrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPRungeKuttaIntegrator.h; sourceTree = "<group>"; };
-		831E9611146FF093003789DF /* CMTPRungeKuttaIntegrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPRungeKuttaIntegrator.m; sourceTree = "<group>"; };
-		831E9612146FF093003789DF /* CMTPSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPSpring.h; sourceTree = "<group>"; };
-		831E9613146FF093003789DF /* CMTPSpring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPSpring.m; sourceTree = "<group>"; };
-		831E962614712566003789DF /* CMTPDMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMTPDMenuViewController.h; path = Classes/CMTPDMenuViewController.h; sourceTree = "<group>"; };
-		831E962714712566003789DF /* CMTPDMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMTPDMenuViewController.m; path = Classes/CMTPDMenuViewController.m; sourceTree = "<group>"; };
-		831E962814712566003789DF /* CMTPDMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CMTPDMenuViewController.xib; path = Classes/CMTPDMenuViewController.xib; sourceTree = "<group>"; };
-		831E962F14712752003789DF /* CMTPDAttractionGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDAttractionGridViewController.h; sourceTree = "<group>"; };
-		831E963014712752003789DF /* CMTPDAttractionGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDAttractionGridViewController.m; sourceTree = "<group>"; };
-		831E963114712752003789DF /* CMTPDAttractionGridViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDAttractionGridViewController.xib; sourceTree = "<group>"; };
-		831E963B14712B77003789DF /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EAGLView.h; path = Classes/EAGLView.h; sourceTree = "<group>"; };
-		831E963C14712B77003789DF /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EAGLView.m; path = Classes/EAGLView.m; sourceTree = "<group>"; };
-		831E9694147134D3003789DF /* CMGLESKTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMGLESKTexture.h; sourceTree = "<group>"; };
-		831E9695147134D3003789DF /* CMGLESKTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMGLESKTexture.m; sourceTree = "<group>"; };
-		831E9699147135E7003789DF /* sandy_beach.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sandy_beach.jpg; sourceTree = "<group>"; };
-		831E969B1471371C003789DF /* CMGLESKProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMGLESKProgram.h; sourceTree = "<group>"; };
-		831E969C1471371C003789DF /* CMGLESKProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMGLESKProgram.m; sourceTree = "<group>"; };
-		831E96A21471430F003789DF /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		831E96A414714324003789DF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		831E96A614720435003789DF /* AttractionGridVertexShader.glsl */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = AttractionGridVertexShader.glsl; sourceTree = "<group>"; };
-		831E96A814720472003789DF /* AttractionGridFragmentShader.glsl */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = AttractionGridFragmentShader.glsl; sourceTree = "<group>"; };
-		831E96AE14720BBB003789DF /* CMTraerPhysics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTraerPhysics.h; sourceTree = "<group>"; };
-		832A9C1714A729EB00C1CB8E /* CMTPDSmoothedPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDSmoothedPath.h; sourceTree = "<group>"; };
-		832A9C1814A729EB00C1CB8E /* CMTPDSmoothedPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDSmoothedPath.m; sourceTree = "<group>"; };
-		832A9C1C14AD321800C1CB8E /* CMTPDWebTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDWebTestViewController.h; sourceTree = "<group>"; };
-		832A9C1D14AD321800C1CB8E /* CMTPDWebTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDWebTestViewController.m; sourceTree = "<group>"; };
-		832A9C1E14AD321800C1CB8E /* CMTPDWebTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDWebTestViewController.xib; sourceTree = "<group>"; };
-		832A9C2114AD336200C1CB8E /* WebTestFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebTestFragmentShader.glsl; sourceTree = "<group>"; };
-		832A9C2214AD336200C1CB8E /* WebTestVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebTestVertexShader.glsl; sourceTree = "<group>"; };
-		834326DE14DFC2FC006F930F /* CMTPDInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMTPDInfoViewController.h; path = Classes/CMTPDInfoViewController.h; sourceTree = "<group>"; };
-		834326DF14DFC2FC006F930F /* CMTPDInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMTPDInfoViewController.m; path = Classes/CMTPDInfoViewController.m; sourceTree = "<group>"; };
-		834326E014DFC2FC006F930F /* CMTPDInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CMTPDInfoViewController.xib; path = Classes/CMTPDInfoViewController.xib; sourceTree = "<group>"; };
-		834326EA14DFC570006F930F /* info.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = info.html; sourceTree = "<group>"; };
-		835E712C14CA4A5200409E43 /* wonderwall_atlas.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = wonderwall_atlas.plist; sourceTree = "<group>"; };
-		835E712D14CA4A5200409E43 /* wonderwall_atlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wonderwall_atlas.png; sourceTree = "<group>"; };
-		835E712E14CA4A5200409E43 /* wonderwall_atlas@2x.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "wonderwall_atlas@2x.plist"; sourceTree = "<group>"; };
-		835E712F14CA4A5200409E43 /* wonderwall_atlas@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wonderwall_atlas@2x.png"; sourceTree = "<group>"; };
-		8361C3D014CD7D2300EBF1A5 /* CMGLESKMatrix3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMGLESKMatrix3D.h; sourceTree = "<group>"; };
-		8395502214864FEA00241646 /* CMTPDAttractionTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDAttractionTestViewController.h; sourceTree = "<group>"; };
-		8395502314864FEA00241646 /* CMTPDAttractionTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDAttractionTestViewController.m; sourceTree = "<group>"; };
-		8395502414864FEA00241646 /* CMTPDAttractionTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDAttractionTestViewController.xib; sourceTree = "<group>"; };
-		83CCDBD215341B99003EA4D6 /* CMScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMScrollView.h; sourceTree = "<group>"; };
-		83CCDBD315341B99003EA4D6 /* CMScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMScrollView.m; sourceTree = "<group>"; };
-		83CCDBD415341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDScrollViewCloneConfigureViewController.h; sourceTree = "<group>"; };
-		83CCDBD515341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDScrollViewCloneConfigureViewController.m; sourceTree = "<group>"; };
-		83CCDBD615341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDScrollViewCloneConfigureViewController.xib; sourceTree = "<group>"; };
-		83CCDBD715341B99003EA4D6 /* CMTPDScrollViewCloneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDScrollViewCloneViewController.h; sourceTree = "<group>"; };
-		83CCDBD815341B99003EA4D6 /* CMTPDScrollViewCloneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDScrollViewCloneViewController.m; sourceTree = "<group>"; };
-		83CCDBD915341B99003EA4D6 /* CMTPDScrollViewCloneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDScrollViewCloneViewController.xib; sourceTree = "<group>"; };
-		83DFD63C148ADD10003771E9 /* CMTPDAttractionTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDAttractionTestView.h; sourceTree = "<group>"; };
-		83DFD63D148ADD10003771E9 /* CMTPDAttractionTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDAttractionTestView.m; sourceTree = "<group>"; };
-		83DFD640148ADDE6003771E9 /* CMTPDAttractionTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDAttractionTestLayer.h; sourceTree = "<group>"; };
-		83DFD641148ADDE6003771E9 /* CMTPDAttractionTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDAttractionTestLayer.m; sourceTree = "<group>"; };
-		83DFD643148AF9C3003771E9 /* CMTPDATSubLayers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDATSubLayers.h; sourceTree = "<group>"; };
-		83DFD644148AF9C3003771E9 /* CMTPDATSubLayers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDATSubLayers.m; sourceTree = "<group>"; };
-		83DFD64F148E32FD003771E9 /* CMTPDClothTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDClothTestViewController.h; sourceTree = "<group>"; };
-		83DFD650148E32FD003771E9 /* CMTPDClothTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDClothTestViewController.m; sourceTree = "<group>"; };
-		83DFD651148E32FD003771E9 /* CMTPDClothTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDClothTestViewController.xib; sourceTree = "<group>"; };
-		83DFD654148F7AC4003771E9 /* ClothTestFragmentShader.glsl */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = ClothTestFragmentShader.glsl; sourceTree = "<group>"; };
-		83DFD655148F7AC4003771E9 /* ClothTestVertexShader.glsl */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = ClothTestVertexShader.glsl; sourceTree = "<group>"; };
-		83DFD67114941A5E003771E9 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		83DFD67414960D5A003771E9 /* CMTPDFreeFloatingTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDFreeFloatingTestViewController.h; sourceTree = "<group>"; };
-		83DFD67514960D5A003771E9 /* CMTPDFreeFloatingTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDFreeFloatingTestViewController.m; sourceTree = "<group>"; };
-		83DFD67614960D5A003771E9 /* CMTPDFreeFloatingTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDFreeFloatingTestViewController.xib; sourceTree = "<group>"; };
-		83DFD67914960D81003771E9 /* CMTPDFreeFloatingTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDFreeFloatingTestView.h; sourceTree = "<group>"; };
-		83DFD67A14960D81003771E9 /* CMTPDFreeFloatingTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDFreeFloatingTestView.m; sourceTree = "<group>"; };
-		83DFD67C14960D9C003771E9 /* CMTPDFreeFloatingTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDFreeFloatingTestLayer.h; sourceTree = "<group>"; };
-		83DFD67D14960D9C003771E9 /* CMTPDFreeFloatingTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDFreeFloatingTestLayer.m; sourceTree = "<group>"; };
-		83DFD67F149613C3003771E9 /* CMTPDFreeFloatingTestSubLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDFreeFloatingTestSubLayer.h; sourceTree = "<group>"; };
-		83DFD680149613C3003771E9 /* CMTPDFreeFloatingTestSubLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDFreeFloatingTestSubLayer.m; sourceTree = "<group>"; };
-		83DFD683149A12CE003771E9 /* CMTPDSpringTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDSpringTestViewController.h; sourceTree = "<group>"; };
-		83DFD684149A12CE003771E9 /* CMTPDSpringTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDSpringTestViewController.m; sourceTree = "<group>"; };
-		83DFD685149A12CE003771E9 /* CMTPDSpringTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDSpringTestViewController.xib; sourceTree = "<group>"; };
-		83DFD688149A139C003771E9 /* CMTPDSpringTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDSpringTestView.h; sourceTree = "<group>"; };
-		83DFD689149A139C003771E9 /* CMTPDSpringTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDSpringTestView.m; sourceTree = "<group>"; };
-		83DFD68B149A1669003771E9 /* CMTPDSpringTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDSpringTestLayer.h; sourceTree = "<group>"; };
-		83DFD68C149A1669003771E9 /* CMTPDSpringTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDSpringTestLayer.m; sourceTree = "<group>"; };
-		83ECC5BF14BC4CA2002126E1 /* CMTPDWonderwallLikeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDWonderwallLikeViewController.h; sourceTree = "<group>"; };
-		83ECC5C014BC4CA2002126E1 /* CMTPDWonderwallLikeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDWonderwallLikeViewController.m; sourceTree = "<group>"; };
-		83ECC5C114BC4CA2002126E1 /* CMTPDWonderwallLikeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMTPDWonderwallLikeViewController.xib; sourceTree = "<group>"; };
-		83ECC5C414BC4D10002126E1 /* WonderwallLikeFragmentShader.glsl */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = WonderwallLikeFragmentShader.glsl; sourceTree = "<group>"; };
-		83ECC5C514BC4D10002126E1 /* WonderwallLikeVertexShader.glsl */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = WonderwallLikeVertexShader.glsl; sourceTree = "<group>"; };
-		83ECC5C814BC4E87002126E1 /* CMGLESKUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMGLESKUtil.h; sourceTree = "<group>"; };
-		83ECC5C914BC4E87002126E1 /* CMGLESKUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMGLESKUtil.m; sourceTree = "<group>"; };
-		83F857D014D5F5D500EB98F4 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		83F857D314D5F5ED00EB98F4 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = SOURCE_ROOT; };
+		E1739D0C210261AC00558840 /* CMTPDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CMTPDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1739D0F210261AC00558840 /* CMTPDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMTPDAppDelegate.h; sourceTree = "<group>"; };
+		E1739D10210261AC00558840 /* CMTPDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CMTPDAppDelegate.m; sourceTree = "<group>"; };
+		E1739D12210261AC00558840 /* CMTPMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMTPMasterViewController.h; sourceTree = "<group>"; };
+		E1739D13210261AC00558840 /* CMTPMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CMTPMasterViewController.m; sourceTree = "<group>"; };
+		E1739D19210261AC00558840 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E1739D1B210261AD00558840 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E1739D1E210261AD00558840 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E1739D20210261AD00558840 /* CMTPDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CMTPDemo-Info.plist"; sourceTree = "<group>"; };
+		E1739D21210261AD00558840 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E1A07E4D210296E4007010AE /* CMTPDInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDInfoViewController.m; sourceTree = "<group>"; };
+		E1A07E50210296E4007010AE /* CMTPDWonderwallLikeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDWonderwallLikeViewController.h; sourceTree = "<group>"; };
+		E1A07E51210296E4007010AE /* WonderwallLikeVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WonderwallLikeVertexShader.glsl; sourceTree = "<group>"; };
+		E1A07E52210296E4007010AE /* WonderwallLikeFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WonderwallLikeFragmentShader.glsl; sourceTree = "<group>"; };
+		E1A07E53210296E4007010AE /* CMTPDWonderwallLikeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDWonderwallLikeViewController.m; sourceTree = "<group>"; };
+		E1A07E56210296E4007010AE /* WebTestFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebTestFragmentShader.glsl; sourceTree = "<group>"; };
+		E1A07E57210296E4007010AE /* WebTestVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebTestVertexShader.glsl; sourceTree = "<group>"; };
+		E1A07E59210296E4007010AE /* CMTPDWebTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDWebTestViewController.m; sourceTree = "<group>"; };
+		E1A07E5A210296E4007010AE /* CMTPDWebTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDWebTestViewController.h; sourceTree = "<group>"; };
+		E1A07E5C210296E5007010AE /* CMTPDInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDInfoViewController.h; sourceTree = "<group>"; };
+		E1A07E5F210296E5007010AE /* CMTPDSmoothedPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDSmoothedPath.m; sourceTree = "<group>"; };
+		E1A07E60210296E5007010AE /* CMTPDSpringTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDSpringTestView.h; sourceTree = "<group>"; };
+		E1A07E61210296E5007010AE /* CMTPDSpringTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDSpringTestViewController.h; sourceTree = "<group>"; };
+		E1A07E62210296E5007010AE /* CMTPDSpringTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDSpringTestLayer.h; sourceTree = "<group>"; };
+		E1A07E63210296E5007010AE /* CMTPDSpringTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDSpringTestView.m; sourceTree = "<group>"; };
+		E1A07E64210296E5007010AE /* CMTPDSmoothedPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDSmoothedPath.h; sourceTree = "<group>"; };
+		E1A07E65210296E5007010AE /* CMTPDSpringTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDSpringTestLayer.m; sourceTree = "<group>"; };
+		E1A07E66210296E5007010AE /* CMTPDSpringTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDSpringTestViewController.m; sourceTree = "<group>"; };
+		E1A07E68210296E5007010AE /* CMTPDFreeFloatingTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDFreeFloatingTestViewController.h; sourceTree = "<group>"; };
+		E1A07E69210296E5007010AE /* CMTPDFreeFloatingTestSubLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDFreeFloatingTestSubLayer.m; sourceTree = "<group>"; };
+		E1A07E6A210296E5007010AE /* CMTPDFreeFloatingTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDFreeFloatingTestLayer.m; sourceTree = "<group>"; };
+		E1A07E6C210296E5007010AE /* CMTPDFreeFloatingTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDFreeFloatingTestView.m; sourceTree = "<group>"; };
+		E1A07E6D210296E5007010AE /* CMTPDFreeFloatingTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDFreeFloatingTestViewController.m; sourceTree = "<group>"; };
+		E1A07E6E210296E5007010AE /* CMTPDFreeFloatingTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDFreeFloatingTestLayer.h; sourceTree = "<group>"; };
+		E1A07E6F210296E5007010AE /* CMTPDFreeFloatingTestSubLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDFreeFloatingTestSubLayer.h; sourceTree = "<group>"; };
+		E1A07E70210296E5007010AE /* CMTPDFreeFloatingTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDFreeFloatingTestView.h; sourceTree = "<group>"; };
+		E1A07E71210296E5007010AE /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
+		E1A07E73210296E5007010AE /* wonderwall_atlas.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = wonderwall_atlas.plist; sourceTree = "<group>"; };
+		E1A07E74210296E5007010AE /* wonderwall_atlas@2x.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "wonderwall_atlas@2x.plist"; sourceTree = "<group>"; };
+		E1A07E75210296E5007010AE /* info.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = info.html; sourceTree = "<group>"; };
+		E1A07E76210296E5007010AE /* sandy_beach.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sandy_beach.jpg; sourceTree = "<group>"; };
+		E1A07E77210296E5007010AE /* wonderwall_atlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wonderwall_atlas.png; sourceTree = "<group>"; };
+		E1A07E78210296E5007010AE /* wonderwall_atlas@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wonderwall_atlas@2x.png"; sourceTree = "<group>"; };
+		E1A07E7A210296E5007010AE /* CMTPDAttractionTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDAttractionTestLayer.m; sourceTree = "<group>"; };
+		E1A07E7B210296E5007010AE /* CMTPDAttractionTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDAttractionTestView.m; sourceTree = "<group>"; };
+		E1A07E7D210296E5007010AE /* CMTPDATSubLayers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDATSubLayers.m; sourceTree = "<group>"; };
+		E1A07E7E210296E5007010AE /* CMTPDAttractionTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDAttractionTestViewController.m; sourceTree = "<group>"; };
+		E1A07E7F210296E5007010AE /* CMTPDAttractionTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDAttractionTestView.h; sourceTree = "<group>"; };
+		E1A07E80210296E5007010AE /* CMTPDAttractionTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDAttractionTestLayer.h; sourceTree = "<group>"; };
+		E1A07E81210296E5007010AE /* CMTPDAttractionTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDAttractionTestViewController.h; sourceTree = "<group>"; };
+		E1A07E82210296E5007010AE /* CMTPDATSubLayers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDATSubLayers.h; sourceTree = "<group>"; };
+		E1A07E84210296E5007010AE /* CMTPDScrollViewCloneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDScrollViewCloneViewController.m; sourceTree = "<group>"; };
+		E1A07E85210296E5007010AE /* CMScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMScrollView.h; sourceTree = "<group>"; };
+		E1A07E86210296E5007010AE /* CMTPDScrollViewCloneConfigureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDScrollViewCloneConfigureViewController.m; sourceTree = "<group>"; };
+		E1A07E88210296E5007010AE /* CMTPDScrollViewCloneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDScrollViewCloneViewController.h; sourceTree = "<group>"; };
+		E1A07E89210296E5007010AE /* CMScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMScrollView.m; sourceTree = "<group>"; };
+		E1A07E8B210296E5007010AE /* CMTPDScrollViewCloneConfigureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDScrollViewCloneConfigureViewController.h; sourceTree = "<group>"; };
+		E1A07E8E210296E5007010AE /* CMTPDAttractionGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDAttractionGridViewController.h; sourceTree = "<group>"; };
+		E1A07E8F210296E5007010AE /* CMTPDAttractionGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDAttractionGridViewController.m; sourceTree = "<group>"; };
+		E1A07E90210296E5007010AE /* AttractionGridVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AttractionGridVertexShader.glsl; sourceTree = "<group>"; };
+		E1A07E91210296E5007010AE /* AttractionGridFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AttractionGridFragmentShader.glsl; sourceTree = "<group>"; };
+		E1A07E93210296E5007010AE /* CMTPDClothTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPDClothTestViewController.m; sourceTree = "<group>"; };
+		E1A07E94210296E5007010AE /* ClothTestVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ClothTestVertexShader.glsl; sourceTree = "<group>"; };
+		E1A07E95210296E5007010AE /* ClothTestFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ClothTestFragmentShader.glsl; sourceTree = "<group>"; };
+		E1A07E97210296E5007010AE /* CMTPDClothTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPDClothTestViewController.h; sourceTree = "<group>"; };
+		E1A07E98210296E5007010AE /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
+		E1A07ECA210296F9007010AE /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		E1A07ECD210296F9007010AE /* CMGLESKUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMGLESKUtil.h; sourceTree = "<group>"; };
+		E1A07ECE210296F9007010AE /* CMGLESKProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMGLESKProgram.m; sourceTree = "<group>"; };
+		E1A07ECF210296F9007010AE /* CMGLESKTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMGLESKTexture.m; sourceTree = "<group>"; };
+		E1A07ED0210296F9007010AE /* CMGLESKUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMGLESKUtil.m; sourceTree = "<group>"; };
+		E1A07ED1210296F9007010AE /* CMGLESKMatrix3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMGLESKMatrix3D.h; sourceTree = "<group>"; };
+		E1A07ED2210296F9007010AE /* CMGLESKTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMGLESKTexture.h; sourceTree = "<group>"; };
+		E1A07ED3210296F9007010AE /* CMGLESKProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMGLESKProgram.h; sourceTree = "<group>"; };
+		E1A07ED821029710007010AE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		E1A07EDA21029710007010AE /* CMTPRungeKuttaIntegrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPRungeKuttaIntegrator.h; sourceTree = "<group>"; };
+		E1A07EDB21029710007010AE /* CMTPModifiedEulerIntegrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPModifiedEulerIntegrator.m; sourceTree = "<group>"; };
+		E1A07EDC21029710007010AE /* CMTPParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPParticle.h; sourceTree = "<group>"; };
+		E1A07EDD21029710007010AE /* CMTraerPhysics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTraerPhysics.h; sourceTree = "<group>"; };
+		E1A07EDE21029710007010AE /* CMTPIntegrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPIntegrator.h; sourceTree = "<group>"; };
+		E1A07EDF21029710007010AE /* CMTPSpring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPSpring.m; sourceTree = "<group>"; };
+		E1A07EE021029710007010AE /* CMTPAttraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPAttraction.m; sourceTree = "<group>"; };
+		E1A07EE121029710007010AE /* CMTPCustomForce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPCustomForce.h; sourceTree = "<group>"; };
+		E1A07EE221029710007010AE /* CMTPParticleSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPParticleSystem.m; sourceTree = "<group>"; };
+		E1A07EE321029710007010AE /* CMTPForce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPForce.m; sourceTree = "<group>"; };
+		E1A07EE421029710007010AE /* CMTPModifiedEulerIntegrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPModifiedEulerIntegrator.h; sourceTree = "<group>"; };
+		E1A07EE521029710007010AE /* CMTPCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPCommon.h; sourceTree = "<group>"; };
+		E1A07EE621029710007010AE /* CMTPRungeKuttaIntegrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPRungeKuttaIntegrator.m; sourceTree = "<group>"; };
+		E1A07EE721029710007010AE /* CMTPParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPParticle.m; sourceTree = "<group>"; };
+		E1A07EE821029710007010AE /* CMTPSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPSpring.h; sourceTree = "<group>"; };
+		E1A07EE921029710007010AE /* CMTPIntegrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPIntegrator.m; sourceTree = "<group>"; };
+		E1A07EEA21029710007010AE /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		E1A07EEB21029710007010AE /* CMTPForce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPForce.h; sourceTree = "<group>"; };
+		E1A07EEC21029710007010AE /* CMTPParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPParticleSystem.h; sourceTree = "<group>"; };
+		E1A07EED21029710007010AE /* CMTPCustomForce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTPCustomForce.m; sourceTree = "<group>"; };
+		E1A07EEE21029710007010AE /* CMTPAttraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTPAttraction.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		831E95CA146FF02B003789DF /* Frameworks */ = {
+		E1739D09210261AC00558840 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83DFD67214941A5E003771E9 /* CoreMotion.framework in Frameworks */,
-				831E96A514714325003789DF /* QuartzCore.framework in Frameworks */,
-				831E96A314714310003789DF /* OpenGLES.framework in Frameworks */,
-				831E95D2146FF02B003789DF /* UIKit.framework in Frameworks */,
-				831E95D4146FF02B003789DF /* Foundation.framework in Frameworks */,
-				831E95D6146FF02B003789DF /* CoreGraphics.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		831E95E4146FF02C003789DF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				831E95EA146FF02C003789DF /* SenTestingKit.framework in Frameworks */,
-				831E95EB146FF02C003789DF /* UIKit.framework in Frameworks */,
-				831E95EC146FF02C003789DF /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		831E95C2146FF02B003789DF = {
+		E1739D03210261AC00558840 = {
 			isa = PBXGroup;
 			children = (
-				831261A6161D749A0037F109 /* Default-568h@2x.png */,
-				831E9691147134D3003789DF /* Libraries */,
-				831E9600146FF093003789DF /* CMTraerPhysics */,
-				831E95D7146FF02B003789DF /* CMTPDemo */,
-				831E95EF146FF02C003789DF /* CMTPDemoTests */,
-				831E95D0146FF02B003789DF /* Frameworks */,
-				831E95CE146FF02B003789DF /* Products */,
+				E1739D0E210261AC00558840 /* CMTPDemo */,
+				E1A07ED921029710007010AE /* CMTraerPhysics */,
+				E1A07ECB210296F9007010AE /* Libraries */,
+				E1A07ECA210296F9007010AE /* LICENSE.txt */,
+				E1739D0D210261AC00558840 /* Products */,
+				E1A07ED821029710007010AE /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
-		831E95CE146FF02B003789DF /* Products */ = {
+		E1739D0D210261AC00558840 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				831E95CD146FF02B003789DF /* CMTPDemo.app */,
-				831E95E8146FF02C003789DF /* CMTPDemoTests.octest */,
+				E1739D0C210261AC00558840 /* CMTPDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		831E95D0146FF02B003789DF /* Frameworks */ = {
+		E1739D0E210261AC00558840 /* CMTPDemo */ = {
 			isa = PBXGroup;
 			children = (
-				83DFD67114941A5E003771E9 /* CoreMotion.framework */,
-				831E96A414714324003789DF /* QuartzCore.framework */,
-				831E96A21471430F003789DF /* OpenGLES.framework */,
-				831E95D1146FF02B003789DF /* UIKit.framework */,
-				831E95D3146FF02B003789DF /* Foundation.framework */,
-				831E95D5146FF02B003789DF /* CoreGraphics.framework */,
-				831E95E9146FF02C003789DF /* SenTestingKit.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		831E95D7146FF02B003789DF /* CMTPDemo */ = {
-			isa = PBXGroup;
-			children = (
-				831E963F14712B7F003789DF /* Classes */,
-				831E9697147135E7003789DF /* Resources */,
-				831E95D8146FF02B003789DF /* Supporting Files */,
-				83F857D314D5F5ED00EB98F4 /* LICENSE.txt */,
+				E1739D1B210261AD00558840 /* Assets.xcassets */,
+				E1A07E8C210296E5007010AE /* AttractionGrid */,
+				E1A07E79210296E5007010AE /* AttractionTest */,
+				E1A07E92210296E5007010AE /* ClothTest */,
+				E1739D0F210261AC00558840 /* CMTPDAppDelegate.h */,
+				E1739D10210261AC00558840 /* CMTPDAppDelegate.m */,
+				E1739D20210261AD00558840 /* CMTPDemo-Info.plist */,
+				E1A07E5C210296E5007010AE /* CMTPDInfoViewController.h */,
+				E1A07E4D210296E4007010AE /* CMTPDInfoViewController.m */,
+				E1739D12210261AC00558840 /* CMTPMasterViewController.h */,
+				E1739D13210261AC00558840 /* CMTPMasterViewController.m */,
+				E1A07E71210296E5007010AE /* EAGLView.h */,
+				E1A07E98210296E5007010AE /* EAGLView.m */,
+				E1A07E67210296E5007010AE /* FreeFloatingTest */,
+				E1739D1D210261AD00558840 /* LaunchScreen.storyboard */,
+				E1739D21210261AD00558840 /* main.m */,
+				E1739D18210261AC00558840 /* Main.storyboard */,
+				E1A07E72210296E5007010AE /* Resources */,
+				E1A07E83210296E5007010AE /* ScrollViewClone */,
+				E1A07E5D210296E5007010AE /* SpringTest */,
+				E1A07E55210296E4007010AE /* WebTest */,
+				E1A07E4F210296E4007010AE /* WonderwallLike */,
 			);
 			path = CMTPDemo;
 			sourceTree = "<group>";
 		};
-		831E95D8146FF02B003789DF /* Supporting Files */ = {
+		E1A07E4F210296E4007010AE /* WonderwallLike */ = {
 			isa = PBXGroup;
 			children = (
-				831E95D9146FF02B003789DF /* CMTPDemo-Info.plist */,
-				831E95DA146FF02B003789DF /* InfoPlist.strings */,
-				831E95DD146FF02B003789DF /* main.m */,
-				831E95DF146FF02B003789DF /* CMTPDemo-Prefix.pch */,
+				E1A07E50210296E4007010AE /* CMTPDWonderwallLikeViewController.h */,
+				E1A07E53210296E4007010AE /* CMTPDWonderwallLikeViewController.m */,
+				E1A07E52210296E4007010AE /* WonderwallLikeFragmentShader.glsl */,
+				E1A07E51210296E4007010AE /* WonderwallLikeVertexShader.glsl */,
 			);
-			name = "Supporting Files";
+			path = WonderwallLike;
 			sourceTree = "<group>";
 		};
-		831E95EF146FF02C003789DF /* CMTPDemoTests */ = {
+		E1A07E55210296E4007010AE /* WebTest */ = {
 			isa = PBXGroup;
 			children = (
-				831E95F5146FF02C003789DF /* CMTPDemoTests.h */,
-				831E95F6146FF02C003789DF /* CMTPDemoTests.m */,
-				831E95F0146FF02C003789DF /* Supporting Files */,
+				E1A07E5A210296E4007010AE /* CMTPDWebTestViewController.h */,
+				E1A07E59210296E4007010AE /* CMTPDWebTestViewController.m */,
+				E1A07E56210296E4007010AE /* WebTestFragmentShader.glsl */,
+				E1A07E57210296E4007010AE /* WebTestVertexShader.glsl */,
 			);
-			path = CMTPDemoTests;
+			path = WebTest;
 			sourceTree = "<group>";
 		};
-		831E95F0146FF02C003789DF /* Supporting Files */ = {
+		E1A07E5D210296E5007010AE /* SpringTest */ = {
 			isa = PBXGroup;
 			children = (
-				831E95F1146FF02C003789DF /* CMTPDemoTests-Info.plist */,
-				831E95F2146FF02C003789DF /* InfoPlist.strings */,
+				E1A07E64210296E5007010AE /* CMTPDSmoothedPath.h */,
+				E1A07E5F210296E5007010AE /* CMTPDSmoothedPath.m */,
+				E1A07E62210296E5007010AE /* CMTPDSpringTestLayer.h */,
+				E1A07E65210296E5007010AE /* CMTPDSpringTestLayer.m */,
+				E1A07E60210296E5007010AE /* CMTPDSpringTestView.h */,
+				E1A07E63210296E5007010AE /* CMTPDSpringTestView.m */,
+				E1A07E61210296E5007010AE /* CMTPDSpringTestViewController.h */,
+				E1A07E66210296E5007010AE /* CMTPDSpringTestViewController.m */,
 			);
-			name = "Supporting Files";
+			path = SpringTest;
 			sourceTree = "<group>";
 		};
-		831E9600146FF093003789DF /* CMTraerPhysics */ = {
+		E1A07E67210296E5007010AE /* FreeFloatingTest */ = {
 			isa = PBXGroup;
 			children = (
-				831E96AE14720BBB003789DF /* CMTraerPhysics.h */,
-				831E9601146FF093003789DF /* CMTPAttraction.h */,
-				831E9602146FF093003789DF /* CMTPAttraction.m */,
-				831E9603146FF093003789DF /* CMTPCommon.h */,
-				831E9604146FF093003789DF /* CMTPCustomForce.h */,
-				831E9605146FF093003789DF /* CMTPCustomForce.m */,
-				831E9606146FF093003789DF /* CMTPForce.h */,
-				831E9607146FF093003789DF /* CMTPForce.m */,
-				831E9608146FF093003789DF /* CMTPIntegrator.h */,
-				831E9609146FF093003789DF /* CMTPIntegrator.m */,
-				831E960A146FF093003789DF /* CMTPModifiedEulerIntegrator.h */,
-				831E960B146FF093003789DF /* CMTPModifiedEulerIntegrator.m */,
-				831E960C146FF093003789DF /* CMTPParticle.h */,
-				831E960D146FF093003789DF /* CMTPParticle.m */,
-				831E960E146FF093003789DF /* CMTPParticleSystem.h */,
-				831E960F146FF093003789DF /* CMTPParticleSystem.m */,
-				831E9610146FF093003789DF /* CMTPRungeKuttaIntegrator.h */,
-				831E9611146FF093003789DF /* CMTPRungeKuttaIntegrator.m */,
-				831E9612146FF093003789DF /* CMTPSpring.h */,
-				831E9613146FF093003789DF /* CMTPSpring.m */,
-				83F857D014D5F5D500EB98F4 /* LICENSE.txt */,
+				E1A07E6E210296E5007010AE /* CMTPDFreeFloatingTestLayer.h */,
+				E1A07E6A210296E5007010AE /* CMTPDFreeFloatingTestLayer.m */,
+				E1A07E6F210296E5007010AE /* CMTPDFreeFloatingTestSubLayer.h */,
+				E1A07E69210296E5007010AE /* CMTPDFreeFloatingTestSubLayer.m */,
+				E1A07E70210296E5007010AE /* CMTPDFreeFloatingTestView.h */,
+				E1A07E6C210296E5007010AE /* CMTPDFreeFloatingTestView.m */,
+				E1A07E68210296E5007010AE /* CMTPDFreeFloatingTestViewController.h */,
+				E1A07E6D210296E5007010AE /* CMTPDFreeFloatingTestViewController.m */,
+			);
+			path = FreeFloatingTest;
+			sourceTree = "<group>";
+		};
+		E1A07E72210296E5007010AE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E1A07E75210296E5007010AE /* info.html */,
+				E1A07E76210296E5007010AE /* sandy_beach.jpg */,
+				E1A07E73210296E5007010AE /* wonderwall_atlas.plist */,
+				E1A07E77210296E5007010AE /* wonderwall_atlas.png */,
+				E1A07E74210296E5007010AE /* wonderwall_atlas@2x.plist */,
+				E1A07E78210296E5007010AE /* wonderwall_atlas@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E1A07E79210296E5007010AE /* AttractionTest */ = {
+			isa = PBXGroup;
+			children = (
+				E1A07E82210296E5007010AE /* CMTPDATSubLayers.h */,
+				E1A07E7D210296E5007010AE /* CMTPDATSubLayers.m */,
+				E1A07E80210296E5007010AE /* CMTPDAttractionTestLayer.h */,
+				E1A07E7A210296E5007010AE /* CMTPDAttractionTestLayer.m */,
+				E1A07E7F210296E5007010AE /* CMTPDAttractionTestView.h */,
+				E1A07E7B210296E5007010AE /* CMTPDAttractionTestView.m */,
+				E1A07E81210296E5007010AE /* CMTPDAttractionTestViewController.h */,
+				E1A07E7E210296E5007010AE /* CMTPDAttractionTestViewController.m */,
+			);
+			path = AttractionTest;
+			sourceTree = "<group>";
+		};
+		E1A07E83210296E5007010AE /* ScrollViewClone */ = {
+			isa = PBXGroup;
+			children = (
+				E1A07E85210296E5007010AE /* CMScrollView.h */,
+				E1A07E89210296E5007010AE /* CMScrollView.m */,
+				E1A07E8B210296E5007010AE /* CMTPDScrollViewCloneConfigureViewController.h */,
+				E1A07E86210296E5007010AE /* CMTPDScrollViewCloneConfigureViewController.m */,
+				E1A07E88210296E5007010AE /* CMTPDScrollViewCloneViewController.h */,
+				E1A07E84210296E5007010AE /* CMTPDScrollViewCloneViewController.m */,
+			);
+			path = ScrollViewClone;
+			sourceTree = "<group>";
+		};
+		E1A07E8C210296E5007010AE /* AttractionGrid */ = {
+			isa = PBXGroup;
+			children = (
+				E1A07E91210296E5007010AE /* AttractionGridFragmentShader.glsl */,
+				E1A07E90210296E5007010AE /* AttractionGridVertexShader.glsl */,
+				E1A07E8E210296E5007010AE /* CMTPDAttractionGridViewController.h */,
+				E1A07E8F210296E5007010AE /* CMTPDAttractionGridViewController.m */,
+			);
+			path = AttractionGrid;
+			sourceTree = "<group>";
+		};
+		E1A07E92210296E5007010AE /* ClothTest */ = {
+			isa = PBXGroup;
+			children = (
+				E1A07E95210296E5007010AE /* ClothTestFragmentShader.glsl */,
+				E1A07E94210296E5007010AE /* ClothTestVertexShader.glsl */,
+				E1A07E97210296E5007010AE /* CMTPDClothTestViewController.h */,
+				E1A07E93210296E5007010AE /* CMTPDClothTestViewController.m */,
+			);
+			path = ClothTest;
+			sourceTree = "<group>";
+		};
+		E1A07ECB210296F9007010AE /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				E1A07ECC210296F9007010AE /* CMGLESKit */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		E1A07ECC210296F9007010AE /* CMGLESKit */ = {
+			isa = PBXGroup;
+			children = (
+				E1A07ECD210296F9007010AE /* CMGLESKUtil.h */,
+				E1A07ECE210296F9007010AE /* CMGLESKProgram.m */,
+				E1A07ECF210296F9007010AE /* CMGLESKTexture.m */,
+				E1A07ED0210296F9007010AE /* CMGLESKUtil.m */,
+				E1A07ED1210296F9007010AE /* CMGLESKMatrix3D.h */,
+				E1A07ED2210296F9007010AE /* CMGLESKTexture.h */,
+				E1A07ED3210296F9007010AE /* CMGLESKProgram.h */,
+			);
+			path = CMGLESKit;
+			sourceTree = "<group>";
+		};
+		E1A07ED921029710007010AE /* CMTraerPhysics */ = {
+			isa = PBXGroup;
+			children = (
+				E1A07EEE21029710007010AE /* CMTPAttraction.h */,
+				E1A07EE021029710007010AE /* CMTPAttraction.m */,
+				E1A07EE521029710007010AE /* CMTPCommon.h */,
+				E1A07EE121029710007010AE /* CMTPCustomForce.h */,
+				E1A07EED21029710007010AE /* CMTPCustomForce.m */,
+				E1A07EEB21029710007010AE /* CMTPForce.h */,
+				E1A07EE321029710007010AE /* CMTPForce.m */,
+				E1A07EDE21029710007010AE /* CMTPIntegrator.h */,
+				E1A07EE921029710007010AE /* CMTPIntegrator.m */,
+				E1A07EE421029710007010AE /* CMTPModifiedEulerIntegrator.h */,
+				E1A07EDB21029710007010AE /* CMTPModifiedEulerIntegrator.m */,
+				E1A07EDC21029710007010AE /* CMTPParticle.h */,
+				E1A07EE721029710007010AE /* CMTPParticle.m */,
+				E1A07EEC21029710007010AE /* CMTPParticleSystem.h */,
+				E1A07EE221029710007010AE /* CMTPParticleSystem.m */,
+				E1A07EDA21029710007010AE /* CMTPRungeKuttaIntegrator.h */,
+				E1A07EE621029710007010AE /* CMTPRungeKuttaIntegrator.m */,
+				E1A07EE821029710007010AE /* CMTPSpring.h */,
+				E1A07EDF21029710007010AE /* CMTPSpring.m */,
+				E1A07EDD21029710007010AE /* CMTraerPhysics.h */,
+				E1A07EEA21029710007010AE /* LICENSE.txt */,
 			);
 			name = CMTraerPhysics;
 			path = ../CMTraerPhysics;
 			sourceTree = "<group>";
 		};
-		831E962D147126A3003789DF /* Demos */ = {
-			isa = PBXGroup;
-			children = (
-				831E962E147126AB003789DF /* Attraction Grid Demo */,
-				8395502014864F7E00241646 /* Attraction Test */,
-				83DFD64E148E3275003771E9 /* Cloth Test */,
-				83DFD6731495FEFA003771E9 /* Free Floating Test */,
-				83CCDBD115341B99003EA4D6 /* Scroll View Clone */,
-				83DFD682149A11C1003771E9 /* Spring Test */,
-				832A9C1B14AD31D400C1CB8E /* Web Test */,
-				83ECC5BD14BC4BF3002126E1 /* Wonderwall Like */,
-			);
-			name = Demos;
-			path = ../Demos;
-			sourceTree = "<group>";
-		};
-		831E962E147126AB003789DF /* Attraction Grid Demo */ = {
-			isa = PBXGroup;
-			children = (
-				831E96A614720435003789DF /* AttractionGridVertexShader.glsl */,
-				831E96A814720472003789DF /* AttractionGridFragmentShader.glsl */,
-				831E962F14712752003789DF /* CMTPDAttractionGridViewController.h */,
-				831E963014712752003789DF /* CMTPDAttractionGridViewController.m */,
-				831E963114712752003789DF /* CMTPDAttractionGridViewController.xib */,
-			);
-			path = "Attraction Grid Demo";
-			sourceTree = "<group>";
-		};
-		831E963A14712B57003789DF /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				831E95E0146FF02B003789DF /* CMTPDAppDelegate.h */,
-				831E95E1146FF02B003789DF /* CMTPDAppDelegate.m */,
-				834326DE14DFC2FC006F930F /* CMTPDInfoViewController.h */,
-				834326DF14DFC2FC006F930F /* CMTPDInfoViewController.m */,
-				834326E014DFC2FC006F930F /* CMTPDInfoViewController.xib */,
-				831E962614712566003789DF /* CMTPDMenuViewController.h */,
-				831E962714712566003789DF /* CMTPDMenuViewController.m */,
-				831E962814712566003789DF /* CMTPDMenuViewController.xib */,
-				831E963B14712B77003789DF /* EAGLView.h */,
-				831E963C14712B77003789DF /* EAGLView.m */,
-			);
-			name = Shared;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		831E963F14712B7F003789DF /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				831E962D147126A3003789DF /* Demos */,
-				831E963A14712B57003789DF /* Shared */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		831E9691147134D3003789DF /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				831E9692147134D3003789DF /* CMGLESKit */,
-			);
-			path = Libraries;
-			sourceTree = "<group>";
-		};
-		831E9692147134D3003789DF /* CMGLESKit */ = {
-			isa = PBXGroup;
-			children = (
-				8361C3D014CD7D2300EBF1A5 /* CMGLESKMatrix3D.h */,
-				831E9694147134D3003789DF /* CMGLESKTexture.h */,
-				831E9695147134D3003789DF /* CMGLESKTexture.m */,
-				831E969B1471371C003789DF /* CMGLESKProgram.h */,
-				831E969C1471371C003789DF /* CMGLESKProgram.m */,
-				83ECC5C814BC4E87002126E1 /* CMGLESKUtil.h */,
-				83ECC5C914BC4E87002126E1 /* CMGLESKUtil.m */,
-			);
-			path = CMGLESKit;
-			sourceTree = "<group>";
-		};
-		831E9697147135E7003789DF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				834326E914DFC570006F930F /* html */,
-				835E712B14CA4A5200409E43 /* Textures */,
-				831E9698147135E7003789DF /* Images */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		831E9698147135E7003789DF /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				831E9699147135E7003789DF /* sandy_beach.jpg */,
-			);
-			path = Images;
-			sourceTree = "<group>";
-		};
-		832A9C1B14AD31D400C1CB8E /* Web Test */ = {
-			isa = PBXGroup;
-			children = (
-				832A9C1C14AD321800C1CB8E /* CMTPDWebTestViewController.h */,
-				832A9C1D14AD321800C1CB8E /* CMTPDWebTestViewController.m */,
-				832A9C1E14AD321800C1CB8E /* CMTPDWebTestViewController.xib */,
-				832A9C2114AD336200C1CB8E /* WebTestFragmentShader.glsl */,
-				832A9C2214AD336200C1CB8E /* WebTestVertexShader.glsl */,
-			);
-			path = "Web Test";
-			sourceTree = "<group>";
-		};
-		834326E914DFC570006F930F /* html */ = {
-			isa = PBXGroup;
-			children = (
-				834326EA14DFC570006F930F /* info.html */,
-			);
-			path = html;
-			sourceTree = "<group>";
-		};
-		835E712B14CA4A5200409E43 /* Textures */ = {
-			isa = PBXGroup;
-			children = (
-				835E712C14CA4A5200409E43 /* wonderwall_atlas.plist */,
-				835E712D14CA4A5200409E43 /* wonderwall_atlas.png */,
-				835E712E14CA4A5200409E43 /* wonderwall_atlas@2x.plist */,
-				835E712F14CA4A5200409E43 /* wonderwall_atlas@2x.png */,
-			);
-			path = Textures;
-			sourceTree = "<group>";
-		};
-		8395502014864F7E00241646 /* Attraction Test */ = {
-			isa = PBXGroup;
-			children = (
-				83DFD640148ADDE6003771E9 /* CMTPDAttractionTestLayer.h */,
-				83DFD641148ADDE6003771E9 /* CMTPDAttractionTestLayer.m */,
-				83DFD63C148ADD10003771E9 /* CMTPDAttractionTestView.h */,
-				83DFD63D148ADD10003771E9 /* CMTPDAttractionTestView.m */,
-				8395502214864FEA00241646 /* CMTPDAttractionTestViewController.h */,
-				8395502314864FEA00241646 /* CMTPDAttractionTestViewController.m */,
-				8395502414864FEA00241646 /* CMTPDAttractionTestViewController.xib */,
-				83DFD643148AF9C3003771E9 /* CMTPDATSubLayers.h */,
-				83DFD644148AF9C3003771E9 /* CMTPDATSubLayers.m */,
-			);
-			path = "Attraction Test";
-			sourceTree = "<group>";
-		};
-		83CCDBD115341B99003EA4D6 /* Scroll View Clone */ = {
-			isa = PBXGroup;
-			children = (
-				83CCDBD215341B99003EA4D6 /* CMScrollView.h */,
-				83CCDBD315341B99003EA4D6 /* CMScrollView.m */,
-				83CCDBD415341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.h */,
-				83CCDBD515341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.m */,
-				83CCDBD615341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.xib */,
-				83CCDBD715341B99003EA4D6 /* CMTPDScrollViewCloneViewController.h */,
-				83CCDBD815341B99003EA4D6 /* CMTPDScrollViewCloneViewController.m */,
-				83CCDBD915341B99003EA4D6 /* CMTPDScrollViewCloneViewController.xib */,
-			);
-			path = "Scroll View Clone";
-			sourceTree = "<group>";
-		};
-		83DFD64E148E3275003771E9 /* Cloth Test */ = {
-			isa = PBXGroup;
-			children = (
-				83DFD654148F7AC4003771E9 /* ClothTestFragmentShader.glsl */,
-				83DFD655148F7AC4003771E9 /* ClothTestVertexShader.glsl */,
-				83DFD64F148E32FD003771E9 /* CMTPDClothTestViewController.h */,
-				83DFD650148E32FD003771E9 /* CMTPDClothTestViewController.m */,
-				83DFD651148E32FD003771E9 /* CMTPDClothTestViewController.xib */,
-			);
-			path = "Cloth Test";
-			sourceTree = "<group>";
-		};
-		83DFD6731495FEFA003771E9 /* Free Floating Test */ = {
-			isa = PBXGroup;
-			children = (
-				83DFD67C14960D9C003771E9 /* CMTPDFreeFloatingTestLayer.h */,
-				83DFD67D14960D9C003771E9 /* CMTPDFreeFloatingTestLayer.m */,
-				83DFD67F149613C3003771E9 /* CMTPDFreeFloatingTestSubLayer.h */,
-				83DFD680149613C3003771E9 /* CMTPDFreeFloatingTestSubLayer.m */,
-				83DFD67914960D81003771E9 /* CMTPDFreeFloatingTestView.h */,
-				83DFD67A14960D81003771E9 /* CMTPDFreeFloatingTestView.m */,
-				83DFD67414960D5A003771E9 /* CMTPDFreeFloatingTestViewController.h */,
-				83DFD67514960D5A003771E9 /* CMTPDFreeFloatingTestViewController.m */,
-				83DFD67614960D5A003771E9 /* CMTPDFreeFloatingTestViewController.xib */,
-			);
-			path = "Free Floating Test";
-			sourceTree = "<group>";
-		};
-		83DFD682149A11C1003771E9 /* Spring Test */ = {
-			isa = PBXGroup;
-			children = (
-				832A9C1714A729EB00C1CB8E /* CMTPDSmoothedPath.h */,
-				832A9C1814A729EB00C1CB8E /* CMTPDSmoothedPath.m */,
-				83DFD68B149A1669003771E9 /* CMTPDSpringTestLayer.h */,
-				83DFD68C149A1669003771E9 /* CMTPDSpringTestLayer.m */,
-				83DFD688149A139C003771E9 /* CMTPDSpringTestView.h */,
-				83DFD689149A139C003771E9 /* CMTPDSpringTestView.m */,
-				83DFD683149A12CE003771E9 /* CMTPDSpringTestViewController.h */,
-				83DFD684149A12CE003771E9 /* CMTPDSpringTestViewController.m */,
-				83DFD685149A12CE003771E9 /* CMTPDSpringTestViewController.xib */,
-			);
-			path = "Spring Test";
-			sourceTree = "<group>";
-		};
-		83ECC5BD14BC4BF3002126E1 /* Wonderwall Like */ = {
-			isa = PBXGroup;
-			children = (
-				83ECC5BF14BC4CA2002126E1 /* CMTPDWonderwallLikeViewController.h */,
-				83ECC5C014BC4CA2002126E1 /* CMTPDWonderwallLikeViewController.m */,
-				83ECC5C114BC4CA2002126E1 /* CMTPDWonderwallLikeViewController.xib */,
-				83ECC5C414BC4D10002126E1 /* WonderwallLikeFragmentShader.glsl */,
-				83ECC5C514BC4D10002126E1 /* WonderwallLikeVertexShader.glsl */,
-			);
-			path = "Wonderwall Like";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		831E95CC146FF02B003789DF /* CMTPDemo */ = {
+		E1739D0B210261AC00558840 /* CMTPDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 831E95FA146FF02C003789DF /* Build configuration list for PBXNativeTarget "CMTPDemo" */;
+			buildConfigurationList = E1739D25210261AD00558840 /* Build configuration list for PBXNativeTarget "CMTPDemo" */;
 			buildPhases = (
-				831E95C9146FF02B003789DF /* Sources */,
-				831E95CA146FF02B003789DF /* Frameworks */,
-				831E95CB146FF02B003789DF /* Resources */,
+				E1739D08210261AC00558840 /* Sources */,
+				E1739D09210261AC00558840 /* Frameworks */,
+				E1739D0A210261AC00558840 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -591,398 +406,304 @@
 			);
 			name = CMTPDemo;
 			productName = CMTPDemo;
-			productReference = 831E95CD146FF02B003789DF /* CMTPDemo.app */;
+			productReference = E1739D0C210261AC00558840 /* CMTPDemo.app */;
 			productType = "com.apple.product-type.application";
-		};
-		831E95E7146FF02C003789DF /* CMTPDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 831E95FD146FF02C003789DF /* Build configuration list for PBXNativeTarget "CMTPDemoTests" */;
-			buildPhases = (
-				831E95E3146FF02C003789DF /* Sources */,
-				831E95E4146FF02C003789DF /* Frameworks */,
-				831E95E5146FF02C003789DF /* Resources */,
-				831E95E6146FF02C003789DF /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				831E95EE146FF02C003789DF /* PBXTargetDependency */,
-			);
-			name = CMTPDemoTests;
-			productName = CMTPDemoTests;
-			productReference = 831E95E8146FF02C003789DF /* CMTPDemoTests.octest */;
-			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		831E95C4146FF02B003789DF /* Project object */ = {
+		E1739D04210261AC00558840 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Chris Miles";
+				TargetAttributes = {
+					E1739D0B210261AC00558840 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+				};
 			};
-			buildConfigurationList = 831E95C7146FF02B003789DF /* Build configuration list for PBXProject "CMTPDemo" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			buildConfigurationList = E1739D07210261AC00558840 /* Build configuration list for PBXProject "CMTPDemo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
-			mainGroup = 831E95C2146FF02B003789DF;
-			productRefGroup = 831E95CE146FF02B003789DF /* Products */;
+			mainGroup = E1739D03210261AC00558840;
+			productRefGroup = E1739D0D210261AC00558840 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				831E95CC146FF02B003789DF /* CMTPDemo */,
-				831E95E7146FF02C003789DF /* CMTPDemoTests */,
+				E1739D0B210261AC00558840 /* CMTPDemo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		831E95CB146FF02B003789DF /* Resources */ = {
+		E1739D0A210261AC00558840 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				831E95DC146FF02B003789DF /* InfoPlist.strings in Resources */,
-				831E962B14712566003789DF /* CMTPDMenuViewController.xib in Resources */,
-				831E963414712752003789DF /* CMTPDAttractionGridViewController.xib in Resources */,
-				831E969A147135E7003789DF /* sandy_beach.jpg in Resources */,
-				831E96A714720435003789DF /* AttractionGridVertexShader.glsl in Resources */,
-				831E96A914720472003789DF /* AttractionGridFragmentShader.glsl in Resources */,
-				8395502614864FEA00241646 /* CMTPDAttractionTestViewController.xib in Resources */,
-				83DFD653148E32FD003771E9 /* CMTPDClothTestViewController.xib in Resources */,
-				83DFD656148F7AC4003771E9 /* ClothTestFragmentShader.glsl in Resources */,
-				83DFD657148F7AC4003771E9 /* ClothTestVertexShader.glsl in Resources */,
-				83DFD67814960D5A003771E9 /* CMTPDFreeFloatingTestViewController.xib in Resources */,
-				83DFD687149A12CE003771E9 /* CMTPDSpringTestViewController.xib in Resources */,
-				832A9C2014AD321800C1CB8E /* CMTPDWebTestViewController.xib in Resources */,
-				832A9C2314AD336200C1CB8E /* WebTestFragmentShader.glsl in Resources */,
-				832A9C2414AD336200C1CB8E /* WebTestVertexShader.glsl in Resources */,
-				83ECC5C314BC4CA2002126E1 /* CMTPDWonderwallLikeViewController.xib in Resources */,
-				83ECC5C614BC4D10002126E1 /* WonderwallLikeFragmentShader.glsl in Resources */,
-				83ECC5C714BC4D10002126E1 /* WonderwallLikeVertexShader.glsl in Resources */,
-				835E713014CA4A5200409E43 /* wonderwall_atlas.plist in Resources */,
-				835E713114CA4A5200409E43 /* wonderwall_atlas.png in Resources */,
-				835E713214CA4A5200409E43 /* wonderwall_atlas@2x.plist in Resources */,
-				835E713314CA4A5200409E43 /* wonderwall_atlas@2x.png in Resources */,
-				834326E214DFC2FC006F930F /* CMTPDInfoViewController.xib in Resources */,
-				834326EB14DFC570006F930F /* info.html in Resources */,
-				83CCDBDC15341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.xib in Resources */,
-				83CCDBDE15341B99003EA4D6 /* CMTPDScrollViewCloneViewController.xib in Resources */,
-				831261A7161D749A0037F109 /* Default-568h@2x.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		831E95E5146FF02C003789DF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				831E95F4146FF02C003789DF /* InfoPlist.strings in Resources */,
-				831E962C14712566003789DF /* CMTPDMenuViewController.xib in Resources */,
-				831E963514712752003789DF /* CMTPDAttractionGridViewController.xib in Resources */,
+				E1A07EC3210296E6007010AE /* AttractionGridFragmentShader.glsl in Resources */,
+				E1A07EC6210296E6007010AE /* ClothTestFragmentShader.glsl in Resources */,
+				E1A07E9E210296E6007010AE /* WonderwallLikeFragmentShader.glsl in Resources */,
+				E1A07EB4210296E6007010AE /* wonderwall_atlas.png in Resources */,
+				E1739D1F210261AD00558840 /* LaunchScreen.storyboard in Resources */,
+				E1A07EB5210296E6007010AE /* wonderwall_atlas@2x.png in Resources */,
+				E1A07EEF21029710007010AE /* README.md in Resources */,
+				E1A07ED4210296F9007010AE /* LICENSE.txt in Resources */,
+				E1A07EC5210296E6007010AE /* ClothTestVertexShader.glsl in Resources */,
+				E1A07EC2210296E6007010AE /* AttractionGridVertexShader.glsl in Resources */,
+				E1A07EA1210296E6007010AE /* WebTestFragmentShader.glsl in Resources */,
+				E1A07EB2210296E6007010AE /* info.html in Resources */,
+				E1739D1C210261AD00558840 /* Assets.xcassets in Resources */,
+				E1A07E9D210296E6007010AE /* WonderwallLikeVertexShader.glsl in Resources */,
+				E1A07EA2210296E6007010AE /* WebTestVertexShader.glsl in Resources */,
+				E1A07EB1210296E6007010AE /* wonderwall_atlas@2x.plist in Resources */,
+				E1739D1A210261AC00558840 /* Main.storyboard in Resources */,
+				E1A07EB3210296E6007010AE /* sandy_beach.jpg in Resources */,
+				E1A07EB0210296E6007010AE /* wonderwall_atlas.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		831E95E6146FF02C003789DF /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		831E95C9146FF02B003789DF /* Sources */ = {
+		E1739D08210261AC00558840 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				831E95DE146FF02B003789DF /* main.m in Sources */,
-				831E95E2146FF02B003789DF /* CMTPDAppDelegate.m in Sources */,
-				831E9614146FF093003789DF /* CMTPAttraction.m in Sources */,
-				831E9616146FF093003789DF /* CMTPCustomForce.m in Sources */,
-				831E9618146FF093003789DF /* CMTPForce.m in Sources */,
-				831E961A146FF093003789DF /* CMTPIntegrator.m in Sources */,
-				831E961C146FF093003789DF /* CMTPModifiedEulerIntegrator.m in Sources */,
-				831E961E146FF093003789DF /* CMTPParticle.m in Sources */,
-				831E9620146FF093003789DF /* CMTPParticleSystem.m in Sources */,
-				831E9622146FF093003789DF /* CMTPRungeKuttaIntegrator.m in Sources */,
-				831E9624146FF093003789DF /* CMTPSpring.m in Sources */,
-				831E962914712566003789DF /* CMTPDMenuViewController.m in Sources */,
-				831E963214712752003789DF /* CMTPDAttractionGridViewController.m in Sources */,
-				831E963D14712B77003789DF /* EAGLView.m in Sources */,
-				831E9696147134D3003789DF /* CMGLESKTexture.m in Sources */,
-				831E969D1471371C003789DF /* CMGLESKProgram.m in Sources */,
-				8395502514864FEA00241646 /* CMTPDAttractionTestViewController.m in Sources */,
-				83DFD63E148ADD10003771E9 /* CMTPDAttractionTestView.m in Sources */,
-				83DFD642148ADDE6003771E9 /* CMTPDAttractionTestLayer.m in Sources */,
-				83DFD645148AF9C3003771E9 /* CMTPDATSubLayers.m in Sources */,
-				83DFD652148E32FD003771E9 /* CMTPDClothTestViewController.m in Sources */,
-				83DFD67714960D5A003771E9 /* CMTPDFreeFloatingTestViewController.m in Sources */,
-				83DFD67B14960D81003771E9 /* CMTPDFreeFloatingTestView.m in Sources */,
-				83DFD67E14960D9D003771E9 /* CMTPDFreeFloatingTestLayer.m in Sources */,
-				83DFD681149613C3003771E9 /* CMTPDFreeFloatingTestSubLayer.m in Sources */,
-				83DFD686149A12CE003771E9 /* CMTPDSpringTestViewController.m in Sources */,
-				83DFD68A149A139D003771E9 /* CMTPDSpringTestView.m in Sources */,
-				83DFD68D149A1669003771E9 /* CMTPDSpringTestLayer.m in Sources */,
-				832A9C1914A729EB00C1CB8E /* CMTPDSmoothedPath.m in Sources */,
-				832A9C1F14AD321800C1CB8E /* CMTPDWebTestViewController.m in Sources */,
-				83ECC5C214BC4CA2002126E1 /* CMTPDWonderwallLikeViewController.m in Sources */,
-				83ECC5CA14BC4E87002126E1 /* CMGLESKUtil.m in Sources */,
-				834326E114DFC2FC006F930F /* CMTPDInfoViewController.m in Sources */,
-				83CCDBDA15341B99003EA4D6 /* CMScrollView.m in Sources */,
-				83CCDBDB15341B99003EA4D6 /* CMTPDScrollViewCloneConfigureViewController.m in Sources */,
-				83CCDBDD15341B99003EA4D6 /* CMTPDScrollViewCloneViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		831E95E3146FF02C003789DF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				831E95F7146FF02C003789DF /* CMTPDemoTests.m in Sources */,
-				831E9615146FF093003789DF /* CMTPAttraction.m in Sources */,
-				831E9617146FF093003789DF /* CMTPCustomForce.m in Sources */,
-				831E9619146FF093003789DF /* CMTPForce.m in Sources */,
-				831E961B146FF093003789DF /* CMTPIntegrator.m in Sources */,
-				831E961D146FF093003789DF /* CMTPModifiedEulerIntegrator.m in Sources */,
-				831E961F146FF093003789DF /* CMTPParticle.m in Sources */,
-				831E9621146FF093003789DF /* CMTPParticleSystem.m in Sources */,
-				831E9623146FF093003789DF /* CMTPRungeKuttaIntegrator.m in Sources */,
-				831E9625146FF093003789DF /* CMTPSpring.m in Sources */,
-				831E962A14712566003789DF /* CMTPDMenuViewController.m in Sources */,
-				831E963314712752003789DF /* CMTPDAttractionGridViewController.m in Sources */,
-				831E963E14712B77003789DF /* EAGLView.m in Sources */,
+				E1A07EA8210296E6007010AE /* CMTPDSpringTestView.m in Sources */,
+				E1739D14210261AC00558840 /* CMTPMasterViewController.m in Sources */,
+				E1A07EF921029710007010AE /* CMTPCustomForce.m in Sources */,
+				E1A07EF121029710007010AE /* CMTPSpring.m in Sources */,
+				E1A07EBA210296E6007010AE /* CMTPDAttractionTestViewController.m in Sources */,
+				E1A07EC1210296E6007010AE /* CMTPDAttractionGridViewController.m in Sources */,
+				E1A07EB9210296E6007010AE /* CMTPDATSubLayers.m in Sources */,
+				E1A07ED6210296F9007010AE /* CMGLESKTexture.m in Sources */,
+				E1A07EA4210296E6007010AE /* CMTPDWebTestViewController.m in Sources */,
+				E1A07EBE210296E6007010AE /* CMScrollView.m in Sources */,
+				E1A07EB6210296E6007010AE /* CMTPDAttractionTestLayer.m in Sources */,
+				E1A07EF321029710007010AE /* CMTPParticleSystem.m in Sources */,
+				E1A07EC8210296E6007010AE /* EAGLView.m in Sources */,
+				E1A07EF621029710007010AE /* CMTPParticle.m in Sources */,
+				E1A07EA9210296E6007010AE /* CMTPDSpringTestLayer.m in Sources */,
+				E1A07EAF210296E6007010AE /* CMTPDFreeFloatingTestViewController.m in Sources */,
+				E1A07EF521029710007010AE /* CMTPRungeKuttaIntegrator.m in Sources */,
+				E1A07EAC210296E6007010AE /* CMTPDFreeFloatingTestLayer.m in Sources */,
+				E1A07EAE210296E6007010AE /* CMTPDFreeFloatingTestView.m in Sources */,
+				E1739D11210261AC00558840 /* CMTPDAppDelegate.m in Sources */,
+				E1A07EAA210296E6007010AE /* CMTPDSpringTestViewController.m in Sources */,
+				E1A07EBC210296E6007010AE /* CMTPDScrollViewCloneConfigureViewController.m in Sources */,
+				E1739D22210261AD00558840 /* main.m in Sources */,
+				E1A07ED5210296F9007010AE /* CMGLESKProgram.m in Sources */,
+				E1A07E9F210296E6007010AE /* CMTPDWonderwallLikeViewController.m in Sources */,
+				E1A07E9B210296E6007010AE /* CMTPDInfoViewController.m in Sources */,
+				E1A07EC4210296E6007010AE /* CMTPDClothTestViewController.m in Sources */,
+				E1A07EF721029710007010AE /* CMTPIntegrator.m in Sources */,
+				E1A07EF421029710007010AE /* CMTPForce.m in Sources */,
+				E1A07EF221029710007010AE /* CMTPAttraction.m in Sources */,
+				E1A07EB7210296E6007010AE /* CMTPDAttractionTestView.m in Sources */,
+				E1A07ED7210296F9007010AE /* CMGLESKUtil.m in Sources */,
+				E1A07EF021029710007010AE /* CMTPModifiedEulerIntegrator.m in Sources */,
+				E1A07EA7210296E6007010AE /* CMTPDSmoothedPath.m in Sources */,
+				E1A07EBB210296E6007010AE /* CMTPDScrollViewCloneViewController.m in Sources */,
+				E1A07EAB210296E6007010AE /* CMTPDFreeFloatingTestSubLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		831E95EE146FF02C003789DF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 831E95CC146FF02B003789DF /* CMTPDemo */;
-			targetProxy = 831E95ED146FF02C003789DF /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		831E95DA146FF02B003789DF /* InfoPlist.strings */ = {
+		E1739D18210261AC00558840 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				831E95DB146FF02B003789DF /* en */,
+				E1739D19210261AC00558840 /* Base */,
 			);
-			name = InfoPlist.strings;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		831E95F2146FF02C003789DF /* InfoPlist.strings */ = {
+		E1739D1D210261AD00558840 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				831E95F3146FF02C003789DF /* en */,
+				E1739D1E210261AD00558840 /* Base */,
 			);
-			name = InfoPlist.strings;
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		831E95F8146FF02C003789DF /* Debug */ = {
+		E1739D23210261AD00558840 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
-				CLANG_WARN_OBJCPP_ARC_ABI = YES;
-				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
-				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
-				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
-				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
-				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
-				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
-				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
-				GCC_WARN_PEDANTIC = YES;
-				GCC_WARN_SHADOW = YES;
-				GCC_WARN_SIGN_COMPARE = YES;
-				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_LABEL = YES;
-				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				RUN_CLANG_STATIC_ANALYZER = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		831E95F9146FF02C003789DF /* Release */ = {
+		E1739D24210261AD00558840 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
-				CLANG_WARN_OBJCPP_ARC_ABI = YES;
-				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
-				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
-				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
-				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
-				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
-				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
-				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
-				GCC_WARN_PEDANTIC = YES;
-				GCC_WARN_SHADOW = YES;
-				GCC_WARN_SIGN_COMPARE = YES;
-				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_LABEL = YES;
-				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				RUN_CLANG_STATIC_ANALYZER = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		831E95FB146FF02C003789DF /* Debug */ = {
+		E1739D26210261AD00558840 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CMTPDemo/CMTPDemo-Prefix.pch";
-				INFOPLIST_FILE = "CMTPDemo/CMTPDemo-Info.plist";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "$(SRCROOT)/CMTPDemo/CMTPDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = info.chrismiles.CMTPDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		831E95FC146FF02C003789DF /* Release */ = {
+		E1739D27210261AD00558840 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CMTPDemo/CMTPDemo-Prefix.pch";
-				INFOPLIST_FILE = "CMTPDemo/CMTPDemo-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		831E95FE146FF02C003789DF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CMTPDemo.app/CMTPDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "$(SRCROOT)/CMTPDemo/CMTPDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CMTPDemo/CMTPDemo-Prefix.pch";
-				INFOPLIST_FILE = "CMTPDemoTests/CMTPDemoTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = info.chrismiles.CMTPDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		831E95FF146FF02C003789DF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CMTPDemo.app/CMTPDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CMTPDemo/CMTPDemo-Prefix.pch";
-				INFOPLIST_FILE = "CMTPDemoTests/CMTPDemoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		831E95C7146FF02B003789DF /* Build configuration list for PBXProject "CMTPDemo" */ = {
+		E1739D07210261AC00558840 /* Build configuration list for PBXProject "CMTPDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				831E95F8146FF02C003789DF /* Debug */,
-				831E95F9146FF02C003789DF /* Release */,
+				E1739D23210261AD00558840 /* Debug */,
+				E1739D24210261AD00558840 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		831E95FA146FF02C003789DF /* Build configuration list for PBXNativeTarget "CMTPDemo" */ = {
+		E1739D25210261AD00558840 /* Build configuration list for PBXNativeTarget "CMTPDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				831E95FB146FF02C003789DF /* Debug */,
-				831E95FC146FF02C003789DF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		831E95FD146FF02C003789DF /* Build configuration list for PBXNativeTarget "CMTPDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				831E95FE146FF02C003789DF /* Debug */,
-				831E95FF146FF02C003789DF /* Release */,
+				E1739D26210261AD00558840 /* Debug */,
+				E1739D27210261AD00558840 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 831E95C4146FF02B003789DF /* Project object */;
+	rootObject = E1739D04210261AC00558840 /* Project object */;
 }

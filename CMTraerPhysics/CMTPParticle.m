@@ -16,10 +16,10 @@
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//  
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -31,79 +31,63 @@
 
 #import "CMTPParticle.h"
 
-
 @implementation CMTPParticle
 
-@synthesize age, context, force, mass, position, velocity;
+@synthesize age,context,force,mass,position,velocity;
 
-- (CMTPFloat)distanceToParticle:(CMTPParticle *)p
-{
-    return CMTPVector3DDistance(position, p.position);
+-(CMTPFloat)distanceToParticle:(CMTPParticle*)p {
+    return CMTPVector3DDistance(position,p.position);
 }
 
-- (void)makeFixed
-{
-    fixed = YES;
-    velocity.x = 0; velocity.y = 0; velocity.z = 0;
+-(void)makeFixed {
+    fixed=YES;
+    velocity.x=0;velocity.y=0;velocity.z=0;
 }
 
-- (void)makeFree
-{
-    fixed = NO;
+-(void)makeFree {
+    fixed=NO;
 }
 
-- (BOOL)isFixed
-{
+-(BOOL)isFixed {
     return fixed;
 }
 
-- (BOOL)isFree
-{
+-(BOOL)isFree {
     return !fixed;
 }
 
-- (void)setMass:(CMTPFloat)m
-{
-    mass = m;
+-(void)setMass:(CMTPFloat)m {
+    mass=m;
 }
 
-- (void)reset
-{
-    age = 0;
-    dead = NO;
-    position.x	= 0; position.y	= 0; position.z	= 0;
-    velocity.x	= 0; velocity.y	= 0; velocity.z	= 0;
-    force.x	= 0; force.y	= 0; force.z	= 0;
-    mass = 1;
+-(void)reset {
+    age=0;
+    dead=NO;
+    position.x=0;position.y=0;position.z=0;
+    velocity.x=0;velocity.y=0;velocity.z=0;
+    force.x=0;force.y=0;force.z=0;
+    mass=1;
 }
 
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"<%@: %p position=(%f, %f, %f)>", [self class], self, position.x, position.y, position.z];
+-(NSString*)description {
+    return [NSString stringWithFormat:@"<%@: %p position=(%f, %f, %f)>",[self class],(void*)self,position.x,position.y,position.z];
 }
 
-- (id)initWithMass:(CMTPFloat)aMass position:(CMTPVector3D)aPosition
-{
-    if ((self = [super init])) {
-	mass = aMass;
-	position = aPosition;
-	
-	velocity = CMTPVector3DMake(0.0, 0.0, 0.0);
-	force = CMTPVector3DMake(0.0, 0.0, 0.0);
-	
-	age = 0.0;
-        
-	dead = NO;
-	fixed = NO;
+-(id)initWithMass:(CMTPFloat)aMass position:(CMTPVector3D)aPosition {
+    if ((self=[super init])) {
+        mass=aMass;
+        position=aPosition;
+
+        velocity=CMTPVector3DMake(0.0,0.0,0.0);
+        force=CMTPVector3DMake(0.0,0.0,0.0);
+
+        age=0.0;
+
+        dead=NO;
+        fixed=NO;
     }
     return self;
 }
 
-- (void)dealloc
-{
-    [context release];
-    
-    [super dealloc];
-}
-
 @end
+

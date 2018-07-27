@@ -16,10 +16,10 @@
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//  
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,72 +29,71 @@
 //  THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "CMTPAttraction.h"
+#import "CMTPCustomForce.h"
 #import "CMTPIntegrator.h"
 #import "CMTPParticle.h"
 #import "CMTPSpring.h"
-#import "CMTPAttraction.h"
-#import "CMTPCustomForce.h"
+#import <Foundation/Foundation.h>
 
 /* Enable DEBUG_PHYSICS_OBJECTS to log count of physics objects */
 //#define DEBUG_PHYSICS_OBJECTS
 
-
 typedef enum {
-    CMTPParticleSystemIntegratorRungeKutta = 1,
+    CMTPParticleSystemIntegratorRungeKutta=1,
     CMTPParticleSystemIntegratorModifiedEuler
 } CMTPParticleSystemIntegrator;
 
-
 @interface CMTPParticleSystem : NSObject {
-    CMTPIntegrator *integrator;
-    
+    CMTPIntegrator* integrator;
+
     CMTPVector3D gravity;
     CMTPFloat drag;
-    
-    NSMutableArray *particles;
-    NSMutableArray *springs;
-    NSMutableArray *attractions;
-    NSMutableArray *custom;
-    
+
+    NSMutableArray* particles;
+    NSMutableArray* springs;
+    NSMutableArray* attractions;
+    NSMutableArray* custom;
+
     BOOL hasDeadParticles;
-    
+
 #ifdef DEBUG_PHYSICS_OBJECTS
     CFTimeInterval debug_physics_prev_time;
 #endif
 }
 
-@property (nonatomic, assign) CMTPFloat drag;
-@property (nonatomic, assign) CMTPVector3D gravity;
+@property (nonatomic,assign) CMTPFloat drag;
+@property (nonatomic,assign) CMTPVector3D gravity;
 
-@property (nonatomic, retain, readonly) NSMutableArray *particles;
+@property (nonatomic,strong,readonly) NSMutableArray* particles;
 
-- (void)setIntegrator:(CMTPParticleSystemIntegrator)anIntegrator;
-- (void)tick:(CMTPFloat)t;
-- (CMTPParticle *)makeParticleWithMass:(CMTPFloat)mass position:(CMTPVector3D)vector;
-- (CMTPSpring *)makeSpringBetweenParticleA:(CMTPParticle *)particleA particleB:(CMTPParticle *)particleB springConstant:(CMTPFloat)springConstant damping:(CMTPFloat)damping restLength:(CMTPFloat)restLength;
-- (CMTPAttraction *)makeAttractionBetweenParticleA:(CMTPParticle *)particleA particleB:(CMTPParticle *)particleB strength:(CMTPFloat)strength minDistance:(CMTPFloat)minDistance;
-- (void)clear;
-- (void)applyForces;
-- (void)clearForces;
-- (NSUInteger)numberOfParticles;
-- (NSUInteger)numberOfSprings;
-- (NSUInteger)numberOfAttractions;
-- (CMTPParticle *)getParticleAtIndex:(NSUInteger)i;
-- (CMTPSpring *)getSpringAtIndex:(NSUInteger)i;
-- (CMTPAttraction *)getAttractionAtIndex:(NSUInteger)i;
-- (void)addCustomForce:(CMTPForce *)f;
-- (NSUInteger)numberOfCustomForces;
-- (CMTPForce *)getCustomForceAtIndex:(NSUInteger)i;
-- (void)removeCustomForceAtIndex:(NSUInteger)i;
-- (BOOL)removeCustomForceByReference:(CMTPForce *)f;
-- (void)removeSpringAtIndex:(NSUInteger)i;
-- (BOOL)removeSpringByReference:(CMTPSpring *)s;
-- (void)removeAttractionAtIndex:(NSUInteger)i;
-- (BOOL)removeAttractionByReference:(CMTPAttraction *)a;
-- (void)removeParticleAtIndex:(NSUInteger)i;
-- (BOOL)removeParticleByReference:(CMTPParticle *)p;
+-(void)setIntegrator:(CMTPParticleSystemIntegrator)anIntegrator;
+-(void)tick:(CMTPFloat)t;
+-(CMTPParticle*)makeParticleWithMass:(CMTPFloat)mass position:(CMTPVector3D)vector;
+-(CMTPSpring*)makeSpringBetweenParticleA:(CMTPParticle*)particleA particleB:(CMTPParticle*)particleB springConstant:(CMTPFloat)springConstant damping:(CMTPFloat)damping restLength:(CMTPFloat)restLength;
+-(CMTPAttraction*)makeAttractionBetweenParticleA:(CMTPParticle*)particleA particleB:(CMTPParticle*)particleB strength:(CMTPFloat)strength minDistance:(CMTPFloat)minDistance;
+-(void)clear;
+-(void)applyForces;
+-(void)clearForces;
+-(NSUInteger)numberOfParticles;
+-(NSUInteger)numberOfSprings;
+-(NSUInteger)numberOfAttractions;
+-(CMTPParticle*)getParticleAtIndex:(NSUInteger)i;
+-(CMTPSpring*)getSpringAtIndex:(NSUInteger)i;
+-(CMTPAttraction*)getAttractionAtIndex:(NSUInteger)i;
+-(void)addCustomForce:(CMTPForce*)f;
+-(NSUInteger)numberOfCustomForces;
+-(CMTPForce*)getCustomForceAtIndex:(NSUInteger)i;
+-(void)removeCustomForceAtIndex:(NSUInteger)i;
+-(BOOL)removeCustomForceByReference:(CMTPForce*)f;
+-(void)removeSpringAtIndex:(NSUInteger)i;
+-(BOOL)removeSpringByReference:(CMTPSpring*)s;
+-(void)removeAttractionAtIndex:(NSUInteger)i;
+-(BOOL)removeAttractionByReference:(CMTPAttraction*)a;
+-(void)removeParticleAtIndex:(NSUInteger)i;
+-(BOOL)removeParticleByReference:(CMTPParticle*)p;
 
-- (id)initWithGravityVector:(CMTPVector3D)gravityVector drag:(CMTPFloat)dragValue;
+-(id)initWithGravityVector:(CMTPVector3D)gravityVector drag:(CMTPFloat)dragValue;
 
 @end
+
