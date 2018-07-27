@@ -27,9 +27,10 @@
 #import "EAGLView.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface EAGLView (PrivateMethods)
--(void)createFramebuffer;
--(void)deleteFramebuffer;
+@interface EAGLView () {
+    EAGLContext* context;
+    GLuint defaultFramebuffer,colorRenderbuffer,depthRenderbuffer;
+}
 @end
 
 @implementation EAGLView
@@ -57,7 +58,7 @@
 }
 
 -(void)dealloc {
-    [self deleteFramebuffer];
+    [self setContext:nil];
 }
 
 -(EAGLContext*)context {
@@ -146,6 +147,7 @@
 
 -(void)layoutSubviews {
     [self deleteFramebuffer];
+    [super layoutSubviews];
 }
 
 @end

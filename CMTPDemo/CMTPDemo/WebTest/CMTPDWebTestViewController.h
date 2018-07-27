@@ -34,13 +34,14 @@
 
 @interface CMTPDWebTestViewController : UIViewController <EAGLViewDelegate>
 
-@property (strong,nonatomic) IBOutlet UILabel* fpsLabel;
-@property (strong,nonatomic) IBOutlet UILabel* fullFrameRateLabel;
-@property (strong,nonatomic) IBOutlet UIView* fullFrameRateToggleView;
-@property (strong,nonatomic) IBOutlet UIView* modifyStructureToggleView;
+@property (weak,nonatomic) IBOutlet EAGLView *testView;
+@property (weak,nonatomic) IBOutlet UIBarButtonItem* fpsLabel;
+@property (weak,nonatomic) IBOutlet UILabel* fullFrameRateLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *fullFrameRateSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *damageSwitch;
 
 -(IBAction)fullFrameRateAction:(id)sender;
--(IBAction)modifyStructureAction:(id)sender;
+-(IBAction)damageAction:(id)sender;
 
 @end
 

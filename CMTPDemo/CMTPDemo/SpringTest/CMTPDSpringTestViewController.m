@@ -26,78 +26,78 @@
 
 #import "CMTPDSpringTestView.h"
 #import "CMTPDSpringTestViewController.h"
+#import <CoreMotion/CoreMotion.h>
+
+#pragma mark - Static Globals
+// Static globals so revisiting same demo remembers control settings.
+static BOOL viewedBefore;
+static BOOL showSmooth;
+static BOOL showAccel;
+
+#pragma mark - CMTPDSpringTestViewController
+@interface CMTPDSpringTestViewController ()
+@property (strong,nonatomic) CMMotionManager* motionManager;
+@end
 
 @implementation CMTPDSpringTestViewController
 
-@synthesize accelerometerToggleView;
-@synthesize fpsLabel;
-@synthesize smoothToggleView;
-
 #pragma mark - UIControl actions
 
--(IBAction)accelerometerToggleAction:(id)sender {
+-(IBAction)accelToggleAction:(id)sender {
     UISwitch* aSwitch=(UISwitch*)sender;
-    [(CMTPDSpringTestView*)self.view setGravityByDeviceMotionEnabled:aSwitch.on];
+    showAccel=aSwitch.on;
+    [self.testView setGravityByDeviceMotionEnabled:showAccel];
 }
 
 -(IBAction)smoothToggleAction:(id)sender {
     UISwitch* aSwitch=(UISwitch*)sender;
-    [(CMTPDSpringTestView*)self.view setSmoothed:aSwitch.on];
+    showSmooth=aSwitch.on;
+    [self.testView setSmoothed:showSmooth];
 }
 
 #pragma mark - View lifecycle
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-
-    self.title=@"Spring Test";
-
-    NSMutableArray* toolbarItems=[NSMutableArray array];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.smoothToggleView]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-    if ([(CMTPDSpringTestView*)self.view isDeviceMotionAvailable]) {
-        [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.accelerometerToggleView]];
-    }
-    self.toolbarItems=toolbarItems;
+    self.motionManager=[[CMMotionManager alloc] init];
+    _motionManager.deviceMotionUpdateInterval=0.02;   // 50 Hz
+    _accelSwitch.enabled=_motionManager.isDeviceMotionAvailable;
+    if (!viewedBefore) {
+        showSmooth=_smoothSwitch.on;
+        showAccel=_accelSwitch.on;
+        viewedBefore=YES;
+    } else {
+        _smoothSwitch.on=showSmooth;
+        _accelSwitch.on=showAccel;
+    };
     [self.navigationController setToolbarHidden:NO animated:YES];
-
-    //    self.freeFloatingTestView.fpsLabel = self.fpsLabel;
-    [(CMTPDSpringTestView*)self.view setFpsLabel:self.fpsLabel];
+    [self.testView setFpsLabel:_fpsLabel];
+    [self.testView setSmoothed:showSmooth];
+    [self.testView setGravityByDeviceMotionEnabled:showAccel];
 }
-
-#if false
--(void)viewDidUnload {
-    [self setAccelerometerToggleView:nil];
-    [self setFpsLabel:nil];
-    [self setSmoothToggleView:nil];
-
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-#endif
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
-    [(CMTPDSpringTestView*)self.view startAnimation];
+    [self.testView startAnimation];
 }
 
--(void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-
-    [(CMTPDSpringTestView*)self.view stopAnimation];
+-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id)coordinator {
+    // before rotation
+    UISplitViewController *splitViewController=self.splitViewController;
+    UINavigationController *navigationController=splitViewController.viewControllers[0];
+    UIViewController* masterViewController=navigationController.viewControllers[0];
+    [masterViewController.navigationController popToRootViewControllerAnimated:NO];
+    [coordinator animateAlongsideTransition:^(id  _Nonnull context) {
+        // resize our content view ...
+    } completion:^(id  _Nonnull context) {
+        // after rotation
+        [masterViewController performSegueWithIdentifier:@"springTestSegue" sender:nil];
+    }];
 }
 
-#pragma mark - Object lifecycle
-
--(id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil {
-    self=[super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-    }
-    return self;
+-(void)viewDidDisappear:(BOOL)animated {
+    [self.testView stopAnimation];
+    [super viewDidDisappear:animated];
 }
 
 @end

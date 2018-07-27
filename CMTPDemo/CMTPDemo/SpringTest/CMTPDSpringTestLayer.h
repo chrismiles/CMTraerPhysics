@@ -31,7 +31,7 @@
 
 @interface CMTPDSpringTestLayer : CALayer
 
-@property (nonatomic,strong) UILabel* fpsLabel;
+@property (nonatomic,strong) UIBarButtonItem* fpsLabel;
 @property (nonatomic,assign) BOOL gravityByDeviceMotionEnabled;
 @property (nonatomic,assign,readonly) BOOL isDeviceMotionAvailable;
 @property (nonatomic,assign) BOOL smoothed;

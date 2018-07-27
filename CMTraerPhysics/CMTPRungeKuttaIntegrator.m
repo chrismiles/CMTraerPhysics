@@ -38,27 +38,42 @@
 }
 @end
 
+@interface CMTPRungeKuttaIntegrator ()
+@property (strong,nonatomic) CMTPParticleSystem* s;
+    
+@property (strong,nonatomic) NSMutableArray* originalPositions;
+@property (strong,nonatomic) NSMutableArray* originalVelocities;
+@property (strong,nonatomic) NSMutableArray* k1Forces;
+@property (strong,nonatomic) NSMutableArray* k1Velocities;
+@property (strong,nonatomic) NSMutableArray* k2Forces;
+@property (strong,nonatomic) NSMutableArray* k2Velocities;
+@property (strong,nonatomic) NSMutableArray* k3Forces;
+@property (strong,nonatomic) NSMutableArray* k3Velocities;
+@property (strong,nonatomic) NSMutableArray* k4Forces;
+@property (strong,nonatomic) NSMutableArray* k4Velocities;
+@end
+
 @implementation CMTPRungeKuttaIntegrator
 
 -(void)allocateParticles {
-    while ([s.particles count]>[originalPositions count]) {
-        [originalPositions addObject:[CMVector3Dobj vector3Dobj]];
-        [originalVelocities addObject:[CMVector3Dobj vector3Dobj]];
-        [k1Forces addObject:[CMVector3Dobj vector3Dobj]];
-        [k1Velocities addObject:[CMVector3Dobj vector3Dobj]];
-        [k2Forces addObject:[CMVector3Dobj vector3Dobj]];
-        [k2Velocities addObject:[CMVector3Dobj vector3Dobj]];
-        [k3Forces addObject:[CMVector3Dobj vector3Dobj]];
-        [k3Velocities addObject:[CMVector3Dobj vector3Dobj]];
-        [k4Forces addObject:[CMVector3Dobj vector3Dobj]];
-        [k4Velocities addObject:[CMVector3Dobj vector3Dobj]];
+    while ([_s.particles count]>[_originalPositions count]) {
+        [_originalPositions addObject:[CMVector3Dobj vector3Dobj]];
+        [_originalVelocities addObject:[CMVector3Dobj vector3Dobj]];
+        [_k1Forces addObject:[CMVector3Dobj vector3Dobj]];
+        [_k1Velocities addObject:[CMVector3Dobj vector3Dobj]];
+        [_k2Forces addObject:[CMVector3Dobj vector3Dobj]];
+        [_k2Velocities addObject:[CMVector3Dobj vector3Dobj]];
+        [_k3Forces addObject:[CMVector3Dobj vector3Dobj]];
+        [_k3Velocities addObject:[CMVector3Dobj vector3Dobj]];
+        [_k4Forces addObject:[CMVector3Dobj vector3Dobj]];
+        [_k4Velocities addObject:[CMVector3Dobj vector3Dobj]];
     }
 }
 
 -(void)step:(CMTPFloat)t {
     [self allocateParticles];
 
-    NSArray* particles=s.particles;
+    NSArray* particles=_s.particles;
     NSUInteger i;
     NSUInteger p_length=[particles count];
     CMTPParticle* p;
@@ -80,22 +95,22 @@
     for (i=0;i<p_length;i++) {
         p=[particles objectAtIndex:i];
         if (![p isFixed]) {
-            CMVector3Dobj* v=[originalPositions objectAtIndex:i];
+            CMVector3Dobj* v=[_originalPositions objectAtIndex:i];
             v.vector3D=p.position;
 
-            v=[originalVelocities objectAtIndex:i];
+            v=[_originalVelocities objectAtIndex:i];
             v.vector3D=p.velocity;
         }
         p.force=CMTPVector3DMake(0,0,0);
     }
-    [s applyForces];
+    [_s applyForces];
     for (i=0;i<p_length;i++) {
         p=[particles objectAtIndex:i];
         if (![p isFixed]) {
-            CMVector3Dobj* v=[k1Forces objectAtIndex:i];
+            CMVector3Dobj* v=[_k1Forces objectAtIndex:i];
             v.vector3D=p.force;
 
-            v=[k1Velocities objectAtIndex:i];
+            v=[_k1Velocities objectAtIndex:i];
             v.vector3D=p.velocity;
         }
         p.force=CMTPVector3DMake(0,0,0); //clear
@@ -106,29 +121,29 @@
     for (i=0;i<p_length;i++) {
         p=[particles objectAtIndex:i];
         if (![p isFixed]) {
-            originalPosition=[(CMVector3Dobj*)[originalPositions objectAtIndex:i] vector3D];
-            k1Velocity=[(CMVector3Dobj*)[k1Velocities objectAtIndex:i] vector3D];
+            originalPosition=[(CMVector3Dobj*)[_originalPositions objectAtIndex:i] vector3D];
+            k1Velocity=[(CMVector3Dobj*)[_k1Velocities objectAtIndex:i] vector3D];
 
             p.position=CMTPVector3DMake(originalPosition.x+k1Velocity.x*0.5f*t,
                 originalPosition.y+k1Velocity.y*0.5f*t,
                 originalPosition.z+k1Velocity.z*0.5f*t);
 
-            originalVelocity=[(CMVector3Dobj*)[originalVelocities objectAtIndex:i] vector3D];
-            k1Force=[(CMVector3Dobj*)[k1Forces objectAtIndex:i] vector3D];
+            originalVelocity=[(CMVector3Dobj*)[_originalVelocities objectAtIndex:i] vector3D];
+            k1Force=[(CMVector3Dobj*)[_k1Forces objectAtIndex:i] vector3D];
 
             p.velocity=CMTPVector3DMake(originalVelocity.x+k1Force.x*0.5f*t/p.mass,
                 originalVelocity.y+k1Force.y*0.5f*t/p.mass,
                 originalVelocity.z+k1Force.z*0.5f*t/p.mass);
         }
     }
-    [s applyForces];
+    [_s applyForces];
     for (i=0;i<p_length;i++) {
         p=[particles objectAtIndex:i];
         if (![p isFixed]) {
-            CMVector3Dobj* v=[k2Forces objectAtIndex:i];
+            CMVector3Dobj* v=[_k2Forces objectAtIndex:i];
             v.vector3D=p.force;
 
-            v=[k2Velocities objectAtIndex:i];
+            v=[_k2Velocities objectAtIndex:i];
             v.vector3D=p.velocity;
         }
         p.force=CMTPVector3DMake(0,0,0); //clear
@@ -139,29 +154,29 @@
     for (i=0;i<p_length;i++) {
         p=[particles objectAtIndex:i];
         if (![p isFixed]) {
-            originalPosition=[(CMVector3Dobj*)[originalPositions objectAtIndex:i] vector3D];
-            k2Velocity=[(CMVector3Dobj*)[k2Velocities objectAtIndex:i] vector3D];
+            originalPosition=[(CMVector3Dobj*)[_originalPositions objectAtIndex:i] vector3D];
+            k2Velocity=[(CMVector3Dobj*)[_k2Velocities objectAtIndex:i] vector3D];
 
             p.position=CMTPVector3DMake(originalPosition.x+k2Velocity.x*0.5f*t,
                 originalPosition.y+k2Velocity.y*0.5f*t,
                 originalPosition.z+k2Velocity.z*0.5f*t);
 
-            originalVelocity=[(CMVector3Dobj*)[originalVelocities objectAtIndex:i] vector3D];
-            k2Force=[(CMVector3Dobj*)[k2Forces objectAtIndex:i] vector3D];
+            originalVelocity=[(CMVector3Dobj*)[_originalVelocities objectAtIndex:i] vector3D];
+            k2Force=[(CMVector3Dobj*)[_k2Forces objectAtIndex:i] vector3D];
 
             p.velocity=CMTPVector3DMake(originalVelocity.x+k2Force.x*0.5f*t/p.mass,
                 originalVelocity.y+k2Force.y*0.5f*t/p.mass,
                 originalVelocity.z+k2Force.z*0.5f*t/p.mass);
         }
     }
-    [s applyForces];
+    [_s applyForces];
     for (i=0;i<p_length;i++) {
         p=[particles objectAtIndex:i];
         if (![p isFixed]) {
-            CMVector3Dobj* v=[k3Forces objectAtIndex:i];
+            CMVector3Dobj* v=[_k3Forces objectAtIndex:i];
             v.vector3D=p.force;
 
-            v=[k3Velocities objectAtIndex:i];
+            v=[_k3Velocities objectAtIndex:i];
             v.vector3D=p.velocity;
         }
         p.force=CMTPVector3DMake(0,0,0); //clear
@@ -172,29 +187,29 @@
     for (i=0;i<p_length;i++) {
         p=[particles objectAtIndex:i];
         if (![p isFixed]) {
-            originalPosition=[(CMVector3Dobj*)[originalPositions objectAtIndex:i] vector3D];
-            k3Velocity=[(CMVector3Dobj*)[k3Velocities objectAtIndex:i] vector3D];
+            originalPosition=[(CMVector3Dobj*)[_originalPositions objectAtIndex:i] vector3D];
+            k3Velocity=[(CMVector3Dobj*)[_k3Velocities objectAtIndex:i] vector3D];
 
             p.position=CMTPVector3DMake(originalPosition.x+k3Velocity.x*0.5f*t,
                 originalPosition.y+k3Velocity.y*0.5f*t,
                 originalPosition.z+k3Velocity.z*0.5f*t);
 
-            originalVelocity=[(CMVector3Dobj*)[originalVelocities objectAtIndex:i] vector3D];
-            k3Force=[(CMVector3Dobj*)[k3Forces objectAtIndex:i] vector3D];
+            originalVelocity=[(CMVector3Dobj*)[_originalVelocities objectAtIndex:i] vector3D];
+            k3Force=[(CMVector3Dobj*)[_k3Forces objectAtIndex:i] vector3D];
 
             p.velocity=CMTPVector3DMake(originalVelocity.x+k3Force.x*0.5f*t/p.mass,
                 originalVelocity.y+k3Force.y*0.5f*t/p.mass,
                 originalVelocity.z+k3Force.z*0.5f*t/p.mass);
         }
     }
-    [s applyForces];
+    [_s applyForces];
     for (i=0;i<p_length;i++) {
         p=[particles objectAtIndex:i];
         if (![p isFixed]) {
-            CMVector3Dobj* v=[k4Forces objectAtIndex:i];
+            CMVector3Dobj* v=[_k4Forces objectAtIndex:i];
             v.vector3D=p.force;
 
-            v=[k4Velocities objectAtIndex:i];
+            v=[_k4Velocities objectAtIndex:i];
             v.vector3D=p.velocity;
         }
         p.force=CMTPVector3DMake(0,0,0); //clear
@@ -209,11 +224,11 @@
         if (![p isFixed]) {
             // position
 
-            originalPosition=[(CMVector3Dobj*)[originalPositions objectAtIndex:i] vector3D];
-            k1Velocity=[(CMVector3Dobj*)[k1Velocities objectAtIndex:i] vector3D];
-            k2Velocity=[(CMVector3Dobj*)[k2Velocities objectAtIndex:i] vector3D];
-            k3Velocity=[(CMVector3Dobj*)[k3Velocities objectAtIndex:i] vector3D];
-            k4Velocity=[(CMVector3Dobj*)[k4Velocities objectAtIndex:i] vector3D];
+            originalPosition=[(CMVector3Dobj*)[_originalPositions objectAtIndex:i] vector3D];
+            k1Velocity=[(CMVector3Dobj*)[_k1Velocities objectAtIndex:i] vector3D];
+            k2Velocity=[(CMVector3Dobj*)[_k2Velocities objectAtIndex:i] vector3D];
+            k3Velocity=[(CMVector3Dobj*)[_k3Velocities objectAtIndex:i] vector3D];
+            k4Velocity=[(CMVector3Dobj*)[_k4Velocities objectAtIndex:i] vector3D];
 
             p.position=CMTPVector3DMake(originalPosition.x+t/6*(k1Velocity.x+2*k2Velocity.x+2*k3Velocity.x+k4Velocity.x),
                 originalPosition.y+t/6*(k1Velocity.y+2*k2Velocity.y+2*k3Velocity.y+k4Velocity.y),
@@ -221,11 +236,11 @@
 
             // velocity
 
-            originalVelocity=[(CMVector3Dobj*)[originalVelocities objectAtIndex:i] vector3D];
-            k1Force=[(CMVector3Dobj*)[k1Forces objectAtIndex:i] vector3D];
-            k2Force=[(CMVector3Dobj*)[k2Forces objectAtIndex:i] vector3D];
-            k3Force=[(CMVector3Dobj*)[k3Forces objectAtIndex:i] vector3D];
-            k4Force=[(CMVector3Dobj*)[k4Forces objectAtIndex:i] vector3D];
+            originalVelocity=[(CMVector3Dobj*)[_originalVelocities objectAtIndex:i] vector3D];
+            k1Force=[(CMVector3Dobj*)[_k1Forces objectAtIndex:i] vector3D];
+            k2Force=[(CMVector3Dobj*)[_k2Forces objectAtIndex:i] vector3D];
+            k3Force=[(CMVector3Dobj*)[_k3Forces objectAtIndex:i] vector3D];
+            k4Force=[(CMVector3Dobj*)[_k4Forces objectAtIndex:i] vector3D];
 
             p.velocity=CMTPVector3DMake(originalVelocity.x+t/6*p.mass*(k1Force.x+2*k2Force.x+2*k3Force.x+k4Force.x),
                 originalVelocity.y+t/6*p.mass*(k1Force.y+2*k2Force.y+2*k3Force.y+k4Force.y),
@@ -236,24 +251,20 @@
 
 -(id)initWithParticleSystem:(CMTPParticleSystem*)aParticleSystem {
     if ((self=[super init])) {
-        s=aParticleSystem; // weak ref
+        self.s=aParticleSystem;
 
-        originalPositions=[[NSMutableArray alloc] init];
-        originalVelocities=[[NSMutableArray alloc] init];
-        k1Forces=[[NSMutableArray alloc] init];
-        k1Velocities=[[NSMutableArray alloc] init];
-        k2Forces=[[NSMutableArray alloc] init];
-        k2Velocities=[[NSMutableArray alloc] init];
-        k3Forces=[[NSMutableArray alloc] init];
-        k3Velocities=[[NSMutableArray alloc] init];
-        k4Forces=[[NSMutableArray alloc] init];
-        k4Velocities=[[NSMutableArray alloc] init];
+        self.originalPositions=[[NSMutableArray alloc] init];
+        self.originalVelocities=[[NSMutableArray alloc] init];
+        self.k1Forces=[[NSMutableArray alloc] init];
+        self.k1Velocities=[[NSMutableArray alloc] init];
+        self.k2Forces=[[NSMutableArray alloc] init];
+        self.k2Velocities=[[NSMutableArray alloc] init];
+        self.k3Forces=[[NSMutableArray alloc] init];
+        self.k3Velocities=[[NSMutableArray alloc] init];
+        self.k4Forces=[[NSMutableArray alloc] init];
+        self.k4Velocities=[[NSMutableArray alloc] init];
     }
     return self;
-}
-
--(void)dealloc {
-    s=nil;
 }
 
 @end

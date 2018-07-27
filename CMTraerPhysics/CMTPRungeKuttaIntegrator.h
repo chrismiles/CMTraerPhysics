@@ -40,20 +40,7 @@
 +(CMVector3Dobj*)vector3Dobj;
 @end
 
-@interface CMTPRungeKuttaIntegrator : CMTPIntegrator {
-    CMTPParticleSystem* s;
-
-    NSMutableArray* originalPositions;
-    NSMutableArray* originalVelocities;
-    NSMutableArray* k1Forces;
-    NSMutableArray* k1Velocities;
-    NSMutableArray* k2Forces;
-    NSMutableArray* k2Velocities;
-    NSMutableArray* k3Forces;
-    NSMutableArray* k3Velocities;
-    NSMutableArray* k4Forces;
-    NSMutableArray* k4Velocities;
-}
+@interface CMTPRungeKuttaIntegrator : CMTPIntegrator
 
 -(id)initWithParticleSystem:(CMTPParticleSystem*)aParticleSystem;
 

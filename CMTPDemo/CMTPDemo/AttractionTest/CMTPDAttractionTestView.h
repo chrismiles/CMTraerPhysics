@@ -28,7 +28,7 @@
 
 @interface CMTPDAttractionTestView : UIView
 
-@property (nonatomic,strong)   UILabel* fpsLabel;
+@property (nonatomic,strong) UIBarButtonItem* fpsLabel;
 
 -(void)startAnimation;
 -(void)stopAnimation;

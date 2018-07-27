@@ -9,20 +9,22 @@
 #import "CMTPCommon.h"
 #import <UIKit/UIKit.h>
 
+@class CMScrollView;
+
 @interface CMTPDScrollViewCloneConfigureViewController : UIViewController
 
-@property (nonatomic,copy) void (^ onFinishedHandler)(void);
+@property (weak,nonatomic) CMScrollView* scrollView;
 
-@property (strong,nonatomic) IBOutlet UISlider* dragSlider;
-@property (strong,nonatomic) IBOutlet UISwitch* springEqualSwitch;
-@property (strong,nonatomic) IBOutlet UISlider* springFixedSlider;
-@property (strong,nonatomic) IBOutlet UISlider* springTouchSlider;
+@property (weak,nonatomic) IBOutlet UISlider* dragSlider;
+@property (weak,nonatomic) IBOutlet UISwitch* springEqualSwitch;
+@property (weak,nonatomic) IBOutlet UISlider* springFixedSlider;
+@property (weak,nonatomic) IBOutlet UISlider* springTouchSlider;
 
--(id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil scrolldrag:(CMTPFloat)scrollDrag springFixedConstant:(CMTPFloat)springFixedConstant springTouchConstant:(CMTPFloat)springTouchConstant;
-
+-(IBAction)dragAction:(id)sender;
 -(IBAction)springEqualValueChanged:(id)sender;
 -(IBAction)springFixedValueChanged:(id)sender;
 -(IBAction)springTouchValueChanged:(id)sender;
+- (IBAction)dismissAction:(id)sender;
 
 @end
 

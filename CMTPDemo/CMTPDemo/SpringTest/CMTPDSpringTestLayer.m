@@ -43,62 +43,80 @@ static CGFloat CGPointDistance(CGPoint userPosition,CGPoint prevPosition){
     CMTPFloat spring_length;
     NSUInteger subdivisions;
 
-    CADisplayLink* displayLink;
     CGPoint handle;
     BOOL isDragging;
     CGSize lastSize;
 
     CMTPFloat gravityScale;
-    CMMotionManager* motionManager;
-
-    /* Physics */
-    CMTPParticle* anchor;
-    NSMutableArray* particles;
-    CMTPParticleSystem* s;
 
     // FPS
     double fps_prev_time;
     NSUInteger fps_count;
 }
+@property (strong,nonatomic) CADisplayLink* displayLink;
 
+@property (strong,nonatomic) CMMotionManager* motionManager;
+
+/* Physics */
+@property (strong,nonatomic) CMTPParticle* anchor;
+@property (strong,nonatomic) NSMutableArray* particles;
+@property (strong,nonatomic) CMTPParticleSystem* s;
 @end
 
 @implementation CMTPDSpringTestLayer
 
 @dynamic isDeviceMotionAvailable;
 @dynamic gravityByDeviceMotionEnabled;
-@synthesize fpsLabel=_fpsLabel;
-@synthesize smoothed;
 
 -(void)startAnimation {
-    if (nil==displayLink) {
+    if (nil==_displayLink) {
         /* Init Timer */
-        displayLink=[CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame:)];
-        [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+        self.displayLink=[CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame:)];
+        [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     }
 }
 
 -(void)stopAnimation {
-    if (displayLink) {
-        [displayLink invalidate];
-        displayLink=nil;
+    if (_displayLink) {
+        [_displayLink invalidate];
+        self.displayLink=nil;
     }
 }
 
 -(void)drawFrame:(CADisplayLink*)sender {
-    if (motionManager.isDeviceMotionActive) {
-        CMAcceleration gravity=motionManager.deviceMotion.gravity;
-        CMTPVector3D gravityVector=CMTPVector3DMake((CMTPFloat)(gravity.x)*gravityScale,(CMTPFloat)(-gravity.y)*gravityScale,0.0f);
-        s.gravity=gravityVector;
+    if (_motionManager.isDeviceMotionActive) {
+        CMAcceleration gravity=_motionManager.deviceMotion.gravity;
+        CMTPFloat x=(CMTPFloat)(gravity.x)*gravityScale;
+        CMTPFloat y=(CMTPFloat)(-gravity.y)*gravityScale;
+        switch ([[UIApplication sharedApplication] statusBarOrientation]) {
+            case UIInterfaceOrientationLandscapeLeft:
+            {
+                CMTPFloat t=y;
+                y=x;
+                x=-t;
+            };
+                break;
+            case UIInterfaceOrientationLandscapeRight:
+            {
+                CMTPFloat t=y;
+                y=-x;
+                x=t;
+            };
+                break;
+            default:
+                break;
+        }
+        CMTPVector3D gravityVector=CMTPVector3DMake(x,y,0.0f);
+        _s.gravity=gravityVector;
     }
-    [s tick:1.8f];
+    [_s tick:1.8f];
     [self setNeedsDisplay];      // draw layer
     /* FPS */
     if (_fpsLabel) {
         double curr_time=CACurrentMediaTime();
         if (curr_time-fps_prev_time>=0.2) {
             double delta=(curr_time-fps_prev_time)/fps_count;
-            _fpsLabel.text=[NSString stringWithFormat:@"%0.0f fps",1.0/delta];
+            _fpsLabel.title=[NSString stringWithFormat:@"%0.0f fps",1.0/delta];
             fps_prev_time=curr_time;
             fps_count=1;
         } else {
@@ -108,41 +126,41 @@ static CGFloat CGPointDistance(CGPoint userPosition,CGPoint prevPosition){
 }
 
 -(void)generateParticles {
-    anchor=[s makeParticleWithMass:0.8f position:CMTPVector3DMake(CGRectGetMidX(self.bounds),CGRectGetHeight(self.bounds)*0.2f,0)];
-    [anchor makeFixed];
-    [particles addObject:anchor];
+    self.anchor=[_s makeParticleWithMass:0.8f position:CMTPVector3DMake(CGRectGetMidX(self.bounds),CGRectGetHeight(self.bounds)*0.2f,0)];
+    [_anchor makeFixed];
+    [_particles addObject:_anchor];
 
     CMTPFloat sub_len=spring_length/subdivisions;
     CMTPFloat sy=100.0f;
     for (NSUInteger i=1;i<=subdivisions;i++) {
-        CMTPParticle* p=[s makeParticleWithMass:0.6f position:CMTPVector3DMake(300.0f,sy+i*sub_len,0)];
-        [particles addObject:p];
+        CMTPParticle* p=[_s makeParticleWithMass:0.6f position:CMTPVector3DMake(300.0f,sy+i*sub_len,0)];
+        [_particles addObject:p];
     }
-    for (NSUInteger i=0;i<[particles count]-1;i++) {
-        [s makeSpringBetweenParticleA:[particles objectAtIndex:i] particleB:[particles objectAtIndex:i+1] springConstant:0.5f damping:0.2f restLength:sub_len];
+    for (NSUInteger i=0;i<[_particles count]-1;i++) {
+        [_s makeSpringBetweenParticleA:[_particles objectAtIndex:i] particleB:[_particles objectAtIndex:i+1] springConstant:0.5f damping:0.2f restLength:sub_len];
     }
 }
 
 #pragma mark - Custom property accessors
 
 -(BOOL)isDeviceMotionAvailable {
-    return motionManager.isDeviceMotionAvailable;
+    return _motionManager.isDeviceMotionAvailable;
 }
 
 -(void)setGravityByDeviceMotionEnabled:(BOOL)gravityByDeviceMotionEnabled {
     if (gravityByDeviceMotionEnabled) {
-        if ([motionManager isDeviceMotionAvailable]) {
-            [motionManager startDeviceMotionUpdates];
+        if ([_motionManager isDeviceMotionAvailable]) {
+            [_motionManager startDeviceMotionUpdates];
         }
     } else {
-        if ([motionManager isDeviceMotionActive]) {
-            [motionManager stopDeviceMotionUpdates];
+        if ([_motionManager isDeviceMotionActive]) {
+            [_motionManager stopDeviceMotionUpdates];
         }
     }
 }
 
 -(BOOL)gravityByDeviceMotionEnabled {
-    return [motionManager isDeviceMotionActive];
+    return [_motionManager isDeviceMotionActive];
 }
 
 #pragma mark - Handle touches
@@ -176,13 +194,13 @@ static CGFloat CGPointDistance(CGPoint userPosition,CGPoint prevPosition){
 #pragma mark - CALayer methods
 
 -(void)drawInContext:(CGContextRef)ctx {
-    if (!CGSizeEqualToSize(self.bounds.size,lastSize)&&!anchor) {
+    if (!CGSizeEqualToSize(self.bounds.size,lastSize)&&!_anchor) {
         [self generateParticles];
 
         gravityScale=1.0f*CGRectGetHeight(self.frame)/320.0f;
         lastSize=self.bounds.size;
     }
-    CMTPParticle* p=[particles objectAtIndex:subdivisions];
+    CMTPParticle* p=[_particles objectAtIndex:subdivisions];
     if (!isDragging) {
         [p makeFree];
 
@@ -195,15 +213,15 @@ static CGFloat CGPointDistance(CGPoint userPosition,CGPoint prevPosition){
     }
     CGMutablePathRef path=CGPathCreateMutable();
 
-    p=[particles objectAtIndex:0];
+    p=[_particles objectAtIndex:0];
     CGPathMoveToPoint(path,NULL,p.position.x,p.position.y);
-    for (NSUInteger i=1;i<[particles count];i++) {
-        p=[particles objectAtIndex:i];
+    for (NSUInteger i=1;i<[_particles count];i++) {
+        p=[_particles objectAtIndex:i];
         CGPathAddLineToPoint(path,NULL,p.position.x,p.position.y);
     }
     UIGraphicsPushContext(ctx);
     UIBezierPath* bezierPath=[UIBezierPath bezierPathWithCGPath:path];
-    if (smoothed) {
+    if (_smoothed) {
         bezierPath=smoothedPath(bezierPath,8);
     }
     [bezierPath stroke];
@@ -230,20 +248,20 @@ static CGFloat CGPointDistance(CGPoint userPosition,CGPoint prevPosition){
         spring_length=25.0;
         subdivisions=8;
 
-        motionManager=[[CMMotionManager alloc] init];
-        motionManager.deviceMotionUpdateInterval=0.02;   // 50 Hz
+        self.motionManager=[[CMMotionManager alloc] init];
+        _motionManager.deviceMotionUpdateInterval=0.02;   // 50 Hz
 
         /* Init Physics */
         CMTPVector3D gravity=CMTPVector3DMake(0.0f,2.0f,0.0f);
-        s=[[CMTPParticleSystem alloc] initWithGravityVector:gravity drag:0.15f];
+        self.s=[[CMTPParticleSystem alloc] initWithGravityVector:gravity drag:0.15f];
 
-        particles=[[NSMutableArray alloc] init];
+        self.particles=[[NSMutableArray alloc] init];
     }
     return self;
 }
 
 -(void)dealloc {
-    [displayLink invalidate];
+    [_displayLink invalidate];
 }
 
 @end

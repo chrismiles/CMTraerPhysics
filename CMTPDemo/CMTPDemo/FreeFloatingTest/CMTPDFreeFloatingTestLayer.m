@@ -44,45 +44,44 @@ static CGFloat CGPointDistance(CGPoint userPosition,CGPoint prevPosition){
 @interface CMTPDFreeFloatingTestLayer () {
     NSUInteger numParticles;
 
-    CADisplayLink* displayLink;
     CGSize lastSize;
     CGPoint prevPosition;
     CGPoint userPosition;
 
     /* Physics */
-    CMTPParticle* attractor;
-    NSMutableArray* attractions;
     CMTPFloat attractorStrengthFactor;
-    NSMutableArray* particles;
-    CMTPParticleSystem* s;
 
     // FPS
     double fps_prev_time;
     NSUInteger fps_count;
 }
+@property (strong,nonatomic) CADisplayLink* displayLink;
 
+/* Physics */
+@property (strong,nonatomic) CMTPParticle* attractor;
+@property (strong,nonatomic) NSMutableArray* attractions;
+@property (strong,nonatomic) NSMutableArray* particles;
+@property (strong,nonatomic) CMTPParticleSystem* s;
 @end
 
 @implementation CMTPDFreeFloatingTestLayer
-
-@synthesize fpsLabel=_fpsLabel;
 
 -(NSUInteger)particleCount {
     return numParticles;
 }
 
 -(void)startAnimation {
-    if (nil==displayLink) {
+    if (nil==_displayLink) {
         /* Init Timer */
-        displayLink=[CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame:)];
-        [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+        self.displayLink=[CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame:)];
+        [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     }
 }
 
 -(void)stopAnimation {
-    if (displayLink) {
-        [displayLink invalidate];
-        displayLink=nil;
+    if (_displayLink) {
+        [_displayLink invalidate];
+        self.displayLink=nil;
     }
 }
 
@@ -95,14 +94,14 @@ static CGFloat CGPointDistance(CGPoint userPosition,CGPoint prevPosition){
 }
 
 -(void)drawFrame:(CADisplayLink*)sender {
-    [s tick:1];
+    [_s tick:1];
     [self setNeedsLayout];      // position sub layers
     /* FPS */
     if (_fpsLabel) {
         double curr_time=CACurrentMediaTime();
         if (curr_time-fps_prev_time>=0.2) {
             double delta=(curr_time-fps_prev_time)/fps_count;
-            _fpsLabel.text=[NSString stringWithFormat:@"%0.0f fps",1.0/delta];
+            _fpsLabel.title=[NSString stringWithFormat:@"%0.0f fps",1.0/delta];
             fps_prev_time=curr_time;
             fps_count=1;
         } else {
@@ -132,7 +131,7 @@ static CGFloat CGPointDistance(CGPoint userPosition,CGPoint prevPosition){
         attractorStrengthFactor=30.0f;
         particleSize=10.0f;
     }
-    attractor=[s makeParticleWithMass:0.8f position:CMTPVector3DMake(0,0,0)];
+    self.attractor=[_s makeParticleWithMass:0.8f position:CMTPVector3DMake(0,0,0)];
     for (unsigned int i=0;i<numParticles;i++) {
         CMTPFloat randx=randomClamp()*(CGRectGetWidth(self.bounds)-1);
         CMTPFloat randy=randomClamp()*(CGRectGetHeight(self.bounds)-1);
@@ -142,19 +141,19 @@ static CGFloat CGPointDistance(CGPoint userPosition,CGPoint prevPosition){
         subLayer.position=CGPointMake(randx,randy);
         [self addSublayer:subLayer];
 
-        CMTPParticle* particle=[s makeParticleWithMass:0.8f position:CMTPVector3DMake(randx,randy,0)];
+        CMTPParticle* particle=[_s makeParticleWithMass:0.8f position:CMTPVector3DMake(randx,randy,0)];
         particle.context=subLayer;
-        [particles addObject:particle];
+        [_particles addObject:particle];
 
-        CMTPAttraction* attraction=[s makeAttractionBetweenParticleA:particle particleB:attractor strength:attractorStrength minDistance:attractorMinDistance];
-        [attractions addObject:attraction];
+        CMTPAttraction* attraction=[_s makeAttractionBetweenParticleA:particle particleB:_attractor strength:attractorStrength minDistance:attractorMinDistance];
+        [_attractions addObject:attraction];
     }
 }
 
 #pragma mark - CALayer methods
 
 -(void)layoutSublayers {
-    if (!CGSizeEqualToSize(self.bounds.size,lastSize)&&!attractor) {
+    if (!CGSizeEqualToSize(self.bounds.size,lastSize)&&!_attractor) {
         [self generateParticles];
 
         lastSize=self.bounds.size;
@@ -163,12 +162,12 @@ static CGFloat CGPointDistance(CGPoint userPosition,CGPoint prevPosition){
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
 
-    attractor.position=CMTPVector3DMake(userPosition.x,userPosition.y,0.0f);
+    _attractor.position=CMTPVector3DMake(userPosition.x,userPosition.y,0.0f);
 
     CMTPFloat width=CGRectGetWidth(self.bounds);
     CMTPFloat height=CGRectGetHeight(self.bounds);
     for (unsigned int i=0;i<numParticles;i++) {
-        CMTPParticle* particle=[particles objectAtIndex:i];
+        CMTPParticle* particle=[_particles objectAtIndex:i];
         CMTPFloat x=fmod(width+particle.position.x,width);
         CMTPFloat y=fmod(height+particle.position.y,height);
         particle.position=CMTPVector3DMake(x,y,0);
@@ -177,7 +176,7 @@ static CGFloat CGPointDistance(CGPoint userPosition,CGPoint prevPosition){
         sublayer.position=CGPointMake(x,y);
         if (prevPosition.x>=0.0f) {
             CMTPFloat distance=CGPointDistance(userPosition,prevPosition);
-            CMTPAttraction* attraction=[attractions objectAtIndex:i];
+            CMTPAttraction* attraction=[_attractions objectAtIndex:i];
             [attraction setMinDistance:distance*1.2f];
             [attraction setStrength:-(10+(attractorStrengthFactor*(distance*distance)))];
         }
@@ -200,18 +199,17 @@ static CGFloat CGPointDistance(CGPoint userPosition,CGPoint prevPosition){
 
         /* Init Physics */
         CMTPVector3D gravity=CMTPVector3DMake(0.0f,0.0f,0.0f);
-        s=[[CMTPParticleSystem alloc] initWithGravityVector:gravity drag:0.02f];
-        [s setIntegrator:CMTPParticleSystemIntegratorModifiedEuler]; // faster simulation (but less stable)
+        self.s=[[CMTPParticleSystem alloc] initWithGravityVector:gravity drag:0.02f];
+        [_s setIntegrator:CMTPParticleSystemIntegratorModifiedEuler]; // faster simulation (but less stable)
 
-        attractions=[[NSMutableArray alloc] init];
-        particles=[[NSMutableArray alloc] init];
+        self.attractions=[[NSMutableArray alloc] init];
+        self.particles=[[NSMutableArray alloc] init];
     }
     return self;
 }
 
 -(void)dealloc {
-    [displayLink invalidate];
-    displayLink=nil;
+    [_displayLink invalidate];
 }
 
 @end

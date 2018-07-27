@@ -1,11 +1,9 @@
 //
-//  CMTPDAttractionGridViewController.h
+//  CMTPMasterViewController.h
 //  CMTPDemo
 //
-//  Created by Chris Miles on 14/11/11.
-//  Copyright (c) 2011 Chris Miles. All rights reserved.
-//
-//  Based on traerAS3 example by Arnaud Icard, https://github.com/sqrtof5/traerAS3
+//  Created by Kelly Roach on 7/20/18.
+//  Copyright (c) 2018 Chris Miles. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,22 +24,7 @@
 //  THE SOFTWARE.
 //
 
-#import "EAGLView.h"
-#import <OpenGLES/EAGL.h>
-#import <OpenGLES/ES2/gl.h>
-#import <OpenGLES/ES2/glext.h>
 #import <UIKit/UIKit.h>
 
-@interface CMTPDAttractionGridViewController : UIViewController <EAGLViewDelegate>
-
-@property (strong,nonatomic) IBOutlet UILabel* fpsLabel;
-@property (strong,nonatomic) IBOutlet UILabel* fullFrameRateLabel;
-@property (strong,nonatomic) IBOutlet EAGLView* glView;
-@property (strong,nonatomic) IBOutlet UIView* gridToggleView;
-@property (strong,nonatomic) IBOutlet UIView* imageToggleView;
-
--(IBAction)gridToggleAction:(id)sender;
--(IBAction)imageToggleAction:(id)sender;
-
+@interface CMTPMasterViewController : UITableViewController
 @end
-

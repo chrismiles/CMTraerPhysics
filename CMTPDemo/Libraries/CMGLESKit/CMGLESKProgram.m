@@ -41,8 +41,6 @@ NSInteger const CMGLESKProgramUniformNotFound=6;
 @property (strong,nonatomic) NSDictionary* attributeLocations;
 @property (strong,nonatomic) NSDictionary* uniformLocations;
 
--(GLuint)compileShaderFromString:(NSString*)shader type:(GLenum)type error:(NSError* *)error;
--(BOOL)linkProgramError:(NSError* *)error;
 @end
 
 @implementation CMGLESKProgram

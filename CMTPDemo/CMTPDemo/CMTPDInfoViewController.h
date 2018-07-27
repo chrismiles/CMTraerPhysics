@@ -28,7 +28,7 @@
 
 @interface CMTPDInfoViewController : UIViewController <UIWebViewDelegate>
 
-@property (strong,nonatomic) IBOutlet UIWebView* infoWebView;
+@property (weak,nonatomic) IBOutlet UIWebView* infoWebView;
 
 @end
 

@@ -32,16 +32,13 @@
 #import "CMTraerPhysics.h"
 #import <QuartzCore/QuartzCore.h>
 
-//#ifdef DEBUG
-//#define ASSERT_GL_OK() do {\
-// //	GLenum glError = glGetError();\
-// //	if (glError != GL_NO_ERROR) {\
-// //	    ALog(@"glError: %d", glError);\
-// //	}} while (0)
-//#else
-//	#define ASSERT_GL_OK() do { } while (0)
-//#endif
+#pragma mark - Static Globals
+// Static globals so revisiting same demo remembers control settings.
+static BOOL viewedBefore;
+static BOOL showDamage;
+static BOOL fullFrameRate;
 
+#pragma mark - C Functions
 /* Return a random CMTPFloat between 0.0 and 1.0 */
 static inline CMTPFloat randomClamp(){
     return (CMTPFloat)(arc4random()%((unsigned)RAND_MAX+1))/(CMTPFloat)((unsigned)RAND_MAX+1);
@@ -56,26 +53,6 @@ static CGFloat CGPointDistance(CGPoint userPosition,CGPoint prevPosition){
     CGFloat dy=prevPosition.y-userPosition.y;
     return sqrt(dx*dx+dy*dy);
 }
-
-//static inline void orthoMatrix(GLfloat *matrix, CMTPFloat left, float right, float bottom, float top, float zNear, float zFar)
-//{
-//    matrix[ 0] = 2.0f / (right-left);
-//    matrix[ 1] = 0.0f;
-//    matrix[ 2] = 0.0f;
-//    matrix[ 3] = 0.0f;
-//    matrix[ 4] = 0.0f;
-//    matrix[ 5] = 2.0f / (top-bottom);
-//    matrix[ 6] = 0.0f;
-//    matrix[ 7] = 0.0f;
-//    matrix[ 8] = 0.0f;
-//    matrix[ 9] = 0.0f;
-//    matrix[10] = -2.0f / (zFar-zNear);
-//    matrix[11] = 0.0f;
-//    matrix[12] = -(right+left) / (right-left);
-//    matrix[13] = -(top+bottom) / (top-bottom);
-//    matrix[14] = -(zFar+zNear) / (zFar-zNear);
-//    matrix[15] = 1.0f;
-//}
 
 /* Line intersection functions, borrowed from Cocos2D http://code.google.com/p/cocos2d-iphone/issues/detail?id=1193
  */
@@ -132,7 +109,6 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
 
 @interface CMTPDWebTestViewController () {
     BOOL animating;
-    BOOL fullFrameRate;
 
     CMTPFloat contentScale;
     CMTPFloat frameHeight,frameWidth;
@@ -144,53 +120,42 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
     // FPS
     double fps_prev_time;
     NSUInteger fps_count;
-
+    
     // Physics
-    NSMutableArray* anchors;
     CMTPVector3D* anchors_copy;
-    NSMutableArray* attractions;
-    CMTPParticle* attractor;
-    NSMutableArray* joints;
-    NSMutableArray* particles;
-    BOOL physicsSetupCompleted;
-    CMTPParticleSystem* s;
 
     float attractionMinDistanceFactor;
     float attractionStrengthFactor;
-    BOOL canModifyStructure;
     NSUInteger steps;
     NSUInteger numTurns;
     CGPoint q0,q1,q2,q3;
     CGPoint prevLocation,userLocation;
 }
 
+// Physics
+@property (strong,nonatomic) NSMutableArray* anchors;
+@property (strong,nonatomic) NSMutableArray* attractions;
+@property (strong,nonatomic) CMTPParticle* attractor;
+@property (strong,nonatomic) NSMutableArray* joints;
+@property (strong,nonatomic) NSMutableArray* particles;
+@property (strong,nonatomic) CMTPParticleSystem* s;
+
 @property (strong,nonatomic) CADisplayLink* displayLink;
 @property (strong,nonatomic) CMGLESKProgram* shaderProgram;
-
--(void)startAnimation;
--(void)stopAnimation;
 
 @end
 
 @implementation CMTPDWebTestViewController
 
-@synthesize displayLink;
-@synthesize fullFrameRateLabel;
-@synthesize fullFrameRateToggleView;
-@synthesize modifyStructureToggleView;
-@synthesize fpsLabel;
-@synthesize shaderProgram;
-
 #pragma mark - Full Frame Rate management
 
 -(void)enableFullFrameRate {
-    self.fullFrameRateLabel.center=CGPointMake(round(CGRectGetMidX(self.view.bounds)),round(CGRectGetMidY(self.view.bounds)));
-    [self.view addSubview:self.fullFrameRateLabel];
+    _fullFrameRateLabel.hidden=NO;
     fullFrameRate=YES;
 }
 
 -(void)disableFullFrameRate {
-    [self.fullFrameRateLabel removeFromSuperview];
+    _fullFrameRateLabel.hidden=YES;
     fullFrameRate=NO;
     [self startAnimation];
 }
@@ -198,14 +163,13 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
 #pragma mark - OpenGL rendering
 
 -(void)drawFrame:(id)sender {
-    EAGLView* glView=(EAGLView*)self.view;
-    [glView setFramebuffer];
+    [_testView setFramebuffer];
 
     /* FPS */
     double curr_time=CACurrentMediaTime();
     if (curr_time-fps_prev_time>=0.2) {
         double delta=(curr_time-fps_prev_time)/fps_count;
-        fpsLabel.text=[NSString stringWithFormat:@"%0.0f fps",1.0/delta];
+        _fpsLabel.title=[NSString stringWithFormat:@"%0.0f fps",1.0/delta];
         fps_prev_time=curr_time;
         fps_count=1;
     } else {
@@ -213,9 +177,9 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
     }
     /* *** Web Test **** */
 
-    attractor.position=CMTPVector3DMake(userLocation.x,userLocation.y,0.0f);
+    _attractor.position=CMTPVector3DMake(userLocation.x,userLocation.y,0.0f);
 
-    [s tick:1];
+    [_s tick:1];
     if (fullFrameRate) {
         // Simulate at full frame rate; skip rendering as there's nothing to draw
         if (animating) {
@@ -228,16 +192,16 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
 
     glClearColor(0.5f,0.5f,0.5f,1.0f);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    glUseProgram(self.shaderProgram.program);
+    glUseProgram(_shaderProgram.program);
     ASSERT_GL_OK();
 
     GLfloat projectionMatrix[16];
     orthoMatrix(projectionMatrix,0.0f,(float)frameWidth,(float)frameHeight,0.0f,-1.0f,1.0f);       // inverted Y
-    int uniformMVP=[self.shaderProgram indexOfUniform:@"mvp"];
+    int uniformMVP=[_shaderProgram indexOfUniform:@"mvp"];
     glUniformMatrix4fv(uniformMVP,1,GL_FALSE,projectionMatrix);
     ASSERT_GL_OK();
 
-    glUniform4f([self.shaderProgram indexOfUniform:@"color"],1.0f,1.0f,1.0f,1.0f);
+    glUniform4f([_shaderProgram indexOfUniform:@"color"],1.0f,1.0f,1.0f,1.0f);
     ASSERT_GL_OK();
 
     NSUInteger vIndex=0;
@@ -245,9 +209,9 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
     glEnableVertexAttribArray(vertexAttrib); // vertex coords
     ASSERT_GL_OK();
     // draw spiral
-    for (NSUInteger i=2;i<[particles count];i++) {
-        CMTPParticle* p0=[particles objectAtIndex:i-1];
-        CMTPParticle* p1=[particles objectAtIndex:i];
+    for (NSUInteger i=2;i<[_particles count];i++) {
+        CMTPParticle* p0=[_particles objectAtIndex:i-1];
+        CMTPParticle* p1=[_particles objectAtIndex:i];
 
         webVertices[vIndex++]=(GLfloat)(p0.position.x*contentScale);
         webVertices[vIndex++]=(GLfloat)(p0.position.y*contentScale);
@@ -256,12 +220,12 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
     }
     // draw armature
     for (NSUInteger i=1;i<=steps;i++) {
-        CMTPParticle* p0=[particles objectAtIndex:i];
+        CMTPParticle* p0=[_particles objectAtIndex:i];
         CMTPVector3D pos0=p0.position;
         for (NSUInteger j=0;j<=numTurns;j++) {
             NSUInteger index=i+(j*steps);
-            if (index<[particles count]) {
-                CMTPParticle* p1=[particles objectAtIndex:index];
+            if (index<[_particles count]) {
+                CMTPParticle* p1=[_particles objectAtIndex:index];
                 webVertices[vIndex++]=(GLfloat)(pos0.x*contentScale);
                 webVertices[vIndex++]=(GLfloat)(pos0.y*contentScale);
                 webVertices[vIndex++]=(GLfloat)(p1.position.x*contentScale);
@@ -274,9 +238,9 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
     // draw joints to frame
     for (NSUInteger i=0;i<=steps;i++) {
         NSUInteger p0_index=i+(NSUInteger)((numTurns-1)*steps);
-        if (p0_index<[particles count]) {
-            CMTPParticle* p0=[particles objectAtIndex:p0_index];
-            CMTPParticle* p1=[joints objectAtIndex:i];
+        if (p0_index<[_particles count]) {
+            CMTPParticle* p0=[_particles objectAtIndex:p0_index];
+            CMTPParticle* p1=[_joints objectAtIndex:i];
             webVertices[vIndex++]=(GLfloat)(p0.position.x*contentScale);
             webVertices[vIndex++]=(GLfloat)(p0.position.y*contentScale);
             webVertices[vIndex++]=(GLfloat)(p1.position.x*contentScale);
@@ -286,13 +250,13 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
     // set attraction based on touch motion, and modify structure if option enabled
     if (prevLocation.x>=0.0f) {
         CMTPFloat user_d=CGPointDistance(userLocation,prevLocation);
-        for (NSUInteger i=0;i<[attractions count];i++) {
-            CMTPAttraction* a=[attractions objectAtIndex:i];
+        for (NSUInteger i=0;i<[_attractions count];i++) {
+            CMTPAttraction* a=[_attractions objectAtIndex:i];
             [a setMinDistance:user_d*attractionMinDistanceFactor];
             [a setStrength:(attractionStrengthFactor*(user_d*user_d))];
-            if (canModifyStructure&&user_d>4) {
-                CMTPParticle* p=[particles objectAtIndex:i];
-                CMTPParticle* anchor=[anchors objectAtIndex:i];
+            if (showDamage&&user_d>4) {
+                CMTPParticle* p=[_particles objectAtIndex:i];
+                CMTPParticle* anchor=[_anchors objectAtIndex:i];
                 CMTPVector3D newPosition=CMTPVector3DMake(anchor.position.x+(p.position.x-anchor.position.x)*0.2f,anchor.position.y+(p.position.y-anchor.position.y)*0.2f,0.0f);
                 anchor.position=newPosition;
             }
@@ -305,7 +269,7 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
 
     glDisableVertexAttribArray(vertexAttrib);
 
-    [glView.context presentRenderbuffer:GL_RENDERBUFFER];
+    [_testView.context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
 #pragma mark - Setup
@@ -319,24 +283,24 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
     CMTPFloat a=6.0;
     CMTPFloat b=1.1;
 
-    anchors=[[NSMutableArray alloc] init];
+    self.anchors=[[NSMutableArray alloc] init];
     anchors_copy=calloc(numTurns*steps,sizeof(CMTPVector3D));
-    attractions=[[NSMutableArray alloc] init];
-    joints=[[NSMutableArray alloc] init];
-    particles=[[NSMutableArray alloc] init];
+    self.attractions=[[NSMutableArray alloc] init];
+    self.joints=[[NSMutableArray alloc] init];
+    self.particles=[[NSMutableArray alloc] init];
 
     // modifying an archimedean spiral to get a spider web-like structure
 
     //points defining the frame the structure is attached to
-    q0=CGPointMake(CGRectGetMinX(self.view.bounds),CGRectGetMinY(self.view.bounds));
-    q1=CGPointMake(CGRectGetMaxX(self.view.bounds),CGRectGetMinY(self.view.bounds));
-    q2=CGPointMake(CGRectGetMaxX(self.view.bounds),CGRectGetMaxY(self.view.bounds));
-    q3=CGPointMake(CGRectGetMinX(self.view.bounds),CGRectGetMaxY(self.view.bounds));
+    q0=CGPointMake(CGRectGetMinX(self.testView.bounds),CGRectGetMinY(self.testView.bounds));
+    q1=CGPointMake(CGRectGetMaxX(self.testView.bounds),CGRectGetMinY(self.testView.bounds));
+    q2=CGPointMake(CGRectGetMaxX(self.testView.bounds),CGRectGetMaxY(self.testView.bounds));
+    q3=CGPointMake(CGRectGetMinX(self.testView.bounds),CGRectGetMaxY(self.testView.bounds));
 
-    CMTPFloat screenScale=1.0f*CGRectGetHeight(self.view.frame)/320.0f;
+    CMTPFloat screenScale=1.0f*CGRectGetHeight(self.testView.frame)/320.0f;
 
     CMTPVector3D gravityVector=CMTPVector3DMake(0.0f,0.0f,0.0f);
-    s=[[CMTPParticleSystem alloc] initWithGravityVector:gravityVector drag:0.42f];
+    self.s=[[CMTPParticleSystem alloc] initWithGravityVector:gravityVector drag:0.42f];
 
     b*=screenScale;     // scale for display size
     if (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPad) {
@@ -348,8 +312,8 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
         attractionMinDistanceFactor=1.1f;
         attractionStrengthFactor=50.0f;
     }
-    attractor=[s makeParticleWithMass:1.0f position:CMTPVector3DMake(ox,oy,0.0f)];
-    [attractor makeFixed];
+    self.attractor=[_s makeParticleWithMass:1.0f position:CMTPVector3DMake(ox,oy,0.0f)];
+    [_attractor makeFixed];
 
     // generate main archimedean spiral, from polar equation r = a + b*theta
     // create two sets of particles, one set fixed, one set free
@@ -365,22 +329,22 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
             // use theta*-1 as spiders create their final web outwards, turning clockwise
             CGPoint pos=CGPointFromPolar(r,-theta);
 
-            CMTPParticle* pfree=[s makeParticleWithMass:0.8f position:CMTPVector3DMake(ox+pos.x*rand,oy+pos.y*rand,0)];
-            CMTPParticle* pfixed=[s makeParticleWithMass:0.8f position:CMTPVector3DMake(ox+pos.x*rand,oy+pos.y*rand,0)];
+            CMTPParticle* pfree=[_s makeParticleWithMass:0.8f position:CMTPVector3DMake(ox+pos.x*rand,oy+pos.y*rand,0)];
+            CMTPParticle* pfixed=[_s makeParticleWithMass:0.8f position:CMTPVector3DMake(ox+pos.x*rand,oy+pos.y*rand,0)];
             [pfixed makeFixed];
 
             // Attraction strength & minDistance will be overriden based on user input
-            CMTPAttraction* attr=[s makeAttractionBetweenParticleA:attractor particleB:pfree strength:1.0f minDistance:1.0f];
-            [attractions addObject:attr];
-            [particles addObject:pfree];
-            [anchors addObject:pfixed];
+            CMTPAttraction* attr=[_s makeAttractionBetweenParticleA:_attractor particleB:pfree strength:1.0f minDistance:1.0f];
+            [_attractions addObject:attr];
+            [_particles addObject:pfree];
+            [_anchors addObject:pfixed];
             if (i==1) {
                 pfree.position=CMTPVector3DMake(ox,oy,0.0f);
                 pfixed.position=pfree.position;
             }
             anchors_copy[anchorIndex++]=CMTPVector3DMake(pfixed.position.x,pfixed.position.y,pfixed.position.z);
 
-            [s makeSpringBetweenParticleA:pfree particleB:pfixed springConstant:0.42f damping:0.0f restLength:randomClamp()*1.01f];
+            [_s makeSpringBetweenParticleA:pfree particleB:pfixed springConstant:0.42f damping:0.0f restLength:randomClamp()*1.01f];
         }
     }
     // at this point the pattern we have is too regular
@@ -388,11 +352,11 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
     // NOTE: the mix of vector math + "custom" calc is horrible, to rewrite using Vector3D methods only
     for (NSUInteger i=0;i<steps-2;i++) {
         NSUInteger seed_index=i+(NSUInteger)((numTurns-1)*steps);
-        if (seed_index<[particles count]) {
-            CMTPParticle* p0=[particles objectAtIndex:seed_index];
+        if (seed_index<[_particles count]) {
+            CMTPParticle* p0=[_particles objectAtIndex:seed_index];
             CMTPVector3D seed_pos=p0.position;
 
-            CMTPParticle* p1=[particles objectAtIndex:i+(NSUInteger)((numTurns-2)*steps)];
+            CMTPParticle* p1=[_particles objectAtIndex:i+(NSUInteger)((numTurns-2)*steps)];
             CMTPVector3D n_pt_pos=p1.position;
 
             CMTPFloat mod_scale=randomClamp()* -4.0f;
@@ -417,8 +381,8 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
             CMTPFloat dx=next_seed_pos.x-seed_pos.x;
             CMTPFloat dy=next_seed_pos.y-seed_pos.y;
             CMTPFloat d=sqrt(dx*dx+dy*dy);
-            for (NSUInteger j=0;j<[particles count];j++) {
-                CMTPParticle* pj=[particles objectAtIndex:j];
+            for (NSUInteger j=0;j<[_particles count];j++) {
+                CMTPParticle* pj=[_particles objectAtIndex:j];
                 CMTPFloat _dx=next_seed_pos.x-pj.position.x;
                 CMTPFloat _dy=next_seed_pos.y-pj.position.y;
                 CMTPFloat _d=sqrt(_dx*_dx+_dy*_dy);
@@ -431,36 +395,36 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
                     CMTPFloat p_pos_y=pj.position.y+dy*r;
 
                     pj.position=CMTPVector3DMake(p_pos_x,p_pos_y,0.0f);
-                    CMTPParticle* anchor=[anchors objectAtIndex:j];
+                    CMTPParticle* anchor=[_anchors objectAtIndex:j];
                     anchor.position=pj.position;
                     anchors_copy[j]=pj.position;
                 }
             }
             p0.position=next_seed_pos;
-            CMTPParticle* anchor=[anchors objectAtIndex:seed_index];
+            CMTPParticle* anchor=[_anchors objectAtIndex:seed_index];
             anchor.position=next_seed_pos;
             anchors_copy[seed_index]=next_seed_pos;
         }
     }
     // generate spring-dampers keeping the structure together
     // main spiral
-    for (NSUInteger i=2;i<[particles count];i++) {
-        CMTPParticle* p0=[particles objectAtIndex:i];
-        CMTPParticle* p1=[particles objectAtIndex:i-1];
+    for (NSUInteger i=2;i<[_particles count];i++) {
+        CMTPParticle* p0=[_particles objectAtIndex:i];
+        CMTPParticle* p1=[_particles objectAtIndex:i-1];
         CMTPFloat dx=p0.position.x-p1.position.x;
         CMTPFloat dy=p0.position.y-p1.position.y;
         CMTPFloat d=sqrt(dx*dx+dy*dy);
-        [s makeSpringBetweenParticleA:p1 particleB:p0 springConstant:0.03f damping:0.61f restLength:d];
+        [_s makeSpringBetweenParticleA:p1 particleB:p0 springConstant:0.03f damping:0.61f restLength:d];
     }
     // joints to frame: create necessary fixed particles and connect
     // we'll need to figure out were the armature should intersect the frame
     for (NSUInteger i=0;i<=steps;i++) {
         NSUInteger p0_index=i+(numTurns-1)*steps;
-        if (p0_index<[particles count]) {
+        if (p0_index<[_particles count]) {
             NSUInteger p1_index=i+(numTurns-2)*steps;
 
-            CMTPParticle* particle0=[particles objectAtIndex:p0_index];
-            CMTPParticle* particle1=[particles objectAtIndex:p1_index];
+            CMTPParticle* particle0=[_particles objectAtIndex:p0_index];
+            CMTPParticle* particle1=[_particles objectAtIndex:p1_index];
             CGPoint p0=CGPointMake(particle0.position.x,particle0.position.y);
             CGPoint p1=CGPointMake(particle1.position.x,particle1.position.y);
 
@@ -474,13 +438,13 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
             CGPoint left_right=(CGPointDistance(p0,intersect_left)<CGPointDistance(p0,intersect_right))?intersect_left:intersect_right;
             CGPoint closest=(CGPointDistance(p0,top_bottom)<CGPointDistance(p0,left_right))?top_bottom:left_right;
 
-            CMTPParticle* p=[s makeParticleWithMass:0.8f position:CMTPVector3DMake(closest.x,closest.y,0.0f)];
+            CMTPParticle* p=[_s makeParticleWithMass:0.8f position:CMTPVector3DMake(closest.x,closest.y,0.0f)];
             [p makeFixed];
 
-            [joints addObject:p];
+            [_joints addObject:p];
 
             CGFloat d=CGPointDistance(closest,p0); //make the rest length equals to the distance between these 2 points
-            [s makeSpringBetweenParticleA:p particleB:particle0 springConstant:0.05f damping:0.01f restLength:d]; //make these a bit different to stretch the structure
+            [_s makeSpringBetweenParticleA:p particleB:particle0 springConstant:0.05f damping:0.01f restLength:d]; //make these a bit different to stretch the structure
         }
     }
     prevLocation=CGPointMake(-1.0f,-1.0f);
@@ -495,22 +459,19 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
     }
     ASSERT_GL_OK();
 
-    EAGLView* glView=(EAGLView*)self.view;
-    [glView setContext:context];
-    [glView setFramebuffer];
+    [_testView setContext:context];
+    [_testView setFramebuffer];
 
     NSError* error=nil;
     NSArray* attributeNames=[NSArray arrayWithObjects:@"position",nil];
     NSArray* uniformNames=[NSArray arrayWithObjects:@"color",@"mvp",nil];
     self.shaderProgram=[[CMGLESKProgram alloc] init];
-    if (![self.shaderProgram loadProgramFromFilesVertexShader:@"WebTestVertexShader.glsl" fragmentShader:@"WebTestFragmentShader.glsl" attributeNames:attributeNames uniformNames:uniformNames error:&error]) {
+    if (![_shaderProgram loadProgramFromFilesVertexShader:@"WebTestVertexShader.glsl" fragmentShader:@"WebTestFragmentShader.glsl" attributeNames:attributeNames uniformNames:uniformNames error:&error]) {
         ALog(@"Shader program load failed: %@",error);
     }
     ASSERT_GL_OK();
 
-    vertexAttrib=(GLuint)[self.shaderProgram indexOfAttribute:@"position"];
-
-    animating=NO;
+    vertexAttrib=(GLuint)[_shaderProgram indexOfAttribute:@"position"];
 }
 
 #pragma mark - Animation management
@@ -518,8 +479,12 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
 -(void)startAnimation {
     if (!animating) {
         self.displayLink=[[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(drawFrame:)];
-        [self.displayLink setFrameInterval:animationFrameInterval];
-        [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        if (@available(iOS 10.0, *)) {
+            [_displayLink setPreferredFramesPerSecond:animationFrameInterval];
+        } else {
+            [_displayLink setFrameInterval:animationFrameInterval];
+        }
+        [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 
         animating=YES;
     }
@@ -527,9 +492,8 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
 
 -(void)stopAnimation {
     if (animating) {
-        [self.displayLink invalidate];
+        [_displayLink invalidate];
         self.displayLink=nil;
-
         animating=NO;
     }
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(drawFrame:) object:nil];
@@ -563,6 +527,9 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
 
 #pragma mark - UIControl actions
 
+- (IBAction)gridSwitch:(id)sender {
+}
+
 -(IBAction)fullFrameRateAction:(id)sender {
     UISwitch* sw=(UISwitch*)sender;
     if (sw.on) {
@@ -572,9 +539,9 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
     }
 }
 
--(IBAction)modifyStructureAction:(id)sender {
+-(IBAction)damageAction:(id)sender {
     UISwitch* sw=(UISwitch*)sender;
-    canModifyStructure=sw.on;
+    showDamage=sw.on;
 }
 
 #pragma mark - Application state changes
@@ -592,12 +559,12 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
 -(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     UITouch* touch=[touches anyObject];
     prevLocation=CGPointMake(-1.0f,-1.0f);
-    userLocation=[touch locationInView:self.view];
+    userLocation=[touch locationInView:self.testView];
 }
 
 -(void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
     UITouch* touch=[touches anyObject];
-    userLocation=[touch locationInView:self.view];
+    userLocation=[touch locationInView:self.testView];
 }
 
 -(void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
@@ -610,71 +577,60 @@ static CGPoint ccpFastIntersectPoint(CGPoint A,CGPoint B,
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-
-    self.title=@"Web Test";
-
-    NSMutableArray* toolbarItems=[NSMutableArray array];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fullFrameRateToggleView]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.modifyStructureToggleView]];
-
-    self.toolbarItems=toolbarItems;
-    [self.navigationController setToolbarHidden:NO animated:YES];
-
-    EAGLView* glView=(EAGLView*)self.view;
-    contentScale=glView.contentScaleFactor;
-    [self setupOpenGL];
-}
-
-#if false
--(void)viewDidUnload {
-    [self setFpsLabel:nil];
-    [self setFullFrameRateLabel:nil];
-    [self setFullFrameRateToggleView:nil];
-    [self setModifyStructureToggleView:nil];
-
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-#endif
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if (!physicsSetupCompleted) {
-        [self setupPhysicsInFrame:self.view.frame];
-        physicsSetupCompleted=YES;
+    // Setting delegate here avoids seeing VC renamed to "Delegate" in IB.
+    self.testView.delegate=self;
+    if (!viewedBefore) {
+        showDamage=_damageSwitch.on;
+        fullFrameRate=_fullFrameRateSwitch.on;
+        viewedBefore=YES;
+    } else {
+        _damageSwitch.on=showDamage;
+        _fullFrameRateSwitch.on=fullFrameRate;
     }
+    [self.navigationController setToolbarHidden:NO animated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self physicsSetup];
+    });
+}
+
+-(void)physicsSetup {
+    contentScale=_testView.contentScaleFactor;
+    NSUInteger numWebVertices=1908;
+    webVertices=calloc(2*numWebVertices,sizeof(GLfloat));
+    [self setupPhysicsInFrame:self.testView.frame];
+    [self setupOpenGL];
     fps_prev_time=CACurrentMediaTime();
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActiveNotification:) name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
     [self startAnimation];
 }
 
--(void)viewWillDisappear:(BOOL)animated {
-    [self stopAnimation];
+-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id)coordinator {
+    // before rotation
+    UISplitViewController *splitViewController=self.splitViewController;
+    UINavigationController *navigationController=splitViewController.viewControllers[0];
+    UIViewController* masterViewController=navigationController.viewControllers[0];
+    [masterViewController.navigationController popToRootViewControllerAnimated:NO];
+    [coordinator animateAlongsideTransition:^(id  _Nonnull context) {
+        // resize our content view ...
+    } completion:^(id  _Nonnull context) {
+        // after rotation
+        [masterViewController performSegueWithIdentifier:@"webTestSegue" sender:nil];
+    }];
+}
 
-    [super viewWillDisappear:animated];
+-(void)viewDidDisappear:(BOOL)animated {
+    [self stopAnimation];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super viewDidDisappear:animated];
 }
 
 #pragma mark - Object lifecycle
 
--(id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil {
-    self=[super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        NSUInteger numWebVertices=1908;
-
-        webVertices=calloc(2*numWebVertices,sizeof(GLfloat));
-
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActiveNotification:) name:UIApplicationWillResignActiveNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
-    }
-    return self;
-}
-
 -(void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-
+    // Tear down context.
+    [_testView setContext:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     free(webVertices);
     free(anchors_copy);
 }

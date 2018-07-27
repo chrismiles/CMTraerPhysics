@@ -29,8 +29,9 @@
 
 @interface CMTPDFreeFloatingTestViewController : UIViewController
 
-@property (strong,nonatomic) IBOutlet UILabel* fpsLabel;
-@property (strong,nonatomic) IBOutlet UILabel* numParticlesLabel;
+@property (weak,nonatomic) IBOutlet CMTPDFreeFloatingTestView *testView;
+@property (weak,nonatomic) IBOutlet UIBarButtonItem* fpsLabel;
+@property (weak,nonatomic) IBOutlet UIBarButtonItem* numParticlesLabel;
 
 @end
 

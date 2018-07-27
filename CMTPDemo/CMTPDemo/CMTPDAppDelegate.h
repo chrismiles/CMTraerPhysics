@@ -27,8 +27,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CMTPDAppDelegate : UIResponder <UIApplicationDelegate>
-
 @property (strong,nonatomic) UIWindow* window;
-
 @end
-

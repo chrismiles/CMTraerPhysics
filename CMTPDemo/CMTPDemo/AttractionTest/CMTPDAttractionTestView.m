@@ -49,11 +49,11 @@
     [(CMTPDAttractionTestLayer*)self.layer stopAnimation];
 }
 
--(void)setFpsLabel:(UILabel*)fpsLabel {
+-(void)setFpsLabel:(UIBarButtonItem*)fpsLabel {
     [(CMTPDAttractionTestLayer*)self.layer setFpsLabel:fpsLabel];
 }
 
--(UILabel*)fpsLabel {
+-(UIBarButtonItem*)fpsLabel {
     return [(CMTPDAttractionTestLayer*)self.layer fpsLabel];
 }
 

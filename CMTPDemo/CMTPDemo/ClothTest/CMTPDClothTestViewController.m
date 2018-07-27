@@ -35,6 +35,15 @@
 #import <CoreMotion/CoreMotion.h>
 #import <QuartzCore/QuartzCore.h>
 
+#pragma mark - Static Globals
+// Static globals so revisiting same demo remembers control settings.
+static BOOL viewedBefore;
+static BOOL showGrid;
+static BOOL showImage;
+static BOOL showAccel;
+
+#pragma mark - C Functions
+
 static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned int num_sections){
     GLfloat* vertices;
     unsigned int index=0;
@@ -56,8 +65,6 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
 @interface CMTPDClothTestViewController () {
     BOOL animating;
     BOOL fullFrameRate;
-    BOOL showGrid;
-    BOOL showImage;
 
     CMTPFloat contentScale;
     CMTPFloat frameHeight,frameWidth;
@@ -82,63 +89,52 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
     GLfloat* texVertices;
     GLfloat* gridVertices;
 
-    CMMotionManager* motionManager;
-
     // FPS
     double fps_prev_time;
     NSUInteger fps_count;
 
-    // Physics
-    CMTPParticle* attractor;
-    NSMutableArray* particles;
-    BOOL physicsSetupCompleted;
-    CMTPParticleSystem* s;
 }
+
+@property (strong,nonatomic) CMMotionManager* motionManager;
+
+// Physics
+@property (strong,nonatomic) CMTPParticle* attractor;
+@property (strong,nonatomic) NSMutableArray* particles;
+@property (strong,nonatomic) CMTPParticleSystem* s;
 
 @property (strong,nonatomic) CADisplayLink* displayLink;
 @property (strong,nonatomic) CMGLESKTexture* gridTexture;
 @property (strong,nonatomic) CMGLESKProgram* shaderProgram;
 
--(void)startAnimation;
--(void)stopAnimation;
-
 @end
 
 @implementation CMTPDClothTestViewController
 
-@synthesize displayLink;
-@synthesize fullFrameRateLabel;
-@synthesize accelerometerToggleView;
-@synthesize fpsLabel;
-@synthesize gridToggleView;
-@synthesize imageToggleView;
-@synthesize gridTexture;
-@synthesize shaderProgram;
-
 #pragma mark - Full Frame Rate management
 
 -(void)enableFullFrameRate {
-    self.fullFrameRateLabel.center=CGPointMake(round(CGRectGetMidX(self.view.bounds)),round(CGRectGetMidY(self.view.bounds)));
-    [self.view addSubview:self.fullFrameRateLabel];
+    _fullFrameRateLabel.hidden=NO;
     fullFrameRate=YES;
 }
 
 -(void)disableFullFrameRate {
-    [self.fullFrameRateLabel removeFromSuperview];
+    _fullFrameRateLabel.hidden=YES;
     fullFrameRate=NO;
+    [self startAnimation];
 }
 
 #pragma mark - Control actions
 
--(IBAction)accelerometerToggleAction:(id)sender {
+-(IBAction)accelToggleAction:(id)sender {
     UISwitch* aSwitch=(UISwitch*)sender;
-    if (aSwitch.on) {
-        if ([motionManager isDeviceMotionAvailable]) {
-            [motionManager startDeviceMotionUpdates];
+    showAccel=aSwitch.on;
+    if (showAccel) {
+        if ([_motionManager isDeviceMotionAvailable]) {
+            [_motionManager startDeviceMotionUpdates];
         }
     } else {
-        if ([motionManager isDeviceMotionActive]) {
-            [motionManager stopDeviceMotionUpdates];
+        if ([_motionManager isDeviceMotionActive]) {
+            [_motionManager stopDeviceMotionUpdates];
         }
     }
 }
@@ -164,14 +160,13 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
 #pragma mark - OpenGL rendering
 
 -(void)drawFrame:(id)sender {
-    EAGLView* glView=(EAGLView*)self.view;
-    [glView setFramebuffer];
+    [_testView setFramebuffer];
 
     /* FPS */
     double curr_time=CACurrentMediaTime();
     if (curr_time-fps_prev_time>=0.2) {
         double delta=(curr_time-fps_prev_time)/fps_count;
-        fpsLabel.text=[NSString stringWithFormat:@"%0.0f fps",1.0/delta];
+        _fpsLabel.title=[NSString stringWithFormat:@"%0.0f fps",1.0/delta];
         fps_prev_time=curr_time;
         fps_count=1;
     } else {
@@ -180,17 +175,37 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
     /* *** Cloth Test **** */
 
     {
-        CMTPParticle* p1=[particles objectAtIndex:0];
-        CMTPParticle* p2=[particles objectAtIndex:gridSize-1];
+        CMTPParticle* p1=[_particles objectAtIndex:0];
+        CMTPParticle* p2=[_particles objectAtIndex:gridSize-1];
         p1.position=CMTPVector3DMake(handle1.x,handle1.y,0.0f);
         p2.position=CMTPVector3DMake(handle2.x,handle2.y,0.0f);
     }
-    if (motionManager.isDeviceMotionActive) {
-        CMAcceleration gravity=motionManager.deviceMotion.gravity;
-        CMTPVector3D gravityVector=CMTPVector3DMake((CMTPFloat)(gravity.x)*gravityScale,(CMTPFloat)(-gravity.y)*gravityScale,0.0f);
-        s.gravity=gravityVector;
+    if (_motionManager.isDeviceMotionActive) {
+        CMAcceleration gravity=_motionManager.deviceMotion.gravity;
+        CMTPFloat x=(CMTPFloat)(gravity.x)*gravityScale;
+        CMTPFloat y=(CMTPFloat)(-gravity.y)*gravityScale;
+        switch ([[UIApplication sharedApplication] statusBarOrientation]) {
+            case UIInterfaceOrientationLandscapeLeft:
+            {
+                CMTPFloat t=y;
+                y=x;
+                x=-t;
+            };
+                break;
+            case UIInterfaceOrientationLandscapeRight:
+            {
+                CMTPFloat t=y;
+                y=-x;
+                x=t;
+            };
+                break;
+            default:
+                break;
+        }
+        CMTPVector3D gravityVector=CMTPVector3DMake(x,y,0.0f);
+        _s.gravity=gravityVector;
     }
-    [s tick:1];
+    [_s tick:1];
     if (fullFrameRate) {
         // Simulate at full frame rate; skip rendering as there's nothing to draw
         if (animating) {
@@ -203,15 +218,15 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
 
     glClearColor(0.2f,0.2f,0.2f,1.0f);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    glUseProgram(self.shaderProgram.program);
+    glUseProgram(_shaderProgram.program);
     ASSERT_GL_OK();
 
-    int uniformMVP=[self.shaderProgram indexOfUniform:@"mvp"];
+    int uniformMVP=[_shaderProgram indexOfUniform:@"mvp"];
     if (showImage||showGrid) {
         /* Draw grab handles */
         Matrix3D translationMatrix,mvpMatrix;
-        glUniform1i([self.shaderProgram indexOfUniform:@"colorOnly"],GL_TRUE);
-        glUniform4f([self.shaderProgram indexOfUniform:@"color"],0.8f,0.8f,0.8f,1.0f);
+        glUniform1i([_shaderProgram indexOfUniform:@"colorOnly"],GL_TRUE);
+        glUniform4f([_shaderProgram indexOfUniform:@"color"],0.8f,0.8f,0.8f,1.0f);
 
         glBindBuffer(GL_ARRAY_BUFFER,handle_vbo);
         glEnableVertexAttribArray(vertexAttrib);
@@ -238,10 +253,10 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
         NSUInteger vIndex=0;
         for (NSUInteger i=0;i<gridSize-1;i++) {
             for (NSUInteger j=0;j<gridSize-1;j++) {
-                CMTPParticle* pBotLeft=[particles objectAtIndex:(gridSize-1-j-1)*gridSize+i];
-                CMTPParticle* pBotRight=[particles objectAtIndex:(gridSize-1-j-1)*gridSize+i+1];
-                CMTPParticle* pTopLeft=[particles objectAtIndex:(gridSize-1-j)*gridSize+i];
-                CMTPParticle* pTopRight=[particles objectAtIndex:(gridSize-1-j)*gridSize+i+1];
+                CMTPParticle* pBotLeft=[_particles objectAtIndex:(gridSize-1-j-1)*gridSize+i];
+                CMTPParticle* pBotRight=[_particles objectAtIndex:(gridSize-1-j-1)*gridSize+i+1];
+                CMTPParticle* pTopLeft=[_particles objectAtIndex:(gridSize-1-j)*gridSize+i];
+                CMTPParticle* pTopRight=[_particles objectAtIndex:(gridSize-1-j)*gridSize+i+1];
 
                 texVertices[vIndex++]=(GLfloat)(pBotLeft.position.x*contentScale);
                 texVertices[vIndex++]=(GLfloat)(pBotLeft.position.y*contentScale);
@@ -262,7 +277,7 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
                 texVertices[vIndex++]=(GLfloat)(pTopRight.position.y*contentScale);
             }
         }
-        glUniform1i([self.shaderProgram indexOfUniform:@"colorOnly"],GL_FALSE);
+        glUniform1i([_shaderProgram indexOfUniform:@"colorOnly"],GL_FALSE);
 
         int stride=0;
 
@@ -272,8 +287,8 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
         glVertexAttribPointer(textureCoordAttrib,2,GL_FLOAT,GL_FALSE,stride,texCoords);
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D,gridTexture.glTextureName);
-        glUniform1i([self.shaderProgram indexOfUniform:@"sampler"],0);
+        glBindTexture(GL_TEXTURE_2D,_gridTexture.glTextureName);
+        glUniform1i([_shaderProgram indexOfUniform:@"sampler"],0);
 
         glDrawArrays(GL_TRIANGLES,0,(GLsizei)(vIndex/2));
 
@@ -283,8 +298,8 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
     if (showGrid) {
         NSUInteger vIndex=0;
 
-        glUniform1i([self.shaderProgram indexOfUniform:@"colorOnly"],GL_TRUE);
-        glUniform4f([self.shaderProgram indexOfUniform:@"color"],1.0f,1.0f,1.0f,1.0f);
+        glUniform1i([_shaderProgram indexOfUniform:@"colorOnly"],GL_TRUE);
+        glUniform4f([_shaderProgram indexOfUniform:@"color"],1.0f,1.0f,1.0f,1.0f);
 
         int stride=0;
         glEnableVertexAttribArray(vertexAttrib); // vertex coords
@@ -294,8 +309,8 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
         for (NSUInteger i=0;i<gridSize;i++) {
             for (NSUInteger j=0;j<gridSize;j++) {
                 if (j<gridSize-1) {
-                    CMTPParticle* p1=[particles objectAtIndex:count];
-                    CMTPParticle* p2=[particles objectAtIndex:count+1];
+                    CMTPParticle* p1=[_particles objectAtIndex:count];
+                    CMTPParticle* p2=[_particles objectAtIndex:count+1];
 
                     gridVertices[vIndex++]=(GLfloat)(p1.position.x*contentScale);
                     gridVertices[vIndex++]=(GLfloat)(p1.position.y*contentScale);
@@ -308,8 +323,8 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
         count=0;
         for (NSUInteger i=0;i<gridSize-1;i++) {
             for (NSUInteger j=0;j<gridSize;j++) {
-                CMTPParticle* p1=[particles objectAtIndex:count];
-                CMTPParticle* p2=[particles objectAtIndex:count+gridSize];
+                CMTPParticle* p1=[_particles objectAtIndex:count];
+                CMTPParticle* p2=[_particles objectAtIndex:count+gridSize];
 
                 gridVertices[vIndex++]=(GLfloat)(p1.position.x*contentScale);
                 gridVertices[vIndex++]=(GLfloat)(p1.position.y*contentScale);
@@ -325,7 +340,7 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
         glDisableVertexAttribArray(vertexAttrib);
     } /* showGrid */
 
-    [glView.context presentRenderbuffer:GL_RENDERBUFFER];
+    [_testView.context presentRenderbuffer:GL_RENDERBUFFER];
     if (!showGrid&&!showImage) {
         [self enableFullFrameRate];
     }
@@ -335,43 +350,43 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
 
 -(void)setupPhysicsInFrame:(CGRect)frame {
     /* AttractionGrid - creates a square grid */
-    particles=[[NSMutableArray alloc] init];
-    gravityScale=1.0f*CGRectGetHeight(self.view.frame)/320.0f;
+    self.particles=[[NSMutableArray alloc] init];
+    gravityScale=1.0f*CGRectGetHeight(self.testView.frame)/320.0f;
     CMTPVector3D gravityVector=CMTPVector3DMake(0.0f,gravityScale,0.0f);
-    s=[[CMTPParticleSystem alloc] initWithGravityVector:gravityVector drag:0.06f];
-    [s setIntegrator:CMTPParticleSystemIntegratorRungeKutta];
+    self.s=[[CMTPParticleSystem alloc] initWithGravityVector:gravityVector drag:0.06f];
+    [_s setIntegrator:CMTPParticleSystemIntegratorRungeKutta];
 
-    NSUInteger sp=(NSUInteger)(CGRectGetWidth(frame)/gridSize/3);
+    NSUInteger sp=(NSUInteger)(CGRectGetWidth(frame)/gridSize/1.5);
     NSUInteger sx=(NSUInteger)(CGRectGetWidth(frame)/2.0f-sp*gridSize/2.0f);
     NSUInteger sy=(NSUInteger)(CGRectGetHeight(frame)*0.15f);
     // create grid of particles
     for (NSUInteger i=0;i<gridSize;i++) {
         for (NSUInteger j=0;j<gridSize;j++) {
-            CMTPParticle* p=[s makeParticleWithMass:0.8f position:CMTPVector3DMake(sx+j*sp,sy+i*sp,0.0f)];
-            [particles addObject:p];
+            CMTPParticle* p=[_s makeParticleWithMass:0.8f position:CMTPVector3DMake(sx+j*sp,sy+i*sp,0.0f)];
+            [_particles addObject:p];
         }
     }
     // create springs
     for (NSUInteger i=0;i<gridSize;i++) {   //horizontal
         for (NSUInteger j=0;j<gridSize-1;j++) {
-            CMTPParticle* particleA=[particles objectAtIndex:(i*gridSize+j)];
-            CMTPParticle* particleB=[particles objectAtIndex:(i*gridSize+j+1)];
-            [s makeSpringBetweenParticleA:particleA particleB:particleB springConstant:1.0f damping:0.6f restLength:sp];
+            CMTPParticle* particleA=[_particles objectAtIndex:(i*gridSize+j)];
+            CMTPParticle* particleB=[_particles objectAtIndex:(i*gridSize+j+1)];
+            [_s makeSpringBetweenParticleA:particleA particleB:particleB springConstant:1.0f damping:0.6f restLength:sp];
         }
     }
     for (NSUInteger i=0;i<gridSize-1;i++) {   //vertical
         for (NSUInteger j=0;j<gridSize;j++) {
-            CMTPParticle* particleA=[particles objectAtIndex:(i*gridSize+j)];
-            CMTPParticle* particleB=[particles objectAtIndex:((i+1)*gridSize+j)];
-            [s makeSpringBetweenParticleA:particleA particleB:particleB springConstant:1.0f damping:0.6f restLength:sp];
+            CMTPParticle* particleA=[_particles objectAtIndex:(i*gridSize+j)];
+            CMTPParticle* particleB=[_particles objectAtIndex:((i+1)*gridSize+j)];
+            [_s makeSpringBetweenParticleA:particleA particleB:particleB springConstant:1.0f damping:0.6f restLength:sp];
         }
     }
-    CMTPParticle* particle=[particles objectAtIndex:0];
+    CMTPParticle* particle=[_particles objectAtIndex:0];
     [particle makeFixed];
     handle1.x=particle.position.x;
     handle1.y=particle.position.y;
 
-    particle=[particles objectAtIndex:gridSize-1];
+    particle=[_particles objectAtIndex:gridSize-1];
     [particle makeFixed];
     handle2.x=particle.position.x;
     handle2.y=particle.position.y;
@@ -386,32 +401,29 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
     }
     ASSERT_GL_OK();
 
-    EAGLView* glView=(EAGLView*)self.view;
-    [glView setContext:context];
-    [glView setFramebuffer];
+    [_testView setContext:context];
+    [_testView setFramebuffer];
 
     NSError* error=nil;
     NSArray* attributeNames=[NSArray arrayWithObjects:@"position",@"textureCoord",nil];
     NSArray* uniformNames=[NSArray arrayWithObjects:@"color",@"colorOnly",@"mvp",@"sampler",nil];
-    self.shaderProgram=[[CMGLESKProgram alloc] init];
-    if (![self.shaderProgram loadProgramFromFilesVertexShader:@"ClothTestVertexShader.glsl" fragmentShader:@"ClothTestFragmentShader.glsl" attributeNames:attributeNames uniformNames:uniformNames error:&error]) {
+    _shaderProgram=[[CMGLESKProgram alloc] init];
+    if (![_shaderProgram loadProgramFromFilesVertexShader:@"ClothTestVertexShader.glsl" fragmentShader:@"ClothTestFragmentShader.glsl" attributeNames:attributeNames uniformNames:uniformNames error:&error]) {
         ALog(@"Shader program load failed: %@",error);
     }
     ASSERT_GL_OK();
 
-    vertexAttrib=(GLuint)[self.shaderProgram indexOfAttribute:@"position"];
-    textureCoordAttrib=(GLuint)[self.shaderProgram indexOfAttribute:@"textureCoord"];
+    vertexAttrib=(GLuint)[_shaderProgram indexOfAttribute:@"position"];
+    textureCoordAttrib=(GLuint)[_shaderProgram indexOfAttribute:@"textureCoord"];
 
-    animating=NO;
-
-    self.gridTexture=[CMGLESKTexture textureNamed:@"sandy_beach.jpg"];
+    _gridTexture=[CMGLESKTexture textureNamed:@"sandy_beach.jpg"];
 
     NSUInteger tIndex=0;
-    CGFloat imageGridSize=self.gridTexture.size.width/gridSize;     // NOTE: assumes square image
+    CGFloat imageGridSize=_gridTexture.size.width/gridSize;     // NOTE: assumes square image
     for (NSUInteger i=0;i<gridSize-1;i++) {
         for (NSUInteger j=0;j<gridSize-1;j++) {
             CGRect subRect=CGRectMake(imageGridSize*i,imageGridSize*(gridSize-j-1),imageGridSize,imageGridSize);
-            CMGLESKTexCoord subTexRect=[gridTexture croppedTextureCoord:subRect];
+            CMGLESKTexCoord subTexRect=[_gridTexture croppedTextureCoord:subRect];
 
             texCoords[tIndex++]=subTexRect.x1;
             texCoords[tIndex++]=subTexRect.y1;
@@ -449,8 +461,12 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
 -(void)startAnimation {
     if (!animating) {
         self.displayLink=[[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(drawFrame:)];
-        [self.displayLink setFrameInterval:animationFrameInterval];
-        [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        if (@available(iOS 10.0, *)) {
+            [_displayLink setPreferredFramesPerSecond:animationFrameInterval];
+        } else {
+            [_displayLink setFrameInterval:animationFrameInterval];
+        }
+        [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 
         animating=YES;
     }
@@ -458,7 +474,7 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
 
 -(void)stopAnimation {
     if (animating) {
-        [self.displayLink invalidate];
+        [_displayLink invalidate];
         self.displayLink=nil;
 
         animating=NO;
@@ -530,7 +546,7 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
 
 -(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     UITouch* touch=[touches anyObject];
-    CGPoint location=[touch locationInView:self.view];
+    CGPoint location=[touch locationInView:self.testView];
     CGPoint diff1=CGPointMake(location.x-handle1.x,location.y-handle1.y);
     CGPoint diff2=CGPointMake(location.x-handle2.x,location.y-handle2.y);
     CGFloat distance1=sqrt(diff1.x*diff1.x+diff1.y*diff1.y);
@@ -547,7 +563,7 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
 
 -(void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
     UITouch* touch=[touches anyObject];
-    CGPoint location=[touch locationInView:self.view];
+    CGPoint location=[touch locationInView:self.testView];
     [self moveHandle:grabbedHandle toLocation:location];
 }
 
@@ -563,83 +579,72 @@ static GLfloat* circle_vertices(unsigned int* count,CMTPFloat radius,unsigned in
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-
-    self.title=@"Cloth Test";
-
-    NSMutableArray* toolbarItems=[NSMutableArray array];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.gridToggleView]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel]];
-    if (motionManager.isDeviceMotionAvailable) {
-        [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-        [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.accelerometerToggleView]];
-    }
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.imageToggleView]];
-
-    self.toolbarItems=toolbarItems;
+    // Setting delegate here avoids seeing VC renamed to "Delegate" in IB.
+    self.testView.delegate=self;
+    if (!viewedBefore) {
+        showGrid=_gridSwitch.on;
+        showImage=_imageSwitch.on;
+        showAccel=_accelSwitch.on;
+        viewedBefore=YES;
+    } else {
+        _gridSwitch.on=showGrid;
+        _imageSwitch.on=showImage;
+        _accelSwitch.on=showAccel;
+    };
     [self.navigationController setToolbarHidden:NO animated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self physicsSetup];
+    });
+}
 
-    EAGLView* glView=(EAGLView*)self.view;
-    contentScale=glView.contentScaleFactor;
+-(void)physicsSetup {
+    contentScale=_testView.contentScaleFactor;
+    showGrid=_gridSwitch.isOn;
+    showImage=_imageSwitch.isOn;
+    gridSize=8;
+    numGridVertices=2*(gridSize*gridSize+2*gridSize*(gridSize-1));
+    //DLog(@"gridSize=%d numGridVertices=%d", gridSize, numGridVertices);
+    gridVertices=calloc(2*numGridVertices,sizeof(GLfloat));
+    texCoords=calloc(6*2*(gridSize-1)*(gridSize-1),sizeof(GLfloat));
+    texVertices=calloc(6*2*(gridSize-1)*(gridSize-1),sizeof(GLfloat));
+    self.motionManager=[[CMMotionManager alloc] init];
+    _motionManager.deviceMotionUpdateInterval=0.02;   // 50 Hz
+    _accelSwitch.enabled=_motionManager.isDeviceMotionAvailable;
+    [self accelToggleAction:_accelSwitch];
+    [self setupPhysicsInFrame:self.testView.frame];
     [self setupOpenGL];
-}
-
-#if false
--(void)viewDidUnload {
-    [self setFpsLabel:nil];
-    [self setGridToggleView:nil];
-    [self setImageToggleView:nil];
-    [self setAccelerometerToggleView:nil];
-    [self setFullFrameRateLabel:nil];
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-#endif
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if (!physicsSetupCompleted) {
-        [self setupPhysicsInFrame:self.view.frame];
-        physicsSetupCompleted=YES;
-    }
     fps_prev_time=CACurrentMediaTime();
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActiveNotification:) name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
     [self startAnimation];
 }
 
--(void)viewWillDisappear:(BOOL)animated {
-    [self stopAnimation];
+-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id)coordinator {
+    // before rotation
+    UISplitViewController *splitViewController=self.splitViewController;
+    UINavigationController *navigationController=splitViewController.viewControllers[0];
+    UIViewController* masterViewController=navigationController.viewControllers[0];
+    [masterViewController.navigationController popToRootViewControllerAnimated:NO];
+    [coordinator animateAlongsideTransition:^(id  _Nonnull context) {
+        // resize our content view ...
+    } completion:^(id  _Nonnull context) {
+        // after rotation
+        [masterViewController performSegueWithIdentifier:@"clothTestSegue" sender:nil];
+    }];
+}
 
-    [super viewWillDisappear:animated];
+-(void)viewDidDisappear:(BOOL)animated {
+    [self stopAnimation];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super viewDidDisappear:animated];
 }
 
 #pragma mark - Object lifecycle
 
--(id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil {
-    self=[super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        showGrid=YES;
-        showImage=YES;
-        gridSize=8;
-        numGridVertices=2*(gridSize*gridSize+2*gridSize*(gridSize-1));
-        //DLog(@"gridSize=%d numGridVertices=%d", gridSize, numGridVertices);
-
-        gridVertices=calloc(2*numGridVertices,sizeof(GLfloat));
-        texCoords=calloc(6*2*(gridSize-1)*(gridSize-1),sizeof(GLfloat));
-        texVertices=calloc(6*2*(gridSize-1)*(gridSize-1),sizeof(GLfloat));
-
-        motionManager=[[CMMotionManager alloc] init];
-        motionManager.deviceMotionUpdateInterval=0.02;   // 50 Hz
-
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActiveNotification:) name:UIApplicationWillResignActiveNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
-    }
-    return self;
-}
-
 -(void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    // Tear down context.
+    [_testView setContext:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     free(gridVertices);
     free(texCoords);
     free(texVertices);

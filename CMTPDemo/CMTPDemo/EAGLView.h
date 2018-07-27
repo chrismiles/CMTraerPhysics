@@ -30,11 +30,7 @@
 
 @protocol EAGLViewDelegate;
 
-@interface EAGLView : UIView {
-    @private
-    EAGLContext* context;
-    GLuint defaultFramebuffer,colorRenderbuffer,depthRenderbuffer;
-}
+@interface EAGLView : UIView 
 
 @property (nonatomic,assign) IBOutlet id<EAGLViewDelegate> delegate;
 

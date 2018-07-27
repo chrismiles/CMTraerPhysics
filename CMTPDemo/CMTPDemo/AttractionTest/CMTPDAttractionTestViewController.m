@@ -27,55 +27,23 @@
 #import "CMTPDAttractionTestViewController.h"
 
 @implementation CMTPDAttractionTestViewController
-@synthesize attractionTestView;
-@synthesize fpsLabel;
-
--(id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil {
-    self=[super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 #pragma mark - View lifecycle
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-
-    self.title=@"Attraction Test";
-
-    NSMutableArray* toolbarItems=[NSMutableArray array];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-
-    self.toolbarItems=toolbarItems;
     [self.navigationController setToolbarHidden:NO animated:YES];
-
-    self.attractionTestView.fpsLabel=self.fpsLabel;
+    _testView.fpsLabel=_fpsLabel;
 }
-
-#if false
--(void)viewDidUnload {
-    [self setFpsLabel:nil];
-    [self setAttractionTestView:nil];
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-#endif
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
-    [self.attractionTestView startAnimation];
+    [_testView startAnimation];
 }
 
--(void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-
-    [self.attractionTestView stopAnimation];
+-(void)viewDidDisappear:(BOOL)animated {
+    [_testView stopAnimation];
+    [super viewDidDisappear:animated];
 }
 
 @end

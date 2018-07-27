@@ -27,60 +27,24 @@
 #import "CMTPDFreeFloatingTestViewController.h"
 
 @implementation CMTPDFreeFloatingTestViewController
-@synthesize fpsLabel;
-@synthesize numParticlesLabel;
-
--(id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil {
-    self=[super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 #pragma mark - View lifecycle
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-
-    self.title=@"Free Floating Test";
-
-    NSMutableArray* toolbarItems=[NSMutableArray array];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.numParticlesLabel]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-
-    self.toolbarItems=toolbarItems;
     [self.navigationController setToolbarHidden:NO animated:YES];
-
-    [(CMTPDFreeFloatingTestView*)self.view setFpsLabel:self.fpsLabel];
+    [_testView setFpsLabel:_fpsLabel];
 }
-
-#if false
--(void)viewDidUnload {
-    [self setFpsLabel:nil];
-
-    [self setNumParticlesLabel:nil];
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-#endif
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
-    self.numParticlesLabel.text=[NSString stringWithFormat:@"%lu particles",(unsigned long)[(CMTPDFreeFloatingTestView*)self.view particleCount]];
-
-    [(CMTPDFreeFloatingTestView*)self.view startAnimation];
+    _numParticlesLabel.title=[NSString stringWithFormat:@"%lu particles",(unsigned long)[_testView particleCount]];
+    [_testView startAnimation];
 }
 
--(void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-
-    [(CMTPDFreeFloatingTestView*)self.view stopAnimation];
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [_testView stopAnimation];
 }
 
 @end

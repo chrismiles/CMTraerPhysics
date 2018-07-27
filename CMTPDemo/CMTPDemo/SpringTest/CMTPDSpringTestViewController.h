@@ -25,14 +25,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CMTPDSpringTestView.h"
 
 @interface CMTPDSpringTestViewController : UIViewController
 
-@property (strong,nonatomic) IBOutlet UIView* accelerometerToggleView;
-@property (strong,nonatomic) IBOutlet UIView* smoothToggleView;
-@property (strong,nonatomic) IBOutlet UILabel* fpsLabel;
+@property (weak,nonatomic) IBOutlet CMTPDSpringTestView *testView;
+@property (weak,nonatomic) IBOutlet UIBarButtonItem* fpsLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *smoothSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *accelSwitch;
 
--(IBAction)accelerometerToggleAction:(id)sender;
+-(IBAction)accelToggleAction:(id)sender;
 -(IBAction)smoothToggleAction:(id)sender;
 
 @end

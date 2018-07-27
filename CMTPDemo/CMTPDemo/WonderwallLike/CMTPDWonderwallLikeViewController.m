@@ -43,14 +43,46 @@ typedef struct {
     CGPoint p3;
 } HighlightCell;
 
+#pragma mark - Static Globals
+// Static globals so revisiting same demo remembers control settings.
+static BOOL viewedBefore;
+static BOOL fullFrameRate;
+static BOOL highlightEnabled;
+
+#pragma mark - C Functions
 static BOOL
-doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
+doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4){
+    // based on an algorithm by Paul Bourke
+    // http://local.wasp.uwa.edu.au/~pbourke/geometry/lineline2d/
+    
+    CMTPFloat denom=(p4.y-p3.y)*(p2.x-p1.x)-(p4.x-p3.x)*(p2.y-p1.y);
+    CMTPFloat num_a=(p4.x-p3.x)*(p1.y-p3.y)-(p4.y-p3.y)*(p1.x-p3.x);
+    CMTPFloat num_b=(p2.x-p1.x)*(p1.y-p3.y)-(p2.y-p1.y)*(p1.x-p3.x);
+    if (denom==0) {
+        return NO; //lines are parallel
+    } else {
+        CMTPFloat ua=num_a/denom;
+        CMTPFloat ub=num_b/denom;
+        if (ua==denom&&ub==denom) {
+            return NO; //lines are coincident
+        } else {
+            //var intersect:Point = new Point(p1.x + ua*(p2.x - p1.x), p1.y + ua*(p2.y - p1.y));
+            if (ub>=0&&ub<=1&&ua>=0&&ua<=1) {
+                return YES;
+            } else {
+                return NO;
+            }
+        }
+        //NOTE: if (ua >= 0 && ua <=1 && ub >= 0 && ub <= 1) then intersection lies within both segments
+        //if only ua lies between 0 and 1, then intersection is within segment p1,p2
+        //if only ub lies between 0 and 1, then intersection is within segment p3,p4
+    }
+}
 
 #pragma mark - CMTPDWonderwallLikeViewController
 
 @interface CMTPDWonderwallLikeViewController () {
     BOOL animating;
-    BOOL fullFrameRate;
 
     CMTPFloat contentScale;
     CMTPFloat frameHeight,frameWidth;
@@ -63,7 +95,6 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
     GLfloat* vertices;
 
     HighlightCell highlightCell;
-    BOOL highlightEnabled;
     GLfloat projectionMatrix[16];
     NSUInteger vertexArraySize;
 
@@ -73,13 +104,6 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
     // FPS
     double fps_prev_time;
     NSUInteger fps_count;
-
-    // Physics
-    CMTPParticle* attractor;
-    NSMutableArray* particlesFixed;
-    NSMutableArray* particlesFree;
-    BOOL physicsSetupCompleted;
-    CMTPParticleSystem* s;
 
     NSUInteger num_cols;
     NSUInteger num_rows;
@@ -92,26 +116,20 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
     NSUInteger subdivisions;
 }
 
+// Physics
+@property (strong,nonatomic) CMTPParticle* attractor;
+@property (strong,nonatomic) NSMutableArray* particlesFixed;
+@property (strong,nonatomic) NSMutableArray* particlesFree;
+@property (strong,nonatomic) CMTPParticleSystem* s;
+
 @property (strong,nonatomic) CADisplayLink* displayLink;
 @property (strong,nonatomic) CMGLESKTexture* gridTexture;
 @property (strong,nonatomic) CMGLESKProgram* shaderProgram;
 @property (strong,nonatomic) NSDictionary* textureAtlasFrames;
 
--(void)startAnimation;
--(void)stopAnimation;
-
 @end
 
 @implementation CMTPDWonderwallLikeViewController
-
-@synthesize displayLink;
-@synthesize fpsLabel;
-@synthesize fullFrameRateLabel;
-@synthesize fullFrameRateToggleView;
-@synthesize highlightToggleView;
-@synthesize gridTexture;
-@synthesize shaderProgram;
-@synthesize textureAtlasFrames;
 
 #pragma mark - Touch location logic
 
@@ -119,10 +137,10 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
     CGPoint _mp=touchLocation;
     CGPoint _o=CGPointMake(-400,-400);
     NSUInteger numIntersect;
-    NSUInteger count=[particlesFree count];
+    NSUInteger count=[_particlesFree count];
     for (NSUInteger i=0;i<count-1;i++) {
-        NSArray* particlesFreeRow=[particlesFree objectAtIndex:i];
-        NSArray* particlesFreeRow1=[particlesFree objectAtIndex:i+1];
+        NSArray* particlesFreeRow=[_particlesFree objectAtIndex:i];
+        NSArray* particlesFreeRow1=[_particlesFree objectAtIndex:i+1];
         NSUInteger pfree_row_count=[particlesFreeRow count];
         for (NSUInteger j=0;j<pfree_row_count-1;j++) {
             CMTPParticle* pFreeij=[particlesFreeRow objectAtIndex:j];   // top / left
@@ -166,13 +184,12 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
 #pragma mark - Full Frame Rate Control
 
 -(void)enableFullFrameRate {
-    self.fullFrameRateLabel.center=CGPointMake(round(CGRectGetMidX(self.view.bounds)),round(CGRectGetMidY(self.view.bounds)));
-    [self.view addSubview:self.fullFrameRateLabel];
+    _fullFrameRateLabel.hidden=NO;
     fullFrameRate=YES;
 }
 
 -(void)disableFullFrameRate {
-    [self.fullFrameRateLabel removeFromSuperview];
+    _fullFrameRateLabel.hidden=YES;
     fullFrameRate=NO;
     [self startAnimation];
 }
@@ -227,28 +244,28 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
     texCoords=calloc(vertexArraySize,sizeof(GLfloat));
     vertices=calloc(vertexArraySize,sizeof(GLfloat));
 
-    particlesFixed=[[NSMutableArray alloc] init];
-    particlesFree=[[NSMutableArray alloc] init];
+    self.particlesFixed=[[NSMutableArray alloc] init];
+    self.particlesFree=[[NSMutableArray alloc] init];
 
     CMTPVector3D gravityVector=CMTPVector3DMake(0.0f,0.0f,0.0f);
-    s=[[CMTPParticleSystem alloc] initWithGravityVector:gravityVector drag:0.1f];
+    self.s=[[CMTPParticleSystem alloc] initWithGravityVector:gravityVector drag:0.1f];
 
-    attractor=[s makeParticleWithMass:1.0f position:CMTPVector3DMake(0.0f,0.0f,0.0f)];
-    [attractor makeFixed];
+    self.attractor=[_s makeParticleWithMass:1.0f position:CMTPVector3DMake(0.0f,0.0f,0.0f)];
+    [_attractor makeFixed];
     for (NSUInteger i=0;i<=num_rows;i++) {
         NSMutableArray* row_particles_fixed=[[NSMutableArray alloc] init];
         NSMutableArray* row_particles_free=[[NSMutableArray alloc] init];
         for (NSUInteger j=0;j<=num_cols;j++) {
-            CMTPParticle* a=[s makeParticleWithMass:0.8f position:CMTPVector3DMake(sx+(j*cell_width),sy+(i*cell_height),0)];
+            CMTPParticle* a=[_s makeParticleWithMass:0.8f position:CMTPVector3DMake(sx+(j*cell_width),sy+(i*cell_height),0)];
             [a makeFixed];
-            CMTPParticle* b=[s makeParticleWithMass:0.8f position:CMTPVector3DMake(sx+(j*cell_width),sy+(i*cell_height),0)];
+            CMTPParticle* b=[_s makeParticleWithMass:0.8f position:CMTPVector3DMake(sx+(j*cell_width),sy+(i*cell_height),0)];
             [row_particles_fixed addObject:a];
             [row_particles_free addObject:b];
-            [s makeSpringBetweenParticleA:a particleB:b springConstant:0.017f damping:0.6f restLength:0.0f];
-            [s makeAttractionBetweenParticleA:attractor particleB:b strength:attractionStrength minDistance:attractionMinDistance];
+            [_s makeSpringBetweenParticleA:a particleB:b springConstant:0.017f damping:0.6f restLength:0.0f];
+            [_s makeAttractionBetweenParticleA:_attractor particleB:b strength:attractionStrength minDistance:attractionMinDistance];
         }
-        [particlesFixed addObject:row_particles_fixed];
-        [particlesFree addObject:row_particles_free];
+        [_particlesFixed addObject:row_particles_fixed];
+        [_particlesFree addObject:row_particles_free];
     }
 }
 
@@ -276,23 +293,20 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
     }
     ASSERT_GL_OK();
 
-    EAGLView* glView=(EAGLView*)self.view;
-    [glView setContext:context];
-    [glView setFramebuffer];
+    [_testView setContext:context];
+    [_testView setFramebuffer];
 
     NSError* error=nil;
     NSArray* attributeNames=[NSArray arrayWithObjects:@"position",@"textureCoord",nil];
     NSArray* uniformNames=[NSArray arrayWithObjects:@"color",@"enableTexture",@"mvp",@"sampler",nil];
     self.shaderProgram=[[CMGLESKProgram alloc] init];
-    if (![self.shaderProgram loadProgramFromFilesVertexShader:@"WonderwallLikeVertexShader.glsl" fragmentShader:@"WonderwallLikeFragmentShader.glsl" attributeNames:attributeNames uniformNames:uniformNames error:&error]) {
+    if (![_shaderProgram loadProgramFromFilesVertexShader:@"WonderwallLikeVertexShader.glsl" fragmentShader:@"WonderwallLikeFragmentShader.glsl" attributeNames:attributeNames uniformNames:uniformNames error:&error]) {
         ALog(@"Shader program load failed: %@",error);
     }
     ASSERT_GL_OK();
 
-    textureCoordAttrib=[self.shaderProgram indexOfAttribute:@"textureCoord"];
-    vertexAttrib=[self.shaderProgram indexOfAttribute:@"position"];
-
-    animating=NO;
+    textureCoordAttrib=[_shaderProgram indexOfAttribute:@"textureCoord"];
+    vertexAttrib=[_shaderProgram indexOfAttribute:@"position"];
 
     /* Texture Atlas */
     NSString* atlasName=[self scaledImageName:@"wonderwall_atlas.plist"];
@@ -301,10 +315,10 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
     self.textureAtlasFrames=[sceneAtlas1 valueForKey:@"frames"];
     self.gridTexture=[CMGLESKTexture textureNamed:[self scaledImageName:@"wonderwall_atlas.png"]];
     ASSERT_GL_OK();
-    [self.gridTexture generateMipmap];
+    [_gridTexture generateMipmap];
     ASSERT_GL_OK();
 
-    glBindTexture(GL_TEXTURE_2D,gridTexture.glTextureName);
+    glBindTexture(GL_TEXTURE_2D,_gridTexture.glTextureName);
     ASSERT_GL_OK();
 }
 
@@ -313,7 +327,7 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
     double curr_time=CACurrentMediaTime();
     if (curr_time-fps_prev_time>=0.2) {
         double delta=(curr_time-fps_prev_time)/fps_count;
-        fpsLabel.text=[NSString stringWithFormat:@"%0.0f fps",1.0/delta];
+        _fpsLabel.title=[NSString stringWithFormat:@"%0.0f fps",1.0/delta];
         fps_prev_time=curr_time;
         fps_count=1;
     } else {
@@ -321,11 +335,11 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
     }
     /* *** Wonderwall Like **** */
 
-    [s tick:2.9f];
+    [_s tick:2.9f];
     if (!touching||![self isMouseOnGrid]) {
-        attractor.position=CMTPVector3DMake(-50000,-50000,0);
+        _attractor.position=CMTPVector3DMake(-50000,-50000,0);
     } else {
-        attractor.position=CMTPVector3DMake(touchLocation.x,touchLocation.y,0);
+        _attractor.position=CMTPVector3DMake(touchLocation.x,touchLocation.y,0);
     }
     if (fullFrameRate) {
         // Simulate at full frame rate; skip rendering as there's nothing to draw
@@ -337,15 +351,14 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
     }
     /* GL rendering */
 
-    EAGLView* glView=(EAGLView*)self.view;
-    [glView setFramebuffer];
+    [_testView setFramebuffer];
 
     glClearColor(0.5f,0.5f,0.5f,1.0f);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    glUseProgram(self.shaderProgram.program);
+    glUseProgram(_shaderProgram.program);
     ASSERT_GL_OK();
 
-    int uniformMVP=[self.shaderProgram indexOfUniform:@"mvp"];
+    int uniformMVP=[_shaderProgram indexOfUniform:@"mvp"];
     glUniformMatrix4fv(uniformMVP,1,GL_FALSE,projectionMatrix);
     ASSERT_GL_OK();
 
@@ -355,17 +368,17 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
         NSUInteger vIndex=0;
         NSUInteger gridIndex=0;
 
-        NSUInteger pfree_count=[particlesFree count];
+        NSUInteger pfree_count=[_particlesFree count];
         for (NSUInteger i=0;i<pfree_count-1;i++) {
-            NSArray* particlesFreeRow=[particlesFree objectAtIndex:i];
-            NSArray* particlesFreeRow1=[particlesFree objectAtIndex:i+1];
+            NSArray* particlesFreeRow=[_particlesFree objectAtIndex:i];
+            NSArray* particlesFreeRow1=[_particlesFree objectAtIndex:i+1];
             NSUInteger pfree_row_count=[particlesFreeRow count];
             for (NSUInteger j=0;j<pfree_row_count-1;j++) {
-                NSArray* textureNames=[self.textureAtlasFrames allKeys];
+                NSArray* textureNames=[_textureAtlasFrames allKeys];
                 NSString* textureName=[textureNames objectAtIndex:(gridIndex++%[textureNames count])];
-                NSDictionary* textureData=[self.textureAtlasFrames objectForKey:textureName];
+                NSDictionary* textureData=[_textureAtlasFrames objectForKey:textureName];
                 CGRect textureFrame=CGRectFromString([textureData valueForKey:@"textureRect"]);
-                CMGLESKTexCoord texCoord=[self.gridTexture croppedTextureCoord:textureFrame];
+                CMGLESKTexCoord texCoord=[_gridTexture croppedTextureCoord:textureFrame];
 
                 CMTPParticle* pFreeij=[particlesFreeRow objectAtIndex:j]; // top / left
                 CMTPParticle* pFreeij1=[particlesFreeRow objectAtIndex:j+1]; // top / right
@@ -445,7 +458,7 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
         ZAssert(vIndex<=vertexArraySize,@"vIndex=%lu",(unsigned long)vIndex);
         ZAssert(tIndex<=vertexArraySize,@"tIndex=%lu",(unsigned long)tIndex);
 
-        glUniform1i([self.shaderProgram indexOfUniform:@"enableTexture"],GL_TRUE);
+        glUniform1i([_shaderProgram indexOfUniform:@"enableTexture"],GL_TRUE);
 
         int stride=0;
         glEnableVertexAttribArray((GLuint)vertexAttrib); // vertex coords
@@ -462,8 +475,8 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
     if (highlightEnabled&&touching&&highlightCell.shouldDraw) {
         NSUInteger vIndex=0;
 
-        glUniform1i([self.shaderProgram indexOfUniform:@"enableTexture"],GL_FALSE);
-        glUniform4f([self.shaderProgram indexOfUniform:@"color"],1.0f,1.0f,1.0f,1.0f);
+        glUniform1i([_shaderProgram indexOfUniform:@"enableTexture"],GL_FALSE);
+        glUniform4f([_shaderProgram indexOfUniform:@"color"],1.0f,1.0f,1.0f,1.0f);
         ASSERT_GL_OK();
 
         int stride=0;
@@ -505,7 +518,7 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
 
         glDisableVertexAttribArray((GLuint)vertexAttrib);
     }
-    [glView.context presentRenderbuffer:GL_RENDERBUFFER];
+    [_testView.context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
 #pragma mark - Animation management
@@ -513,18 +526,20 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
 -(void)startAnimation {
     if (!animating) {
         self.displayLink=[[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(drawFrame:)];
-        [self.displayLink setFrameInterval:animationFrameInterval];
-        [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-
+        if (@available(iOS 10.0, *)) {
+            [_displayLink setPreferredFramesPerSecond:animationFrameInterval];
+        } else {
+            [_displayLink setFrameInterval:animationFrameInterval];
+        }
+        [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         animating=YES;
     }
 }
 
 -(void)stopAnimation {
     if (animating) {
-        [self.displayLink invalidate];
+        [_displayLink invalidate];
         self.displayLink=nil;
-
         animating=NO;
     }
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(drawFrame:) object:nil];
@@ -572,13 +587,13 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
 
 -(void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     UITouch* touch=[touches anyObject];
-    touchLocation=[touch locationInView:self.view];
+    touchLocation=[touch locationInView:self.testView];
     touching=YES;
 }
 
 -(void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
     UITouch* touch=[touches anyObject];
-    touchLocation=[touch locationInView:self.view];
+    touchLocation=[touch locationInView:self.testView];
 }
 
 -(void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
@@ -593,103 +608,60 @@ doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4);
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-
-    self.title=@"Wonderwall Like";
-
-    NSMutableArray* toolbarItems=[NSMutableArray array];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fullFrameRateToggleView]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.fpsLabel]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-    [toolbarItems addObject:[[UIBarButtonItem alloc] initWithCustomView:self.highlightToggleView]];
-
-    self.toolbarItems=toolbarItems;
+    // Setting delegate here avoids seeing VC renamed to "Delegate" in IB.
+    self.testView.delegate=self;
+    if (!viewedBefore) {
+        fullFrameRate=_fullFrameRateSwitch.on;
+        highlightEnabled=_highlightSwitch.on;
+        viewedBefore=YES;
+    } else {
+        _fullFrameRateSwitch.on=fullFrameRate;
+        _highlightSwitch.on=highlightEnabled;
+    };
     [self.navigationController setToolbarHidden:NO animated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self physicsSetup];
+    });
+}
 
-    highlightEnabled=YES;
-
-    EAGLView* glView=(EAGLView*)self.view;
-    contentScale=glView.contentScaleFactor;
+-(void)physicsSetup {
+    contentScale=_testView.contentScaleFactor;
+    [self setupPhysicsInFrame:self.testView.frame];
     [self setupOpenGL];
-}
-
-#if false
--(void)viewDidUnload {
-    [self setFpsLabel:nil];
-    [self setFullFrameRateLabel:nil];
-
-    [self setFullFrameRateToggleView:nil];
-    [self setHighlightToggleView:nil];
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-#endif
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if (!physicsSetupCompleted) {
-        [self setupPhysicsInFrame:self.view.frame];
-        physicsSetupCompleted=YES;
-    }
     fps_prev_time=CACurrentMediaTime();
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActiveNotification:) name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
     [self startAnimation];
 }
 
--(void)viewWillDisappear:(BOOL)animated {
-    [self stopAnimation];
+-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id)coordinator {
+    // before rotation
+    UISplitViewController *splitViewController=self.splitViewController;
+    UINavigationController *navigationController=splitViewController.viewControllers[0];
+    UIViewController* masterViewController=navigationController.viewControllers[0];
+    [masterViewController.navigationController popToRootViewControllerAnimated:NO];
+    [coordinator animateAlongsideTransition:^(id  _Nonnull context) {
+        // resize our content view ...
+    } completion:^(id  _Nonnull context) {
+        // after rotation
+        [masterViewController performSegueWithIdentifier:@"wonderwallLikeSegue" sender:nil];
+    }];
+}
 
-    [super viewWillDisappear:animated];
+-(void)viewDidDisappear:(BOOL)animated {
+    [self stopAnimation];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super viewDidDisappear:animated];
 }
 
 #pragma mark -
 
--(id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil {
-    self=[super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        animationFrameInterval=1;
-
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActiveNotification:) name:UIApplicationWillResignActiveNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
-    }
-    return self;
-}
-
 -(void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-
+    // Tear down context.
+    [_testView setContext:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     free(texCoords);
     free(vertices);
 }
 
 @end
-
-static BOOL
-doesIntersectOnBothSegments(CGPoint p1,CGPoint p2,CGPoint p3,CGPoint p4){
-    // based on an algorithm by Paul Bourke
-    // http://local.wasp.uwa.edu.au/~pbourke/geometry/lineline2d/
-
-    CMTPFloat denom=(p4.y-p3.y)*(p2.x-p1.x)-(p4.x-p3.x)*(p2.y-p1.y);
-    CMTPFloat num_a=(p4.x-p3.x)*(p1.y-p3.y)-(p4.y-p3.y)*(p1.x-p3.x);
-    CMTPFloat num_b=(p2.x-p1.x)*(p1.y-p3.y)-(p2.y-p1.y)*(p1.x-p3.x);
-    if (denom==0) {
-        return NO; //lines are parallel
-    } else {
-        CMTPFloat ua=num_a/denom;
-        CMTPFloat ub=num_b/denom;
-        if (ua==denom&&ub==denom) {
-            return NO; //lines are coincident
-        } else {
-            //var intersect:Point = new Point(p1.x + ua*(p2.x - p1.x), p1.y + ua*(p2.y - p1.y));
-            if (ub>=0&&ub<=1&&ua>=0&&ua<=1) {
-                return YES;
-            } else {
-                return NO;
-            }
-        }
-        //NOTE: if (ua >= 0 && ua <=1 && ub >= 0 && ub <= 1) then intersection lies within both segments
-        //if only ua lies between 0 and 1, then intersection is within segment p1,p2
-        //if only ub lies between 0 and 1, then intersection is within segment p3,p4
-    }
-}
-

@@ -34,10 +34,11 @@
 
 @interface CMTPDWonderwallLikeViewController : UIViewController <EAGLViewDelegate>
 
-@property (strong,nonatomic) IBOutlet UILabel* fpsLabel;
-@property (strong,nonatomic) IBOutlet UILabel* fullFrameRateLabel;
-@property (strong,nonatomic) IBOutlet UIView* fullFrameRateToggleView;
-@property (strong,nonatomic) IBOutlet UIView* highlightToggleView;
+@property (weak,nonatomic) IBOutlet EAGLView *testView;
+@property (weak,nonatomic) IBOutlet UIBarButtonItem* fpsLabel;
+@property (weak,nonatomic) IBOutlet UILabel* fullFrameRateLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *fullFrameRateSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *highlightSwitch;
 
 -(IBAction)fullFrameRateAction:(id)sender;
 -(IBAction)highlightToggleAction:(id)sender;

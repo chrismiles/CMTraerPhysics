@@ -81,81 +81,7 @@ static inline GLfloat fastSinf(GLfloat x){
     return (k&1)?-y:y;
 }
 
-#if TARGET_OS_IPHONE&&!TARGET_IPHONE_SIMULATOR
-#define VFP_CLOBBER_S0_S31 "s0","s1","s2","s3","s4","s5","s6","s7","s8",  \
-    "s9","s10","s11","s12","s13","s14","s15","s16",  \
-    "s17","s18","s19","s20","s21","s22","s23","s24",  \
-    "s25","s26","s27","s28","s29","s30","s31"
-#define VFP_VECTOR_LENGTH(VEC_LENGTH) "fmrx    r0, fpscr                         \n\t" \
-    "bic     r0, r0, #0x00370000               \n\t" \
-    "orr     r0, r0, #0x000" #VEC_LENGTH "0000 \n\t" \
-    "fmxr    fpscr, r0                         \n\t"
-#define VFP_VECTOR_LENGTH_ZERO "fmrx    r0, fpscr            \n\t" \
-    "bic     r0, r0, #0x00370000  \n\t" \
-    "fmxr    fpscr, r0            \n\t"
-#endif
-static inline void Matrix3DMultiply(Matrix3D m1,Matrix3D m2,Matrix3D result){
-#if TARGET_OS_IPHONE&&!TARGET_IPHONE_SIMULATOR
-    __asm__ __volatile__ (VFP_VECTOR_LENGTH(3)
-
-                          // Interleaving loads and adds/muls for faster calculation.
-                          // Let A:=src_ptr_1, B:=src_ptr_2, then
-                          // function computes A*B as (B^T * A^T)^T.
-
-                          // Load the whole matrix into memory.
-                          "VLDMIA.32  %2, {s8-s23}    \n\t"
-                          // Load first column to scalar bank.
-                          "VLDMIA.32  %1!, {s0-s3}    \n\t"
-                          // First column times matrix.
-                          "fmuls s24, s8, s0        \n\t"
-                          "fmacs s24, s12, s1       \n\t"
-
-                          // Load second column to scalar bank.
-                          "VLDMIA.32 %1!,  {s4-s7}    \n\t"
-
-                          "fmacs s24, s16, s2       \n\t"
-                          "fmacs s24, s20, s3       \n\t"
-                          // Save first column.
-                          "VSTMIA.32  %0!, {s24-s27}  \n\t"
-
-                          // Second column times matrix.
-                          "fmuls s28, s8, s4        \n\t"
-                          "fmacs s28, s12, s5       \n\t"
-
-                          // Load third column to scalar bank.
-                          "VLDMIA.32  %1!, {s0-s3}    \n\t"
-
-                          "fmacs s28, s16, s6       \n\t"
-                          "fmacs s28, s20, s7       \n\t"
-                          // Save second column.
-                          "VSTMIA.32  %0!, {s28-s31}  \n\t"
-
-                          // Third column times matrix.
-                          "fmuls s24, s8, s0        \n\t"
-                          "fmacs s24, s12, s1       \n\t"
-
-                          // Load fourth column to scalar bank.
-                          "VLDMIA.32 %1,  {s4-s7}    \n\t"
-
-                          "fmacs s24, s16, s2       \n\t"
-                          "fmacs s24, s20, s3       \n\t"
-                          // Save third column.
-                          "VSTMIA.32  %0!, {s24-s27}  \n\t"
-
-                          // Fourth column times matrix.
-                          "fmuls s28, s8, s4        \n\t"
-                          "fmacs s28, s12, s5       \n\t"
-                          "fmacs s28, s16, s6       \n\t"
-                          "fmacs s28, s20, s7       \n\t"
-                          // Save fourth column.
-                          "VSTMIA.32  %0!, {s28-s31}  \n\t"
-
-                          VFP_VECTOR_LENGTH_ZERO
-                          : "=r" (result),"=r" (m2)
-                          : "r" (m1),"0" (result),"1" (m2)
-                          : "r0","cc","memory",VFP_CLOBBER_S0_S31
-                          );
-#else
+static inline void Matrix3DMultiply(Matrix3D m1,Matrix3D m2,Matrix3D result) {
     result[0]=m1[0]*m2[0]+m1[4]*m2[1]+m1[8]*m2[2]+m1[12]*m2[3];
     result[1]=m1[1]*m2[0]+m1[5]*m2[1]+m1[9]*m2[2]+m1[13]*m2[3];
     result[2]=m1[2]*m2[0]+m1[6]*m2[1]+m1[10]*m2[2]+m1[14]*m2[3];
@@ -175,7 +101,6 @@ static inline void Matrix3DMultiply(Matrix3D m1,Matrix3D m2,Matrix3D result){
     result[13]=m1[1]*m2[12]+m1[5]*m2[13]+m1[9]*m2[14]+m1[13]*m2[15];
     result[14]=m1[2]*m2[12]+m1[6]*m2[13]+m1[10]*m2[14]+m1[14]*m2[15];
     result[15]=m1[3]*m2[12]+m1[7]*m2[13]+m1[11]*m2[14]+m1[15]*m2[15];
-#endif
 }
 
 /*

@@ -19,27 +19,24 @@ static char CMScrollViewOriginKey;
 
 @interface CMScrollView () {
     BOOL _animating;
-    CADisplayLink* _displayLink;
     BOOL _isTouching;
     CGPoint _touchLocation;
     CGPoint _touchStartLocation;
     CGPoint _touchVelocity;
 
-    CMTPParticle* _fixedParticle;
-    CMTPParticleSystem* _particleSystem;
-    CMTPParticle* _contentParticle;
-    CMTPSpring* _spring1;
-    CMTPSpring* _spring2;
-    CMTPParticle* _touchParticle;
 }
+@property (strong,nonatomic) CADisplayLink* displayLink;
 
--(void)setupDefaults;
+@property (strong,nonatomic) CMTPParticle* fixedParticle;
+@property (strong,nonatomic) CMTPParticleSystem* particleSystem;
+@property (strong,nonatomic) CMTPParticle* contentParticle;
+@property (strong,nonatomic) CMTPSpring* spring1;
+@property (strong,nonatomic) CMTPSpring* spring2;
+@property (strong,nonatomic) CMTPParticle* touchParticle;
 @end
 
 @implementation CMScrollView
 
-@synthesize contentOffset=_contentOffset;
-@synthesize contentSize=_contentSize;
 @synthesize fixedSpringConstant=_fixedSpringConstant;
 @synthesize touchSpringConstant=_touchSpringConstant;
 
@@ -85,7 +82,6 @@ static char CMScrollViewOriginKey;
 
 -(void)dealloc {
     [_displayLink invalidate];
-    _displayLink=nil;
 }
 
 #pragma mark - Custom accessors

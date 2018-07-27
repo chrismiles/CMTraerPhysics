@@ -29,8 +29,8 @@
 
 @interface CMTPDAttractionTestViewController : UIViewController
 
-@property (strong,nonatomic) IBOutlet CMTPDAttractionTestView* attractionTestView;
-@property (strong,nonatomic) IBOutlet UILabel* fpsLabel;
+@property (weak,nonatomic) IBOutlet CMTPDAttractionTestView* testView;
+@property (weak,nonatomic) IBOutlet UIBarButtonItem* fpsLabel;
 
 @end
 

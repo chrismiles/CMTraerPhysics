@@ -7,85 +7,51 @@
 //
 
 #import "CMTPDScrollViewCloneConfigureViewController.h"
-
-@interface CMTPDScrollViewCloneConfigureViewController () {
-    CMTPFloat _scrollDrag;
-    BOOL _springEqual;
-    CMTPFloat _springFixedConstant;
-    CMTPFloat _springTouchConstant;
-}
-
-@end
+#import "CMScrollView.h"
 
 @implementation CMTPDScrollViewCloneConfigureViewController
 
-@synthesize dragSlider=_dragSlider;
-@synthesize springEqualSwitch=_springEqualSwitch;
-@synthesize springFixedSlider=_springFixedSlider;
-@synthesize springTouchSlider=_springTouchSlider;
-
-@synthesize onFinishedHandler=_onFinishedHandler;
-
--(id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil scrolldrag:(CMTPFloat)scrollDrag springFixedConstant:(CMTPFloat)springFixedConstant springTouchConstant:(CMTPFloat)springTouchConstant {
-    self=[super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        _scrollDrag=scrollDrag;
-        _springFixedConstant=springFixedConstant;
-        _springTouchConstant=springTouchConstant;
-        if (_springFixedConstant==_springTouchConstant) {
-            _springEqual=YES;
-        } else {
-            _springEqual=NO;
-        }
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (_scrollView!=nil) {
+        _dragSlider.value=(float)_scrollView.scrollDrag;
+        _springFixedSlider.value=(float)_scrollView.fixedSpringConstant;
+        _springTouchSlider.value=(float)_scrollView.touchSpringConstant;
+        _springEqualSwitch.on=(_scrollView.fixedSpringConstant==_scrollView.touchSpringConstant);
     }
-    return self;
 }
 
--(void)viewDidLoad {
-    [super viewDidLoad];
-
-    self.title=@"Configure Scroll View";
-
-    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)];
-
-    self.dragSlider.value=(float)_scrollDrag;
-    self.springFixedSlider.value=(float)_springFixedConstant;
-    self.springTouchSlider.value=(float)_springTouchConstant;
-    self.springEqualSwitch.on=_springEqual;
-}
-
-#if false
--(void)viewDidUnload {
-    [self setDragSlider:nil];
-    [self setSpringEqualSwitch:nil];
-    [self setSpringFixedSlider:nil];
-    [self setSpringTouchSlider:nil];
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-#endif
-
--(void)doneAction:(id)sender {
-    if (self.onFinishedHandler) {
-        self.onFinishedHandler();
+-(void)viewDidDisappear:(BOOL)animated {
+    if (_scrollView!=nil) {
+        _scrollView.scrollDrag=_dragSlider.value;
+        _scrollView.fixedSpringConstant=_springFixedSlider.value;
+        _scrollView.touchSpringConstant=_springTouchSlider.value;
     }
+    [super viewDidDisappear:animated];
+}
+
+- (IBAction)dragAction:(id)sender {
 }
 
 -(IBAction)springEqualValueChanged:(id)sender {
-    _springEqual=self.springEqualSwitch.on;
 }
 
 -(IBAction)springFixedValueChanged:(id)sender {
-    if (_springEqual&&self.springTouchSlider.value!=self.springFixedSlider.value) {
-        self.springTouchSlider.value=self.springFixedSlider.value;
+    _scrollView.fixedSpringConstant=_springFixedSlider.value;
+    if (_springEqualSwitch.on&&_springTouchSlider.value!=_springFixedSlider.value) {
+        _springTouchSlider.value=_springFixedSlider.value;
     }
 }
 
 -(IBAction)springTouchValueChanged:(id)sender {
-    if (_springEqual&&self.springTouchSlider.value!=self.springFixedSlider.value) {
-        self.springFixedSlider.value=self.springTouchSlider.value;
+    _scrollView.touchSpringConstant=_springTouchSlider.value;
+    if (_springEqualSwitch.on&&_springTouchSlider.value!=_springFixedSlider.value) {
+        _springFixedSlider.value=_springTouchSlider.value;
     }
+}
+
+- (IBAction)dismissAction:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
